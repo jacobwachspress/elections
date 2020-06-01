@@ -8,8 +8,10 @@ import pandas as pd
 import numpy as np
 from datetime import date, timedelta, datetime
 from dateutil.parser import parse
+import scipy.stats as st
 from scipy.stats import norm
 import matplotlib.pyplot as plt
+from sklearn.calibration import calibration_curve
 
 # download file to dataframe
 df = pd.read_csv\
@@ -41,6 +43,8 @@ out_df['median_absolute_deviation'] = ''
 out_df['SEM'] = ''
 out_df['win_probability'] = ''
 out_df['actual_winning_margin'] = ''
+out_df['error_of_median'] = ''
+out_df['won_race'] = ''
 out_df.set_index('race', inplace=True)
 
 # Determine which polls to use according to the following rules:
@@ -99,7 +103,8 @@ for race in races:
 ## Fill in the remaining columns of out_df based on the polls used
 
 # number of polls used
-out_df['num_polls_used']        
+out_df['num_polls_used'] = out_df['polls_used'].apply(len)
+ 
 # median winning margin in polls of candidate 1
 def median_win_margin(polls_df):
     return np.median(np.asarray(polls_df['cand1_pct'] - polls_df['cand2_pct']))
@@ -126,12 +131,11 @@ def SEM(polls_df):
     stddev = med_deviation / 0.675
     
     return stddev / np.sqrt(len(polls_df))
-out_df['SEM'] = \
-            out_df['polls_used'].apply(SEM)
+out_df['SEM'] = out_df['polls_used'].apply(SEM)
+
 # win probability of candidate 1
 # we find the probability that a Gaussian random variable with 
-# distruibuted according to ~ N(median, SEM) is greater than 0.
-    
+# distruibuted according to ~ N(median, SEM) is greater than 0.    
 def win_probability(polls_df):
     median = median_win_margin(polls_df)
     sem = SEM(polls_df) 
@@ -140,10 +144,21 @@ def win_probability(polls_df):
         sem = 0.0001
         
     # 2020 modification, require SEM >= 3
-    #sem = max(sem, 3)
+    sem = 3
             
     return np.round(1000*norm.cdf(median/sem))/1000
 out_df['win_probability'] = \
             out_df['polls_used'].apply(win_probability)
     
-    
+# actual win margin
+def actual_win_margin(polls_df):
+    return max(polls_df['cand1_actual']) - max(polls_df['cand2_actual'])  
+out_df['actual_winning_margin'] = out_df['polls_used'].apply(actual_win_margin)
+
+# error of the polling median
+out_df['error_of_median'] = \
+    out_df['median_winning_margin'] - out_df['actual_winning_margin'] 
+# won race
+def won_race(margin):
+    return margin > 0 
+out_df['won_race'] = out_df['actual_winning_margin'].apply(won_race)
