@@ -13,12 +13,17 @@ from scipy.stats import norm
 import matplotlib.pyplot as plt
 from sklearn.calibration import calibration_curve
 
+# download EV file
+ev = pd.read_csv("C:\\Users\\Jacob\\Documents\\GitHub\\elections\\ev.csv")
+ev.set_index('State', inplace=True)
+
 # download file to dataframe
 df = pd.read_csv\
         ("C:\\Users\\Jacob\\Documents\\GitHub\\elections\\raw-polls.csv") 
         
-# get rid of this year
+# get rid of this year, national polls
 df = df[df['year'] != 2020]
+df = df[df['location'] != 'US']
 
 # put 'polldate' column in datetime date format
 def format_date(i):
@@ -45,14 +50,21 @@ out_df['win_probability'] = ''
 out_df['actual_winning_margin'] = ''
 out_df['error_of_median'] = ''
 out_df['won_race'] = ''
+out_df['year'] = ''
+out_df['state'] = ''
 out_df.set_index('race', inplace=True)
+
+# set year and state field
+for i, _ in out_df.iterrows():
+    out_df.loc[i, 'year'] = int(i[0:4])
+    out_df.loc[i, 'state'] = i[-2:]
 
 # Determine which polls to use according to the following rules:
 # 1. Consider only the most recent poll for a given pollster
 #
 # 2. Use all polls taken in the two weeks prior to election day, or use the
 # last three polls, whichever gives more data
-    
+
 # for each race
 for race in races:
     
@@ -162,3 +174,43 @@ out_df['error_of_median'] = \
 def won_race(margin):
     return margin > 0 
 out_df['won_race'] = out_df['actual_winning_margin'].apply(won_race)
+
+# drop polls used
+out_df = out_df.drop(columns=['polls_used'])
+
+
+### SOME TESTING (TRASH) ###
+def win_prob_2(race):
+    m = race['median_winning_margin']
+    n = race['num_polls_used']
+    return st.t.cdf(m*(n+3)/(2*n+26), 10)
+for i, race in out_df.iterrows():
+    out_df.loc[i, 'win_probability'] = win_prob_2(race)
+
+    
+def calibrate():
+    probs = []
+    actuals = []
+    for percent in np.linspace(0, 1, 101):
+        idxs = [i for i, x in out_df.iterrows() if out_df.loc[i, 'win_probability'] <= percent+0.1 and out_df.loc[i, 'win_probability'] >= percent-0.1]
+        probs.append(np.mean([out_df.loc[i, 'win_probability'] for i in idxs]))
+        actuals.append(sum([out_df.loc[i, 'won_race'] for i in idxs])/len([out_df.loc[i, 'won_race'] for i in idxs]))
+    return probs, actuals
+
+# calculates the average polling error in a year, weighted roughly by population
+def weighted_national_error(year):
+    # set year for electoral votes
+    if year > 2010:
+        ev_year = '2010'
+    else:
+        ev_year = '2000'
+        
+    year_df = out_df[out_df['year'] == year]
+    year_df = year_df[year_df['state'].isin(list(ev.index))]
+    errors = [year_df.loc[race, 'error_of_median'] for race, _ in year_df.iterrows()]
+    evs = [ev.loc[i['state'], ev_year] for race, i in year_df.iterrows()]
+    
+    # find average
+    return sum(np.asarray(errors) * (np.asarray(evs) - 2)) / np.sum(np.asarray(evs) - 2)
+
+out_df['adjusted_error_of_median'] = out_df['error_of_median'] - out_df['year'].apply(weighted_national_error)
