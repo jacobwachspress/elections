@@ -4,7 +4,15 @@ Created on Fri Jun  5 15:38:40 2020
 
 @author: Jacob
 """
+
 import pandas as pd
+
+sts = ['TN','SC','MD','IN','VT','RI','FL','UT','CA','WV','GA','WY','NM',\
+          'MO','MT','LA','CO','IL','NY','AK','NC','NE','OR','WA','MA','NV',\
+          'MI','AR','CT','NH','OK','VA','OH','HI','AL','KY','IA','MS',\
+          'WI','AZ','TX','SD','ME','ID','DE','NJ','MN','PA','ND','KS']
+
+## DOWNLOADING RATINGS FROM CHAZ
 
 def compile_ratings(in_file, out_file):
     
@@ -35,4 +43,5 @@ def compile_ratings(in_file, out_file):
     return 1
     
     
-    
+## DO  
+    https://github.com/openelections/openelections-data-tx/tree/master/2018

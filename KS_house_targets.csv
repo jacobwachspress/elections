@@ -1,8 +1,8 @@
-,STATE,GEOID,NAME,DISTRICT,RATING,FLIP,R NOM,D NOM,I NOM
-1159,KS,20014,14,KS-HD-14,Tilt R,,Charlotte Esau [I],Angela Justus Schweller,
-1160,KS,20015,15,KS-HD-15,Tilt R,,John Toplikar [I],Cole Fine,
-1162,KS,20017,17,KS-HD-17,Toss-Up,,Kristine Sapp,Jo Ella Hoye,
-1185,KS,20040,40,KS-HD-40,Tilt R,,David French [I],Joana Scholtz,
-1193,KS,20048,48,KS-HD-48,Toss-Up,,Terry Frederick,Jennifer Day [I],
-1232,KS,20087,87,KS-HD-87,Tilt R,,Susan Oliver Estes,Matt Fox,
-1243,KS,20098,98,KS-HD-98,Toss-Up,,Ron Howard [I],TBA,
+,STATE,GEOID,NAME,DISTRICT,RATING,FLIP,R NOM,D NOM,I NOM,COUNTIES
+1159,KS,20014,14,KS-HD-14,Tilt R,,Charlotte Esau [I],Angela Justus Schweller,,Johnson
+1160,KS,20015,15,KS-HD-15,Tilt R,,John Toplikar [I],Cole Fine,,Johnson
+1162,KS,20017,17,KS-HD-17,Toss-Up,,Kristine Sapp,Jo Ella Hoye,,Johnson
+1185,KS,20040,40,KS-HD-40,Tilt R,,David French [I],Joana Scholtz,,Leavenworth
+1193,KS,20048,48,KS-HD-48,Toss-Up,,Terry Frederick,Jennifer Day [I],,Johnson
+1232,KS,20087,87,KS-HD-87,Tilt R,,Susan Oliver Estes,Matt Fox,,Sedgwick
+1243,KS,20098,98,KS-HD-98,Toss-Up,,Ron Howard [I],TBA,,Sedgwick

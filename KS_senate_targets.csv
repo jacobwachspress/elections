@@ -1,9 +1,9 @@
-,STATE,GEOID,NAME,DISTRICT,RATING,FLIP,R NOM,D NOM,I NOM
-534,KS,20003,3,KS-SD-3,Lean D,,Willie Dove,Tom Holland [I],
-536,KS,20005,5,KS-SD-5,Toss-Up,,Kevin Braun [I],Jeffrey Pittman,
-539,KS,20008,8,KS-SD-8,Lean D,R TO D,James Todd,Cindy Holscher,
-541,KS,20010,10,KS-SD-10,Toss-Up,,TBA,Lindsey Constance,
-549,KS,20018,18,KS-SD-18,Toss-Up,,Kristen O'Shea,TBA,
-552,KS,20021,21,KS-SD-21,Lean D,,Tom Bickimer,Dinah Sykes [I],
-553,KS,20022,22,KS-SD-22,Lean D,,TBA,Tom Hawk [I],
-559,KS,20028,28,KS-SD-28,Toss-Up,,Mike Petersen [I],Jim Ward,
+,STATE,GEOID,NAME,DISTRICT,RATING,FLIP,R NOM,D NOM,I NOM,COUNTIES
+534,KS,20003,3,KS-SD-3,Lean D,,Willie Dove,Tom Holland [I],,"Douglas, Leavenworth"
+536,KS,20005,5,KS-SD-5,Toss-Up,,Kevin Braun [I],Jeffrey Pittman,,"Leavenworth, Wyandotte"
+539,KS,20008,8,KS-SD-8,Lean D,R TO D,James Todd,Cindy Holscher,,Johnson
+541,KS,20010,10,KS-SD-10,Toss-Up,,TBA,Lindsey Constance,,"Johnson, Wyandotte"
+549,KS,20018,18,KS-SD-18,Toss-Up,,Kristen O'Shea,TBA,,"Pottawatomie, Shawnee, Wabanaunsee"
+552,KS,20021,21,KS-SD-21,Lean D,,Tom Bickimer,Dinah Sykes [I],,Johnson
+553,KS,20022,22,KS-SD-22,Lean D,,TBA,Tom Hawk [I],,"Clay, Riley, Geary"
+559,KS,20028,28,KS-SD-28,Toss-Up,,Mike Petersen [I],Jim Ward,,Sedgwick
