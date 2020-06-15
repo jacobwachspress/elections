@@ -1,6 +1,5 @@
 """
 Created on Thu May 28 15:29:43 2020
-
 @author: Jacob
 """
 import pandas as pd
@@ -31,7 +30,6 @@ def median_deviation(polls_df):
 
 def SEM(polls_df):
     """Standard error of the mean.
-
     To prevent errors from outliers. Use th emedian in place of the mean and
     the MAD / 0.675 in place of the standard deviation.
     """
