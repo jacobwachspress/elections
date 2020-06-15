@@ -5,14 +5,16 @@ Created on Thu Jun 11 14:04:26 2020
 @author: Jacob
 """
 import scipy.stats as sts
+from scipy.integrate import quad
 import numpy as np
+
 
 def margins_from_ratings(ratings):
     return
     
     
 
-def success_prob_from_meta_margin(meta_margin, meta_sigma=0.03, meta_df=2):
+def success_prob_from_meta_margin(meta_margin, meta_sigma=0.03, meta_deg_f=2):
     '''Given the meta-margin for the party reaching the desired threshold and 
     the parameters determining the t-distribution about this margin, returns the 
     party's probability of reaching this threshold.
@@ -23,16 +25,16 @@ def success_prob_from_meta_margin(meta_margin, meta_sigma=0.03, meta_df=2):
         meta_sigma: positive real number, estimate of standard deviation of 
             actual meta-margin
         
-        race_df: positive integer, degrees of freedom used in t-distribution
+        meta_deg_f: positive integer, degrees of freedom used in t-distribution
     
     Output: real number between 0 and 1, probability of party reaching 
             threshold
     '''
     
-    return sts.t.cdf(meta_margin/meta_sigma, meta_df)
+    return sts.t.cdf(meta_margin/meta_sigma, meta_deg_f)
 
 
-def success_prob_from_margin(margin, race_sigma=0.03, race_df=2):
+def success_prob_from_margin(margin, race_sigma=0.03, race_deg_f=2):
     ''' Given the expected margin of a race and the parameters determining the
     t-distribution about this margin, returns the probability of victory.
     
@@ -43,12 +45,12 @@ def success_prob_from_margin(margin, race_sigma=0.03, race_df=2):
         race_sigma: positive real number, estimate of standard deviation of 
             actual win margin
         
-        race_df: positive integer, degrees of freedom used in t-distribution
+        race_deg_f: positive integer, degrees of freedom used in t-distribution
     
     Output: real number between 0 and 1, probability of candidate winning
     '''
 
-    return sts.t.cdf(margin/race_sigma, race_df)
+    return sts.t.cdf(margin/race_sigma, race_deg_f)
     
 
 def chamber_success_prob_assuming_independence(margins, threshold):
@@ -149,6 +151,78 @@ def chamber_success_prob(margins, threshold):
     
     return success_prob_from_meta_margin(find_meta_margin(margins, threshold))
 
+def chamber_success_prob_with_shift(shift, margins, threshold, \
+                                    statewide_sigma = 0.03, statewide_deg_f=2):
+    ''' Helper method to be integrated in better_chamber_success_prob.
+    
+    Assuming independence of races, calculates the probability of the party
+    reaching a fixed threshold of seats after a uniform shift in all margins,
+    then multiplies by the probability density function of the statewide shift
+    distribution at this point.
+    
+    Integrating over all shifts will give the probability of reaching that 
+    threshold, assuming uncorrelated error among seats after the statewide
+    shift.
+    
+    Arguments:
+        shift: real number between -1 and 1, how much all seats the state are 
+            shifted in favor of the party 
+        
+        margins: numpy array of expected win margins (between -1 and 1) for 
+            party before the statewide shift (negative = loss margin)
+        
+        threshold: number of seats needed for redistricting power
+        
+        statewide_sigma: positive real number, estimate of standard deviation 
+            of statewide error
+        
+        statewide_deg_f: positive integer, degrees of freedom used in 
+            t-distribution
+        
+    Output: A * B, where
+        A = probability that the party reaches the threshold number of seats,
+            assuming the given shift and assuming independence of race outcomes
+        B = the density of the statewide shift probability measure at this
+            specific shift
+    '''
+    # find win probability assuming a statewift shift of "shift" in favor of
+    # the party
+    win_prob = \
+        chamber_success_prob_assuming_independence(margins + shift, threshold)
+        
+    # find relative likelihood of this shift, dividing by statewide_sigma so
+    # that the density function integrates to 1     
+    shift_prob_density = sts.t.pdf(shift/statewide_sigma, statewide_deg_f) / \
+                            statewide_sigma
+    
+    # return the product
+    return win_prob * shift_prob_density
+    
+def better_chamber_success_prob(margins, threshold, \
+                                statewide_sigma=0.03, statewide_deg_f=2):
+    ''' Given a list of expected win margins and the number of seats needed
+    for the party to have desired redistricting power, find the probability
+    of the party reaching that threshold. Considers all statewide shifts and
+    assumes independence of errors after the statewide shift. Relies on
+    chamber_success_prob_with_shift.
+    
+    Arguments:
+        margins: numpy array of expected win margins (between -1 and 1) for 
+            party (negative = loss margin)
+        
+        threshold: number of seats needed for redistricting power
+        
+    Output: (win_prob, err), where 
+        win_prob = real number between 0 and 1, probability of party reaching 
+            threshold
+        err = error bound on win_prob due to numerical integration error
+    '''
+    # integrate chamber_success_prob_with_shift with respect to shift from 
+    # -inf to +inf
+    return quad(chamber_success_prob_with_shift, \
+                -np.inf, np.inf, \
+                args = (margins, threshold, statewide_sigma, statewide_deg_f))
+
 def voter_power(districts_df, seats_needed):
     ''' Finds the power of one vote in each district (i.e. the increase in 
     probability that the party reaches the necessary number of seats if they gain
@@ -174,7 +248,7 @@ def voter_power(districts_df, seats_needed):
         margins = np.asarray([i for i in margins])
         
         # find the chamber success probability 
-        prob = chamber_success_prob(margins, seats_needed)
+        prob = better_chamber_success_prob(margins, seats_needed)
         
         # grab the number of voters in the district of interest
         num_voters = race['NUM_VOTERS']
@@ -186,7 +260,7 @@ def voter_power(districts_df, seats_needed):
         ## floating point error. Need to check. Maybe boost to 10 or 100.
         
         # find the chamber success probability 
-        prob_new = chamber_success_prob(margins, seats_needed)
+        prob_new = better_chamber_success_prob(margins, seats_needed)
         
         # calcuate vote power and add to proper row of districts_df
         districts_df.loc[ix, 'VOTER_POWER'] = prob_new - prob
