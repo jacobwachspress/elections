@@ -4,6 +4,7 @@ Created on Thu Jun 11 14:04:26 2020
 @author: Jacob
 """
 import scipy.stats as sts
+from scipy.integrate import quad
 import numpy as np
 
 
