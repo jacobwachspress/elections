@@ -75,7 +75,7 @@ def clean(in_path, out_path):
     df['district_num'] = df['geoid'].apply(lambda x: x[2:])
 
     # Get relevant columns
-    keep_cols = ['state', 'state_fips', 'district', 'district_num',
+    keep_cols = ['state', 'state_fips', 'district', 'district_num', 'geoid',
                  'incumbent', 'flip', 'favored', 'confidence', 'nom_R',
                  'nom_D', 'nom_I']
     df = df[keep_cols]
