@@ -15,6 +15,9 @@ import tempfile
 
 ## SCRIPTS FOR DOWNLOADING CENSUS DATA ##
 
+# shared drive path
+drive_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/' 
+
 def zipped_shapefile_to_geo_df(file_URL):
     ''' Downloads a zipped shapefile and turns it into a GeoDataFrame.
     

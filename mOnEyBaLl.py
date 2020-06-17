@@ -3,10 +3,14 @@
 Created on Thu Jun 11 14:04:26 2020
 @author: Jacob
 """
+import scipy
 import scipy.stats as sts
 from scipy.integrate import quad
 import numpy as np
+import pandas as pd
 
+# MONEYBALL PATH FOR GOOGLE DRIVE
+moneyball_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
 
 def margins_from_ratings(ratings):
     return
@@ -193,7 +197,7 @@ def better_chamber_success_prob(margins, threshold, \
     # -inf to +inf
     return quad(chamber_success_prob_with_shift, \
                 -np.inf, np.inf, \
-                args = (margins, threshold, statewide_sigma, statewide_deg_f))
+                args = (margins, threshold, statewide_sigma, statewide_deg_f))[0]
 
 
 def voter_power(districts_df, seats_needed):
@@ -205,23 +209,27 @@ def voter_power(districts_df, seats_needed):
             with (at least) these columns:
             'MARGIN': the expected winning margin for the party (negative if
                     losing margin)
-            'NUM_VOTERS': the number of voters in the district
+            'totalvotes': the number of voters in the district
         seats_needed: number of seats needed for redistricting power
     Output: input DataFrame with one column added, 'VOTER_POWER', which
             gives the result of the calculation for each district'''
 
+    # grab all margins, deep copy in numpy format
+    margins = districts_df['MARGIN']
+    margins = np.asarray([i for i in margins])
+
+    # find the chamber success probability
+    prob = better_chamber_success_prob(margins, seats_needed)
+    
     # for all races in districts_df
     for ix, race in districts_df.iterrows():
-
+        
         # grab all margins, deep copy in numpy format
         margins = districts_df['MARGIN']
         margins = np.asarray([i for i in margins])
 
-        # find the chamber success probability
-        prob = chamber_success_prob(margins, seats_needed)
-
         # grab the number of voters in the district of interest
-        num_voters = race['NUM_VOTERS']
+        num_voters = race['totalvotes']
 
         # adjust the margin in that race, assuming the party gained 1 vote
         margins[ix] = margins[ix] + 1 / num_voters
@@ -230,9 +238,65 @@ def voter_power(districts_df, seats_needed):
         # floating point error. Need to check. Maybe boost to 10 or 100.
 
         # find the chamber success probability
-        prob_new = chamber_success_prob(margins, seats_needed)
+        prob_new = better_chamber_success_prob(margins, seats_needed)
 
         # calcuate vote power and add to proper row of districts_df
         districts_df.loc[ix, 'VOTER_POWER'] = prob_new - prob
 
     return districts_df
+
+
+def rating_to_margin(favored, confidence, params_file= \
+                        'state/rating_to_margin.csv'):
+    ''' Gets the expected margin of victory based on information in 
+    two input parameter files.
+    
+    Arguments:
+        favored: 'D', 'R', 'I', or FALSE (in case of Toss-Up)
+        confidence: 'Toss-Up', 'Tilt', 'Lean', 'Likely', or 'Uncontested'
+        params_file: csv with two columns, 'RATING' and 'MARGIN' that give
+            expected margin of victory associated with each rating
+            
+    Output: expected margin of victory, positive if Dem, negative if Rep, None
+        if Ind'''        
+        
+    # read csv into ratings_to_margin DataFrame
+    ratings_to_margin_df = pd.read_csv(moneyball_path + params_file, \
+                                           index_col='RATING')
+    
+    # get absolute margin
+    margin = ratings_to_margin_df.loc[confidence, 'MARGIN']
+    
+    # postive if dem, negative if rep, None if ind
+    if favored == 'R':
+        margin = -margin
+    if favored == 'I':
+        margin = None
+        
+    return margin
+    
+def main():
+    ratings_df = pd.read_csv(moneyball_path + 'state/state_assembly_turnout.csv')
+    ratings_df['MARGIN'] = ''
+    ratings_df['MARGIN'] = ratings_df.apply(lambda x: \
+                                              rating_to_margin(x.favored, \
+                                                               x.confidence), \
+                                               axis=1)
+                                            
+    seats_needed = {'TX' : 75}
+    output = {}
+    for st in seats_needed:
+        st_df = ratings_df.loc[ratings_df['state'] == st]
+        
+        # remove uncontested seats, subtracting dem seats from seats_needed
+        threshold = seats_needed[st] - sum(st_df.apply(lambda x: \
+                                            x['favored'] == 'D' and \
+                                            x['confidence'] == 'Uncontested', \
+                                            axis=1))
+        st_df = st_df[st_df['confidence'] != 'Uncontested'].reset_index()
+        
+        output[st] = voter_power(st_df, threshold)
+    
+    
+if __name__ == "__main__":
+    main()
