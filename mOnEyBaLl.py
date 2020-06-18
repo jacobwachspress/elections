@@ -11,6 +11,7 @@ import pandas as pd
 
 # MONEYBALL PATH FOR GOOGLE DRIVE
 moneyball_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
+count = 0
 
 def margins_from_ratings(ratings):
     return
@@ -31,7 +32,7 @@ def success_prob_from_meta_margin(meta_margin, meta_sigma=0.03, meta_df=2):
     return sts.t.cdf(meta_margin / meta_sigma, meta_df)
 
 
-def success_prob_from_margin(margin, race_sigma=0.03, race_df=2):
+def success_prob_from_margin(margin, race_sigma=0.07, race_df=2):
     ''' Given the expected margin of a race and the parameters determining the
     t-distribution about this margin, returns the probability of victory.
     Arguments:
@@ -135,7 +136,7 @@ def chamber_success_prob(margins, threshold):
     return success_prob_from_meta_margin(find_meta_margin(margins, threshold))
 
 def chamber_success_prob_with_shift(shift, margins, threshold, \
-                                    statewide_sigma = 0.03, statewide_deg_f=2):
+                                    statewide_sigma = 0.04, statewide_deg_f=2):
     ''' Helper method to be integrated in better_chamber_success_prob.
     Assuming independence of races, calculates the probability of the party
     reaching a fixed threshold of seats after a uniform shift in all margins,
@@ -176,7 +177,7 @@ def chamber_success_prob_with_shift(shift, margins, threshold, \
     return win_prob * shift_prob_density
     
 def better_chamber_success_prob(margins, threshold, \
-                                statewide_sigma=0.03, statewide_deg_f=2):
+                                statewide_sigma=0.04, statewide_deg_f=2):
     ''' Given a list of expected win margins and the number of seats needed
     for the party to have desired redistricting power, find the probability
     of the party reaching that threshold. Considers all statewide shifts and
@@ -274,19 +275,75 @@ def rating_to_margin(favored, confidence, params_file= \
         margin = None
         
     return margin
+
+
+def t_parameter_tester(margin, params_list, delta=10000):
+    ''' Estimates win probability given expected win margin and list of 
+    t-distributions of independent errors.
     
+    Arguments:
+        margin: expected win margin, from -1 to 1
+        params_list: list of pairs (sigma, degrees of freedom) representing the 
+            parameters for the independent t-distributed random variables to be 
+            added to the expected win margin to get the result
+        delta: resolution for estimating integral
+        
+    Output: win probability'''
+    
+    ## discretize space, convolve a whole bunch of distributions ##
+    
+    # initialize distribution
+    convolved = np.asarray([1])
+    
+    # for each pair of t-distribution parameters
+    for sigma, deg_f in params_list:
+        
+        # discretize the region [-1, 1] in delta parts
+        discretized_space = np.linspace(-1, 1, delta+1)
+        
+        # find the discretized PDF of the t-distribution given these params
+        pdf = np.ravel(sts.t.pdf(discretized_space / sigma, deg_f))
+        
+        # convolve this distribution into convolved
+        convolved = np.convolve(convolved, pdf)
+        
+    # set convolved sum to 1, so it is a pdf
+    convolved = convolved/sum(convolved)
+        
+    ## find cdf at given margin ##
+    
+    # find endpoints of intervals of convolved pdf [-endpt, endpt]
+    endpt = len(params_list)
+    
+    # find total number of pieces into which the interval is carved
+    pieces = endpt * delta
+    
+    # find relative position of margin among the pieces in this interval
+    pos = pieces * (margin + endpt) / (2*endpt) 
+    
+    # split pos into integer and fracitonal parts
+    ix = int(np.floor(pos))
+    frac = pos - ix
+    
+    # estimate cdf by adding pdf up to this index, principled linear guess
+    # for the error due to not being right on an index
+    return sum(convolved[:ix]) + frac * convolved[ix]
+    
+
 def main():
     ratings_df = pd.read_csv(moneyball_path + 'state/state_assembly_turnout.csv')
-    ratings_df['MARGIN'] = ''
-    ratings_df['MARGIN'] = ratings_df.apply(lambda x: \
-                                              rating_to_margin(x.favored, \
-                                                               x.confidence), \
-                                               axis=1)
+
                                             
-    seats_needed = {'TX' : 75}
+    # assume tie = good
+    seats_needed = {'TX' : 75, 'KS' : 42, 'NC' : 60, 'FL' : 60}
     output = {}
     for st in seats_needed:
         st_df = ratings_df.loc[ratings_df['state'] == st]
+        st_df['MARGIN'] = ''
+        st_df['MARGIN'] = ratings_df.apply(lambda x: \
+                                              rating_to_margin(x.favored, \
+                                                               x.confidence), \
+                                               axis=1)
         
         # remove uncontested seats, subtracting dem seats from seats_needed
         threshold = seats_needed[st] - sum(st_df.apply(lambda x: \
@@ -296,7 +353,8 @@ def main():
         st_df = st_df[st_df['confidence'] != 'Uncontested'].reset_index()
         
         output[st] = voter_power(st_df, threshold)
+        print (st)
     
     
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#    main()
