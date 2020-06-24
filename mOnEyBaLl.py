@@ -201,7 +201,7 @@ def better_chamber_success_prob(margins, threshold, \
                 args = (margins, threshold, statewide_sigma, statewide_deg_f))[0]
 
 
-def voter_power(districts_df, seats_needed):
+def voter_power(districts_df, seats_needed, voters='turnout_cvap'):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
@@ -210,7 +210,7 @@ def voter_power(districts_df, seats_needed):
             with (at least) these columns:
             'MARGIN': the expected winning margin for the party (negative if
                     losing margin)
-            'totalvotes': the number of voters in the district
+            voters : the number of voters in the district
         seats_needed: number of seats needed for redistricting power
     Output: input DataFrame with one column added, 'VOTER_POWER', which
             gives the result of the calculation for each district'''
@@ -230,7 +230,7 @@ def voter_power(districts_df, seats_needed):
         margins = np.asarray([i for i in margins])
 
         # grab the number of voters in the district of interest
-        num_voters = race['totalvotes']
+        num_voters = race[voters]
 
         # adjust the margin in that race, assuming the party gained 1 vote
         margins[ix] = margins[ix] + 1 / num_voters
@@ -331,30 +331,64 @@ def t_parameter_tester(margin, params_list, delta=10000):
     
 
 def main():
-    ratings_df = pd.read_csv(moneyball_path + 'state/state_assembly_turnout.csv')
-
-                                            
-    # assume tie = good
-    seats_needed = {'TX' : 75, 'KS' : 42, 'NC' : 60, 'FL' : 60}
-    output = {}
-    for st in seats_needed:
-        st_df = ratings_df.loc[ratings_df['state'] == st]
+    # read in race-level data
+    assembly_df = pd.read_csv(moneyball_path + 'state/state_assembly_cvap.csv')
+    senate_df = pd.read_csv(moneyball_path + 'state/state_senate_cvap.csv')
+    
+    # seats needed for redistricting power
+    assembly_seats_needed = {'TX' : 75, 'KS' : 42, 'NC' : 60, 'FL' : 60}
+    senate_seats_needed = {'MN' : 34, 'KS' : 14, 'NC' : 25}
+    
+    # initialize dicts where results dataframes will go
+    assembly = {}
+    senate = {}
+    
+    # assembly #
+    
+    # for each state
+    for st in assembly_seats_needed:
+        
+        # limit search to races in this state
+        st_df = assembly_df.loc[assembly_df['state'] == st].copy()
+        
+        # add margin column
         st_df['MARGIN'] = ''
-        st_df['MARGIN'] = ratings_df.apply(lambda x: \
-                                              rating_to_margin(x.favored, \
-                                                               x.confidence), \
-                                               axis=1)
+        st_df['MARGIN'] = st_df.apply(lambda x: rating_to_margin(x.favored, \
+                                         x.confidence), axis=1)
         
         # remove uncontested seats, subtracting dem seats from seats_needed
-        threshold = seats_needed[st] - sum(st_df.apply(lambda x: \
+        threshold = assembly_seats_needed[st] - sum(st_df.apply(lambda x: \
                                             x['favored'] == 'D' and \
                                             x['confidence'] == 'Uncontested', \
                                             axis=1))
         st_df = st_df[st_df['confidence'] != 'Uncontested'].reset_index()
+
+        # add voter power column
+        assembly[st] = voter_power(st_df, threshold)
         
-        output[st] = voter_power(st_df, threshold)
-        print (st)
+    # senate #
     
+    # for each state
+    for st in senate_seats_needed:
+        
+        # limit search to races in this state
+        st_df = senate_df.loc[senate_df['state'] == st].copy()
+        
+        # add margin column
+        st_df['MARGIN'] = ''
+        st_df['MARGIN'] = st_df.apply(lambda x: rating_to_margin(x.favored, \
+                                         x.confidence), axis=1)
+        
+        # remove uncontested seats, subtracting dem seats from seats_needed
+        threshold = senate_seats_needed[st] - sum(st_df.apply(lambda x: \
+                                            x['favored'] == 'D' and \
+                                            x['confidence'] == 'Uncontested', \
+                                            axis=1))
+        st_df = st_df[st_df['confidence'] != 'Uncontested'].reset_index()
+
+        # add voter power column
+        senate[st] = voter_power(st_df, threshold)
+                                            
     
 # if __name__ == "__main__":
 #    main()
