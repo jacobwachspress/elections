@@ -74,7 +74,7 @@ def chamber_success_prob_with_shift(*args):
             among n independent categories (i.e. rural, statewide, incumbent)
         threshold: number of seats needed for redistricting power
         race_sigma: positive real number, estimate of standard deviation of
-            actual win margin in each race
+            actual win margin in each race, after correlated error
         race_df: positive integer, degrees of freedom used in t-distribution
             in each race
         parameter_weights: numpy matrix with n+1 columns, where the rows denote
@@ -144,7 +144,8 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold, \
                         parameter_weights, sigmas, deg_fs))
 
 ## TODO NEEDS REWRITE ##
-def voter_power(districts_df, seats_needed):
+def voter_power(districts_df, error_vars, threshold, race_sigma, race_deg_f, \
+                        total_votes='totalvotes'):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
@@ -154,39 +155,49 @@ def voter_power(districts_df, seats_needed):
             'MARGIN': the expected winning margin for the party (negative if
                     losing margin)
             'totalvotes': the number of voters in the district
-        seats_needed: number of seats needed for redistricting power
+        threshold: number of seats needed for redistricting power
     Output: input DataFrame with one column added, 'VOTER_POWER', which
             gives the result of the calculation for each district'''
-
-    # grab all margins, deep copy in numpy format
-    margins = districts_df['MARGIN']
-    margins = np.asarray([i for i in margins])
+            
+    # generate parameter_weights, must have columns[0] be the margins
+    parameter_weights = districts_df[error_vars].to_numpy()
+    
+    # get total_votes by district
+    votes_by_district  = list(districts_df[total_votes])
+    
+    # extract sigmas, deg_fs from error_vars
+    t_dist_params = list(error_vars.values()) 
 
     # find the chamber success probability
-    prob = chamber_success_prob(margins, seats_needed)
+    prob = chamber_success_prob(parameter_weights, t_dist_params, threshold, \
+                             race_sigma, race_deg_f)
     
-    # for all races in districts_df
-    for ix, race in districts_df.iterrows():
+    # intitialize voter_powers list
+    voter_powers = []
+    
+    # for all races
+    for i in range(len(parameter_weights[:,0])):
         
-        # grab all margins, deep copy in numpy format
-        margins = districts_df['MARGIN']
-        margins = np.asarray([i for i in margins])
+        # deep copy parameter_weights
+        param_weights_copy = parameter_weights.copy()
 
         # grab the number of voters in the district of interest
-        num_voters = race['totalvotes']
+        num_voters = votes_by_district[i]
 
         # adjust the margin in that race, assuming the party gained 1 vote
-        margins[ix] = margins[ix] + 1 / num_voters
+        param_weights_copy[i, 0] = param_weights_copy[i, 0] + 1/num_voters
 
         # NOTE: 1 may be too small, with the effect so small it might get into
         # floating point error. Need to check. Maybe boost to 10 or 100.
 
         # find the chamber success probability
-        prob_new = chamber_success_prob(margins, seats_needed)
+        prob_new = chamber_success_prob(param_weights_copy, t_dist_params, \
+                                        threshold, race_sigma, race_deg_f)
 
         # calcuate vote power and add to proper row of districts_df
-        districts_df.loc[ix, 'VOTER_POWER'] = prob_new - prob
+        voter_powers[i] = prob_new - prob
 
+    districts_df['VOTER_POWER'] = voter_powers
     return districts_df
 
 
@@ -283,7 +294,7 @@ def main():
     for st in seats_needed:
         st_df = ratings_df.loc[ratings_df['state'] == st]
         st_df['MARGIN'] = ''
-        st_df['MARGIN'] = ratings_df.apply(lambda x: \
+        st_df['MARGIN'] = st_df.apply(lambda x: \
                                               rating_to_margin(x.favored, \
                                                                x.confidence), \
                                                axis=1)
