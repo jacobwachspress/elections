@@ -127,11 +127,29 @@ def chamber_success_prob_with_shift(*args):
     
 def chamber_success_prob(parameter_weights, t_dist_params, threshold, \
                              race_sigma, race_deg_f):
-    ''' TODO COMMENT THIS
+    ''' Finds the probability of chamber success (redistricting power) for a
+    state, accounting for various sources of correlated error
+    
+    Arguments: 
+        parameter_weights: numpy matrix with n+1 columns, where the rows denote
+            races, the first column denotes the desired candidate's expected
+            win margin, and the remaining columns denote the margin's
+            sensitivity to an error in a certain parameter 
+                threshold: number of seats needed for redistricting power
+        t_dist_params: list of (sigma, deg_f) for the t-distributed
+            random variables, index i corresponds to column i+1 in
+            parameter_weights
+        race_sigma: positive real number, estimate of standard deviation of
+            actual win margin in each race, after correlated error
+        race_deg_f: positive integer, degrees of freedom used in t-distribution
+            in each race
     '''
     # build range array for all variables
     n = len(t_dist_params)
     range_arr = [[-np.inf, np.inf] for i in range(n)]
+    
+    # make sure at least one source of correlated error
+    assert n > 0, "no correlated error encoded"
     
     # extract sigmas and deg_fs from t_dist_params
     sigmas = [param[0] for param in t_dist_params]
@@ -141,26 +159,40 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold, \
     # variables from -inf to +inf
     return nquad(chamber_success_prob_with_shift, range_arr, \
                 args = (threshold, race_sigma, race_deg_f, \
-                        parameter_weights, sigmas, deg_fs))
+                        parameter_weights, sigmas, deg_fs))[0]
 
-## TODO NEEDS REWRITE ##
 def voter_power(districts_df, error_vars, threshold, race_sigma, race_deg_f, \
-                        total_votes='totalvotes'):
+                        margin_col='MARGIN', total_votes='turnout_cvap'):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
+    
     Arguments:
         districts_df: pandas DataFrame of districts, indexed by 0, 1, 2, ..
             with (at least) these columns:
-            'MARGIN': the expected winning margin for the party (negative if
+            margin_col: the expected winning margin for the party (negative if
                     losing margin)
-            'totalvotes': the number of voters in the district
+            total_votes: the number of voters in the district
+        error_vars: dictionary where keys are the columns in districts_df that
+            are sources of error, values are (sigma, deg_f) of t-distribution
+            of the error
         threshold: number of seats needed for redistricting power
+        race_sigma: positive real number, estimate of standard deviation of
+            actual win margin in each race, after correlated error
+        race_deg_f: positive integer, degrees of freedom used in t-distribution
+            in each race
+        
     Output: input DataFrame with one column added, 'VOTER_POWER', which
             gives the result of the calculation for each district'''
-            
-    # generate parameter_weights, must have columns[0] be the margins
+    
+        
+    # generate parameter_weights
     parameter_weights = districts_df[error_vars].to_numpy()
+    
+    # append margins to the first column of parameter_weights
+    margins = districts_df[margin_col].to_numpy()
+    margins.shape = (len(districts_df), 1)
+    parameter_weights = np.hstack((margins, parameter_weights))
     
     # get total_votes by district
     votes_by_district  = list(districts_df[total_votes])
@@ -172,31 +204,44 @@ def voter_power(districts_df, error_vars, threshold, race_sigma, race_deg_f, \
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold, \
                              race_sigma, race_deg_f)
     
+    # initialize dictionary keyed by parameter weights, where the value is
+    # voter_power * voters_in_district, which is very nearly constant for 
+    # each set of weights, assuming locally linear behavior, which is observed
+    # to cause < 0.1% error
+    voter_power_dict = {}
+    
     # intitialize voter_powers list
     voter_powers = []
     
     # for all races
     for i in range(len(parameter_weights[:,0])):
         
-        # deep copy parameter_weights
-        param_weights_copy = parameter_weights.copy()
-
         # grab the number of voters in the district of interest
         num_voters = votes_by_district[i]
+        
+        # grab relevant parameter weights for this race
+        race_weights = tuple(parameter_weights[i, :])
+        
+        # if we have not already done a race with these exact weights
+        if race_weights not in voter_power_dict:
+            
+            # deep copy parameter_weights
+            param_weights_copy = parameter_weights.copy()
+    
+            # adjust the margin in our race, assuming the party gained 1 vote
+            param_weights_copy[i, 0] = param_weights_copy[i, 0] + 1/num_voters
+    
+            # find the chamber success probability
+            prob_new = chamber_success_prob(param_weights_copy, t_dist_params,\
+                                            threshold, race_sigma, race_deg_f)
+            
+            # update dictionary with quantity voter_power * voters_in_district
+            voter_power_dict[race_weights] = (prob_new - prob) * num_voters
 
-        # adjust the margin in that race, assuming the party gained 1 vote
-        param_weights_copy[i, 0] = param_weights_copy[i, 0] + 1/num_voters
+        # calcuate vote power, to later add to proper column of districts_df
+        voter_powers.append(voter_power_dict[race_weights] / num_voters)
 
-        # NOTE: 1 may be too small, with the effect so small it might get into
-        # floating point error. Need to check. Maybe boost to 10 or 100.
-
-        # find the chamber success probability
-        prob_new = chamber_success_prob(param_weights_copy, t_dist_params, \
-                                        threshold, race_sigma, race_deg_f)
-
-        # calcuate vote power and add to proper row of districts_df
-        voter_powers[i] = prob_new - prob
-
+    # add voter power column and return
     districts_df['VOTER_POWER'] = voter_powers
     return districts_df
 
@@ -285,7 +330,7 @@ def t_parameter_tester(margin, params_list, delta=10000):
     
 
 def main():
-    ratings_df = pd.read_csv(moneyball_path + 'state/state_assembly_turnout.csv')
+    ratings_df = pd.read_csv(moneyball_path + 'state/state_assembly_cvap.csv')
 
                                             
     # assume tie = good
