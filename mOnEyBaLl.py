@@ -162,7 +162,8 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold, \
                         parameter_weights, sigmas, deg_fs))[0]
 
 def voter_power(districts_df, error_vars, threshold, race_sigma, race_deg_f, \
-                        margin_col='MARGIN', total_votes='turnout_cvap'):
+                        margin_col='MARGIN', total_votes='turnout_cvap',\
+                        power_col='VOTER_POWER'):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
@@ -182,7 +183,7 @@ def voter_power(districts_df, error_vars, threshold, race_sigma, race_deg_f, \
         race_deg_f: positive integer, degrees of freedom used in t-distribution
             in each race
         
-    Output: input DataFrame with one column added, 'VOTER_POWER', which
+    Output: input DataFrame with one column added, power_col, which
             gives the result of the calculation for each district'''
     
         
@@ -242,11 +243,11 @@ def voter_power(districts_df, error_vars, threshold, race_sigma, race_deg_f, \
         voter_powers.append(voter_power_dict[race_weights] / num_voters)
 
     # add voter power column and return
-    districts_df['VOTER_POWER'] = voter_powers
+    districts_df[power_col] = voter_powers
     return districts_df
 
 
-def rating_to_margin(favored, confidence, params_file= \
+def rating_to_margin(favored, confidence, df=None, params_csv= \
                         'state/rating_to_margin.csv'):
     ''' Gets the expected margin of victory based on information in 
     two input parameter files.
@@ -254,14 +255,17 @@ def rating_to_margin(favored, confidence, params_file= \
     Arguments:
         favored: 'D', 'R', 'I', or FALSE (in case of Toss-Up)
         confidence: 'Toss-Up', 'Tilt', 'Lean', 'Likely', or 'Uncontested'
-        params_file: csv with two columns, 'RATING' and 'MARGIN' that give
+        df: pandas DataFrame with two columns, 'RATING' and 'MARGIN' that give
             expected margin of victory associated with each rating
+        params_csv: option to pass csv instead of df, 
             
     Output: expected margin of victory, positive if Dem, negative if Rep, None
         if Ind'''        
         
-    # read csv into ratings_to_margin DataFrame
-    ratings_to_margin_df = pd.read_csv(moneyball_path + params_file, \
+    # if not passed a df
+    if df is None:
+        # read csv into ratings_to_margin DataFrame
+        ratings_to_margin_df = pd.read_csv(moneyball_path + params_csv, \
                                            index_col='RATING')
     
     # get absolute margin
@@ -328,32 +332,79 @@ def t_parameter_tester(margin, params_list, delta=10000):
     # for the error due to not being right on an index
     return sum(convolved[:ix]) + frac * convolved[ix]
     
+def TX_testing(output_file):
+    
+    # read in ratings df, limit to TX
+    assembly_df = pd.read_csv(moneyball_path + 'state/state_assembly_cvap.csv')
+    st_df = assembly_df.loc[assembly_df['state'] == 'TX'].copy()
+    
+    # remove uncontested seats, subtracting dem seats from seats_needed
+    threshold = 75 - sum(st_df.apply(lambda x: x['favored'] == 'D' and \
+                                        x['confidence'] == 'Uncontested', \
+                                        axis=1))
+    st_df = st_df[st_df['confidence'] != 'Uncontested']
+    
+    # for now, do not play with margins
+    # add margin column
+    st_df['MARGIN'] = st_df.apply(lambda x: rating_to_margin(x.favored, \
+                                     x.confidence), axis=1)
+    # add statewide indicator column
+    st_df['STATEWIDE'] = 1
+    
+
+    # play with different parameters
+    for race_sigma, statewide_sigma in [(0.09, 0.015), (0.08, 0.03), (0.07, 0.04), \
+                                        (0.06, 0.055), (0.05, 0.065), (0.04, 0.07),\
+                                        (0.03, 0.08)]:
+            error_vars = {'STATEWIDE': (statewide_sigma, 2)}
+            race_deg_f = 2
+            
+            # add voter_power column to st_df
+            st_df = voter_power(st_df, error_vars, threshold, race_sigma, 
+                                race_deg_f, power_col='race'+ str(race_sigma) \
+                                + '_state' + str(statewide_sigma))
+    
+    return st_df
+            
+            
+            
 
 def main():
-    ratings_df = pd.read_csv(moneyball_path + 'state/state_assembly_cvap.csv')
-
-                                            
-    # assume tie = good
-    seats_needed = {'TX' : 75, 'KS' : 42, 'NC' : 60, 'FL' : 60}
-    output = {}
-    for st in seats_needed:
-        st_df = ratings_df.loc[ratings_df['state'] == st]
-        st_df['MARGIN'] = ''
-        st_df['MARGIN'] = st_df.apply(lambda x: \
-                                              rating_to_margin(x.favored, \
-                                                               x.confidence), \
-                                               axis=1)
-        
+    # read in ratings df
+    
+    assembly_df = pd.read_csv(moneyball_path + 'state/state_assembly_cvap.csv')
+    # seats needed for redistricting power
+    assembly_seats_needed = {'TX' : 75}
+    
+    # initialize dicts where results dataframes will go
+    assembly = {}
+    
+    # assembly #
+    
+    # for each state
+    for st in assembly_seats_needed:
+    
+        # limit search to races in this state
+        st_df = assembly_df.loc[assembly_df['state'] == st].copy()
+    
+        # add margin column
+        st_df['MARGIN'] = st_df.apply(lambda x: rating_to_margin(x.favored, \
+                                         x.confidence), axis=1)
+        st_df['STATEWIDE'] = 1
+        error_vars = {'STATEWIDE': (0.04, 2)}
+        race_sigma = 0.07
+        race_deg_f = 2
+    
         # remove uncontested seats, subtracting dem seats from seats_needed
-        threshold = seats_needed[st] - sum(st_df.apply(lambda x: \
+        threshold = assembly_seats_needed[st] - sum(st_df.apply(lambda x: \
                                             x['favored'] == 'D' and \
                                             x['confidence'] == 'Uncontested', \
                                             axis=1))
-        st_df = st_df[st_df['confidence'] != 'Uncontested'].reset_index()
-        
-        output[st] = voter_power(st_df, threshold)
-        print (st)
-   
+        st_df = st_df[st_df['confidence'] != 'Uncontested']
+    
+        # add voter power column
+        assembly[st] = voter_power(st_df, error_vars, threshold, race_sigma, race_deg_f)
+    return assembly
 
     
     
