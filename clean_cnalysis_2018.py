@@ -8,6 +8,8 @@ Created on Fri Jul  3 11:24:17 2020
 import pandas as pd
 import numpy as np
 import operator
+import os
+import difflib
 
 # CLEAN 2018 ELECTION DATA #
 
@@ -17,17 +19,24 @@ moneyball_path = 'G:\\Shared drives\\princeton_gerrymandering_project\\Moneyball
 # read in 2018 results from MEDSL
 df = pd.read_csv(moneyball_path + "testing\\state_overall_2018.csv")
 
-# restrict to offices of interest
-df = df[df['office'].isin(['State Senate',
- 'State Senator', 'state Representative'])]
+# Filter to state assembly/senate offices
+partial_term = 'State Representative (Partial Term Ending 01/01/2019)'
+relevant_offices = ['House of Delegates Member', 'State Assembly Member',
+                    'State Assembly Representative',
+                    'State House Delegate', 'State Representative',
+                    partial_term, 'State Representative A',
+                    'State Representative B',
+                    'State Representative Pos. 1',
+                    'State Representative Pos. 2', 'State Senate',
+                    'State Senator',
+                    'State Senator Partial Term Ending (01/01/2019)']
+senate_offices = ['State Senate', 'State Senator',
+                  'State Senator Partial Term Ending (01/01/2019)']
+df = df[df['office'].isin(relevant_offices)]
 
-# Remove state_pos with multi-member districts
-df = df[~df['state_po'].isin(['Vermont', 'West Virginia', 'Washington', \
-        'Idaho'])]
-
-# clean office titles
-df['office'] = df['office'].apply(lambda x: 'senate' if x in ['State Senate', \
-                  'State Senator'] else 'house')
+# Identify which chamber each race is
+df['office'] = df['office'].apply(lambda x: 'upper' if x in senate_offices
+                                   else 'lower')
 
 # get total votes per candidate, filter out unimportant columns
 cols_to_group = ['year', 'state_po', 'office', 'district', 'candidate']
@@ -95,4 +104,65 @@ for year in years:
                     
                 
 
+## FUZZY MERGE CHAZ AND ELECTION RESULTS ##
+def fuzzy_merge(file, df):
+
+    # get state and chamber from file name of the form 'ST_chamber.csv'
+    state = file.split('_')[0]
+    chamber = file.split('_')[1][:-4]
+    
+    # get chaz df for state and chamber
+    chaz_df = pd.read_csv(moneyball_path + 'chaz\\cleaned_states\\' + \
+                          state + '_' + chamber + '.csv', dtype=str).dropna()
+
+    # deal with chaz inconsistency in chaz rating column label
+    rating_col = chaz_df.columns[-1]
+    
+    # get rating and confidence
+    chaz_df['predicted_winner'] = chaz_df.apply(lambda x: \
+                                       x[rating_col].split(' ')[1], axis=1)
+    chaz_df['confidence'] = chaz_df.apply(lambda x: \
+                                       x[rating_col].split(' ')[0], axis=1)
+    
+    # drop uncontested / no election (no results for many uncontested)
+    chaz_df = chaz_df[~chaz_df['confidence'].isin(['No', 'Uncontested'])]
+        
+    # get election results in this chamber
+    results_df = df[df['state_po'] == state]
+    results_df = results_df[results_df['office'] == chamber]
+    
+    # filter for winners
+    results_df = results_df[results_df['Winner'] == 'True']
+    
+    # clean district names (get rid of "District" at the front)
+    results_df['district'] = results_df['district'].apply(lambda x: \
+             ' '.join(x.split(' ')[1:]) if x.split(' ')[0] == 'District' \
+                     else x)
+    
+    # fuzzy guess the name of the district
+    chaz_df['DIST_NAME'] = chaz_df['NAME'].apply(lambda x: \
+           difflib.get_close_matches(x, results_df['district'])[0] \
+           if len(difflib.get_close_matches(x, results_df['district'])) > 0\
+                  else None)
+    
+    # merge dataframes
+    new_chaz_df = pd.merge(chaz_df, results_df, how='left', \
+                               left_on='DIST_NAME', right_on='district')
+    
+    # set index to new name and return
+    return new_chaz_df.set_index('DIST_NAME')
+
+dfs = [fuzzy_merge(file, df) for file in \
+           os.listdir(moneyball_path + 'chaz\\cleaned_states\\')]
+
+merged_df = pd.concat(dfs)
+cols_to_keep = ['NAME', 'state_po', 'office', 'GEOID', 'confidence', \
+                'predicted_winner', 'win_party', 'win_margin']
+merged_df = merged_df[cols_to_keep]
+
+# WISCONSIN, MANUAL CHANGES
+    
+        
+    
+    
 
