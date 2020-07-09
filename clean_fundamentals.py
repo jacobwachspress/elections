@@ -13,14 +13,19 @@ def main():
     df_fips['fips'] = df_fips['fips'].astype(str).str.zfill(2)
 
     # Statewide presidential results
-    df = pd.read_csv(path + 'raw/1976-2016-president.csv')
-    df = get_statewide_presidential_results(df)
-    df.to_csv(path + 'clean/statewide_presidential_results.csv', index=False)
+    df_state = pd.read_csv(path + 'raw/1976-2016-president.csv')
+    df_state = get_statewide_presidential_results(df_state)
+    df_state.to_csv(path + 'clean/state_pres_results.csv', index=False)
 
     # Presidential results by congressional district
-    df = pd.read_csv(path + 'raw/congressional_pvi.csv')
-    df = get_cong_dist_presidential_results(df, df_fips)
-    df.to_csv(path + 'clean/cong_dist_presidential_results.csv', index=False)
+    df_cd = pd.read_csv(path + 'raw/congressional_pvi.csv')
+    df_cd = get_cong_dist_presidential_results(df_cd, df_fips)
+    df_cd.to_csv(path + 'clean/cong_dist_pres_results.csv', index=False)
+
+    # Get partisan residual of each congressional district
+    df_cd_pr = get_cong_dist_partisan_residual(df_cd, df_state)
+    df_cd_pr.to_csv(path + 'clean/cong_dist_partisan_residual.csv',
+                    index=False)
     return
 
 
@@ -114,6 +119,46 @@ def get_cong_dist_presidential_results(df, df_fips):
     # Sort columns
     df = df[['state', 'geoid', 'district_num', 'dem_12', 'rep_12', 'dem_16',
              'rep_16']]
+    return df
+
+
+def get_cong_dist_partisan_residual(df, df_state):
+    """Calculate partisan residual for each congressional district.
+
+    Partisan residual is defined as follows:
+
+        Average of congressional district presidential vote in 2012 and 2016
+
+        MINUS
+
+        Average of statewide district presidential vote in 2012 and 2016
+
+    Note that if we don't have 2012 data for a congressional district, we
+    simply impute the 2016 result
+
+    Arguments:
+        df: cleaned congressional district presidential results
+
+        df_state: cleaned statewide presidential results
+    """
+    # Impute 2012 voteshare with 2016 and vice versa
+    df['dem_12'] = df['dem_12'].fillna(df['dem_16'])
+
+    # Calculate average dem voteshare
+    df['cd_dem'] = (df['dem_12'] + df['dem_16']) / 2
+    df_state['state_dem'] = (df_state['dem_12'] + df_state['dem_16']) / 2
+
+    # Reduce state to relevant columns
+    df_state = df_state[['state', 'state_dem']]
+
+    # Join state value to congressional districts
+    df = df.merge(df_state)
+
+    # Calculate congressional district residual
+    df['resid'] = df['cd_dem'] - df['state_dem']
+
+    # Reduce to relevant columns and save
+    df = df[['state', 'geoid', 'district_num', 'resid']]
     return df
 
 
