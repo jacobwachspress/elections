@@ -8,10 +8,19 @@ def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
     path = money_path + 'fundamentals/'
 
-    # Initial cleaning
+    # Load and clean fips
+    df_fips = pd.read_csv(path + 'raw/state_fips.csv')
+    df_fips['fips'] = df_fips['fips'].astype(str).str.zfill(2)
+
+    # Statewide presidential results
     df = pd.read_csv(path + 'raw/1976-2016-president.csv')
     df = get_statewide_presidential_results(df)
-    df.to_csv(path + 'clean/statewide_presidential_results.csv')
+    df.to_csv(path + 'clean/statewide_presidential_results.csv', index=False)
+
+    # Presidential results by congressional district
+    df = pd.read_csv(path + 'raw/congressional_pvi.csv')
+    df = get_cong_dist_presidential_results(df, df_fips)
+    df.to_csv(path + 'clean/cong_dist_presidential_results.csv', index=False)
     return
 
 
@@ -64,6 +73,47 @@ def get_statewide_presidential_results(df):
     df['dem_16'] = df['dem_16'] / df['sum_16']
     df['rep_16'] = df['rep_16'] / df['sum_16']
     df = df.drop(columns=['sum_12', 'sum_16'])
+    return df
+
+
+def get_cong_dist_presidential_results(df, df_fips):
+    """Calculate 2-party voteshare in 2012 and 2016 for pres by cong district.
+
+    Arguments:
+        df: Cook Political PVI by congressional district csv
+
+        df_fips: dataframe w/ state abbreviations and fips codes
+    """
+    # Split original district into state and district number
+    df['state'] = df['Dist'].apply(lambda x: x.split('-')[0])
+    df['district_num'] = df['Dist'].apply(lambda x: x.split('-')[-1])
+    df.loc[df['district_num'] == 'AL', 'district_num'] = '00'
+    df['district_num'] = df['district_num'].str.zfill(2)
+
+    # Add Fips
+    df = df.merge(df_fips)
+
+    # Add geoid
+    df['geoid'] = df['fips'] + df['district_num']
+
+    # Drop unnecesarry columns
+    df = df.drop(columns=['Dist', 'Incumbent', 'PVI', 'fips'])
+
+    # Rename columns
+    df.columns = ['dem_16', 'rep_16', 'dem_12', 'rep_12', 'state',
+                  'district_num', 'geoid']
+
+    # Get two party voteshare
+    df['sum_12'] = df['dem_12'] + df['rep_12']
+    df['sum_16'] = df['dem_16'] + df['rep_16']
+    df['dem_16'] /= df['sum_16']
+    df['rep_16'] /= df['sum_16']
+    df['dem_12'] /= df['sum_12']
+    df['rep_12'] /= df['sum_12']
+
+    # Sort columns
+    df = df[['state', 'geoid', 'district_num', 'dem_12', 'rep_12', 'dem_16',
+             'rep_16']]
     return df
 
 
