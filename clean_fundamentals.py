@@ -2,6 +2,9 @@
 
 import pandas as pd
 import numpy as np
+import os
+from clean_moneyball import massachusetts_cleaning
+import difflib
 
 
 def main():
@@ -26,7 +29,12 @@ def main():
     df_cd_pr = get_cong_dist_partisan_residual(df_cd, df_state)
     df_cd_pr.to_csv(path + 'clean/cong_dist_partisan_residual.csv',
                     index=False)
-    return
+    
+    # Presidential results by st_leg district
+    input_path = money_path + \
+                    'fundamentals\\raw\\pres_results_by_state_leg_district\\'
+    df_st_leg = get_all_st_leg_pres_results(input_path, df_fips)
+    df_st_leg.to_csv(path + 'clean/st_leg_pres_results.csv', index=False)
 
 
 def get_statewide_presidential_results(df):
@@ -121,6 +129,146 @@ def get_cong_dist_presidential_results(df, df_fips):
              'rep_16']]
     return df
 
+def clean_st_leg_presidential_results(df, st_fips, chamber):
+    """Calculate 2-party voteshare in 2012 and 2016 for pres for all
+    state leg districts in a state.
+
+    Arguments:
+        df: election results by district, cleaned Daily Kos data
+
+        st_fips: state fips code
+        
+        chamber: 'upper' or 'lower'
+    """
+    
+    # Split original district into state and district number
+    df['state'] = df['STATE']
+            
+    df['district_num'] = df['DISTRICT'].apply(lambda x: x.split(' ')[-1])
+    df['district_num'] = df['district_num'].str.zfill(3)
+
+    # Add Fips
+    df['fips'] = st_fips
+
+    # Add geoid
+    df['geoid'] = df['fips'] + df['district_num']
+    
+    # Add chamber
+    df['office'] = chamber
+    
+    # find columns we have for the 2012/2016 races
+    important_cols = {'Clinton 2016 President D' : 'dem_16',\
+                      'Trump 2016 President R' : 'rep_16',\
+                      'Obama 2012 President D' : 'dem_12',\
+                      'Romney 2012 President R' : 'rep_12'}
+    cols_we_have = list(df.columns.intersection(important_cols))
+    
+    # string to int for results columns
+    for col in cols_we_have:
+        df[col] = df[col].apply(lambda x: int(x.replace(',', '')))
+
+    # Drop unnecessary columns
+    df = df[['state', 'geoid', 'office', 'district_num'] + cols_we_have]
+
+    # Rename columns
+    for col in cols_we_have:
+        df[important_cols[col]] = df[col]
+    
+    # if we have the 2012 elections
+    if 'dem_12' in df.columns and 'rep_12' in df.columns:
+        
+        # Get two party voteshare
+        df['sum_12'] = df['dem_12'] + df['rep_12']
+        df['dem_12'] /= df['sum_12']
+        df['rep_12'] /= df['sum_12']
+        
+    # if we have the 2016 elections
+    if 'dem_16' in df.columns and 'rep_16' in df.columns:
+        
+        # Get two party voteshare
+        df['sum_16'] = df['dem_16'] + df['rep_16']
+        df['dem_16'] /= df['sum_16']
+        df['rep_16'] /= df['sum_16']
+
+
+    # Drop unnecessary columns and sort to match format
+    new_cols_we_have = list(df.columns.intersection(['dem_12', 'rep_12', \
+                                                'dem_16', 'rep_16']))
+    df = df[['state', 'geoid', 'office', 'district_num'] + new_cols_we_have]
+    
+    return df
+
+    
+def get_all_st_leg_pres_results(input_path, df_fips):
+    ''' Reads in a bunch of files of state_leg presidential results by 
+    state + chamber, cleans, and concats into one dataframe
+    
+    input_path: folder containing results by state+chamber
+    
+    df_fips: dataframe w/ state abbreviations and fips codes
+    '''
+    
+    # store chambers that use multimember districts, to be ignored
+    multimember_districts = {'upper' : ['VT', 'WV'], 'lower' : ['AZ', 'ID', \
+                         'MD', 'NH', 'NJ', 'ND', 'SD', 'VT', 'WA', 'WV']}
+    
+    # initialize list of dfs to be concatenated
+    dfs = []
+    
+    # for each state/chamber
+    for file in os.listdir(input_path):
+        
+        # read in dataframe
+        state_df = pd.read_csv(input_path+file)
+        
+        # get state, chamber, fips
+        state = file[0:2]
+        chamber = (file.split('_')[1])[:-4].lower()
+        st_fips = df_fips.set_index('state').loc[state, 'fips']
+        
+        # check if this is a multimember district; if so, continue
+        if state in multimember_districts[chamber]:
+            continue
+        
+        # fix massachusetts
+        if st_fips == '25':
+            
+            # prime for fuzzy match
+            state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
+                            'District ' + ' '.join(x.split(' ')[2:]))
+            
+            # grab dictionaries
+            mass_dict_lower, mass_dict_upper, _, _ = massachusetts_cleaning()
+            
+            if chamber == 'lower':
+                
+                # fuzzy match to dict keys
+                state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
+                        difflib.get_close_matches(x, list(mass_dict_lower))[0])
+
+                # change to numerical districts
+                state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
+                            str(mass_dict_lower[x]))
+            else:
+
+                # fuzzy match to dict keys
+                state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
+                        difflib.get_close_matches(x, list(mass_dict_upper))[0])
+
+                # change to numerical districts
+                state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
+                            str(mass_dict_upper[x]))
+                
+        # clean dataframe and append to list
+        dfs.append(clean_st_leg_presidential_results(state_df, st_fips, chamber))
+        
+        # merge all dfs
+        out_df = pd.concat(dfs)
+        
+    # order columns appropriately and return
+    return out_df[['state', 'office', 'geoid', 'district_num', 'dem_12', 
+               'rep_12', 'dem_16', 'rep_16']]
+        
 
 def get_cong_dist_partisan_residual(df, df_state):
     """Calculate partisan residual for each congressional district.

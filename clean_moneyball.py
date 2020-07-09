@@ -127,7 +127,7 @@ def clean_initial_rating(df):
     return df
 
 
-def massachussetts_cleaning():
+def massachusetts_cleaning():
     mass_dict_lower = {}
     mass_dict_upper = {}
 
@@ -796,6 +796,5 @@ def add_turnout_estimate(df):
     df = df.drop(columns=drop_cols)
     return df
 
-
 if __name__ == "__main__":
-    main()
+   main()
