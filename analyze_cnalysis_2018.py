@@ -12,23 +12,11 @@ import scipy.stats as sts
 moneyball_path = 'G:\\Shared drives\\princeton_gerrymandering_project\\Moneyball\\'
 
 # read in results
-results = pd.read_csv(moneyball_path + 'chaz\\merged_results.csv').dropna()
+results = pd.read_csv(moneyball_path + \
+                          'chaz\\chaz_prediction_results_2018.csv')
 
-# nebraska has nonpartisan elections in results, can't assess
-results = results[results['state_po'] != 'NE']
-
-# get parties of winners
-names = {'democrat' : 'D', 'democratic-farmer-labor' : 'D', 'democratic-npl' :\
-         'D', 'republican' : 'R', 'conservative' : 'R'}
-results['winning_party'] = results['win_party'].apply(lambda x: names[x] \
-                   if x in names else 'I')
-
-# 
-results['correct'] = results.apply(lambda x: x['predicted_winner'] == \
-                               x['winning_party'], axis=1)
-
-results['actual_win_margin'] = results.apply(lambda x: x['win_margin'] * \
-                       (2*x['correct']-1), axis=1)
+# filter oddball seats
+results = results[results['ignore'] != True]
 
 states = results['state_po'].dropna().unique()
 confidences = results['confidence'].dropna().unique()
