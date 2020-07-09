@@ -1,5 +1,5 @@
-import helper.helper_tools.shp_manipulation as sm
-import helper.helper_tools.file_management as fm
+import geo_helper.helper_tools.shp_manipulation as sm
+import geo_helper.helper_tools.file_management as fm
 
 
 def dissolve_by_attribute(in_path, dissolve_attribute, out_path=False):

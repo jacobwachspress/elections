@@ -1,10 +1,10 @@
-import helper.helper_tools.file_management as fm
+import geo_helper.helper_tools.file_management as fm
 import numpy as np
 import pandas as pd
 
 
 def distribute_label(df_large, large_cols, df_small, small_cols=False,
-                     small_path=False):
+                     small_path=False, progress=False, debug_col=False):
     ''' Take labels from a shapefile that has larger boundaries and interpolate
     said labels to shapefile with smaller boundaries. By smaller boundaries we
     just mean more fine geographic boundaries. (i.e. census blocks are smaller
@@ -33,6 +33,13 @@ def distribute_label(df_large, large_cols, df_small, small_cols=False,
 
         small_path:
             path to save the new dataframe to
+
+        progress:
+            how often to print
+
+        debug_col:
+            column in df_small to print out when error occurs.
+            usually block_id or geoid
 
     Output:
         edited df_small dataframe
@@ -70,8 +77,9 @@ def distribute_label(df_large, large_cols, df_small, small_cols=False,
     df_small = df_small.reset_index(drop=True)
     for ix, row in df_small.iterrows():
         try:
-            if (ix + 1) % 10000 == 0:
-                print(str(ix + 1) + '/' + str(len(df_small)))
+            if progress:
+                if (ix + 1) % progress == 0:
+                    print('\t' + str(ix + 1) + '/' + str(len(df_small)))
             # Get potential matches
             small_poly = row['geometry']
             potential_matches = [df_large.index[i] for i in
