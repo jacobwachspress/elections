@@ -49,8 +49,8 @@ def main():
     cong_res = pd.read_csv(path + 'clean/cong_dist_partisan_residual.csv', \
                                          dtype=str)
     up, low = impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res)
-    up.to_csv(path + 'clean/imputed_sldu_residuals.csv')
-    low.to_csv(path + 'clean/imputed_sldl_residuals.csv')
+    up.to_csv(path + 'clean/imputed_sldu_residuals.csv', index=False)
+    low.to_csv(path + 'clean/imputed_sldl_residuals.csv', index=False)
 
 def get_statewide_presidential_results(df):
     """Calculate 2-party voteshare in 2012 and 2016 for president by state.
@@ -348,7 +348,7 @@ def get_st_leg_dist_partisan_residual(df, df_state):
     df['dem_16'] = df['dem_16'].fillna(df['dem_12'])
 
     # Calculate average dem voteshare
-    df['cd_dem'] = (df['dem_12'] + df['dem_16']) / 2
+    df['st_leg_dem'] = (df['dem_12'] + df['dem_16']) / 2
     df_state['state_dem'] = (df_state['dem_12'] + df_state['dem_16']) / 2
 
     # Reduce state to relevant columns
@@ -357,8 +357,8 @@ def get_st_leg_dist_partisan_residual(df, df_state):
     # Join state value to congressional districts
     df = df.merge(df_state)
 
-    # Calculate congressional district residual
-    df['resid'] = df['cd_dem'] - df['state_dem']
+    # Calculate st_leg district residual
+    df['resid'] = df['st_leg_dem'] - df['state_dem']
 
     # Reduce to relevant columns and save
     df = df[['state', 'office', 'geoid', 'district_num', 'resid']]
@@ -481,10 +481,78 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
     
     return sldu_labels, sldl_labels
                 
-            
-            
-            
-            
+  
+def clean_election_results(df):
+    ''' Parses Harvard dataverse election results and cleans up 2016 results'''
+    
+    # remove "scattering" votes
+    df = df[df['cand'] != 'scattering']
+    
+    # make vote totals floats
+    df['vote'] = df['vote'].astype(float)
+    
+    # makes fips a two-digit string
+    df['sfips'] = df['sfips'].str.zfill(2)
+    
+    # get upper and lower dataframes for 2016
+    df_2016 = df[df['year'] == '2016']          
+    upper_df = df_2016[df_2016['sen'] == '1'].copy()
+    lower_df = df_2016[df_2016['sen'] == '0'].copy()
+    
+    # for both chamber dataframes
+    input_dfs = {1: upper_df, 2: lower_df}
+    output_dfs = {}
+    for i in input_dfs:
+        
+        cham_df = input_dfs[i]
+        
+        # add votes for same candidate if multiple rows have their name
+        grouped = cham_df.groupby(['sid', 'ddez', 'cand'])
+        cham_df = grouped.agg({'vote' : sum, 'sfips': 'first', \
+                               'outcome' : 'first', 'partyt': 'first', \
+                               'sen' : 'first'}).reset_index()
+        
+        # get total_votes in each race
+        grouped = cham_df.groupby(['sid', 'ddez'])['vote']
+        totalvotes = grouped.sum()
+        totalvotes = totalvotes.reset_index()
+        
+        # rename column for better merge
+        totalvotes = totalvotes.rename(columns={'vote':'totalvotes'})
+        
+        # add totalvotes column to cham_df
+        cham_df = pd.merge(cham_df, totalvotes, how='left', on=['sid', 'ddez'])
+        
+        # get winning margins, using same grouped object
+        winmargins = grouped.apply(lambda x: 1 if len(x) \
+             < 2 else (x.nlargest(2).max() - x.nlargest(2).min()) / x.sum())
+        winmargins = winmargins.reset_index()
+        
+        # rename column for better merge
+        winmargins = winmargins.rename(columns={'vote':'win_margin'})
+        
+        # add totalvotes column to cham_df
+        cham_df = pd.merge(cham_df, winmargins, how='left', on=['sid', 'ddez'])
+        
+        # reduce datatframe to winners
+        # IF YOU AIN'T FIRST, YOU'RE LAST
+        cham_df = cham_df[cham_df['outcome'] == 'w']
+        
+        # columns to keep
+        cols_to_keep = ['sfips', 'ddez', 'cand', 'vote', 'totalvotes', 
+                        'win_margin', 'partyt', 'sen']
+        
+        cham_df = cham_df[cols_to_keep]
+        output_dfs[i] = cham_df
+        
+    return output_dfs[1], output_dfs[2]
+        
+        
+def merge_results_data:
+    
+    ordinals = pd.read_csv(path + 'raw/ordinal_numbers.csv')
+    ordinals['ordinal'] = ordinals['ordinal'].apply(lambda x: x.upper())
+    ordinals_dict = dict(zip(ordinals['ordinal'], ordinals['number']))
         
         
         
