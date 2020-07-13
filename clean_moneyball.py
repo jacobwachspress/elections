@@ -91,9 +91,9 @@ def clean_initial_rating(df):
     df = df[~df['STATE'].isin(['VT', 'WV'])]
 
     # Get if there is an incumbent
-    df['incub_D'] = df['D NOM'].str.contains('[I]').fillna(False)
-    df['incub_R'] = df['R NOM'].str.contains('[I]').fillna(False)
-    df['incub_I'] = df['I NOM'].str.contains('[I]').fillna(False)
+    df['incub_D'] = df['D NOM'].apply(lambda x: '[I]' in str(x))
+    df['incub_R'] = df['R NOM'].apply(lambda x: '[I]' in str(x))
+    df['incub_I'] = df['I NOM'].apply(lambda x: '[I]' in str(x))
 
     # Get which incumbent
     df['incumbent'] = df.apply(lambda r: get_incumb(r['incub_D'], r['incub_R'],
@@ -121,6 +121,13 @@ def clean_initial_rating(df):
            (df['incumbent'] is False), 'incumbent'] = 'D'
     df.loc[(df['favored'] == 'I') & (df['nom_I'] == 'TBA') &
            (df['incumbent'] is False), 'incumbent'] = 'I'
+
+    df.loc[(df['favored'] == 'R') & (df['R NOM'].isna()) &
+           (df['incumbent'].astype(str) == 'False'), 'incumbent'] = 'R'
+    df.loc[(df['favored'] == 'D') & (df['D NOM'].isna()) &
+           (df['incumbent'].astype(str) == 'False'), 'incumbent'] = 'D'
+    df.loc[(df['favored'] == 'I') & (df['I NOM'].isna()) &
+           (df['incumbent'].astype(str) == 'False'), 'incumbent'] = 'I'
 
     # lowercase geoid
     df['geoid'] = df['GEOID'].str.zfill(5)
