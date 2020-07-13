@@ -624,5 +624,5 @@ def merge_2016_election_results(df, ordinals_dict, sldu_old, sldl_old):
         
 
 
-# if __name__ == "__main__":
-#    main()
+ if __name__ == "__main__":
+    main()
