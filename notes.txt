@@ -1,0 +1,11 @@
+simplifying modelling assumptions
+
+no consideration of national shift (correlated error between states)
+- national shift affects everything in the same direction anyway
+- average over both directions, probably negligible (test?)
+
+model based on margin, uncertainty
+- this is not real life (different elasticity districts)
+- luckily chaz ws modelling on probabilities anyway, so possible he has a 
+    lower elasticity, lower margin race in the same region, probable that our
+    effects are minor
