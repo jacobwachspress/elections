@@ -113,6 +113,15 @@ def clean_initial_rating(df):
     df['nom_I'] = df['nom_I'].apply(lambda x: False if not x else
                                     x.split(' [I]')[0])
 
+    # If your party is favored and the nominee is TBA assume that the primary
+    # hasn't happened and there is an incumbent that will
+    df.loc[(df['favored'] == 'R') & (df['nom_R'] == 'TBA') &
+           (df['incumbent'] is False), 'incumbent'] = 'R'
+    df.loc[(df['favored'] == 'D') & (df['nom_D'] == 'TBA') &
+           (df['incumbent'] is False), 'incumbent'] = 'D'
+    df.loc[(df['favored'] == 'I') & (df['nom_I'] == 'TBA') &
+           (df['incumbent'] is False), 'incumbent'] = 'I'
+
     # lowercase geoid
     df['geoid'] = df['GEOID'].str.zfill(5)
     df['state_fips'] = df['geoid'].apply(lambda x: x[:2])
@@ -576,7 +585,7 @@ def add_recorded_turnout(df, df_lower, df_upper):
                                           else x)
 
     # Get district number for MA
-    mass_dict_L, mass_dict_U, _, _ = massachussetts_cleaning()
+    mass_dict_L, mass_dict_U, _, _ = massachusetts_cleaning()
     df_ma = df[df['state'] == 'MA']
     df_ma_L = df_ma[df_ma['chamber'] == 'lower']
     df_ma_U = df_ma[df_ma['chamber'] == 'upper']
@@ -693,7 +702,7 @@ def add_lower_uncontested(df, df_leg):
 
     # We need to add previous uncontested elections not included in join
     mn_uncon = ['28A', '67A']
-    _, _, ma_uncon, _ = massachussetts_cleaning()
+    _, _, ma_uncon, _ = massachusetts_cleaning()
     df.loc[(df['district_num'].isin(mn_uncon)) &
            (df['state'] == 'MN'), 'prev_uncontested'] = True
     df.loc[(df['district'].isin(ma_uncon)) &
