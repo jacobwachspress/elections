@@ -1,4 +1,4 @@
-"""Pull Incumbency Data for State Senate Seats.
+"""Pull Incumbency Data for State Legislative Upper Chambers.
 
 We need to know who holds seats that are not up for election.
 
