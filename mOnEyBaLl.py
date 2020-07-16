@@ -66,7 +66,7 @@ def dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f):
     return np.sum(seat_probs[threshold:]) - (1-tie)*seat_probs[threshold]
 
 def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma, 
-                race_deg_f, both_bad):
+                race_deg_f, both_bad, neither_bad):
     ''' Given two lists of expected win margins and thresholds for Dem party to
     have redistricting power, find the probability of a "good" outcome (no 
     single party control). Relies on dem_chamber_power and assumes independence
@@ -94,10 +94,11 @@ def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
         dem_probs.append(p)
         
     # find the probability that we have a good outcome
+    good_outcome = 1
     if both_bad:
-        good_outcome = np.sum(dem_probs) - 2*np.prod(dem_probs)
-    else:
-        good_outcome = np.sum(dem_probs) - np.prod(dem_probs)
+        good_outcome -= np.prod(dem_probs)
+    if neither_bad:
+        good_outcome -= (1 - np.sum(dem_probs) + np.prod(dem_probs))
         
     return good_outcome
 
@@ -138,6 +139,9 @@ def chamber_success_prob_with_shift(*args):
         both_bad: Boolean, is it bad if Dems reach threshold in both chambers? 
             (This happens if there is a D governor or governors have no 
             veto power.)
+        neither_bad: Boolean, is it bad if Dems reach threshold in no chamber? 
+            (This happens if there is a R governor or governors have no 
+            veto power.)
             
             
     Output: A*B, where
@@ -146,18 +150,19 @@ def chamber_success_prob_with_shift(*args):
 
     '''
     # parse args
-    threshold_1 = args[-11]
-    threshold_2 = args[-10]
-    tie_1 = args[-9]
-    tie_2 = args[-8]
-    race_sigma = args[-7]
-    race_deg_f = args[-6]
-    parameter_weights = args[-5]
-    chamber_2_ix = args[-4]
-    sigmas = args[-3]
-    deg_fs = args[-2]
-    both_bad = args[-1]
-    shift_vector = list(args[0:-11])
+    threshold_1 = args[-12]
+    threshold_2 = args[-11]
+    tie_1 = args[-10]
+    tie_2 = args[-9]
+    race_sigma = args[-8]
+    race_deg_f = args[-7]
+    parameter_weights = args[-6]
+    chamber_2_ix = args[-5]
+    sigmas = args[-4]
+    deg_fs = args[-3]
+    both_bad = args[-2]
+    neither_bad = args[-1]
+    shift_vector = list(args[0:-12])
     
     # check that parameters have the right sizes, for the ones that won't get 
     # caught automatically later
@@ -176,7 +181,7 @@ def chamber_success_prob_with_shift(*args):
     
     # find success probability assuming this set of correlated shifts
     success_prob = success_prob_independence(params_1, params_2, race_sigma, \
-                                             race_deg_f, both_bad)
+                                             race_deg_f, both_bad, neither_bad)
                 
     # find relative likelihood of this shift, dividing by all sigmas so
     # that the density function integrates to 1    
@@ -189,7 +194,7 @@ def chamber_success_prob_with_shift(*args):
     
 def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
                              threshold_2, tie_1, tie_2, chamber_2_ix, \
-                             race_sigma, race_deg_f, both_bad):
+                             race_sigma, race_deg_f, both_bad, neither_bad):
     ''' Finds the probability of chamber success (redistricting power) for a
     state, accounting for various sources of correlated error
     
@@ -216,6 +221,9 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
         both_bad: Boolean, is it bad if Dems reach threshold in both chambers? 
             (This happens if there is a D governor or governors have no 
             veto power.)
+        neither_bad: Boolean, is it bad if Dems reach threshold in no chamber? 
+            (This happens if there is a R governor or governors have no 
+            veto power.)
     '''
     # build range array for all variables
     n = len(t_dist_params)
@@ -233,15 +241,16 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
     return nquad(chamber_success_prob_with_shift, range_arr, \
                 args = (threshold_1, threshold_2, tie_1, tie_2, race_sigma, \
                         race_deg_f, parameter_weights, chamber_2_ix, sigmas, \
-                        deg_fs, both_bad))[0]
+                        deg_fs, both_bad, neither_bad))[0]
 
 def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
-                        margin_col='MARGIN', 
-                        voters_col='turnout_cvap', \
-                        threshold_col='d_threshold', \
-                        tie_col='tie_dem', \
-                        chamber_col='office', \
-                        power_col='VOTER_POWER'):
+                        neither_bad, \
+                            margin_col='MARGIN', 
+                            voters_col='turnout_cvap', \
+                            threshold_col='d_threshold', \
+                            tie_col='tie_dem', \
+                            chamber_col='office', \
+                            power_col='VOTER_POWER'):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
@@ -266,6 +275,9 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
             in each race
         both_bad: Boolean, is it bad if Dems reach threshold in both chambers? 
             (This happens if there is a D governor or governors have no 
+            veto power.)
+        neither_bad: Boolean, is it bad if Dems reach threshold in no chamber? 
+            (This happens if there is a R governor or governors have no 
             veto power.)
     Output: input DataFrame with one column added, power_col, which
             gives the result of the calculation for each district'''
@@ -300,7 +312,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
     # find the chamber success probability
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold_1,\
                              threshold_2, tie_1, tie_2, chamber_2_ix, \
-                             race_sigma, race_deg_f, both_bad)
+                             race_sigma, race_deg_f, both_bad, neither_bad)
     
     # initialize dictionary keyed by parameter weights, where the value is
     # voter_power * voters_in_district, which is very nearly constant for 
@@ -339,8 +351,8 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
     
             # find the chamber success probability
             prob_new = chamber_success_prob(param_weights_copy, t_dist_params,\
-                                threshold_1, threshold_2, tie_1, tie_2, \
-                                chamber_2_ix, race_sigma, race_deg_f, both_bad)
+                         threshold_1, threshold_2, tie_1, tie_2, chamber_2_ix,\
+                         race_sigma, race_deg_f, both_bad, neither_bad)
             
             # update dictionary with quantity voter_power * voters_in_district
             voter_power_dict[unique_params] = (prob_new - prob) * num_voters
@@ -352,8 +364,9 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
     districts_df[power_col] = voter_powers
     return districts_df
     
-def rating_to_margin(favored, confidence, df=None, params_csv= \
-                        'state/rating_to_margin.csv'):
+def rating_to_margin(favored, confidence, df=None, \
+    money_path='G:/Shared drives/princeton_gerrymandering_project/Moneyball/',\
+    params_csv='state/rating_to_margin.csv'):
     ''' Gets the expected margin of victory based on information in 
     two input parameter files.
     
@@ -370,7 +383,7 @@ def rating_to_margin(favored, confidence, df=None, params_csv= \
     # if not passed a df
     if df is None:
         # read csv into ratings_to_margin DataFrame
-        ratings_to_margin_df = pd.read_csv(moneyball_path + params_csv, \
+        ratings_to_margin_df = pd.read_csv(money_path + params_csv, \
                                            index_col='RATING')
     
     # get absolute margin
@@ -448,10 +461,14 @@ def main():
                     - d_uncont[x['office']], axis=1)
                 
         # determine if it is bad for dems to win both
-        bb = st_races['both_bad'].unique()[0]
+        both_bad = st_races['both_bad'].unique()[0]
+        
+        # determine if it is bad for dems to win neither
+        neither_bad = st_races['neither_bad'].unique()[0]
         
         # calculate voter power, add column to df
-        st_races = voter_power(st_races, error_vars, race_sigma, race_deg_f, bb)
+        st_races = voter_power(st_races, error_vars, race_sigma, race_deg_f, \
+                               both_bad, neither_bad)
         
         
         # append to results dataframe
