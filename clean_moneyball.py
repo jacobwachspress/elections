@@ -15,6 +15,11 @@ def main():
     df_upper = pd.read_csv(path + 'state_senate.csv')
     df_upper = clean_initial_rating(df_upper)
 
+    # Fix incumbency errors in ratings
+    incum_path = money_path + 'fundamentals/clean/incumbent_corrections.csv'
+    df_incumbent = pd.read_csv(incum_path)
+    df_lower, df_upper = fix_incumbency(df_incumbent, df_lower, df_upper)
+
     # Add recorded turnout
     df_election = pd.read_csv(path + 'state_overall_2018.csv',
                               encoding='ISO-8859-1')
@@ -812,5 +817,32 @@ def add_turnout_estimate(df):
     df = df.drop(columns=drop_cols)
     return df
 
+
+def fix_incumbency(df_incumbent, df_lower, df_upper):
+    """Fix incumbency entry errors in Chaz's sheet.
+
+    Arguments:
+        df_incumbent: dataframe to fix incumbent errros
+
+        df_lower: lower chamber moneyball data
+
+        df_upper: upper chamber moneyball data
+    """
+    # Set incumbent geoid to zfill
+    df_incumbent['geoid'] = df_incumbent['geoid'].astype(str).str.zfill(5)
+
+    # Update lower chamber incumbents
+    for ix, row in df_incumbent[df_incumbent['chamber'] == 'lower'].iterrows():
+        df_lower.loc[df_lower['geoid'] == row['geoid'],
+                     'incumbent'] = row['actual_incumbent']
+
+    # Update upper chamber incumbents
+    for ix, row in df_incumbent[df_incumbent['chamber'] == 'upper'].iterrows():
+        df_upper.loc[df_upper['geoid'] == row['geoid'],
+                     'incumbent'] = row['actual_incumbent']
+
+    return df_lower, df_upper
+
+
 if __name__ == "__main__":
-   main()
+    main()

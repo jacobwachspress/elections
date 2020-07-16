@@ -1,5 +1,4 @@
 """Calculate incumbency advantage in each district."""
-
 import pandas as pd
 import numpy as np
 from clean_moneyball import massachusetts_cleaning
@@ -11,16 +10,20 @@ def main():
 
     # Get statewide presidential results and economist forecast
     df_state = pd.read_csv(path + 'clean/state_pres_results.csv')
-    df_econ = pd.read_csv(money_path + 'economist/projected_margins_07_11.csv')
+    df_econ = pd.read_csv(money_path + 'economist/projected_margins_07_15.csv')
 
     # Get cleaned moneyball data
     df_lower = pd.read_csv(money_path + 'state/moneyball_lower_chamber.csv')
     df_upper = pd.read_csv(money_path + 'state/moneyball_upper_chamber.csv')
 
+    # Get data error corrections
+    df_party = pd.read_csv(path + 'clean/election_candidate_corrections.csv')
+    df_results = pd.read_csv(path + 'clean/mit_add_entry_corrections.csv')
+
     # Clean 2018 Results
     df = pd.read_csv(money_path + 'state/state_overall_2018.csv',
                      encoding='ISO-8859-1')
-    df_elec_18 = clean_results_18(df)
+    df_elec_18 = clean_results_18(df, df_party, df_results)
     df_elec_18.to_csv(path + 'temp/results_18.csv', index=False)
 
     # Convert 2018 results to dem voteshare
@@ -30,10 +33,8 @@ def main():
     df_elec_upper.to_csv(path + 'temp/upper_voteshare.csv', index=False)
 
     # Get difference between 2018 election and fundamentals prediction
-    df_lower_resid = pd.read_csv(path + 'clean/imputed_sldl_residuals.csv',
-                                 index_col=0)
-    df_upper_resid = pd.read_csv(path + 'clean/imputed_sldu_residuals.csv',
-                                 index_col=0)
+    df_lower_resid = pd.read_csv(path + 'clean/imputed_sldl_residuals.csv')
+    df_upper_resid = pd.read_csv(path + 'clean/imputed_sldu_residuals.csv')
     df_diff_lower = fundamentals_diff(df_state, df_lower_resid, df_elec_lower)
     df_diff_upper = fundamentals_diff(df_state, df_upper_resid, df_elec_upper)
     df_diff_lower.to_csv(path + 'temp/fund_diff_lower.csv', index=False)
@@ -44,11 +45,35 @@ def main():
     df_proj_upper = fundamentals_prediction(df_upper, df_econ, df_diff_upper)
     df_proj_lower.to_csv(path + 'clean/proj_lower_2020.csv', index=False)
     df_proj_upper.to_csv(path + 'clean/proj_upper_2020.csv', index=False)
+
     return
 
 
-def clean_results_18(df):
-    """Clean MIT electin lab election results in 2018."""
+def clean_results_18(df, df_party, df_results):
+    """Clean MIT electin lab election results in 2018.
+
+    Arguments:
+        df: MIT election data
+
+        df_party: party error corrections for MIT data
+
+        df_results: election result "corrections", sometimes just using most
+                    recent special election or fixing corner cases
+    """
+
+    # Update party of each candidate
+    for ix, row in df_party.iterrows():
+        df.loc[df['candidate'] == row['candidate'],
+               'party'] = row['actual_party']
+
+    # Add updated results for each candidate
+    for ix, row in df_results.iterrows():
+        df = df[~((df['district'] == row['district']) &
+                (df['state_po'] == row['state_po']) &
+                (df['office'] == row['office']))]
+    df = df.append(df_results)
+
+    # Define relevant offices
     partial_term = 'State Representative (Partial Term Ending 01/01/2019)'
     relevant_offices = ['House of Delegates Member', 'State Assembly Member',
                         'State Assembly Representative',
@@ -67,9 +92,7 @@ def clean_results_18(df):
     df['chamber'] = df['office'].apply(lambda x: 'upper' if x in senate_offices
                                        else 'lower')
 
-    # Only get regular general elections and let the state be the abbreviation
-    df = df[df['stage'] == 'gen']
-    df = df[~df['special']]
+    # let state be the abbreviation
     df['state'] = df['state_po']
 
     # Filter out WV, VT, and NH because of multi-member districts
@@ -303,7 +326,7 @@ def fundamentals_prediction(df, df_econ, df_diff):
     df = df.merge(df_econ).merge(df_diff)
 
     # Adjust state election difference in direction of incumbent
-    df['state_diff'] = df.apply(lambda r: - r['state_diff']
+    df['state_diff'] = df.apply(lambda r: -r['state_diff']
                                 if r['incumbent'] == 'R' else r['state_diff'],
                                 axis=1)
     df.loc[df['incumbent'].isin(['I', 'False']), 'state_diff'] = 0
@@ -318,8 +341,8 @@ def fundamentals_prediction(df, df_econ, df_diff):
     df['is_inc'] = df['incumbent'].apply(lambda x: 1 if x in ['D', 'R'] else 0)
     df['fund_margin'] += (df['is_inc'] * df['inc_adv'])
 
-    # Clip margin between 0.2 and 0.8
-    df['fund_margin'] = np.clip(df['fund_margin'], 0.2, 0.8)
+    # Clip margin between 0.7 and 0.3
+    df['fund_margin'] = np.clip(df['fund_margin'], 0.35, 0.65)
 
     # Determine if we have results from a past election
     df['past_election'] = df['elec_diff'].notna()
