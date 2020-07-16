@@ -9,3 +9,25 @@ model based on margin, uncertainty
 - luckily chaz ws modelling on probabilities anyway, so possible he has a 
     lower elasticity, lower margin race in the same region, probable that our
     effects are minor
+    
+no correlated error within a state
+- suburban, rural affects
+- nuttycombe states that he considers this, need to model uncertainty around this
+    - backtest to see the effect in 2018
+    
+ties
+- could pick off members from the other party to protect incumbency
+- lobbying could sway a couple representatives from the powerful party
+
+
+172 tilt 
+120 tossup
+
+of tilt, assume tilt are 0.589 of them
+- gives 66.53%
+
+looks like state: (0.037, 12) and race: (0.075, 5) approximates 2018 data well
+- statewide error 0.42 correlated with error
+- isolated race error 0.90 correlated with error 
+- random data more like (0.20, 0.97)
+even when you get rid of small states, very similar
