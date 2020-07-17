@@ -99,13 +99,13 @@ def save_shapefile(df, file_path, cols_to_exclude=[]):
     if df.crs == {}:
         df = set_CRS(df)
 
-    # Attempt to fix object types in dataframe by converting to float if
-    # possible
-    for col in df.columns:
-        try:
-            df[col] = df[col].astype(float)
-        except Exception:
-            pass
+#    # Attempt to fix object types in dataframe by converting to float if
+#    # possible
+#    for col in df.columns:
+#        try:
+#            df[col] = df[col].astype(float)
+#        except Exception:
+#            pass
 
     # Create backup if path already exists
     if os.path.exists(file_path):
