@@ -10,7 +10,7 @@ def main():
 
     # Get statewide presidential results and economist forecast
     df_state = pd.read_csv(path + 'clean/state_pres_results.csv')
-    df_econ = pd.read_csv(money_path + 'economist/projected_margins_07_15.csv')
+    df_econ = pd.read_csv(money_path + 'economist/projected_margins_07_19.csv')
 
     # Get cleaned moneyball data
     df_lower = pd.read_csv(money_path + 'state/moneyball_lower_chamber.csv')
@@ -320,7 +320,7 @@ def fundamentals_prediction(df, df_econ, df_diff):
     # Reduce economist data and adjust projected margin to dem voteshare
     df_econ = df_econ[['state', 'margin']]
     df_econ.columns = ['state', 'state_margin']
-    df_econ['state_margin'] = df_econ['state_margin'] / 100 + 0.5
+    df_econ['state_voteshare'] = df_econ['state_margin'] / 100 + 0.5
 
     # Join dataframes
     df = df.merge(df_econ).merge(df_diff)
@@ -334,21 +334,21 @@ def fundamentals_prediction(df, df_econ, df_diff):
     # Calculate incumbency advantage elec_diff
     df['inc_adv'] = df['elec_diff'].fillna(df['state_diff'])
 
-    # Calculate projected district margin w/o incumbency
-    df['fund_margin'] = df['state_margin'] + df['resid']
+    # Calculate projected district voteshare w/o incumbency
+    df['found_voteshare'] = df['state_voteshare'] + df['resid']
 
     # Add incumbency advantage
     df['is_inc'] = df['incumbent'].apply(lambda x: 1 if x in ['D', 'R'] else 0)
-    df['fund_margin'] += (df['is_inc'] * df['inc_adv'])
+    df['found_voteshare'] += (df['is_inc'] * df['inc_adv'])
 
-    # Clip margin between 0.7 and 0.3
-    df['fund_margin'] = np.clip(df['fund_margin'], 0.35, 0.65)
+    # Clip voteshare between 0.7 and 0.3
+    df['found_voteshare'] = np.clip(df['found_voteshare'], 0.35, 0.65)
 
     # Determine if we have results from a past election
     df['past_election'] = df['elec_diff'].notna()
 
-    # Reduce to geoid and fundamentals margin
-    df = df[['geoid', 'past_election', 'elec_18', 'fund_margin']]
+    # Reduce to geoid and foundations voteshare
+    df = df[['geoid', 'past_election', 'elec_18', 'found_voteshare']]
     return df
 
 
