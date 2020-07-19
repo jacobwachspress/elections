@@ -12,8 +12,118 @@ import shutil
 import requests
 import pandas as pd
 import geopandas as gpd
+import numpy as np
 import geo_helper.helper_tools.file_management as fm
+import geo_helper.helper_tools.areal_interpolation as areal
 
+def main():
+    
+    # set parameters
+    census_vars = {'H001001': 'housing', 'H010001': 'pop', 'GEO_ID': 'GEOID10'}
+    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
+    density_path = money_path + 'density/'
+    
+    # make directories
+    if not os.path.isdir(density_path):
+        os.mkdir(density_path)
+    if not os.path.isdir(density_path + 'raw/'):
+        os.mkdir(density_path + 'raw/')
+    if not os.path.isdir(density_path + 'clean/'):
+        os.mkdir(density_path + 'clean/')
+    
+    
+    # set output path for raw data
+    output_path = density_path + 'raw/block_groups/'
+    if not os.path.isdir(output_path):
+        os.mkdir(output_path)
+    url_start = 'https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_'
+    url_end = '_bg10.zip'
+    
+    # get all fips
+    fips_path = money_path + 'fundamentals/raw/state_fips.csv'
+    fips_df = pd.read_csv(fips_path)
+    all_fips = fips_df['fips'].astype(str).str.zfill(2).unique()
+    
+    # generate shapefiles
+    for st_fips in all_fips:
+        process_state_census_data(st_fips, census_vars, output_path, \
+                    url_start, url_end)
+        
+    ## SOMETIMES I HAVE BEEN GETTING AN HTTP ERROR WITH THE CENSUS DOWNLOAD
+    ## EVERY 15 OR SO STATES, MIGHT BE A TIME THING? A BLOCKER TO DOWNLOADING
+    ## TONS OF DATA AT ONCE? COULD WORK AROUND THIS WITH TRY/EXCEPT
+    
+    # add key colums and save to clean folder
+    for st_fips in all_fips:
+        # get file name
+        file = st_fips + '_block_group.shp'
+        # grab geo_df
+        geo_df = gpd.read_file(density_path + 'raw/block_groups/' + file)
+        # fix area column, square meters to square miles
+        geo_df['area'] = (geo_df['ALAND10']+geo_df['AWATER10']) / 2589988
+        # add density columns
+        geo_df = get_densities(geo_df)
+        # write shapefile
+        output_path = density_path + 'clean/block_groups/'
+        if not os.path.isdir(output_path):
+            os.mkdir(output_path)
+        fm.save_shapefile(geo_df, output_path + file)
+        
+    # areal interpolation
+    for st_fips in all_fips:
+        
+        # get file name
+        file = st_fips + '_block_group.shp'
+        
+        # get block group geo_df
+        bg_path = density_path + 'clean/block_groups/'
+        bg_df = gpd.read_file(bg_path + file)
+        bg_df['pop'] = bg_df['pop'].astype(int)
+        
+        # for upper and lower
+        for cham in ['upper', 'lower']:
+            
+            # get the target geo_df file
+            dist_file = money_path + 'fundamentals/shp/' + cham + \
+                            '/tl_2019_' + st_fips + '_sld' + cham[0] + '.shp'
+            
+            # if the file exists
+            if os.path.exists(dist_file):
+                dist_df = gpd.read_file(dist_file)
+                
+                # specify columns for aggregation and block group id
+                source_cols = ['density_0', 'density_1', 'density_2', 
+                               'density_3', 'pop']
+                target_cols = ['GEOID', 'NAMELSAD']
+                
+                # areal interpolation
+                out_bg_df, out_dist_df = areal.aggregate(bg_df, dist_df, \
+                                           source_columns=source_cols, \
+                                           target_columns=target_cols)
+                
+                # rename some columns
+                bg_cols = {'GEOID': 'dist_geoid', 'NAMELSAD': 'dist_name'}
+                dist_cols = {'density_0': 'rural', 'density_1': 'exurban', \
+                        'density_2': 'suburban', 'density_3': 'urban'}
+                
+                out_bg_df = out_bg_df.rename(columns=bg_cols)
+                out_dist_df = out_dist_df.rename(columns=dist_cols)
+                
+                # prepare output paths to write shapefiles
+                bg_output_path = density_path + 'clean/block_group_eq_files/'
+                dist_output_path = density_path + 'clean/' + cham + '/'
+                if not os.path.isdir(bg_output_path):
+                    os.mkdir(bg_output_path)
+                if not os.path.isdir(dist_output_path):
+                    os.mkdir(dist_output_path)
+                    
+                # write shapefiles
+                fm.save_shapefile(out_bg_df, bg_output_path + st_fips + \
+                                  '_block_groups_' + cham + '.shp')
+                fm.save_shapefile(out_dist_df, dist_output_path + st_fips + \
+                                  '_districts.shp')
+            
+        
 def get_census_data(variables, st_fips, level='block group'):
     ''' Downloads census data from 2010 Census Summary File for a given 
     state at a given geographic level.
@@ -210,24 +320,89 @@ def process_state_census_data(st_fips, census_vars, output_path, \
     fm.save_shapefile(merged_df, output_path + out_file + '.shp')
     
     return
+            
+        
+def get_categories(density):
+    ''' Given the density of a region (households / square mile), classify
+    the region into one of four density categories. Give 0-to-1 weights for
+    all four possiblities.
     
-def main():
+    Arguments:
+        density: float, households /sq mile
+        
+    Output:
+        numpy array, elements summing to 1, indicating the weight
+            of each density category (sometimes more than 1 non-zero weight
+            due to smoothing near the boundary)
+    '''
     
-    # set parameters
-    census_vars = {'H001001': 'housing', 'GEO_ID': 'GEOID10'}
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    output_path = money_path + 'density/raw/'
-    url_start = 'https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_'
-    url_end = '_bg10.zip'
+    # set density bounds for different categories, based on Jed Kolko research
+    # 5000 is not an upper bound, but used later in code to see if we were
+    # "close" (relatively) to a boundary between intervals 
+    densities = np.asarray([0, 102, 800, 2213, 5000])
     
-    # get all fips
-    fips_path = money_path + 'fundamentals/raw/state_fips.csv'
-    fips_df = pd.read_csv(fips_path)
-    all_fips = fips_df['fips'].astype(str).str.zfill(2).unique()
+    # initialize output arroy
+    output = np.zeros(4)
     
-    # generate shapefiles
-    for st_fips in all_fips:
-        process_state_census_data(st_fips, census_vars, output_path, \
-                    url_start, url_end)
+    # find the index of the lower bound where this density fits
+    ix = (np.where(densities <= density)[0])[-1]
+                
+    # if we are not in the highest (artificial) range
+    if ix != 4:
+      
+        # check if we are within 10 percent of a boundary
+        pctile = (density - densities[ix]) / (densities[ix+1] - densities[ix])
+        
+        # if we are on the low end
+        if pctile <= 0.1:
+            # add in some weight to the lower category
+            if ix != 0:
+                output[ix-1] = (0.1-pctile)*5
+        
+        # if we are on the high end
+        if pctile >= 0.9:
+            # add in some weight to the higher category
+            if ix != len(densities) - 2:
+                output[ix+1] = (pctile-0.9)*5
+    
+    # if we are in the artificial highest range, fix the index        
+    else:
+        ix = 3
+     
+    # set weight of main index
+    output[ix] = 1 - np.sum(output)
+    
+    # return np array of the values
+    return output
+
+def get_densities(df, area_col='area', housing_col='housing', pop_col='pop'):
+    
+    # for each record
+    for i, region in df.iterrows():
+        
+        # deal with water only districts
+        if float(region[area_col]) == 0:
+            df.loc[i, 'water_people'] = float(region[pop_col])    
+        
+        else:
+            # get housing units per square mile
+            density = float(region[housing_col]) / float(region[area_col])
+            
+            # get density categories
+            category_weights = get_categories(density)
+            
+            # get people in each category
+            people = category_weights * float(region[pop_col])
+            
+            # for each element of people
+            for j in range(len(people)):
+                
+                # update df for density field
+                df.loc[i, 'density_' + str(j)] = people[j]
+            
+    return df
+            
+if __name__ == "__main__":
+    main()
         
     
