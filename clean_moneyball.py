@@ -1,6 +1,7 @@
 """Cleaning cnalysis and election results for State Leg. Moneyball Analysis."""
 
 import pandas as pd
+import geopandas as gpd
 import numpy as np
 import difflib
 
@@ -69,6 +70,45 @@ def main():
 
     lower.to_csv(path + 'lower_with_old_results.csv', index=False)
     upper.to_csv(path + 'upper_with_old_results.csv', index=False)
+    
+    # get all fips
+    fips_path = money_path + 'fundamentals/raw/state_fips.csv'
+    fips_df = pd.read_csv(fips_path)
+    all_fips = fips_df['fips'].astype(str).str.zfill(2).unique()
+    
+    # merge in densities
+    density_path = money_path + 'density/clean/'
+    for cham in ['upper', 'lower']:
+        dfs = []
+        for st_fips in all_fips:
+            # nebraska lower does not exist, skip
+            if st_fips == '31' and cham == 'lower': 
+                continue 
+            geo_df = gpd.read_file(density_path + cham + '/' + st_fips + \
+                                   '_districts.shp')
+            geo_df['geoid'] = geo_df['GEOID']
+            geo_df = geo_df[['geoid', 'rural', 'exurban', \
+                            'suburban', 'urban']]
+            
+            dfs.append(geo_df)
+        to_merge = pd.concat(dfs)
+        if cham == 'upper':
+            upper = pd.merge(upper, to_merge, how='left', on='geoid')
+        else:
+            lower = pd.merge(lower, to_merge, how='left', on='geoid')
+    lower.to_csv(path + 'lower_with_density.csv', index=False)
+    upper.to_csv(path + 'upper_with_density.csv', index=False)
+    
+    # merge in incumbencies
+        # clean alaska
+#    AK_dict = {'1':'A', '2':'B', '3':'C', '4':'D', '5':'E', '6':'F', 
+#               '7':'G', '8':'H', '9':'I', '10':'J', '11':'K', '12':'L',
+#               '13':'M', '14':'N', '15':'O', '16':'P', '17':'Q', '18':'R',
+#               '19':'S', '20':'T'}
+#    df_inc['district'] = df_inc.apply(lambda x: AK_dict[x['district']] \
+#                          if x['state'] == 'AK' else x['district'], axis=1)
+    
+    
 
     return
 

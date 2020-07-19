@@ -468,7 +468,7 @@ def main():
         
         # calculate voter power, add column to df
         st_races = voter_power(st_races, error_vars, race_sigma, race_deg_f, \
-                               both_bad, neither_bad)
+                               both_bad, neither_bad, voters_col='turnout_cvap')
         
         
         # append to results dataframe
