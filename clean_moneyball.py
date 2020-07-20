@@ -100,15 +100,38 @@ def main():
     upper.to_csv(path + 'upper_with_density.csv', index=False)
     
     # merge in incumbencies
-        # clean alaska
-#    AK_dict = {'1':'A', '2':'B', '3':'C', '4':'D', '5':'E', '6':'F', 
-#               '7':'G', '8':'H', '9':'I', '10':'J', '11':'K', '12':'L',
-#               '13':'M', '14':'N', '15':'O', '16':'P', '17':'Q', '18':'R',
-#               '19':'S', '20':'T'}
-#    df_inc['district'] = df_inc.apply(lambda x: AK_dict[x['district']] \
-#                          if x['state'] == 'AK' else x['district'], axis=1)
+    lower_inc = pd.read_csv(fund_path + \
+                        'clean/state_lower_chamber_incumbency.csv', \
+                        dtype={'district':int})
+    upper_inc = pd.read_csv(fund_path + \
+                        'clean/state_senate_incumbency.csv',\
+                        dtype={'district':int})
+    # clean alaska upper
+    AK_dict = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E', 6:'F', 
+               7:'G', 8:'H', 9:'I', 10:'J', 11:'K', 12:'L',
+               13:'M', 14:'N', 15:'O', 16:'P', 17:'Q', 18:'R',
+               19:'S', 20:'T'}
+    upper_inc['district'] = upper_inc.apply(lambda x: AK_dict[x['district']] \
+                          if x['state'] == 'AK' else x['district'], axis=1)
     
+    lower_inc['district'] = lower_inc['district'].apply(lambda x: \
+                                     str(x).zfill(3))
     
+    upper_inc['district'] = upper_inc['district'].apply(lambda x: \
+                                     str(x).zfill(3))
+    
+    lower_inc.columns = ['state', 'wiki_incumbent', 'inc_party', 'district_num']
+    upper_inc.columns = ['state', 'wiki_incumbent', 'inc_party', 'district_num']
+    
+    lower = pd.merge(lower, lower_inc, how='left', on=['state', 'district_num'])
+    upper = pd.merge(upper, upper_inc, how='left', on=['state', 'district_num'])
+
+    
+    ## TO DO MASSACHUSSETTS, MINNESOTA LOWER, VERIFY CHAZ
+            
+    
+    lower.to_csv(path + 'lower_with_incumbents.csv', index=False)
+    upper.to_csv(path + 'upper_with_incumbents.csv', index=False)
 
     return
 
