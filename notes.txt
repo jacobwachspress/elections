@@ -1,16 +1,4 @@
-simplifying modelling assumptions
-
-no consideration of national shift (correlated error between states)
-- national shift affects everything in the same direction anyway
-- average over both directions, probably negligible (test?)
-
-model based on margin, uncertainty
-- this is not real life (different elasticity districts)
-- luckily chaz ws modelling on probabilities anyway, so possible he has a 
-    lower elasticity, lower margin race in the same region, probable that our
-    effects are minor
-    
-no correlated error within a state
+correlated error within a state
 - suburban, rural affects
 - nuttycombe states that he considers this, need to model uncertainty around this
     - backtest to see the effect in 2018
@@ -31,3 +19,39 @@ looks like state: (0.037, 12) and race: (0.075, 5) approximates 2018 data well
 - isolated race error 0.90 correlated with error 
 - random data more like (0.20, 0.97)
 even when you get rid of small states, very similar
+
+
+What this model does not consider
+
+A uniform national or regional error. Sometimes one party does systematically 
+better than expected in a geographic region or nationwide. This year, we can 
+expect state legislative races to be affected by the results of the
+presidential election. (Though there is plenty of ticket-splitting
+between national races and state legislative races, there is still some 
+coattail effect.) However, we do not see the need to model this correlated 
+error for our purposes. National elections have an objective function 
+aggregated up from state or local elections to the national level (i.e. 270 electoral
+votes, 51 senators, or 218 representatives). State legislature elections, on the
+other hand, all have their own objective functions. Preventing gerrymandering
+in one state is just as valuable whether or not we have prevented it in another.
+As long as we model the statewide uncertainty properly, the fact that these
+uncertainties are correlated has no impact on voter power. The model cannot
+answer the question: how likely are we to get bipartisan control of redistricting in 
+every one of TX, KS, and MN? While it might be interesting to know that, it is
+not necessary for calculating voter power.
+
+Elasticity of the districts. Some districts' results are less likely to change
+sharply from election to election than others. (Imagine an Alabama district
+comprised of 60% white, mostly-Republican voters and 40% Black, mostly-Democratic
+voters. Compare that to a New Hampshire district with 50% independents.) 
+Because our model sets expected win margins for each race and then models 
+uncertainty about those margins, it treats any two races with an expected win 
+margin of, say, 10% the same. But this expected win margin should translate 
+to a larger win probability in the inelastic Alabama district than the elastic
+New Hampshire district. Fortunately, according to Nuttycombe, cnalysis reports 
+its race ratings so that each category corresponds to a probability range, not 
+a range of margins. This means that our model sometimes assigns an expected win
+margin too small or large, but when it does this, it also assigns an uncertainty 
+too small or large in the same direction. These factors cause error in opposite
+directions, and we believe the net effect is minor. In future updates, we may
+try to model elasticity.
