@@ -89,9 +89,18 @@ def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
         threshold = params[1]
         tie = params[2]
         
-        # find dem chamber power probability and append to win_probs
-        p = dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f)
-        dem_probs.append(p)
+        # if we are passed 'D' or 'R' in the threshold, this is code that 
+        # the district is not in question and win probability is fixed
+        if threshold == 'D':
+            dem_probs.append(1)
+        elif threshold == 'R':
+            dem_probs.append(0)
+            
+        else:
+            # find dem chamber power probability and append to win_probs
+            p = dem_chamber_power(margins, threshold, tie, race_sigma, \
+                                      race_deg_f)
+            dem_probs.append(p)
         
     # find the probability that we have a good outcome
     good_outcome = 1
@@ -115,7 +124,9 @@ def chamber_success_prob_with_shift(*args):
         x_1, ... , x_n denote shifts in n parameters of correlated error
             among n independent categories (i.e. rural, statewide, incumbent)
         threshold_1: number of seats needed for Dem power in chamber 1 
+            ('D' is code for guaranteed Dem victory, 'R' for Rep victory)
         threshold_2: number of seats needed for Dem power in chamber 2
+            ('D' is code for guaranteed Dem victory, 'R' for Rep victory)
         tie_1: estimated probability of D power in chamber 1 if they hit 
             "threshold" on the mark
         tie_2: estimated probability of D power in chamber 2 if they hit 
@@ -207,7 +218,9 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
             random variables, index i corresponds to column i+1 in
             parameter_weights
         threshold_1: number of seats needed for Dem power in chamber 1 
+            ('D' is code for guaranteed Dem victory, 'R' for Rep victory)
         threshold_2: number of seats needed for Dem power in chamber 2
+            ('D' is code for guaranteed Dem victory, 'R' for Rep victory)
         tie_1: estimated probability of D power in chamber 1 if they hit 
             "threshold" on the mark
         tie_2: estimated probability of D power in chamber 2 if they hit 
@@ -308,6 +321,36 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
     ties = list(districts_df[tie_col])
     tie_1 = ties[0]
     tie_2 = ties[-1]
+    
+    ## check if the race is already won in a chamber ##
+    
+    # initialize some variables
+    test_cham_1 = True
+    test_cham_2 = True
+    
+    # find number of competitive seats per chamber
+    possible_seats_1 = chamber_2_ix
+    possible_seats_2 = len(margins) - possible_seats_1
+    
+    # if D's already won chamber 1
+    if threshold_1 <= 0:
+        test_cham_1 = False
+        threshold_1 = 'D'
+        
+    # if R's already won chamber 1
+    if threshold_1 > possible_seats_1:
+        test_cham_1 = False
+        threshold_1 = 'R'
+        
+    # if D's already won chamber 2
+    if threshold_2 <= 0:
+        test_cham_2 = False
+        threshold_2 = 'D'
+        
+    # if R's already won chamber 1
+    elif threshold_2 > possible_seats_2:
+        test_cham_2 = False
+        threshold_2 = 'R'
 
     # find the chamber success probability
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold_1,\
@@ -325,6 +368,16 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
     
     # for all races
     for i in range(len(parameter_weights[:,0])):
+        
+        # make sure the chamber is in doubt, if not assign voter power 0
+        if i < chamber_2_ix:
+            if not test_cham_1:
+                voter_powers.append(0)
+                continue
+        else:
+            if not test_cham_2:
+                voter_powers.append(0)
+                continue
         
         # grab the number of voters in the district of interest
         num_voters = votes_by_district[i]
@@ -356,7 +409,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
             
             # update dictionary with quantity voter_power * voters_in_district
             voter_power_dict[unique_params] = (prob_new - prob) * num_voters
-
+            
         # calcuate vote power, to later add to proper column of districts_df
         voter_powers.append(voter_power_dict[unique_params] / num_voters)
 
@@ -405,8 +458,8 @@ def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
     
     # read in ratings dfs
-    lower = pd.read_csv(money_path + 'state/moneyball_lower_chamber.csv')
-    upper = pd.read_csv(money_path + 'state/moneyball_upper_chamber.csv')
+    lower = pd.read_csv(money_path + 'state/lower_with_incumbents.csv')
+    upper = pd.read_csv(money_path + 'state/upper_with_incumbents.csv')
     
     # add columns for office
     lower['office'] = 'lower'
@@ -437,14 +490,10 @@ def main():
     results = []
     
     # for each state
-    for state in ['MN']:
-        
+    for state in all_races['state'].unique():
+    
         # restrict dataframe to this state
         st_races = all_races[all_races['state'] == state].copy()
-        
-        # add margin column
-        st_races['MARGIN'] = st_races.apply(lambda x: rating_to_margin\
-                            (x.favored, x.confidence), axis=1)
         
         # find number of uncontested Dem seats in each chamber
         d_uncont = {'lower' : False, 'upper' : False}
@@ -459,6 +508,27 @@ def main():
         st_races = st_races[st_races['confidence'] != 'Uncontested']
         st_races['d_threshold'] = st_races.apply(lambda x: x['d_threshold'] \
                     - d_uncont[x['office']], axis=1)
+        
+        # find number of non-elections in each chamber
+        d_noelec = {'lower' : False, 'upper' : False}
+        for chamber in d_noelec:
+            cham_df = st_races[st_races['office'] == chamber]
+            d_noelec[chamber] = sum(cham_df.apply(lambda x: \
+                                            x['inc_party'] == 'D' and \
+                                            x['confidence'] == 'False', \
+                                            axis=1))
+        
+        # remove no-election seats and update thresholds
+        st_races = st_races[st_races['confidence'] != 'False']
+        st_races['d_threshold'] = st_races.apply(lambda x: x['d_threshold'] \
+                    - d_noelec[x['office']], axis=1)
+        
+        
+        # add margin column
+        st_races['MARGIN'] = st_races.apply(lambda x: rating_to_margin\
+                            (x.favored, x.confidence), axis=1)
+        
+
                 
         # determine if it is bad for dems to win both
         both_bad = st_races['both_bad'].unique()[0]
@@ -473,11 +543,15 @@ def main():
         
         # append to results dataframe
         results.append(st_races)
+        print (state)
         
     # concatenate statewide dataframes
     output_df = pd.concat(results) 
     
     # delete unecessary columns TODO TODO
+    output_df = output_df[['state', 'district', 'incumbent', 'favored', 
+                          'confidence', 'nom_R', 'nom_D', 'nom_I', 
+                          'turnout_cvap', 'VOTER_POWER']]
     
     return output_df
             
