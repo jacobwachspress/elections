@@ -66,20 +66,68 @@ def main():
         # Get the list of individuals
         rep_list = state_table[0].findAll('div', {'class': indiv_text})[0]
         rep_list = rep_list.find_next('ol').find_all('li')
+            
+        # MN is not standard, names 1A, 1B, 2A, etc.
+        if abbrev != 'MN':
+            
+            # Iterate through the list of senators
+            for ix, elem in enumerate(rep_list):
+                # Get the candidate and the party
+                text = elem.text.strip()
+                candidate = text.split('(')[0].strip()
+                party = text.split()[-1][1]
+    
+                # Save candidate data (wiki orders according to district)
+                r = len(df_inc)
+                df_inc.at[r, 'state'] = abbrev
+                df_inc.at[r, 'candidate'] = candidate
+                df_inc.at[r, 'party'] = party
+                df_inc.at[r, 'district'] = str(int(ix) + 1)
+        
+        # handle MN
+        else:
+            
+            # initialize current number of district
+            current_ix = 1
+            
+            for _, elem in enumerate(rep_list):
+                # Get candidate A and the party
+                text = elem.text.strip()
+                candidate_A = text.split('(')[0].strip().split(' ')[1:]
+                candidate_A = ' '.join(candidate_A)
+                party_A = text.split(')')[0][-1]
+                # we got the last letter of the party, and the party is
+                # either R or DFL (democrat-farmer-labor)
+                if party_A == 'L':
+                    party_A = 'D'
+                    
+                    
+                # Get candidate B and the party
+                text = elem.text.strip()
+                candidate_B = text.split(')B.')[1].strip().split(' ')[:-1]
+                candidate_B = ' '.join(candidate_B)
+                party_B = text[-2]
+                # we got the last letter of the party, and the party is
+                # either R or DFL (democrat-farmer-labor)
+                if party_B == 'L':
+                    party_B = 'D'
+                    
+                # Save candidate data
+                r = len(df_inc)
+                df_inc.at[r, 'state'] = abbrev
+                df_inc.at[r, 'candidate'] = candidate_A
+                df_inc.at[r, 'party'] = party_A
+                df_inc.at[r, 'district'] = str(current_ix) + 'A'
+                df_inc.at[r+1, 'state'] = abbrev
+                df_inc.at[r+1, 'candidate'] = candidate_B
+                df_inc.at[r+1, 'party'] = party_B
+                df_inc.at[r+1, 'district'] = str(current_ix) + 'B'
+                
+                # update index
+                current_ix += 1
+                        
+        
 
-        # Iterate through the list of senators
-        for ix, elem in enumerate(rep_list):
-            # Get the candidate and the party
-            text = elem.text.strip()
-            candidate = text.split('(')[0].strip()
-            party = text.split()[-1][1]
-
-            # Save candidate data (wikipedia orders according to district)
-            r = len(df_inc)
-            df_inc.at[r, 'state'] = abbrev
-            df_inc.at[r, 'candidate'] = candidate
-            df_inc.at[r, 'party'] = party
-            df_inc.at[r, 'district'] = ix + 1
 
     # Change vacant seats to no party
     vacant = ['Vacant', 'vacant', '--Vacant--', 'seat vacant']

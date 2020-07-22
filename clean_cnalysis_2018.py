@@ -38,11 +38,11 @@ def fuzzy_merge(file, df):
     chaz_df = chaz_df[~chaz_df['confidence'].isin(['No', 'Uncontested'])]
         
     # get election results in this chamber
-    results_df = df[df['state_po'] == state]
+    results_df = df[df['state_po'] == state].copy()
     results_df = results_df[results_df['office'] == chamber]
     
     # filter for winners
-    results_df = results_df[results_df['Winner'] == 'True']
+    results_df = results_df[results_df['Winner'] == True]
     
     # clean district names (get rid of "District" at the front)
     results_df['district'] = results_df['district'].apply(lambda x: \
@@ -59,8 +59,13 @@ def fuzzy_merge(file, df):
     new_chaz_df = pd.merge(chaz_df, results_df, how='left', \
                                left_on='DIST_NAME', right_on='district')
     
-    # set index to new name and return
-    return new_chaz_df.set_index('DIST_NAME')
+    # keep certain columns
+    cols_to_keep = ['DIST_NAME', 'NAME', 'GEOID', 'state_po', 'office', 
+                    'confidence', 'predicted_winner', 'win_party', 'win_margin']
+    new_chaz_df = new_chaz_df[cols_to_keep]
+    
+    # set return
+    return new_chaz_df
 
 
 # CLEAN 2018 ELECTION DATA #
@@ -155,17 +160,30 @@ for year in years:
 dfs = [fuzzy_merge(file, df) for file in \
            os.listdir(moneyball_path + 'chaz\\cleaned_states\\')]
 
-merged_df = pd.concat(dfs)
-cols_to_keep = ['NAME', 'state_po', 'office', 'GEOID', 'confidence', \
-                'predicted_winner', 'win_party', 'win_margin']
-merged_df = merged_df[cols_to_keep]
+merged_df = pd.concat(dfs).reset_index(drop=True)
 
-## HERE I CHECKED THE FUZZY MERGE, MADE SOME MANUAL CHANGES, SAVED TO CSV ## 
-## IN WISCONSIN, FIXED THAT IND == REP ##
+merged_df.to_csv(moneyball_path + 'chaz\\merged_results.csv', index=False)
+
+# Incorporate manual changes from when the fuzzy merge was off
+manual = pd.read_csv(moneyball_path + 'chaz\manual_2018_results.csv', dtype=str)
+manual['GEOID'] = manual['GEOID'].str.zfill(5)
+
+for cham in ['upper', 'lower']:
+    cham_df = merged_df[merged_df['office'] == cham]
+    cham_manual = manual[manual['office'] == cham]
+    merged_df = merged_df.drop(np.where\
+                              (cham_df['GEOID'].isin(cham_manual['GEOID']))[0])
+
+merged_df = pd.concat([merged_df, manual]).sort_values(['state_po', 'office'])
+
+## data fix, since CT republicans file as independents as well
+merged_df.loc[(merged_df['state_po'] == 'CT') & \
+              (merged_df['win_party'] == 'independent'), 'win_party'] = \
+              'republican'
 
 # SOME MORE CLEANING #
 
-results = pd.read_csv(moneyball_path + 'chaz\\merged_results.csv').dropna()
+results = merged_df.dropna(subset=['state_po']).copy()
 
 # nebraska has nonpartisan elections in results, can't assess
 results = results[results['state_po'] != 'NE']
@@ -173,12 +191,12 @@ results = results[results['state_po'] != 'NE']
 # get parties of winners
 names = {'democrat' : 'D', 'democratic-farmer-labor' : 'D', 'democratic-npl' :\
          'D', 'republican' : 'R', 'conservative' : 'R'}
-results['winning_party'] = results['win_party'].apply(lambda x: names[x] \
+results['win_party'] = results['win_party'].apply(lambda x: names[x] \
                    if x in names else 'I')
 
 # add some useful columns
 results['correct'] = results.apply(lambda x: x['predicted_winner'] == \
-                               x['winning_party'], axis=1)
+                               x['win_party'], axis=1)
 
 results['actual_win_margin'] = results.apply(lambda x: x['win_margin'] * \
                        (2*x['correct']-1), axis=1)
@@ -223,7 +241,8 @@ results['correctness_conflict'] = results.apply(lambda x: x['chaz_correct'] \
                    == 'Correct' and x['correct'] == False or x['chaz_correct'] \
                     == 'Incorrect' and x['correct'] == True, axis = 1)
 
-results.to_csv(moneyball_path + '\\chaz\\merged_results_2.csv', index=False)
+results.to_csv(moneyball_path + '\\chaz\\chaz_with_election_results.csv', 
+               index=False)
 
         
 
