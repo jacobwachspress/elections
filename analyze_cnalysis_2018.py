@@ -7,6 +7,7 @@ Created on Tue Jul  7 15:29:39 2020
 import pandas as pd
 import numpy as np
 import scipy.stats as sts
+import scipy.linalg as lin
 
 
 def main():
@@ -15,8 +16,16 @@ def main():
     money_path = 'G:\\Shared drives\\princeton_gerrymandering_project\\Moneyball\\'
 
     # read in results
-    results_df = pd.read_csv(money_path + 'chaz\\chaz_prediction_results_2018.csv')
+    results_df = pd.read_csv(money_path +\
+                             'chaz\\chaz_with_election_results.csv')
+    
+    sts_df = generate_summary_stats(results_df)
 
+    results_df = add_overperformance(results_df, sts_df)
+    
+    results_temp = add_overperformance(results_df, sts_df)
+
+    results_temp = get_density_proportions(results_temp)
 def t_parameter_tester(margin, params_list, delta=10000):
     ''' Estimates win probability given expected win margin and list of
     t-distributions of independent errors.
@@ -162,22 +171,36 @@ def generate_summary_stats(results_df):
 
     return sts_df
 
-def test_parameters(results_df, st_stats):
-
-    # filter oddball seats
-    results = results_df[results_df['ignore'] != True]
-
-    # get the  confidence levels
+def get_margins(results, st_stats):
+    ''' Expected win margin by category, based on 2018 data'''
     confidences = results['confidence'].dropna().unique()
 
     # build dictionary of expected win margin by confidence
     expected_win_margins = {}
     for conf in confidences:
         expected_win_margins[conf] = st_stats.loc['USA', conf + '_t_mean']
+        
+    return expected_win_margins
+
+def add_overperformance(results_df, st_stats):
+
+    # filter oddball seats
+    results = results_df[results_df['ignore'] != True]
+    
+    # remove safe seats (uncontested issues)
+    results = results[results['confidence'] != 'Safe']
+
+    # remove predicted I winners
+    results = results[results['predicted_winner'] != 'I']
+
+    expected_win_margins = get_margins(results, st_stats)
 
     # add expected win margin column to results DataFrame
     results['expected_win_margin'] = results['confidence'].apply(lambda x: \
            expected_win_margins[x])
+    
+    # remove surprise uncontesteds
+    results = results[results['win_margin'] < 0.9]
 
     # add R overperformance column
     results['R_overperformance'] = results.apply(lambda x: \
@@ -187,14 +210,10 @@ def test_parameters(results_df, st_stats):
 
     # find average R_overperformance by state, add column to isolate race effects
 
-    # remove safe seats (uncontested issues)
-    no_safe = results[results['confidence'] != 'Safe']
 
-    # remove predicted I winners
-    no_safe = no_safe[no_safe['predicted_winner'] != 'I']
 
     # dictionary of mean R_overperformance
-    R_dict = no_safe.groupby(['state_po'])['R_overperformance'].mean().to_dict()
+    R_dict = results.groupby(['state_po'])['R_overperformance'].mean().to_dict()
 
     # add column with these numbers
     results['state_R_overperformance'] = results['state_po'].apply(lambda x: \
@@ -204,40 +223,44 @@ def test_parameters(results_df, st_stats):
     results['isolated_race_error'] = results.apply(lambda x: \
            x['R_overperformance'] - x['state_R_overperformance'], axis=1)
 
-    # again remove safe seats and I predicted winners
-    no_safe = results[results['confidence'] != 'Safe']
-    no_safe = no_safe[no_safe['predicted_winner'] != 'I']
+    return results
 
+def get_density_proportions(results):
+    columns = ['rural', 'exurban', 'suburban', 'urban']
+    results['pop'] = results[columns].sum(axis=1)
+    for col in columns:
+        results[col + '_prop'] = results[col] / results['pop']
+    return results
+
+def fit_t(results):
     # fit t-distribution
-    deg_f, _, sig = sts.t.fit(no_safe['isolated_race_error'], floc=0)
-    st_deg_f, _, st_sig = sts.t.fit(no_safe['state_R_overperformance'], floc=0)
+    deg_f, _, sig = sts.t.fit(results['isolated_race_error'], floc=0)
+    st_deg_f, _, st_sig = sts.t.fit(results['state_R_overperformance'], floc=0)
 
     return deg_f, sig, st_deg_f, st_sig
 
-def simulate(states, st_sig, race_sig, st_df, race_df):
-    corr_state = np.zeros([2, 2])
-    corr_iso = np.zeros([2, 2])
 
 
-    n=10
+def simulate(n, results_df, race_sig, race_df):
+    
+    results = results_df.copy()
+    
+    corr_cols = ['rural_prop', 'exurban_prop', 'suburban_prop', 'urban_prop']
+    corr_dict = {}
+    for i in corr_cols:
+        corr_dict[i] = []
+
     for trial in range(n):
         results['R_overperformance'] = race_sig*sts.t.rvs(race_df, \
                                    size=len(results['R_overperformance']))
-        state_errors = {}
-        for i in states:
-            state_errors[i] = st_sig*sts.t.rvs(st_df)
-        results['R_overperformance'] = results.apply(lambda x: \
-                  x['R_overperformance'] + state_errors[x['state_po']], axis=1)
+#        state_errors = {}
+#        for i in states:
+#            state_errors[i] = st_sig*sts.t.rvs(st_df)
+#        results['R_overperformance'] = results.apply(lambda x: \
+#                  x['R_overperformance'] + state_errors[x['state_po']], axis=1)
 
-        # remove safe seats (uncontested issues)
-        no_safe = results[results['confidence'] != 'Safe']
-
-        # remove predicted I winners
-        no_safe = no_safe[no_safe['predicted_winner'] != 'I']
-
-        R_dict = no_safe.groupby(['state_po'])['R_overperformance'].mean().to_dict()
-
-        # add column with these numbers
+        # add column with statewide overperformance
+        R_dict = results.groupby(['state_po'])['R_overperformance'].mean().to_dict()
         results['state_R_overperformance'] = results['state_po'].apply(lambda x:\
                                                        R_dict[x])
 
@@ -245,16 +268,11 @@ def simulate(states, st_sig, race_sig, st_df, race_df):
         results['isolated_race_error'] = results.apply(lambda x: \
             x['R_overperformance'] - x['state_R_overperformance'], axis=1)
 
-        # again remove safe seats and I predicted winners
-        no_safe = results[results['confidence'] != 'Safe']
-        no_safe = no_safe[no_safe['predicted_winner'] != 'I']
+        for col in corr_cols:
+            corr = np.corrcoef(results['R_overperformance'], results[col])
+            corr_dict[col].append(corr[1,0])
+            
+    return corr_dict
 
-        corr_state = corr_state + np.corrcoef(no_safe['R_overperformance'], \
-                                            no_safe['state_R_overperformance'])
-        corr_iso = corr_iso + np.corrcoef(no_safe['R_overperformance'], \
-                                              no_safe['isolated_race_error'])
-
-    corr_state /= n
-    corr_iso /= n
-
-    return corr_state[1,0], corr_iso[1,0]
+if __name__ == '__main__':
+    main()

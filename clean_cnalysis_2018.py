@@ -10,9 +10,10 @@ import numpy as np
 import operator
 import os
 import difflib
+from clean_moneyball import merge_densities
 
 # set google drive path for files
-moneyball_path = 'G:\\Shared drives\\princeton_gerrymandering_project\\Moneyball\\'
+money_path = 'G:\\Shared drives\\princeton_gerrymandering_project\\Moneyball\\'
 
 ## FUZZY MERGE CHAZ AND ELECTION RESULTS ##
 def fuzzy_merge(file, df):
@@ -22,7 +23,7 @@ def fuzzy_merge(file, df):
     chamber = file.split('_')[1][:-4]
     
     # get chaz df for state and chamber
-    chaz_df = pd.read_csv(moneyball_path + 'chaz\\cleaned_states\\' + \
+    chaz_df = pd.read_csv(money_path + 'chaz\\cleaned_states\\' + \
                           state + '_' + chamber + '.csv', dtype=str).dropna()
 
     # deal with chaz inconsistency in chaz rating column label
@@ -71,7 +72,7 @@ def fuzzy_merge(file, df):
 # CLEAN 2018 ELECTION DATA #
 
 # read in 2018 results from MEDSL
-df = pd.read_csv(moneyball_path + "testing\\state_overall_2018.csv")
+df = pd.read_csv(money_path + "testing\\state_overall_2018.csv")
 
 # Filter to state assembly/senate offices
 partial_term = 'State Representative (Partial Term Ending 01/01/2019)'
@@ -158,14 +159,14 @@ for year in years:
                     
                 
 dfs = [fuzzy_merge(file, df) for file in \
-           os.listdir(moneyball_path + 'chaz\\cleaned_states\\')]
+           os.listdir(money_path + 'chaz\\cleaned_states\\')]
 
 merged_df = pd.concat(dfs).reset_index(drop=True)
 
-merged_df.to_csv(moneyball_path + 'chaz\\merged_results.csv', index=False)
+merged_df.to_csv(money_path + 'chaz\\merged_results.csv', index=False)
 
 # Incorporate manual changes from when the fuzzy merge was off
-manual = pd.read_csv(moneyball_path + 'chaz\manual_2018_results.csv', dtype=str)
+manual = pd.read_csv(money_path + 'chaz\manual_2018_results.csv', dtype=str)
 manual['GEOID'] = manual['GEOID'].str.zfill(5)
 
 for cham in ['upper', 'lower']:
@@ -175,6 +176,7 @@ for cham in ['upper', 'lower']:
                               (cham_df['GEOID'].isin(cham_manual['GEOID']))[0])
 
 merged_df = pd.concat([merged_df, manual]).sort_values(['state_po', 'office'])
+merged_df['win_margin'] = merged_df['win_margin'].astype(float)
 
 ## data fix, since CT republicans file as independents as well
 merged_df.loc[(merged_df['state_po'] == 'CT') & \
@@ -209,10 +211,10 @@ chaz_correctness_folders = {'lower' : 'State House', 'upper' : 'State Senate'}
 dfs = []
 
 for chamber in chaz_correctness_folders:
-    for file in os.listdir(moneyball_path + 'chaz\\Prediction Results\\' + \
+    for file in os.listdir(money_path + 'chaz\\Prediction Results\\' + \
                                chaz_correctness_folders[chamber]):
         # read .xlsx
-        df = pd.read_excel(moneyball_path + 'chaz\\Prediction Results\\' + \
+        df = pd.read_excel(money_path + 'chaz\\Prediction Results\\' + \
                                chaz_correctness_folders[chamber] + '\\' + file, \
                                dtype=str)
         
@@ -241,7 +243,21 @@ results['correctness_conflict'] = results.apply(lambda x: x['chaz_correct'] \
                    == 'Correct' and x['correct'] == False or x['chaz_correct'] \
                     == 'Incorrect' and x['correct'] == True, axis = 1)
 
-results.to_csv(moneyball_path + '\\chaz\\chaz_with_election_results.csv', 
+# merge in densities
+results = results.rename(columns={'GEOID':'geoid'})
+upper = results[results['office'] == 'upper'].copy()
+lower = results[results['office'] == 'lower'].copy()
+fips_path = money_path + 'fundamentals/raw/state_fips.csv'
+fips_df = pd.read_csv(fips_path)
+density_path = money_path + 'density/clean/'
+upper, lower = merge_densities(fips_df, density_path, upper, lower)
+results = pd.concat([upper, lower])
+
+# merge in comments and races to ignore due to weird candiadate cases
+comments = pd.read_csv(money_path + 'chaz\\manual_ignore.csv', dtype=str)
+results = pd.merge(results, comments, how='left', on=['geoid', 'office'])
+
+results.to_csv(money_path + '\\chaz\\chaz_with_election_results.csv', 
                index=False)
 
         
