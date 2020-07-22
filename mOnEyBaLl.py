@@ -524,6 +524,13 @@ def main():
                     - d_noelec[x['office']], axis=1)
         
         
+        # remove safe and uncontested independents, lower threshold by 1 and 
+        # cut tie prob in half (roughly, this assumes indies break to either
+        # party with equal probability in a redistricting coalition)
+        
+        
+        
+        
         # add margin column
         st_races['MARGIN'] = st_races.apply(lambda x: rating_to_margin\
                             (x.favored, x.confidence), axis=1)
