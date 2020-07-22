@@ -108,8 +108,20 @@ def clean_results_18(df, df_party, df_results):
     group_cols = ['year', 'state', 'chamber', 'district', 'candidate', 'party']
     df = df.groupby(group_cols).sum()
 
-    # Reset index and get top candidate for each party
+    # Get the actual party of each candidate
     df = df.reset_index()
+    df_candidate = df.sort_values(by='candidatevotes', ascending=False)
+    dup_cols = ['state', 'chamber', 'district', 'candidate']
+    df_candidate = df_candidate.drop_duplicates(subset=dup_cols)
+    df_candidate = df_candidate.drop('candidatevotes', axis=1)
+
+    # Get the votes per candidate in each race and add back party
+    group_cols = ['year', 'state', 'chamber', 'district', 'candidate']
+    df = df.groupby(group_cols).sum()
+    df = df.reset_index()
+    df = df.merge(df_candidate)
+
+    # Get top candidate for each party
     df = df.sort_values(by='candidatevotes', ascending=False)
     duplicate_cols = ['year', 'state', 'chamber', 'district', 'party']
     df = df.drop_duplicates(subset=duplicate_cols)
@@ -117,16 +129,30 @@ def clean_results_18(df, df_party, df_results):
     # Change MN democratic-farmer-labor to democrat
     df.loc[(df['party'] == 'democratic-farmer-labor') &
            (df['state'] == 'MN'), 'party'] = 'democrat'
+    df.loc[(df['party'] == 'democratic-npl') &
+           (df['state'] == 'MN'), 'party'] = 'democrat'
 
     # Rename all other parties as independent
     df['party'] = df['party'].apply(lambda x: x if x in ['democrat',
                                                          'republican']
                                     else 'independent')
-    # Pivot the table
-    df = pd.pivot_table(df, values='candidatevotes', columns='party',
-                        index=['year', 'state', 'chamber', 'district'])
-    df = df.fillna(0)
-    df = df.reset_index()
+
+    # Pivot the table for votes
+    df_votes = df.pivot_table(values='candidatevotes', columns='party',
+                              index=['year', 'state', 'chamber', 'district'])
+    df_votes = df_votes.fillna(0)
+    df_votes = df_votes.reset_index()
+
+    # Pivot the table for candidates
+    df_cand = df.pivot_table(values=['candidate'], columns='party',
+                             index=['year', 'state', 'chamber', 'district'],
+                             aggfunc=lambda x: ' '.join(x))
+    df_cand.columns = df_cand.columns.droplevel()
+    df_cand.columns = ['dem_cand', 'ind_cand', 'rep_cand']
+    df_cand = df_cand.reset_index()
+
+    # Join candidate and votes
+    df = df_votes.merge(df_cand)
 
     # Get 3 party voteshare
     df['three_sum'] = df['democrat'] + df['independent'] + df['republican']
@@ -221,7 +247,7 @@ def results_to_dem_voteshare(df, df_16):
 
     # Get whether it was essentially uncontested
     df['max_three'] = df[['dem_three', 'rep_three', 'ind_three']].max(axis=1)
-    df['uncontested'] = df['max_three'] >= 0.8
+    df['uncontested'] = df['max_three'] >= 0.75
     df = df.drop('max_three', axis=1)
 
     # Get the party that got the least amount of votes
@@ -284,8 +310,8 @@ def fundamentals_diff(df_state, df, df_elec):
     df['elec_diff'] = df['dem_elec'] - df['no_incumb_pred']
 
     # If uncontested let the election be a 35 point swing
-    df.loc[(df['uncontested']) & (df['dem_elec'] > 0.5), 'elec_diff'] = 0.35
-    df.loc[(df['uncontested']) & (df['dem_elec'] <= 0.5), 'elec_diff'] = -0.35
+    df.loc[(df['uncontested']) & (df['dem_elec'] > 0.5), 'elec_diff'] = 0.3
+    df.loc[(df['uncontested']) & (df['dem_elec'] <= 0.5), 'elec_diff'] = -0.3
 
     # Impute average election difference by state
     df_state = df.groupby('state')['elec_diff'].mean()
