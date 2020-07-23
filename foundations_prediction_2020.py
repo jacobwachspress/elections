@@ -6,25 +6,27 @@ from clean_moneyball import massachusetts_cleaning
 
 def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'fundamentals/'
+    path = money_path + 'foundation/'
 
     # Get statewide presidential results and economist forecast
     df_state = pd.read_csv(path + 'clean/state_pres_results.csv')
-    df_econ = pd.read_csv(money_path + 'economist/projected_margins_07_19.csv')
+    economist_path = money_path + 'elections/'
+    economist_path += 'economist_projected_margins_most_recent.csv'
+    df_econ = pd.read_csv(economist_path)
 
     # Get cleaned moneyball data
-    df_lower = pd.read_csv(money_path + 'state/moneyball_lower_chamber.csv')
-    df_upper = pd.read_csv(money_path + 'state/moneyball_upper_chamber.csv')
+    df_lower = pd.read_csv(money_path + 'state/lower_input_data.csv')
+    df_upper = pd.read_csv(money_path + 'state/upper_input_data.csv')
 
     # Get data error corrections
     df_party = pd.read_csv(path + 'clean/election_candidate_corrections.csv')
     df_results = pd.read_csv(path + 'clean/mit_add_entry_corrections.csv')
 
-    # Clean 2018 Results
+    # Clean 2018 Results and save
     df = pd.read_csv(money_path + 'state/state_overall_2018.csv',
                      encoding='ISO-8859-1')
     df_elec_18 = clean_results_18(df, df_party, df_results)
-    df_elec_18.to_csv(path + 'temp/results_18.csv', index=False)
+    df_elec_18.to_csv(path + 'clean/election_results_2018.csv', index=False)
 
     # Convert 2018 results to dem voteshare
     df_16 = pd.read_csv(money_path + 'state/upper_chamber_results_2016.csv')
@@ -32,17 +34,17 @@ def main():
     df_elec_lower.to_csv(path + 'temp/lower_voteshare.csv', index=False)
     df_elec_upper.to_csv(path + 'temp/upper_voteshare.csv', index=False)
 
-    # Get difference between 2018 election and fundamentals prediction
+    # Get difference between 2018 election and foundation prediction
     df_lower_resid = pd.read_csv(path + 'clean/imputed_sldl_residuals.csv')
     df_upper_resid = pd.read_csv(path + 'clean/imputed_sldu_residuals.csv')
-    df_diff_lower = fundamentals_diff(df_state, df_lower_resid, df_elec_lower)
-    df_diff_upper = fundamentals_diff(df_state, df_upper_resid, df_elec_upper)
+    df_diff_lower = foundation_diff(df_state, df_lower_resid, df_elec_lower)
+    df_diff_upper = foundation_diff(df_state, df_upper_resid, df_elec_upper)
     df_diff_lower.to_csv(path + 'temp/fund_diff_lower.csv', index=False)
     df_diff_upper.to_csv(path + 'temp/fund_diff_upper.csv', index=False)
 
-    # Get fundamentals prediction
-    df_proj_lower = fundamentals_prediction(df_lower, df_econ, df_diff_lower)
-    df_proj_upper = fundamentals_prediction(df_upper, df_econ, df_diff_upper)
+    # Get foundation prediction
+    df_proj_lower = foundation_prediction(df_lower, df_econ, df_diff_lower)
+    df_proj_upper = foundation_prediction(df_upper, df_econ, df_diff_upper)
     df_proj_lower.to_csv(path + 'clean/proj_lower_2020.csv', index=False)
     df_proj_upper.to_csv(path + 'clean/proj_upper_2020.csv', index=False)
 
@@ -277,8 +279,8 @@ def results_to_dem_voteshare(df, df_16):
     return df_lower, df_upper
 
 
-def fundamentals_diff(df_state, df, df_elec):
-    """Difference between election outcome and 2018 fundamentals prediction.
+def foundation_diff(df_state, df, df_elec):
+    """Difference between election outcome and 2018 foundation prediction.
 
     Arguments:
         df_state: 2016 state presidential election results
@@ -309,7 +311,7 @@ def fundamentals_diff(df_state, df, df_elec):
     # Get difference between election and prediciton
     df['elec_diff'] = df['dem_elec'] - df['no_incumb_pred']
 
-    # If uncontested let the election be a 35 point swing
+    # If uncontested let the election be a 30 point swing
     df.loc[(df['uncontested']) & (df['dem_elec'] > 0.5), 'elec_diff'] = 0.3
     df.loc[(df['uncontested']) & (df['dem_elec'] <= 0.5), 'elec_diff'] = -0.3
 
@@ -330,8 +332,8 @@ def fundamentals_diff(df_state, df, df_elec):
     return df
 
 
-def fundamentals_prediction(df, df_econ, df_diff):
-    """Get two party voteshare predictions using fundamentals model.
+def foundation_prediction(df, df_econ, df_diff):
+    """Get two party voteshare predictions using foundation model.
 
     Statewide economist forecast + district presidential residual + incumbency
     effect
@@ -341,7 +343,7 @@ def fundamentals_prediction(df, df_econ, df_diff):
 
         df_econ: current economist forecast
 
-        df_diff: difference between 2018 results and no incumbency fundamentals
+        df_diff: difference between 2018 results and no incumbency foundation
                  projected"""
     # Reduce economist data and adjust projected margin to dem voteshare
     df_econ = df_econ[['state', 'margin']]
@@ -368,7 +370,7 @@ def fundamentals_prediction(df, df_econ, df_diff):
     df['found_voteshare'] += (df['is_inc'] * df['inc_adv'])
 
     # Clip voteshare between 0.7 and 0.3
-    df['found_voteshare'] = np.clip(df['found_voteshare'], 0.35, 0.65)
+    df['found_voteshare'] = np.clip(df['found_voteshare'], 0.3, 0.7)
 
     # Determine if we have results from a past election
     df['past_election'] = df['elec_diff'].notna()

@@ -1,7 +1,6 @@
 """Get incumbency for 2018 using a fuzzy match."""
 
 import pandas as pd
-import numpy as np
 import titlecase as tc
 from difflib import SequenceMatcher
 
@@ -10,7 +9,7 @@ def main():
     """Get incumbency for 2018."""
     # initialize paths
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'fundamentals/'
+    path = money_path + 'foundation/'
     state_path = money_path + 'state/'
 
     # Load 2016 election results
@@ -18,8 +17,8 @@ def main():
     df_upper = pd.read_csv(state_path + 'upper_with_old_results.csv')
 
     # Load 2018 election results and hand checked incumbency
-    df_18 = pd.read_csv(path + 'temp/results_18.csv')
-    df_hand = pd.read_csv(path + 'clean/incumbency_2016_hand_checked.csv')
+    df_18 = pd.read_csv(path + 'clean/election_results_2018.csv')
+    df_hand = pd.read_csv(path + 'clean/incumbency_2016_2018_hand_checked.csv')
 
     # Add incumbency and save
     df_lower = get_incumbency(df_lower, df_18, df_hand)

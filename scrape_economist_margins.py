@@ -84,8 +84,8 @@ def main():
 
     # Save to drive
     path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path1 = path + 'economist/projected_margins_' + stamp + '.csv'
-    path2 = path + 'economist/projected_margins_most_recent.csv'
+    path1 = path + 'elections/economist_projected_margins_' + stamp + '.csv'
+    path2 = path + 'elections/economist_projected_margins_most_recent.csv'
     df.to_csv(path1, index=False)
     df.to_csv(path2, index=False)
     return
