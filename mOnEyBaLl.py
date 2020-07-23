@@ -8,6 +8,7 @@ import scipy.stats as sts
 from scipy.integrate import quad, nquad
 import numpy as np
 import pandas as pd
+import itertools as it
 
 
 
@@ -238,23 +239,60 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
             (This happens if there is a R governor or governors have no 
             veto power.)
     '''
-    # build range array for all variables
-    n = len(t_dist_params)
-    range_arr = [[-np.inf, np.inf] for i in range(n)]
     
     # make sure at least one source of correlated error
+    n = len(t_dist_params)
     assert n > 0, "no correlated error encoded"
     
+    # chose sampling points to estimate integration, Chebyshev nodes of 
+    # percentile function on each distribution
+    
+    # get percentiles
+    num_nodes = 5
+    nodes = 2*np.linspace(1, num_nodes, num_nodes) - 1
+    nodes = np.cos(nodes * np.pi / (2 * num_nodes))
+    nodes = (1 + nodes)/2
+
     # extract sigmas and deg_fs from t_dist_params
     sigmas = [param[0] for param in t_dist_params]
     deg_fs = [param[1] for param in t_dist_params]
     
-    # integrate chamber_success_prob_with_shift with respect to all shift 
-    # variables from -inf to +inf
-    return nquad(chamber_success_prob_with_shift, range_arr, \
-                args = (threshold_1, threshold_2, tie_1, tie_2, race_sigma, \
-                        race_deg_f, parameter_weights, chamber_2_ix, sigmas, \
-                        deg_fs, both_bad, neither_bad))[0]
+    # convert percentiles to points on distributions
+    sample_points = []
+    weights = []
+    for ix, sig in enumerate(sigmas):
+        
+        # get points, append to list, and get distribution pdfs to 
+        # weight all points
+        points_to_add = sts.t.ppf(nodes, deg_fs[ix], scale=sig)
+        sample_points.append(points_to_add)
+        weights.append(sts.t.pdf(points_to_add, deg_fs[ix], scale=sig))
+    
+    # cartesian product to get all correlated errors at once, relative weights     
+    all_shifts = list(it.product(*sample_points))
+    all_shifts = [list(i) for i in all_shifts]
+    all_weights = [np.prod(i) for i in list(it.product(*weights))]
+    total_weight = np.sum(all_weights)
+    
+    success_weight = 0
+    for ix, shift_vector in enumerate(all_shifts):
+    
+        # find expected margins before independent race shift
+        # append 1 at the beginning to add in the starting margin
+        margins = parameter_weights.dot(np.asarray([1] + shift_vector))
+        
+        # generate list of parameters for the two chambers
+        params_1 = [margins[:chamber_2_ix], threshold_1, tie_1]
+        params_2 = [margins[chamber_2_ix:], threshold_2, tie_2]
+        
+        # find success_prob
+        success = success_prob_independence(params_1, params_2, race_sigma, 
+                                            race_deg_f, both_bad, neither_bad)
+        
+        # add to weighted success probability
+        success_weight += all_weights[ix] * success
+        
+    return success_weight / total_weight
 
 def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
                         neither_bad, \
@@ -491,11 +529,11 @@ def main():
                     'urban_prop']
     state_vars = ['statewide']
     error_vars = {}
-    for i in density_vars:
-        error_vars[i] = (0.04, 5)
+#    for i in density_vars:
+#        error_vars[i] = (0.04, 5)
     for i in state_vars:
-        error_vars[i] = (0.02, 12)
-    race_sigma = 0.054
+        error_vars[i] = (0.037, 12)
+    race_sigma = 0.075
     race_deg_f = 5
     
     # initialize empty list of dataframes to concatenate at the end
