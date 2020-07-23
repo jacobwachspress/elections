@@ -529,11 +529,11 @@ def main():
                     'urban_prop']
     state_vars = ['statewide']
     error_vars = {}
-#    for i in density_vars:
-#        error_vars[i] = (0.04, 5)
+    for i in density_vars:
+        error_vars[i] = (0.05, 5)
     for i in state_vars:
-        error_vars[i] = (0.037, 12)
-    race_sigma = 0.075
+        error_vars[i] = (0.03, 3)
+    race_sigma = 0.065
     race_deg_f = 5
     
     # initialize empty list of dataframes to concatenate at the end
