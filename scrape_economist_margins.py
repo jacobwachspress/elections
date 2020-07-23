@@ -13,7 +13,7 @@ from selenium.webdriver.common.keys import Keys
 
 
 def main():
-    """Scrape."""
+    """Scrape Economist Statewide Projected Margins"""
     # Set base url
     base_url = 'https://projects.economist.com/us-2020-forecast/president/'
 
@@ -83,9 +83,12 @@ def main():
     stamp = str(today.month).zfill(2) + '_' + str(today.day).zfill(2)
 
     # Save to drive
-    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball'
-    path += '/economist/projected_margins_' + stamp + '.csv'
-    df.to_csv(path, index=False)
+    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
+    path1 = path + 'economist/projected_margins_' + stamp + '.csv'
+    path2 = path + 'economist/projected_margins_most_recent.csv'
+    df.to_csv(path1, index=False)
+    df.to_csv(path2, index=False)
+    return
 
 
 def states_dict():
