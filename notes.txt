@@ -7,6 +7,7 @@ ties
 - could pick off members from the other party to protect incumbency
 - lobbying could sway a couple representatives from the powerful party
 
+issue- correlated error between upper and lower (same voters!)
 
 172 tilt 
 120 tossup
@@ -109,10 +110,11 @@ votes, 51 senators, or 218 representatives). State legislature elections, on the
 other hand, all have their own objective functions. Preventing gerrymandering
 in one state is just as valuable whether or not we have prevented it in another.
 As long as we model the statewide uncertainty properly, the fact that these
-uncertainties are correlated has no impact on voter power. The model cannot
-answer the question: how likely are we to get bipartisan control of redistricting in 
+uncertainties are correlated across states has no impact on voter power. The model cannot
+answer question: how likely are we to get bipartisan control of redistricting in 
 every one of TX, KS, and MN? While it might be interesting to know that, it is
-not necessary for calculating voter power.
+not necessary for calculating voter power. (Also can't answer how likely Chaz 
+is to get 98% or more.)
 
 Elasticity of the districts. Some districts' results are less likely to change
 sharply from election to election than others. (Imagine an Alabama district

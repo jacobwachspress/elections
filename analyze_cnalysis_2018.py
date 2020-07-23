@@ -171,9 +171,8 @@ def generate_summary_stats(results_df):
 
     return sts_df
 
-def get_margins(results, st_stats):
+def get_margins(st_stats, confidences=['Tilt', 'Lean', 'Likely', 'Safe']):
     ''' Expected win margin by category, based on 2018 data'''
-    confidences = results['confidence'].dropna().unique()
 
     # build dictionary of expected win margin by confidence
     expected_win_margins = {}
@@ -198,9 +197,6 @@ def add_overperformance(results_df, st_stats):
     # add expected win margin column to results DataFrame
     results['expected_win_margin'] = results['confidence'].apply(lambda x: \
            expected_win_margins[x])
-    
-    # remove surprise uncontesteds
-    results = results[results['win_margin'] < 0.9]
 
     # add R overperformance column
     results['R_overperformance'] = results.apply(lambda x: \
@@ -243,7 +239,7 @@ def fit_t(results):
 
 def simulate(n, results_df, race_sig, race_df):
     
-    results = results_df.copy()
+    sim_results = results_df.copy()
     
     corr_cols = ['rural_prop', 'exurban_prop', 'suburban_prop', 'urban_prop']
     corr_dict = {}
@@ -251,8 +247,8 @@ def simulate(n, results_df, race_sig, race_df):
         corr_dict[i] = []
 
     for trial in range(n):
-        results['R_overperformance'] = race_sig*sts.t.rvs(race_df, \
-                                   size=len(results['R_overperformance']))
+        sim_results['R_overperformance'] = race_sig*sts.t.rvs(race_df, \
+                                   size=len(sim_results['R_overperformance']))
 #        state_errors = {}
 #        for i in states:
 #            state_errors[i] = st_sig*sts.t.rvs(st_df)
@@ -260,16 +256,18 @@ def simulate(n, results_df, race_sig, race_df):
 #                  x['R_overperformance'] + state_errors[x['state_po']], axis=1)
 
         # add column with statewide overperformance
-        R_dict = results.groupby(['state_po'])['R_overperformance'].mean().to_dict()
-        results['state_R_overperformance'] = results['state_po'].apply(lambda x:\
-                                                       R_dict[x])
+        R_dict = sim_results.groupby(['state_po'])['R_overperformance'].mean()\
+                                .to_dict()
+        sim_results['state_R_overperformance'] = sim_results['state_po']\
+                                            .apply(lambda x: R_dict[x])
 
         # add column with isolated error, in direction of GOP
-        results['isolated_race_error'] = results.apply(lambda x: \
+        sim_results['isolated_race_error'] = sim_results.apply(lambda x: \
             x['R_overperformance'] - x['state_R_overperformance'], axis=1)
 
         for col in corr_cols:
-            corr = np.corrcoef(results['R_overperformance'], results[col])
+            corr = np.corrcoef(sim_results['R_overperformance'], \
+                               sim_results[col])
             corr_dict[col].append(corr[1,0])
             
     return corr_dict

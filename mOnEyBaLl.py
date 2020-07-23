@@ -259,7 +259,7 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
 def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
                         neither_bad, \
                             margin_col='MARGIN', 
-                            voters_col='turnout_cvap', \
+                            voters_col='cvap', \
                             threshold_col='d_threshold', \
                             tie_col='tie_dem', \
                             chamber_col='office', \
@@ -352,10 +352,13 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
         test_cham_2 = False
         threshold_2 = 'R'
 
+    print ('long calc')
     # find the chamber success probability
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold_1,\
                              threshold_2, tie_1, tie_2, chamber_2_ix, \
                              race_sigma, race_deg_f, both_bad, neither_bad)
+    print('done long calc')
+
     
     # initialize dictionary keyed by parameter weights, where the value is
     # voter_power * voters_in_district, which is very nearly constant for 
@@ -402,10 +405,12 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, \
             # adjust the margin in our race, assuming the party gained 1 vote
             param_weights_copy[i, 0] = param_weights_copy[i, 0] + 1/num_voters
     
+            print ('long calc')
             # find the chamber success probability
             prob_new = chamber_success_prob(param_weights_copy, t_dist_params,\
                          threshold_1, threshold_2, tie_1, tie_2, chamber_2_ix,\
                          race_sigma, race_deg_f, both_bad, neither_bad)
+            print('done long calc')
             
             # update dictionary with quantity voter_power * voters_in_district
             voter_power_dict[unique_params] = (prob_new - prob) * num_voters
@@ -458,8 +463,8 @@ def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
     
     # read in ratings dfs
-    lower = pd.read_csv(money_path + 'state/lower_with_incumbents.csv')
-    upper = pd.read_csv(money_path + 'state/upper_with_incumbents.csv')
+    lower = pd.read_csv(money_path + 'state/lower_input_data.csv')
+    upper = pd.read_csv(money_path + 'state/upper_input_data.csv')
     
     # add columns for office
     lower['office'] = 'lower'
@@ -478,19 +483,26 @@ def main():
     all_races = all_races[all_races['d_threshold'].notna()]
     
     # add column for statewide error
-    all_races['STATEWIDE'] = 1
+    all_races['statewide'] = 1
     
     # set the error vars
     ## THIS SHOULD CHANGE WITH TIME ##
-    error_vars = {'STATEWIDE': (0.037, 12)}
-    race_sigma = 0.075
+    density_vars = ['rural_prop', 'exurban_prop', 'suburban_prop', 
+                    'urban_prop']
+    state_vars = ['statewide']
+    error_vars = {}
+    for i in density_vars:
+        error_vars[i] = (0.04, 5)
+    for i in state_vars:
+        error_vars[i] = (0.02, 12)
+    race_sigma = 0.054
     race_deg_f = 5
     
     # initialize empty list of dataframes to concatenate at the end
     results = []
     
     # for each state
-    for state in all_races['state'].unique():
+    for state in ['TX']:
     
         # restrict dataframe to this state
         st_races = all_races[all_races['state'] == state].copy()
@@ -545,7 +557,7 @@ def main():
         
         # calculate voter power, add column to df
         st_races = voter_power(st_races, error_vars, race_sigma, race_deg_f, \
-                               both_bad, neither_bad, voters_col='turnout_cvap')
+                               both_bad, neither_bad, voters_col='cvap')
         
         
         # append to results dataframe
@@ -558,7 +570,7 @@ def main():
     # delete unecessary columns TODO TODO
     output_df = output_df[['state', 'district', 'incumbent', 'favored', 
                           'confidence', 'nom_R', 'nom_D', 'nom_I', 
-                          'turnout_cvap', 'VOTER_POWER']]
+                          'cvap', 'VOTER_POWER']]
     
     return output_df
             

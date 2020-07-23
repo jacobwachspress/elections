@@ -10,7 +10,7 @@ def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
     path = money_path + 'state/'
     cvap_path = money_path + 'cvap/'
-    fund_path = money_path + 'fundamentals/'
+    found_path = money_path + 'foundation/'
 
     # Initial cleaning
     lower = pd.read_csv(money_path + 'chaz/chaz_lower_chamber_07_18.csv')
@@ -19,7 +19,7 @@ def main():
     upper = clean_initial_rating(upper)
 
     # Fix incumbency errors in ratings
-    incum_path = money_path + 'fundamentals/clean/incumbent_corrections.csv'
+    incum_path = found_path + 'clean/incumbent_corrections.csv'
     df_incumbent = pd.read_csv(incum_path)
     lower, upper = fix_incumbency(df_incumbent, lower, upper)
     
@@ -30,12 +30,12 @@ def main():
     upper = add_cvap(upper, df_cvap_upper)
     
     # read in ordinals dict for massachusetts district name cleaning
-    ordinals = pd.read_csv(fund_path + 'raw/ordinal_numbers.csv')
+    ordinals = pd.read_csv(found_path + 'raw/ordinal_numbers.csv')
     ordinals['ordinal'] = ordinals['ordinal'].apply(lambda x: x.upper())
     ordinals_dict = dict(zip(ordinals['ordinal'], ordinals['number']))
     
     # merge in old election results
-    df = pd.read_csv(fund_path + 'raw/historical_state_leg_results.csv',\
+    df = pd.read_csv(found_path + 'raw/historical_state_leg_results.csv',\
                                              dtype=str)
 
     upper, lower = merge_year_election_results(df, ordinals_dict, '2016', \
@@ -46,7 +46,7 @@ def main():
                                                    upper, lower)
 
     # get all fips
-    fips_path = money_path + 'fundamentals/raw/state_fips.csv'
+    fips_path = found_path + 'raw/state_fips.csv'
     fips_df = pd.read_csv(fips_path)
     density_path = money_path + 'density/clean/'
     
@@ -54,9 +54,9 @@ def main():
     upper, lower = merge_densities(fips_df, density_path, upper, lower)
     
     # merge incumbents
-    lower_inc = pd.read_csv(fund_path + \
+    lower_inc = pd.read_csv(found_path + \
                         'clean/state_lower_chamber_incumbency.csv')
-    upper_inc = pd.read_csv(fund_path + \
+    upper_inc = pd.read_csv(found_path + \
                         'clean/state_senate_incumbency.csv')
     lower_inc['district'] = lower_inc['district'].apply(lambda x:\
                                 str(int(x)) if type(x) == float else str(x))
@@ -888,6 +888,7 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
     
     return upper, lower 
 
+
 def merge_densities(fips_df, density_path, upper, lower):
     ''' Merges in density data to upper and lower DataFrames
 
@@ -931,6 +932,12 @@ def merge_densities(fips_df, density_path, upper, lower):
             
         # concatenate all state DataFrames
         to_merge = pd.concat(dfs)
+        
+        # get proportion of population in each density
+        columns = ['rural', 'exurban', 'suburban', 'urban']
+        to_merge['pop'] = to_merge[columns].sum(axis=1)
+        for col in columns:
+            to_merge[col + '_prop'] = to_merge[col] / to_merge['pop']
         
         # merge to appropriate chamber DataFrame
         if cham == 'upper':
