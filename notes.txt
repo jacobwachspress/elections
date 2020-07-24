@@ -31,6 +31,8 @@ of Americans. This year, they will decide who has the power to draw the
 boundaries in the 2021 redistricting for U.S. Congressional and state 
 legislative districts.
 
+
+
 In an effort to help our readers make impactful political contributions to 
 state legislative races, we have designed a model that identifies the 
 highest-leverage seats for chamber control in each state, and to prevent 
@@ -95,6 +97,23 @@ TODO (not in methodology post?): mention specifics of gerrymandering problem
 - supermajority
 - number of seats at stake
 
+One might imagine two (false) paradigms of the uncertainty in the election
+results.
+1) All forecaster errors are uncorrelated. Knowing that 
+
+The voter power is the probability that an individual voter in a district will
+cast the vote that determines whether her state has bipartisan control of
+redistricting. In order to calculate this number, we add the equivalent of 
+one vote to the Democratic candidate's expected win margin, run the model again
+to find the new probability of bipartisan control, and calculate the 
+difference in probability. This requires an estimate of
+the number of votes cast in each race. Rather than use past election results
+to make these estimates (this would be susceptible to error because turnout 
+depends on how strongly the seat was contested), we assume the vote totals
+are proportional to the citizen-voting-age population (CVAP) in the district. 
+This will introduce some error, but CVAP is our best estimate at the moment;
+we haven't taken on the daunting task of modelling voter turnout in 
+the era of coronavirus.
 
 What this model does not consider
 

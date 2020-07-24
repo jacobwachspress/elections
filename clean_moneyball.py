@@ -65,12 +65,19 @@ def main():
     upper, lower = merge_incumbents(upper, lower, upper_inc, lower_inc)
 
     
+    # add chamber columns
+    # add columns for office
+    lower['office'] = 'lower'
+    upper['office'] = 'upper'
+    
     # sort DataFrames
     upper = upper.sort_values(by=['state', 'geoid'])
     lower = lower.sort_values(by=['state', 'geoid'])
     
+    # read out the cleaned files
     lower.to_csv(path + 'lower_input_data.csv', index=False)
     upper.to_csv(path + 'upper_input_data.csv', index=False)
+    pd.concat([upper, lower]).to_csv(path + 'all_input_data.csv', index=False)
 
     return
 

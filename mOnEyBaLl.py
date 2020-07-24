@@ -248,7 +248,7 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
     # percentile function on each distribution
     
     # get percentiles
-    num_nodes = 5
+    num_nodes = 200
     nodes = 2*np.linspace(1, num_nodes, num_nodes) - 1
     nodes = np.cos(nodes * np.pi / (2 * num_nodes))
     nodes = (1 + nodes)/2
@@ -364,6 +364,10 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
     # find number of competitive seats per chamber
     possible_seats_1 = chamber_2_ix
     possible_seats_2 = len(margins) - possible_seats_1
+    print(threshold_1)
+    print(possible_seats_1)
+    print(threshold_2)
+    print(possible_seats_2)
     
     # if D's already won chamber 1
     if threshold_1 <= 0:
@@ -390,7 +394,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold_1,\
                              threshold_2, tie_1, tie_2, chamber_2_ix, \
                              race_sigma, race_deg_f, both_bad, neither_bad)
-    print('done long calc')
+    print('success_prob = ' + str(prob))
 
     
     # initialize dictionary keyed by parameter weights, where the value is
@@ -491,7 +495,8 @@ def rating_to_margin(favored, confidence, df=None, \
 
 def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
                        margin_col, voters_col, threshold_col, tie_col, 
-                       chamber_col, power_col):
+                       chamber_col, power_col, found_margin_col=False, 
+                       found_clip=False, blend_safe=False, blend_else=False):
     ''' Gets all voter powers in a state.
     
     Arguments:
@@ -499,6 +504,18 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
             with (at least) these columns:
             margin_col: the expected winning margin for the party (negative if
                     losing margin)
+            found_margin_col (optional): the expected winning margin based
+                on a foundational model, to blend with margin_col. Note: if 
+                this column is passed, must also pass:
+                    found_clip: clip found_margin at certain distance from 
+                        margin to avoid adjusting too aggressively when the 
+                        forecaster has knowledge we do not
+                    blend_safe: what fraction of foundational margin to use
+                        in weighted average with margin in *safe* seats
+                        (spilitting this category since "safe" is a much
+                        wider range of outcomes than others)
+                    blend_else: what fraction of foundational margin to use
+                        in weighted average with margin in non-safe seats
             voters_col: the number of voters in the district
             threshold_col: threshold for Dem power in redistricting process
             tie_col: estimated probability of Dem power if they hit the 
@@ -511,6 +528,7 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
     # restrict dataframe to this state
     st_races = all_races[all_races['state'] == state].copy()
     
+    print(st_races[threshold_col].unique())
     # find number of uncontested Dem seats in each chamber
     d_uncont = {'lower' : False, 'upper' : False}
     for chamber in d_uncont:
@@ -519,11 +537,14 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
                                         x['favored'] == 'D' and \
                                         x['confidence'] == 'Uncontested', \
                                         axis=1))
+    print(d_uncont)
     
     # remove uncontested seats and update thresholds
     st_races = st_races[st_races['confidence'] != 'Uncontested']
-    st_races['d_threshold'] = st_races.apply(lambda x: x['d_threshold'] \
+    st_races[threshold_col] = st_races.apply(lambda x: x[threshold_col] \
                 - d_uncont[x['office']], axis=1)
+    
+    print(st_races[threshold_col].unique())
     
     
     # remove safe and uncontested independents, lower threshold by 1 and 
@@ -538,9 +559,29 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
     
     
     # add margin column
-    st_races['MARGIN'] = st_races.apply(lambda x: rating_to_margin\
+    st_races[margin_col] = st_races.apply(lambda x: rating_to_margin\
                         (x.favored, x.confidence), axis=1)
-            
+    
+    # adjust margin column based on foundational model
+    if found_margin_col:
+        print('foundations')
+        
+        # clip margins if needed
+        if found_clip:
+            st_races[found_margin_col] = st_races.apply(lambda x: \
+                        min(x[found_margin_col], x[margin_col] + found_clip),\
+                        axis=1)
+            st_races[found_margin_col] = st_races.apply(lambda x: \
+                        max(x[found_margin_col], x[margin_col] - found_clip),\
+                        axis=1)
+                
+        # blend margins
+        st_races[margin_col] = st_races.apply(lambda x: blend_safe * \
+                    x[found_margin_col] + (1 - blend_safe) * x[margin_col] \
+                    if x['confidence'] == 'Safe' else blend_else * \
+                    x[found_margin_col] + (1 - blend_else) * x[margin_col],\
+                    axis=1)
+                    
     # determine if it is bad for dems to win both
     both_bad = st_races['both_bad'].unique()[0]
     
@@ -553,81 +594,4 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
                            threshold_col, tie_col, chamber_col, power_col)
     return st_races
             
-def main():
-    
-    # initialize moneyball path
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    
-    # read in ratings dfs
-    lower = pd.read_csv(money_path + 'state/lower_input_data.csv')
-    upper = pd.read_csv(money_path + 'state/upper_input_data.csv')
-    
-    # add columns for office
-    lower['office'] = 'lower'
-    upper['office'] = 'upper'
-    
-    # concat
-    all_races = pd.concat([lower, upper])
-    
-    # read in states to test
-    to_test = pd.read_csv(money_path + 'state/states_to_test.csv')
-    
-    # merge to get thresholds
-    all_races = pd.merge(all_races, to_test, how='left', on=['state', 'office'])
-    
-    # restrict to chambers where there is a threshold in the csv
-    all_races = all_races[all_races['d_threshold'].notna()]
-    
-    # add column for statewide error
-    all_races['statewide'] = 1
-    
-    # set the error vars
-    ## THIS SHOULD CHANGE WITH TIME ##
-    density_vars = ['rural_prop', 'exurban_prop', 'suburban_prop', 
-                    'urban_prop']
-    state_vars = ['statewide']
-    error_vars = {}
-    for i in density_vars:
-        error_vars[i] = (0.05, 5)
-    for i in state_vars:
-        error_vars[i] = (0.03, 3)
-    race_sigma = 0.065
-    race_deg_f = 5
-    
-    # set DataFrame columns for voter power analysis
-    margin_col = 'MARGIN' 
-    voters_col = 'cvap'
-    threshold_col = 'd_threshold'
-    tie_col = 'tie_dem'
-    chamber_col = 'office'
-    power_col = 'VOTER_POWER'
-    
-    # initialize empty list of dataframes to concatenate at the end
-    results = []
-    
-    # for each state
-    for state in all_races['state'].unique():
-        
-        # find voter powers for districts in this state
-        power_df = state_voter_powers(all_races, state, error_vars, race_sigma, 
-                                race_deg_f, margin_col, voters_col,
-                                threshold_col, tie_col, chamber_col, power_col)
-        
-        # append to results dataframe
-        results.append(power_df)
-        print (state)
-        
-    # concatenate statewide dataframes
-    output_df = pd.concat(results) 
-    
-    # delete unecessary columns
-    output_df = output_df[['state', 'district', 'incumbent', 'favored', 
-                          'confidence', 'nom_R', 'nom_D', 'nom_I', 
-                          'cvap', 'VOTER_POWER']]
-    
-    output_df.to_csv(money_path + 'output/' + state + '.csv')
-    return output_df
-                
-    
-# if __name__ == "__main__":
-#    main()
+
