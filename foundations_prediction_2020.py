@@ -93,6 +93,8 @@ def compile_historical_results(df, df_lower, df_upper, df_inc_lower,
     # Check if the race was essentially uncontested
     df['max_three'] = df[['dem_three', 'rep_three', 'ind_three']].max(axis=1)
     df['uncontested'] = df['max_three'] >= 0.75
+
+    # Drop unncessary columns
     drop_cols = ['max_three', 'dem_three', 'ind_three', 'rep_three']
     df = df.drop(columns=drop_cols)
 
@@ -106,15 +108,14 @@ def compile_historical_results(df, df_lower, df_upper, df_inc_lower,
                                             (r['R'] == 0)) else r['R'], axis=1)
 
     # Convert to margin and then to two party voteshare
-    df['dem_margin'] = df['D'] - df['R']
-    df['dem_elec'] = df['dem_margin'] / 2 + 0.5
+    df['dem_elec'] = df['D'] / (df['D'] + df['R'])
 
     # Split into lower and upper
     df_elec_lower = df[df['chamber'] == 'lower']
     df_elec_upper = df[df['chamber'] == 'upper']
 
     # Drop relevant columns
-    drop_cols = ['D', 'R', 'I', 'worst_party', 'chamber', 'dem_margin']
+    drop_cols = ['D', 'R', 'I', 'worst_party', 'chamber']
     df_elec_lower = df_elec_lower.drop(columns=drop_cols)
     df_elec_upper = df_elec_upper.drop(columns=drop_cols)
 
@@ -238,6 +239,7 @@ def incumbency_advantage(df):
     # Get the average incumbency advantage between the two years
     df['inc_adv'] = np.mean(df[['obs_inc_16', 'obs_inc_18']],
                             axis=1).fillna(0)
+    df['inc_adv'] = np.clip(df['inc_adv'], -0.2, 0.2)
     return df
 
 
@@ -266,7 +268,7 @@ def foundation_prediction(df, df_econ):
     # Clean economist margins
     df_econ = df_econ[['state', 'margin']]
     df_econ.columns = ['state', 'state_margin']
-    df_econ['dem_pres_20'] = df_econ['state_margin'] / 100 + 0.5
+    df_econ['dem_pres_20'] = df_econ['state_margin'] / 200 + 0.5
     df_econ = df_econ.drop('state_margin', axis=1)
 
     # Join dataframes
@@ -275,6 +277,16 @@ def foundation_prediction(df, df_econ):
     # Let the nationwide vote share estimate be the average of economist
     # prediction and 2016
     df['dem_pres'] = 0.5 * df['dem_pres_16'] + 0.5 * df['dem_pres_20']
+
+    # HAND FIX INCUMBENCY ADVANTAGE DATA ERRORS
+
+    # Dinah Sikes in KS changed parties
+    df.loc[(df['state'] == 'KS') & (df['district_num'] == '008')
+           & (df['chamber'] == 'upper'), 'inc_adv'] = 0.078
+
+    # Julia Lynn has the wrong dem_share_16
+    df.loc[(df['state'] == 'KS') & (df['district_num'] == '008')
+           & (df['chamber'] == 'upper'), 'inc_adv'] = 0.02
 
     # Get the foundational voteshare and margin
     df['found_share'] = df['dem_pres'] + df['inc_adv']
