@@ -185,7 +185,7 @@ def incumbency_advantage(df, uncontested_diff):
     was no election in that year in which we use the 2014 election.
     """
     # Get the last result
-    df['dem_share_last'] = df['dem_share_18'].fillna(df['dem_share_16'])
+    df['dem_share_last'] = df['dem_share_16'].fillna(df['dem_share_14'])
 
     # Determine if the last election result was effectively uncontested
     df['uncontested'] = df['dem_share_last'] - 0.5
