@@ -277,8 +277,7 @@ def foundation_prediction(df, df_econ):
     df['dem_pres'] = 0.5 * df['dem_pres_16'] + 0.5 * df['dem_pres_20']
 
     # Get the foundational voteshare and margin
-    df['found_share'] = df['dem_pres'] + df['district_resid']
-    df['found_share'] += df['inc_adv']
+    df['found_share'] = df['dem_pres'] + df['inc_adv']
     df['found_share'] = np.clip(df['found_share'], 0.3, 0.7)
     df['found_margin'] = (df['found_share'] - 0.5) * 2
     return df
