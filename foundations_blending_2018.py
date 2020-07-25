@@ -279,6 +279,5 @@ def blend_predictions(df, clip=0.1):
     return df_blend
 
 
-
 if __name__ == "__main__":
     main()
