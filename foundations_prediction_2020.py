@@ -105,15 +105,16 @@ def compile_historical_results(df, df_lower, df_upper, df_inc_lower,
     df['R'] = df.apply(lambda r: r['I'] if ((r['win_party'] == 'D') &
                                             (r['R'] == 0)) else r['R'], axis=1)
 
-    # Get two party voteshare
-    df['dem_elec'] = df['D'] / (df['R'] + df['D'])
+    # Convert to margin and then to two party voteshare
+    df['dem_margin'] = df['D'] - df['R']
+    df['dem_elec'] = df['dem_margin'] / 2 + 0.5
 
     # Split into lower and upper
     df_elec_lower = df[df['chamber'] == 'lower']
     df_elec_upper = df[df['chamber'] == 'upper']
 
     # Drop relevant columns
-    drop_cols = ['D', 'R', 'I', 'worst_party', 'chamber']
+    drop_cols = ['D', 'R', 'I', 'worst_party', 'chamber', 'dem_margin']
     df_elec_lower = df_elec_lower.drop(columns=drop_cols)
     df_elec_upper = df_elec_upper.drop(columns=drop_cols)
 
@@ -271,11 +272,15 @@ def foundation_prediction(df, df_econ):
     # Join dataframes
     df = df.merge(df_econ)
 
+    # Let the nationwide vote share estimate be the average of economist
+    # prediction and 2016
+    df['dem_pres'] = 0.5 * df['dem_pres_16'] + 0.5 * df['dem_pres_20']
+
     # Get the foundational voteshare and margin
-    df['found_share'] = df['dem_pres_20'] + df['district_resid']
+    df['found_share'] = df['dem_pres'] + df['district_resid']
     df['found_share'] += df['inc_adv']
     df['found_share'] = np.clip(df['found_share'], 0.3, 0.7)
-    df['found_margin'] = (df['found_share'] - 0.5) * 200
+    df['found_margin'] = (df['found_share'] - 0.5) * 2
     return df
 
 
