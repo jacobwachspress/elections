@@ -15,7 +15,8 @@ def main():
     # get input and output folders for election data
     money_path = "G:/Shared drives/princeton_gerrymandering_project/Moneyball/"
     input_path = money_path + "state/historical_election_results/"
-    output_path = money_path + "state/really_clean_historical_election_results/"
+    output_path = money_path +\
+            "foundation\\raw\\pres_results_by_state_leg_district\\"
     
     # make the output folder if neded
     if not os.path.isdir(output_path):

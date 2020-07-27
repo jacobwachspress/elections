@@ -3,14 +3,10 @@
 Created on Thu Jun 11 14:04:26 2020
 @author: Jacob
 """
-import scipy
 import scipy.stats as sts
-from scipy.integrate import quad, nquad
 import numpy as np
 import pandas as pd
 import itertools as it
-
-
 
 
 def prob_from_margin(margin, race_sigma, race_deg_f):
@@ -113,96 +109,6 @@ def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
     return good_outcome
 
 
-
-def chamber_success_prob_with_shift(*args):
-    ''' Helper method to be integrated in chamber_success_prob. Takes a
-    variable number of arguments in order to comply with the specifications
-    of scipy.integrate.nquad and allow any number of independent shifts.
-    
-    Arguments: x_1, x_2, x_3, ... , x_n, threshold, race_sigma, race_deg_f, 
-            parameter_weights, sigmas, deg_fs (in this order). 
-            
-        x_1, ... , x_n denote shifts in n parameters of correlated error
-            among n independent categories (i.e. rural, statewide, incumbent)
-        threshold_1: number of seats needed for Dem power in chamber 1 
-            ('D' is code for guaranteed Dem victory, 'R' for Rep victory)
-        threshold_2: number of seats needed for Dem power in chamber 2
-            ('D' is code for guaranteed Dem victory, 'R' for Rep victory)
-        tie_1: estimated probability of D power in chamber 1 if they hit 
-            "threshold" on the mark
-        tie_2: estimated probability of D power in chamber 2 if they hit 
-            "threshold" on the mark
-        race_sigma: positive real number, estimate of standard deviation of
-            actual win margin in each race, after correlated error
-        race_df: positive integer, degrees of freedom used in t-distribution
-            in each race
-        parameter_weights: numpy matrix with n+1 columns, where the rows denote
-            races, the first column denotes the desired candidate's expected
-            win margin, and the remaining columns denote the margin's
-            sensitivity to an error in a certain parameter 
-        chamber_2_ix: row index of parameter_weights where chamber 2 races
-            begin (all earlier indices are chamber 1)
-        sigmas: numpy array with n elements, where element i corresponds to
-            the sigma of the t-distribution for the error of the random
-            variable whose category is in the (i+1)st column of 
-            parameter_weights
-        deg_fs: corresponding degrees of freedom for the t-distribution 
-            (indexed the same as sigmas)
-        both_bad: Boolean, is it bad if Dems reach threshold in both chambers? 
-            (This happens if there is a D governor or governors have no 
-            veto power.)
-        neither_bad: Boolean, is it bad if Dems reach threshold in no chamber? 
-            (This happens if there is a R governor or governors have no 
-            veto power.)
-            
-            
-    Output: A*B, where
-        A = probability of party reaching threshold under this shift
-        B = probability density of this set of shifts
-
-    '''
-    # parse args
-    threshold_1 = args[-12]
-    threshold_2 = args[-11]
-    tie_1 = args[-10]
-    tie_2 = args[-9]
-    race_sigma = args[-8]
-    race_deg_f = args[-7]
-    parameter_weights = args[-6]
-    chamber_2_ix = args[-5]
-    sigmas = args[-4]
-    deg_fs = args[-3]
-    both_bad = args[-2]
-    neither_bad = args[-1]
-    shift_vector = list(args[0:-12])
-    
-    # check that parameters have the right sizes, for the ones that won't get 
-    # caught automatically later
-    n = len(sigmas)
-    assert len(deg_fs) == n, "deg_fs and sigmas not same size"
-    assert len(shift_vector) == n, "shift_vector and sigmas not same size"
-    
-    # find expected margins before independent race shift
-    # append 1 at the beginning to add in the starting margin
-    margins = parameter_weights.dot(np.asarray([1] + shift_vector))
-    
-    # generate list of parameters for the two chambers
-    params_1 = [margins[:chamber_2_ix], threshold_1, tie_1]
-    params_2 = [margins[chamber_2_ix:], threshold_2, tie_2]
-    
-    
-    # find success probability assuming this set of correlated shifts
-    success_prob = success_prob_independence(params_1, params_2, race_sigma, \
-                                             race_deg_f, both_bad, neither_bad)
-                
-    # find relative likelihood of this shift, dividing by all sigmas so
-    # that the density function integrates to 1    
-    densities = [sts.t.pdf(shift_vector[i] / sigmas[i], deg_fs[i]) for i \
-                     in range(len(shift_vector))]
-    shift_prob_density = np.prod(densities) / np.prod(sigmas)
-    
-    # return the product
-    return success_prob * shift_prob_density
     
 def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
                              threshold_2, tie_1, tie_2, chamber_2_ix, \
@@ -244,23 +150,24 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
     n = len(t_dist_params)
     assert n > 0, "no correlated error encoded"
     
-    # chose sampling points to estimate integration, Chebyshev nodes of 
-    # percentile function on each distribution
-    
-    # get percentiles
-    num_nodes = 200
-    nodes = 2*np.linspace(1, num_nodes, num_nodes) - 1
-    nodes = np.cos(nodes * np.pi / (2 * num_nodes))
-    nodes = (1 + nodes)/2
+
 
     # extract sigmas and deg_fs from t_dist_params
-    sigmas = [param[0] for param in t_dist_params]
-    deg_fs = [param[1] for param in t_dist_params]
+    sigmas = [param[0][0] for param in t_dist_params]
+    deg_fs = [param[0][1] for param in t_dist_params]
+    num_nodes_list = [param[1] for param in t_dist_params]
     
-    # convert percentiles to points on distributions
+    # chose sampling points to estimate integration, Chebyshev nodes of 
+    # percentile function on each distribution
     sample_points = []
     weights = []
     for ix, sig in enumerate(sigmas):
+        
+        # get percentiles of nodes 
+        num_nodes = num_nodes_list[ix]
+        nodes = 2*np.linspace(1, num_nodes, num_nodes) - 1
+        nodes = np.cos(nodes * np.pi / (2 * num_nodes))
+        nodes = (1 + nodes)/2
         
         # get points, append to list, and get distribution pdfs to 
         # weight all points
@@ -296,7 +203,7 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1, \
 
 def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad, 
                 neither_bad, margin_col, voters_col, threshold_col, tie_col,
-                chamber_col, power_col):
+                chamber_col, power_col, just_get_prob):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
@@ -313,7 +220,8 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
             chamber_col: the district's chamber
         error_vars: dictionary where keys are the columns in districts_df that
             are sources of error, values are (sigma, deg_f) of t-distribution
-            of the error
+            of the error and number of nodes for numerical integration accuracy
+                format: (sigma, deg_f), nodes
         threshold: number of seats needed for redistricting power
         race_sigma: positive real number, estimate of standard deviation of
             actual win margin in each race, after correlated error
@@ -364,10 +272,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
     # find number of competitive seats per chamber
     possible_seats_1 = chamber_2_ix
     possible_seats_2 = len(margins) - possible_seats_1
-    print(threshold_1)
-    print(possible_seats_1)
-    print(threshold_2)
-    print(possible_seats_2)
+
     
     # if D's already won chamber 1
     if threshold_1 <= 0:
@@ -375,7 +280,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
         threshold_1 = 'D'
         
     # if R's already won chamber 1
-    if threshold_1 > possible_seats_1:
+    elif threshold_1 > possible_seats_1:
         test_cham_1 = False
         threshold_1 = 'R'
         
@@ -389,12 +294,14 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
         test_cham_2 = False
         threshold_2 = 'R'
 
-    print ('long calc')
     # find the chamber success probability
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold_1,\
                              threshold_2, tie_1, tie_2, chamber_2_ix, \
                              race_sigma, race_deg_f, both_bad, neither_bad)
-    print('success_prob = ' + str(prob))
+    
+    # if we just cared about election results
+    if just_get_prob:    
+        return prob
 
     
     # initialize dictionary keyed by parameter weights, where the value is
@@ -442,12 +349,10 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
             # adjust the margin in our race, assuming the party gained 1 vote
             param_weights_copy[i, 0] = param_weights_copy[i, 0] + 1/num_voters
     
-            print ('long calc')
             # find the chamber success probability
             prob_new = chamber_success_prob(param_weights_copy, t_dist_params,\
                          threshold_1, threshold_2, tie_1, tie_2, chamber_2_ix,\
                          race_sigma, race_deg_f, both_bad, neither_bad)
-            print('done long calc')
             
             # update dictionary with quantity voter_power * voters_in_district
             voter_power_dict[unique_params] = (prob_new - prob) * num_voters
@@ -485,7 +390,7 @@ def rating_to_margin(favored, confidence, df=None, \
     # get absolute margin
     margin = ratings_to_margin_df.loc[confidence, 'MARGIN']
     
-    # postive if dem, negative if rep, None if ind
+    # positive if dem, negative if rep, None if ind
     if favored == 'R':
         margin = -margin
     if favored == 'I':
@@ -496,7 +401,8 @@ def rating_to_margin(favored, confidence, df=None, \
 def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
                        margin_col, voters_col, threshold_col, tie_col, 
                        chamber_col, power_col, found_margin_col=False, 
-                       found_clip=False, blend_safe=False, blend_else=False):
+                       found_clip=False, blend_safe=False, blend_else=False,
+                       just_get_prob=False):
     ''' Gets all voter powers in a state.
     
     Arguments:
@@ -528,7 +434,6 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
     # restrict dataframe to this state
     st_races = all_races[all_races['state'] == state].copy()
     
-    print(st_races[threshold_col].unique())
     # find number of uncontested Dem seats in each chamber
     d_uncont = {'lower' : False, 'upper' : False}
     for chamber in d_uncont:
@@ -537,15 +442,11 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
                                         x['favored'] == 'D' and \
                                         x['confidence'] == 'Uncontested', \
                                         axis=1))
-    print(d_uncont)
     
     # remove uncontested seats and update thresholds
     st_races = st_races[st_races['confidence'] != 'Uncontested']
     st_races[threshold_col] = st_races.apply(lambda x: x[threshold_col] \
                 - d_uncont[x['office']], axis=1)
-    
-    print(st_races[threshold_col].unique())
-    
     
     # remove safe and uncontested independents, lower threshold by 1 and 
     # cut tie prob in half (roughly, this assumes indies break to either
@@ -564,10 +465,11 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
     
     # adjust margin column based on foundational model
     if found_margin_col:
-        print('foundations')
-        
+
         # clip margins if needed
         if found_clip:
+            st_races['unclipped_' + found_margin_col] = \
+                                        st_races[found_margin_col]
             st_races[found_margin_col] = st_races.apply(lambda x: \
                         min(x[found_margin_col], x[margin_col] + found_clip),\
                         axis=1)
@@ -576,11 +478,13 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
                         axis=1)
                 
         # blend margins
+        st_races['orig_' + margin_col] = st_races[margin_col]
         st_races[margin_col] = st_races.apply(lambda x: blend_safe * \
                     x[found_margin_col] + (1 - blend_safe) * x[margin_col] \
                     if x['confidence'] == 'Safe' else blend_else * \
                     x[found_margin_col] + (1 - blend_else) * x[margin_col],\
                     axis=1)
+    
                     
     # determine if it is bad for dems to win both
     both_bad = st_races['both_bad'].unique()[0]
@@ -591,7 +495,8 @@ def state_voter_powers(all_races, state, error_vars, race_sigma, race_deg_f,
     # calculate voter power, add column to df
     st_races = voter_power(st_races, error_vars, race_sigma, race_deg_f,
                            both_bad, neither_bad, margin_col, voters_col, 
-                           threshold_col, tie_col, chamber_col, power_col)
+                           threshold_col, tie_col, chamber_col, power_col,
+                           just_get_prob)
     return st_races
             
 

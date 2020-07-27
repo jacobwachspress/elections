@@ -72,7 +72,7 @@ def fuzzy_merge(file, df):
 # CLEAN 2018 ELECTION DATA #
 
 # read in 2018 results from MEDSL
-df = pd.read_csv(money_path + "testing\\state_overall_2018.csv")
+df = pd.read_csv(money_path + "chaz\\state_overall_2018.csv")
 
 # Filter to state assembly/senate offices
 partial_term = 'State Representative (Partial Term Ending 01/01/2019)'
@@ -93,6 +93,11 @@ df = df[df['office'].isin(relevant_offices)]
 df['office'] = df['office'].apply(lambda x: 'upper' if x in senate_offices
                                    else 'lower')
 
+# sort DataFrame so that the first instance of the candidate's party is
+# the party under which they received the most votes
+df = df.sort_values(by=['year', 'state_po', 'office', 'district', 'candidate',
+                        'candidatevotes'], 
+                    ascending = [True, True, True, True, True, False])
 # get total votes per candidate, filter out unimportant columns
 cols_to_group = ['year', 'state_po', 'office', 'district', 'candidate']
 df_grouped = df.groupby(cols_to_group).agg({'candidatevotes' : sum, \
@@ -167,15 +172,10 @@ merged_df.to_csv(money_path + 'chaz\\merged_results.csv', index=False)
 
 # Incorporate manual changes from when the fuzzy merge was off
 manual = pd.read_csv(money_path + 'chaz\manual_2018_results.csv', dtype=str)
-manual['GEOID'] = manual['GEOID'].str.zfill(5)
-
-for cham in ['upper', 'lower']:
-    cham_df = merged_df[merged_df['office'] == cham]
-    cham_manual = manual[manual['office'] == cham]
-    merged_df = merged_df.drop(np.where\
-                              (cham_df['GEOID'].isin(cham_manual['GEOID']))[0])
-
-merged_df = pd.concat([merged_df, manual]).sort_values(['state_po', 'office'])
+merged_df = pd.concat([manual, merged_df])
+merged_df['GEOID'] = merged_df['GEOID'].astype(str).str.zfill(5)
+merged_df = merged_df.drop_duplicates(['GEOID', 'office'])
+merged_df = merged_df.sort_values(['state_po', 'office'])
 merged_df['win_margin'] = merged_df['win_margin'].astype(float)
 
 ## data fix, since CT republicans file as independents as well
@@ -247,7 +247,7 @@ results['correctness_conflict'] = results.apply(lambda x: x['chaz_correct'] \
 results = results.rename(columns={'GEOID':'geoid'})
 upper = results[results['office'] == 'upper'].copy()
 lower = results[results['office'] == 'lower'].copy()
-fips_path = money_path + 'fundamentals/raw/state_fips.csv'
+fips_path = money_path + 'foundation/raw/state_fips.csv'
 fips_df = pd.read_csv(fips_path)
 density_path = money_path + 'density/clean/'
 upper, lower = merge_densities(fips_df, density_path, upper, lower)

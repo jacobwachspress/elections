@@ -150,3 +150,5 @@ margin too small or large, but when it does this, it also assigns an uncertainty
 too small or large in the same direction. These factors cause error in opposite
 directions, and we believe the net effect is minor. In future updates, we may
 try to model elasticity.
+
+Lags in cnalysis updates.

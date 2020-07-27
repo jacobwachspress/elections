@@ -803,6 +803,10 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         # make district a three-digit string
         cham_df['ddez'] = cham_df['ddez'].str.zfill(3)
         
+        # sort DataFrame so that the first instance of the candidate's party is
+        # the party under which they received the most votes
+        cham_df = cham_df.sort_values(by=['sid', 'ddez', 'cand', 'vote'],
+                                      ascending = [True, True, True, False])
         # add votes for same candidate if multiple rows have their name
         grouped = cham_df.groupby(['sid', 'ddez', 'cand'])
         cham_df = grouped.agg({'vote' : sum, 'sfips': 'first', \

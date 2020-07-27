@@ -9,7 +9,7 @@ import difflib
 
 def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'fundamentals/'
+    path = money_path + 'foundation/'
 
     # Load and clean fips
     df_fips = pd.read_csv(path + 'raw/state_fips.csv')
@@ -32,7 +32,7 @@ def main():
     
     # Presidential results by st_leg district
     input_path = money_path + \
-                    'fundamentals\\raw\\pres_results_by_state_leg_district\\'
+                    'foundation\\raw\\pres_results_by_state_leg_district\\'
     df_st_leg = get_all_st_leg_pres_results(input_path, df_fips)
     df_st_leg.to_csv(path + 'clean/st_leg_pres_results.csv', index=False)
     
@@ -762,5 +762,5 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
     return upper, lower 
 
 
- if __name__ == "__main__":
+if __name__ == "__main__":
     main()

@@ -151,6 +151,8 @@ def compile_historical_results(df, df_lower, df_upper, df_inc_lower,
     # Get dem vote share 2018
     df_lower.loc[df_lower['win_party_16'] == 'R',
                  '2016_win_margin'] *= -1
+    df_upper.loc[df_upper['win_party_16'] == 'R',
+                 '2016_win_margin'] *= -1
     df_lower['dem_share_16'] = df_lower['2016_win_margin'] / 2 + 0.5
     df_upper['dem_share_16'] = df_upper['2016_win_margin'] / 2 + 0.5
 
@@ -273,6 +275,7 @@ def foundation_prediction(df, df_econ):
 
     # Join dataframes
     df = df.merge(df_econ)
+    df['dem_pres_20'] = df['dem_pres_20'] + df['district_resid']
 
     # Let the nationwide vote share estimate be the average of economist
     # prediction and 2016
