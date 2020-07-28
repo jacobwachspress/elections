@@ -48,10 +48,6 @@ def main():
     for st_fips in all_fips:
         process_state_census_data(st_fips, census_vars, output_path, \
                     url_start, url_end)
-        
-    ## SOMETIMES I HAVE BEEN GETTING AN HTTP ERROR WITH THE CENSUS DOWNLOAD
-    ## EVERY 15 OR SO STATES, MIGHT BE A TIME THING? A BLOCKER TO DOWNLOADING
-    ## TONS OF DATA AT ONCE? COULD WORK AROUND THIS WITH TRY/EXCEPT
     
     # add key colums and save to clean folder
     for st_fips in all_fips:
