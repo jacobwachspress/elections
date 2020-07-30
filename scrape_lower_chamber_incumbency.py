@@ -101,7 +101,6 @@ def main():
                 if party_A == 'L':
                     party_A = 'D'
 
-
                 # Get candidate B and the party
                 text = elem.text.strip()
                 candidate_B = text.split(')B.')[1].strip().split(' ')[:-1]
@@ -125,9 +124,6 @@ def main():
 
                 # update index
                 current_ix += 1
-
-
-
 
     # Change vacant seats to no party
     vacant = ['Vacant', 'vacant', '--Vacant--', 'seat vacant']

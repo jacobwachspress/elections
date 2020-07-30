@@ -76,12 +76,13 @@ def main():
     df_inc.loc[df_inc['candidate'] == 'Vacant', 'party'] = False
 
     # clean alaska
-    AK_dict = {'1':'A', '2':'B', '3':'C', '4':'D', '5':'E', '6':'F',
-               '7':'G', '8':'H', '9':'I', '10':'J', '11':'K', '12':'L',
-               '13':'M', '14':'N', '15':'O', '16':'P', '17':'Q', '18':'R',
-               '19':'S', '20':'T'}
-    df_inc['district'] = df_inc.apply(lambda x: AK_dict[x['district']] \
-                          if x['state'] == 'AK' else x['district'], axis=1)
+    AK_dict = {'1': 'A', '2': 'B', '3': 'C', '4': 'D', '5': 'E', '6': 'F',
+               '7': 'G', '8': 'H', '9': 'I', '10': 'J', '11': 'K', '12': 'L',
+               '13': 'M', '14': 'N', '15': 'O', '16': 'P', '17': 'Q',
+               '18': 'R', '19': 'S', '20': 'T'}
+    df_inc['district'] = df_inc.apply(lambda x: AK_dict[x['district']]
+                                      if x['state'] == 'AK'
+                                      else x['district'], axis=1)
 
     # Save to drive
     path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
