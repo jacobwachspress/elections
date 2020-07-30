@@ -5,22 +5,20 @@ import pandas as pd
 
 def main():
     """Get historical incumbency unavailable in cnalysis rating."""
-    # initialize paths
-    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-
     # Get election results
-    df = pd.read_csv(path + 'elections/medsl_state_results_2018.csv',
+    df = pd.read_csv('data/input/election/medsl_state_results_2018.csv',
                      encoding='ISO-8859-1')
 
     # Get data error corrections
-    found_path = path + 'foundation/clean/'
-    df_party = pd.read_csv(found_path + 'election_candidate_corrections.csv')
-    df_results = pd.read_csv(found_path + 'mit_add_entry_corrections.csv')
+    party_path = 'data/input/foundation/medsl_party_corrections.csv'
+    results_path = 'data/input/foundation/medsl_results_corrections.csv'
+    df_party = pd.read_csv(party_path)
+    df_results = pd.read_csv(results_path)
 
     # Load 2018 election results and hand checked incumbency
     df_elec_18 = clean_results_18(df, df_party, df_results)
-    df_elec_18.to_csv(path + 'elections/election_results_2018.csv',
-                      index=False)
+    elec_path = 'data/output/electoins/state_results_2018.csv'
+    df_elec_18.to_csv(elec_path, index=False)
     return
 
 
