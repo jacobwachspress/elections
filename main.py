@@ -70,7 +70,7 @@ power_col = 'VOTER_POWER'
 bipart_probs = []
 
 # for each state
-for state in races_df['state'].unique():
+for state in ['CT']:
     
     # find probablity of bipartisan control of residistricting
     
@@ -92,16 +92,17 @@ for state in races_df['state'].unique():
     bipart_probs.append(bipart_prob)
     
 # write results to DataFrame
-bipartisan_control_df = pd.DataFrame({'state' : races_df['state'].unique(), \
+bipartisan_control_df = pd.DataFrame({'state' : ['CT'], \
                                       'bipartisan_prob': bipart_probs})
-    
+bipartisan_control_df.to_csv(money_path + 'output/bipartisan_control_CT.csv')
+
 print ('win probs done')
     
 
 results = []
 
 # for each state
-for state in races_df['state'].unique():
+for state in ['CT']:
     print ('starting ' + state)
     try:
     
@@ -121,18 +122,18 @@ for state in races_df['state'].unique():
         
         # append to results dataframe
         results.append(power_df)
-        power_df.to_csv(money_path + 'output/' + state + '.csv')
+        power_df.to_csv(money_path + 'output/' + state + '_7_28.csv')
     except:
         print('failed')
     
 # concatenate statewide dataframes
 output_df = pd.concat(results) 
 
-output_df.to_csv(money_path + 'output/' + 'all_results_raw.csv')
+# output_df.to_csv(money_path + 'output/' + 'all_results_raw.csv')
 
 # delete unecessary columns
 output_df = output_df[['state', 'district', 'incumbent', 'favored', 
                       'confidence', 'nom_R', 'nom_D', 'nom_I', 
                       'cvap', 'VOTER_POWER']]
 
-output_df.to_csv(money_path + 'output/' + 'all_results.csv')
+# output_df.to_csv(money_path + 'output/' + 'all_results.csv')
