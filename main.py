@@ -23,12 +23,12 @@ path = money_path + 'state/'
 races_df = pd.read_csv(money_path + 'state/all_input_data.csv')
 
 # read in and merge foundations margin
-founds_df = pd.read_csv(money_path + \
+founds_df = pd.read_csv(money_path +
                         'foundation/clean/foundations_predictions_2020.csv')
 founds_df['office'] = founds_df['chamber']
 founds_df = founds_df[['state', 'district_num', 'office', 'found_margin']]
-races_df = pd.merge(races_df, founds_df, how='left', on=['state', \
-                                            'office', 'district_num'])
+races_df = pd.merge(races_df, founds_df, how='left',
+                    on=['state', 'office', 'district_num'])
 
 # read in states to test
 to_test = pd.read_csv(path + 'states_to_test.csv')
@@ -51,88 +51,92 @@ err_df = pd.read_csv(path + 'correlated_error.csv')
 for _, row in err_df.iterrows():
     sigma = row['sigma']
     deg_f = row['deg_f']
-    if row['decay'] == True:
+    if row['decay']:
         deg_f /= deg_f_scale
     error_vars[row['parameter']] = ((sigma, deg_f), row['nodes'])
 
-# set the isolated race error    
+# set the isolated race error
 race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
 # set DataFrame columns for voter power analysis
-margin_col = 'margin' 
+margin_col = 'margin'
 voters_col = 'cvap'
 threshold_col = 'd_threshold'
 tie_col = 'tie_dem'
 chamber_col = 'office'
 power_col = 'VOTER_POWER'
 
-# initialize list of bipartisan control probabilities 
+# initialize list of bipartisan control probabilities
 bipart_probs = []
 
 # for each state
 for state in races_df['state'].unique():
-    
+
     # find probablity of bipartisan control of residistricting
-    
+
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
     if state == 'NC':
-        bipart_prob = state_voter_powers(races_df, state, error_vars, race_sigma, 
-                            race_deg_f, margin_col, voters_col,
-                            threshold_col, tie_col, chamber_col, power_col,
-                            found_margin_col='found_margin', found_clip=0.06, 
-                            blend_safe=0.75, blend_else=0.5, just_get_prob=True)
-    
+        bipart_prob = state_voter_powers(races_df, state, error_vars,
+                                         race_sigma, race_deg_f, margin_col,
+                                         voters_col, threshold_col, tie_col,
+                                         chamber_col, power_col,
+                                         found_margin_col='found_margin',
+                                         found_clip=0.06,
+                                         blend_safe=0.75, blend_else=0.5,
+                                         just_get_prob=True)
+
     else:
-        bipart_prob = state_voter_powers(races_df, state, error_vars, race_sigma, 
-                            race_deg_f, margin_col, voters_col,
-                            threshold_col, tie_col, chamber_col, power_col,
-                            just_get_prob=True)
-    
-    
+        bipart_prob = state_voter_powers(races_df, state, error_vars,
+                                         race_sigma, race_deg_f, margin_col,
+                                         voters_col, threshold_col, tie_col,
+                                         chamber_col, power_col,
+                                         just_get_prob=True)
+
     bipart_probs.append(bipart_prob)
-    
+
 # write results to DataFrame
-bipartisan_control_df = pd.DataFrame({'state' : races_df['state'].unique(), \
+bipartisan_control_df = pd.DataFrame({'state': races_df['state'].unique(),
                                       'bipartisan_prob': bipart_probs})
-    
-print ('win probs done')
-    
+
+print('win probs done')
 
 results = []
 
 # for each state
 for state in races_df['state'].unique():
-    print ('starting ' + state)
+    print('starting ' + state)
     try:
-    
-        # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
+        # no blending for NC, all Chaz (maps redrawn in 2018)
         if state == 'NC':
-            power_df = state_voter_powers(races_df, state, error_vars, race_sigma, 
-                            race_deg_f, margin_col, voters_col,
-                            threshold_col, tie_col, chamber_col, power_col)
-        
-        else:    
+            power_df = state_voter_powers(races_df, state, error_vars,
+                                          race_sigma, race_deg_f, margin_col,
+                                          voters_col, threshold_col, tie_col,
+                                          chamber_col, power_col)
+
+        else:
             # find probablity of pvoter powers for districts in this state
-            power_df = state_voter_powers(races_df, state, error_vars, race_sigma, 
-                                    race_deg_f, margin_col, voters_col,
-                                    threshold_col, tie_col, chamber_col, power_col,
-                                    found_margin_col='found_margin', 
-                                    found_clip=0.06, blend_safe=0.75, blend_else=0.5)
-        
+            power_df = state_voter_powers(races_df, state, error_vars,
+                                          race_sigma, race_deg_f, margin_col,
+                                          voters_col, threshold_col, tie_col,
+                                          chamber_col, power_col,
+                                          found_margin_col='found_margin',
+                                          found_clip=0.06, blend_safe=0.75,
+                                          blend_else=0.5)
+
         # append to results dataframe
         results.append(power_df)
         power_df.to_csv(money_path + 'output/' + state + '.csv')
     except:
         print('failed')
-    
+
 # concatenate statewide dataframes
-output_df = pd.concat(results) 
+output_df = pd.concat(results)
 
 output_df.to_csv(money_path + 'output/' + 'all_results_raw.csv')
 
 # delete unecessary columns
-output_df = output_df[['state', 'district', 'incumbent', 'favored', 
-                      'confidence', 'nom_R', 'nom_D', 'nom_I', 
-                      'cvap', 'VOTER_POWER']]
+output_df = output_df[['state', 'district', 'incumbent', 'favored',
+                       'confidence', 'nom_R', 'nom_D', 'nom_I', 'cvap',
+                       'VOTER_POWER']]
 
 output_df.to_csv(money_path + 'output/' + 'all_results.csv')
