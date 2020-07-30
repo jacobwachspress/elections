@@ -6,11 +6,12 @@ import titlecase as tc
 def main():
     """Load original cnalysis data and apply updates"""
     # Define path
-    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
+    input_path = 'data/input/CNalysis/'
+    output_path = 'data/output/CNalysis'
 
     # Load original data
-    lower_old_path = path + 'chaz/chaz_lower_chamber_original.csv'
-    upper_old_path = path + 'chaz/chaz_upper_chamber_original.csv'
+    lower_old_path = input_path + 'ratings_lower_chamber_original.csv'
+    upper_old_path = input_path + 'ratings_upper_chamber_original.csv'
     df_lower_old = pd.read_csv(lower_old_path)
     df_upper_old = pd.read_csv(upper_old_path)
 
@@ -19,8 +20,8 @@ def main():
 
     # Define update paths. Add in reverse date order b/c we'll drop duplicates
     update_paths = []
-    update_paths.append(path + 'chaz/chaz_updates_07_18.csv')
-    update_paths.append(path + 'chaz/chaz_updates_07_02.csv')
+    update_paths.append(input_path + 'ratings_updates_07_18.csv')
+    update_paths.append(input_path + 'ratings_updates_07_02.csv')
 
     # Load updates
     df = pd.DataFrame()
@@ -51,11 +52,13 @@ def main():
     df_lower = df_lower.drop('NEW_RATING', axis=1)
     df_upper = df_upper.drop('NEW_RATING', axis=1)
 
-    # Save updated predictions with update date
-    lower_path = path + 'chaz/chaz_lower_chamber_' + update_date + '.csv'
-    upper_path = path + 'chaz/chaz_upper_chamber_' + update_date + '.csv'
-    df_lower.to_csv(lower_path, index=False)
-    df_upper.to_csv(upper_path, index=False)
+    # Save updated predictions with update date and as most recent
+    lower_path = output_path + 'ratings_lower_chamber_'
+    upper_path = output_path + 'ratings_upper_chamber_'
+    df_lower.to_csv(lower_path + update_date + '.csv', index=False)
+    df_upper.to_csv(upper_path + update_date + '.csv', index=False)
+    df_lower.to_csv(lower_path + 'most_recent' + '.csv', index=False)
+    df_upper.to_csv(upper_path + 'most_recent' + '.csv', index=False)
     return
 
 
