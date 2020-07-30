@@ -1,0 +1,6 @@
+﻿parameter,sigma,deg_f,decay,nodes
+statewide,0.037,3,TRUE,20
+rural_prop,0.05,5,FALSE,3
+suburban_prop,0.05,5,FALSE,3
+exurban_prop,0.05,5,FALSE,3
+urban_prop,0.05,5,FALSE,3

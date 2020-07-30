@@ -1,0 +1,105 @@
+STATE,DISTRICT,Clinton 2016 President D,Trump 2016 President R,Obama 2012 President D,Romney 2012 President R,Sanders 2012 Senate D,MacGovern 2012 Senate R
+VT,VT House Addison 1,"2,682",595,"2,635",661,"2,625",579
+VT,VT House Addison 2,"1,411",686,"1,606",668,"1,699",554
+VT,VT House Addison 3,"2,248","1,373","2,512","1,348","2,717","1,112"
+VT,VT House Addison 4,"2,774","1,362","3,125","1,248","3,270","1,032"
+VT,VT House Addison 5,"1,301",689,"1,394",727,"1,488",601
+VT,VT House Addison-Rutland,937,795,"1,171",689,"1,249",552
+VT,VT House Bennington 1,855,747,"1,169",552,"1,191",388
+VT,VT House Bennington 2-1 ,"1,764",970,"2,446",904,"2,401",643
+VT,VT House Bennington 2-2,"1,597",979,"2,057",849,"2,070",623
+VT,VT House Bennington 3,"1,014",702,"1,237",697,"1,307",502
+VT,VT House Bennington 4,"2,432","1,378","2,545","1,541","2,560","1,299"
+VT,VT House Bennington-Rutland ,"1,274",739,"1,428",767,"1,413",684
+VT,VT House Caledonia 1,"1,029",934,"1,294",890,"1,377",739
+VT,VT House Caledonia 2,955,691,"1,295",561,"1,387",434
+VT,VT House Caledonia 3,"1,469","1,110","1,789","1,081","1,909",883
+VT,VT House Caledonia 4,"1,376","1,439","1,849","1,320","2,015","1,075"
+VT,VT House Caledonia-Washington ,"1,330",859,"1,528",832,"1,585",680
+VT,VT House Chittenden 01,"1,694",515,"1,722",650,"1,822",486
+VT,VT House Chittenden 02,"3,508","1,481","3,329","1,697","3,446","1,476"
+VT,VT House Chittenden 03,"3,255","1,394","3,216","1,591","3,402","1,295"
+VT,VT House Chittenden 04-1,"1,809",516,"1,691",659,"1,704",602
+VT,VT House Chittenden 04-2,"1,711",619,"1,731",650,"1,795",535
+VT,VT House Chittenden 05-1,"1,930",445,"1,759",679,"1,760",604
+VT,VT House Chittenden 05-2,"1,660",606,"1,536",827,"1,571",687
+VT,VT House Chittenden 06-1,"3,023",855,"3,065","1,045","3,233",787
+VT,VT House Chittenden 06-2,"1,697",278,"1,651",329,"1,696",261
+VT,VT House Chittenden 06-3,"2,818",258,"2,839",264,"2,820",193
+VT,VT House Chittenden 06-4,"2,028",150,"2,147",242,"2,052",172
+VT,VT House Chittenden 06-5,"3,922",460,"3,692",596,"3,660",516
+VT,VT House Chittenden 06-6,933,74,875,112,784,104
+VT,VT House Chittenden 06-7,"2,203",542,"1,998",556,"1,999",432
+VT,VT House Chittenden 07-1,"1,899",433,"1,650",698,"1,681",592
+VT,VT House Chittenden 07-2,"2,064",652,"1,720",851,"1,717",746
+VT,VT House Chittenden 07-3,"1,810",423,"1,636",522,"1,666",413
+VT,VT House Chittenden 07-4,"1,473",551,"1,507",677,"1,540",585
+VT,VT House Chittenden 08-1,"2,847","1,274","2,729","1,493","2,893","1,229"
+VT,VT House Chittenden 08-2,"3,057","1,331","3,051","1,634","3,266","1,283"
+VT,VT House Chittenden 08-3,"1,545",796,"1,592",889,"1,705",734
+VT,VT House Chittenden 09-1,"1,929",988,"2,068","1,027","2,248",771
+VT,VT House Chittenden 09-2,"2,554","1,437","2,550","1,524","2,788","1,146"
+VT,VT House Chittenden 10,"1,950","1,783","2,231","1,665","2,600","1,192"
+VT,VT House Essex-Caledonia,607,923,950,710,"1,082",548
+VT,VT House Essex-Caledonia-Orleans,770,888,"1,019",735,"1,126",544
+VT,VT House Franklin 1,"1,019","1,023","1,228",918,"1,395",704
+VT,VT House Franklin 2,"1,063",947,"1,275",826,"1,391",614
+VT,VT House Franklin 3-1,"1,752","1,199","2,089","1,103","2,332",800
+VT,VT House Franklin 3-2,951,876,"1,096",796,"1,237",585
+VT,VT House Franklin 4,"1,406","1,569","1,937","1,230","2,196",878
+VT,VT House Franklin 5,"1,236","1,691","1,869","1,279","2,193",867
+VT,VT House Franklin 6,"1,120",787,"1,356",681,"1,490",516
+VT,VT House Franklin 7,804,660,"1,207",572,"1,373",372
+VT,VT House Grand Isle-Chittenden,"2,404","1,789","2,889","1,772","3,166","1,356"
+VT,VT House Lamoille 1,"1,974",559,"1,805",800,"1,771",722
+VT,VT House Lamoille 2,"1,929","1,231","2,542",988,"2,677",753
+VT,VT House Lamoille 3,"1,228",666,"1,565",610,"1,673",457
+VT,VT House Lamoille-Washington ,"2,534","1,159","2,872","1,067","3,019",830
+VT,VT House Orange 1,"1,831","1,819","2,375","1,614","2,596","1,237"
+VT,VT House Orange 2,"1,135",655,"1,310",662,"1,440",469
+VT,VT House Orange-Caledonia ,913,911,"1,130",794,"1,244",633
+VT,VT House Orange-Washington-Addison,"2,095","1,332","2,566","1,176","2,744",937
+VT,VT House Orleans 1,"1,397","1,779","2,052","1,463","2,361","1,029"
+VT,VT House Orleans 2,"1,430","1,555","2,040","1,304","2,337",901
+VT,VT House Orleans-Caledonia ,"1,971","1,356","2,472","1,174","2,674",934
+VT,VT House Orleans-Lamoille,771,923,"1,148",644,"1,288",468
+VT,VT House Rutland 1,754,702,989,564,"1,084",427
+VT,VT House Rutland 2,"1,802","2,012","2,447","1,699","2,673","1,330"
+VT,VT House Rutland 3,"1,517","1,556","1,955","1,280","2,069","1,047"
+VT,VT House Rutland 4,"1,064",979,"1,211","1,029","1,310",846
+VT,VT House Rutland 5-1,"1,162",845,"1,243",846,"1,335",640
+VT,VT House Rutland 5-2,911,704,"1,139",655,"1,213",522
+VT,VT House Rutland 5-3,587,557,797,387,829,289
+VT,VT House Rutland 5-4,835,628,"1,073",542,"1,130",418
+VT,VT House Rutland 6,"1,755","1,514","2,294","1,213","2,403",990
+VT,VT House Rutland-Bennington,"1,128","1,031","1,377",867,"1,512",665
+VT,VT House Rutland-Windsor 1,"1,291",972,"1,411",963,"1,468",808
+VT,VT House Rutland-Windsor 2,"1,200",997,"1,474",979,"1,556",768
+VT,VT House Washington 1,"1,771","1,162","2,173","1,111","2,344",848
+VT,VT House Washington 2,"1,760","1,862","2,127","1,734","2,397","1,377"
+VT,VT House Washington 3,"1,653","1,091","1,946","1,048","2,140",765
+VT,VT House Washington 4,"3,698",492,"3,694",700,"3,754",573
+VT,VT House Washington 5,"1,751",584,"1,907",618,"1,986",509
+VT,VT House Washington 6,"1,529",608,"1,783",579,"1,888",502
+VT,VT House Washington 7,"3,172",946,"3,295","1,068","3,421",870
+VT,VT House Washington-Chittenden ,"3,220","1,029","3,261","1,047","3,421",832
+VT,VT House Windham 1,"1,211",760,"1,415",756,"1,411",629
+VT,VT House Windham 2-1,"1,489",426,"1,580",432,"1,593",314
+VT,VT House Windham 2-2,"1,367",216,"1,512",242,"1,459",189
+VT,VT House Windham 2-3,"1,491",217,"1,529",241,"1,504",189
+VT,VT House Windham 3,"1,960",940,"2,268",825,"2,273",608
+VT,VT House Windham 4,"2,749",714,"3,112",746,"3,185",559
+VT,VT House Windham 5,"1,496",473,"1,662",464,"1,683",369
+VT,VT House Windham 6,"1,061",791,"1,316",683,"1,267",549
+VT,VT House Windham-Bennington,"1,011",878,"1,213",754,"1,180",588
+VT,VT House Windham-Bennington-Windsor,"1,459",749,"1,519",842,"1,569",672
+VT,VT House Windsor 1,"2,591","1,193","2,863","1,150","2,836",991
+VT,VT House Windsor 2,"1,051",909,"1,287",770,"1,346",646
+VT,VT House Windsor 3-1,"1,114",762,"1,301",700,"1,389",540
+VT,VT House Windsor 3-2,"1,802","1,445","2,264","1,295","2,337","1,053"
+VT,VT House Windsor 4-1,"1,472",660,"1,500",752,"1,512",657
+VT,VT House Windsor 4-2,"2,452",947,"2,642","1,010","2,696",796
+VT,VT House Windsor 5,"1,723",605,"1,812",748,"1,797",672
+VT,VT House Windsor-Orange 1,"1,047",648,"1,370",594,"1,433",468
+VT,VT House Windsor-Orange 2,"4,055",837,"4,092",921,"4,097",764
+VT,VT House Windsor-Rutland ,"1,305",715,"1,529",714,"1,637",544

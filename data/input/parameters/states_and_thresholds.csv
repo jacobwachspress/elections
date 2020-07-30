@@ -1,0 +1,73 @@
+﻿state,office,d_threshold,tie_dem,neither_bad,both_bad,comments
+AK,,,,,,"1 district, independent commission"
+AL,,,,,,no election
+AR,upper,18,1,1,0,prob not worth it
+AR,lower,50,1,1,0,prob not worth it
+AZ,,,,,,independent
+CA,,,,,,independent commission
+CO,,,,,,independent commission
+CT,upper,24,1,0,1,
+CT,lower,101,1,0,1,
+DE,,,,,,"1 congressional district, need to check on cnalysis ratings for senate, gov election"
+FL,upper,20,0.1,1,0,
+FL,lower,60,0.9,1,0,
+GA,upper,28,1,1,0,prob not worth it
+GA,lower,90,0.9,1,0,prob not worth it
+HI,,,,,,commission
+IA,,,,,,commission (check this?)
+ID,,,,,,commission
+IL,upper,30,1,0,1,prob not worth it
+IL,lower,59,0.9,0,1,prob not worth it
+IN,upper,25,0.1,1,0,prob not worth it
+IN,lower,50,0.9,1,0,prob not worth it
+KS,upper,14,1,1,0,
+KS,lower,42,1,1,0,
+KY,upper,19,0.9,1,0,prob not worth it
+KY,lower,50,0.9,1,0,prob not worth it
+LA,,,,,,no election
+MA,upper,20,0.9,0,1,"prob not worth it threshold=20, need to deal with inc before running"
+MA,lower,80,1,0,1,prob not worth it threshold = 80 need to deal with upper chamber no elec
+MD,,,,,,no election
+ME,,,,,,independent commission
+MI,,,,,,no election
+MN,upper,34,1,0,1,
+MN,lower,67,0.9,0,1,prob not worth it
+MO,,,,,,"would need to flip governor, lots of house seats, hard to model and prob not high-leverage"
+MS,,,,,,no election
+MT,,,,,,independent commission
+NC,lower,60,0.9,1,1,
+NC,upper,25,0.8,1,1,
+ND,,,,,,no election
+NE,,,,,,no election
+NH,,,,,,"hard to model, dems would need double supermajority or governor, multi-member in house is tough"
+NJ,,,,,,no election
+NM,upper,21,0.9,0,1,prob not worth it thresh=21 missing data
+NM,lower,25,0.9,0,1,prob not worth it thresh=25 missing data
+NV,upper,11,1,0,1,prob not worth it
+NV,lower,21,1,0,1,prob not worth it
+NY,,,,,,independent commission
+OH,,,,,,"commision, no way to prevent"
+OK,upper,24,0.1,1,0,prob not worth it
+OK,lower,50,0.9,1,0,prob not worth it
+OR,upper,15,0.9,0,1,prob not worth it
+OR,lower,30,0.9,0,1,prob not worth it
+PA,upper,25,0.9,0,1,prob not worth it
+PA,lower,102,1,0,1,prob not worth it
+RI,,,,,,"one district, so dem I don't care"
+SC,upper,23,0.1,1,0,prob not worth it
+SC,lower,62,1,1,0,prob not worth it
+SD,,,,,,no election
+TN,upper,17,1,1,0,prob not worth it
+TN,lower,50,1,1,0,prob not worth it
+TX,lower,75,0.9,1,0,
+TX,upper,15,0.1,1,0,prob not worth it
+UT,upper,15,1,1,0,prob not worth it
+UT,lower,38,1,1,0,prob not worth it
+VA,,,,,,no election
+VT,,,,,,"1 district, st_leg is hard with the many parties and process"
+WA,,,,,,independent commission
+WI,upper,12,1,1,0,
+WI,lower,34,1,1,0,
+WV,upper,17,0.1,1,0,prob not worth it
+WV,lower,50,1,1,0,prob not worth it
+WY,,,,,,"1 district, st_leg = lost cause"
