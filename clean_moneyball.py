@@ -22,58 +22,60 @@ def main():
     incum_path = found_path + 'clean/incumbent_corrections.csv'
     df_incumbent = pd.read_csv(incum_path)
     lower, upper = fix_incumbency(df_incumbent, lower, upper)
-    
+
     # Add cvap by district
     df_cvap_lower = pd.read_csv(cvap_path + 'SLDLC.csv')
     df_cvap_upper = pd.read_csv(cvap_path + 'SLDUC.csv')
     lower = add_cvap(lower, df_cvap_lower)
     upper = add_cvap(upper, df_cvap_upper)
-    
+
     # read in ordinals dict for massachusetts district name cleaning
     ordinals = pd.read_csv(found_path + 'raw/ordinal_numbers.csv')
     ordinals['ordinal'] = ordinals['ordinal'].apply(lambda x: x.upper())
     ordinals_dict = dict(zip(ordinals['ordinal'], ordinals['number']))
-    
-    # merge in old election results
-    df = pd.read_csv(found_path + 'raw/historical_state_leg_results.csv',\
-                                             dtype=str)
 
-    upper, lower = merge_year_election_results(df, ordinals_dict, '2016', \
-                                                   upper, lower)
-    upper, lower = merge_year_election_results(df, ordinals_dict, '2014', \
-                                                   upper, lower)
-    upper, lower = merge_year_election_results(df, ordinals_dict, '2012', \
-                                                   upper, lower)
+    # merge in old election results
+    df = pd.read_csv(found_path + 'raw/historical_state_leg_results.csv',
+                     dtype=str)
+
+    upper, lower = merge_year_election_results(df, ordinals_dict, '2016',
+                                               upper, lower)
+    upper, lower = merge_year_election_results(df, ordinals_dict, '2014',
+                                               upper, lower)
+    upper, lower = merge_year_election_results(df, ordinals_dict, '2012',
+                                               upper, lower)
 
     # get all fips
     fips_path = found_path + 'raw/state_fips.csv'
     fips_df = pd.read_csv(fips_path)
     density_path = money_path + 'density/clean/'
-    
+
     # merge in densities
     upper, lower = merge_densities(fips_df, density_path, upper, lower)
-    
+
     # merge incumbents
-    lower_inc = pd.read_csv(found_path + \
-                        'clean/state_lower_chamber_incumbency.csv')
-    upper_inc = pd.read_csv(found_path + \
-                        'clean/state_senate_incumbency.csv')
-    lower_inc['district'] = lower_inc['district'].apply(lambda x:\
-                                str(int(x)) if type(x) == float else str(x))
-    upper_inc['district'] = upper_inc['district'].apply(lambda x:\
-                                str(int(x)) if type(x) == float else str(x))
+    lower_path = 'clean/state_lower_chamber_incumbency.csv'
+    upper_path = 'clean/state_sentate_incumbency.csv'
+    lower_inc = pd.read_csv(found_path + lower_path)
+    upper_inc = pd.read_csv(found_path + upper_path)
+    lower_inc['district'] = lower_inc['district'].apply(lambda x:
+                                                        str(int(x))
+                                                        if type(x) == float
+                                                        else str(x))
+    upper_inc['district'] = upper_inc['district'].apply(lambda x:
+                                                        str(int(x))
+                                                        if type(x) == float
+                                                        else str(x))
     upper, lower = merge_incumbents(upper, lower, upper_inc, lower_inc)
 
-    
-    # add chamber columns
     # add columns for office
     lower['office'] = 'lower'
     upper['office'] = 'upper'
-    
+
     # sort DataFrames
     upper = upper.sort_values(by=['state', 'geoid'])
     lower = lower.sort_values(by=['state', 'geoid'])
-    
+
     # read out the cleaned files
     lower.to_csv(path + 'lower_input_data.csv', index=False)
     upper.to_csv(path + 'upper_input_data.csv', index=False)
@@ -482,9 +484,6 @@ def massachusetts_cleaning():
     return mass_dict_lower, mass_dict_upper, ma_uncon_lower, ma_uncon_upper
 
 
-
-
-
 def add_cvap(df, df_cvap):
     """Add CVAP to our moneyball dataset.
 
@@ -509,9 +508,8 @@ def add_cvap(df, df_cvap):
 
     # Join cvap data
     df = df.merge(df_cvap, on='geoid')
-    
-    return df
 
+    return df
 
 
 def fix_incumbency(df_incumbent, lower, upper):
@@ -530,14 +528,15 @@ def fix_incumbency(df_incumbent, lower, upper):
     # Update lower chamber incumbents
     for ix, row in df_incumbent[df_incumbent['chamber'] == 'lower'].iterrows():
         lower.loc[lower['geoid'] == row['geoid'],
-                     'incumbent'] = row['actual_incumbent']
+                  'incumbent'] = row['actual_incumbent']
 
     # Update upper chamber incumbents
     for ix, row in df_incumbent[df_incumbent['chamber'] == 'upper'].iterrows():
         upper.loc[upper['geoid'] == row['geoid'],
-                     'incumbent'] = row['actual_incumbent']
+                  'incumbent'] = row['actual_incumbent']
 
     return lower, upper
+
 
 def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
     ''' Parses Klamer election results and cleans up results from a
@@ -552,97 +551,98 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
     '''
     # remove "scattering" votes
     df = df[df['cand'] != 'scattering']
-    
+
     # make vote totals floats
     df['vote'] = df['vote'].astype(float)
-    
+
     # make party uppercase
     df['partyt'] = df['partyt'].apply(lambda x: x.upper())
-    
+
     # makes fips a two-digit string
     df['sfips'] = df['sfips'].str.zfill(2)
-    
+
     # keep only the year in question
     df = df[df['year'] == year]
-    
+
     # keep only general elections done concurrently with other Nov. elections
     df = df[df['etype'] == 'g']
-       
-    # get upper and lower DataFrames   
+
+    # get upper and lower DataFrames
     upper_df = df[df['sen'] == '1'].copy()
     lower_df = df[df['sen'] == '0'].copy()
-    
-    
+
     # for both chamber DataFrames
     input_dfs = {'u': upper_df, 'l': lower_df}
     output_dfs = {}
     for i in input_dfs:
-        
+
         cham_df = input_dfs[i]
-        
-        
+
         # get the cleanest form of district designation for match
-        cham_df['ddez'] = cham_df.apply(lambda x: x['ddez'].replace('-', '') \
-                  if x['sfips'] != '50' else x['ddez'], axis=1)
-        
+        cham_df['ddez'] = cham_df.apply(lambda x:
+                                        x['ddez'].replace('-', '')
+                                        if x['sfips'] != '50'
+                                        else x['ddez'], axis=1)
+
         # make district a three-digit string
         cham_df['ddez'] = cham_df['ddez'].str.zfill(3)
-        
+
         # sort DataFrame so that the first instance of the candidate's party is
         # the party under which they received the most votes
         cham_df = cham_df.sort_values(by=['sid', 'ddez', 'cand', 'vote'],
-                                      ascending = [True, True, True, False])
+                                      ascending=[True, True, True, False])
         # add votes for same candidate if multiple rows have their name
         grouped = cham_df.groupby(['sid', 'ddez', 'cand'])
-        cham_df = grouped.agg({'vote' : sum, 'sfips': 'first', \
-                               'outcome' : 'first', 'partyt': 'first', \
-                               'sen' : 'first'}).reset_index()
-        
+        cham_df = grouped.agg({'vote': sum, 'sfips': 'first',
+                               'outcome': 'first', 'partyt': 'first',
+                               'sen': 'first'}).reset_index()
+
         # get total_votes in each race
         grouped = cham_df.groupby(['sid', 'ddez'])['vote']
         totalvotes = grouped.sum()
         totalvotes = totalvotes.reset_index()
-        
+
         # rename column for better merge
-        totalvotes = totalvotes.rename(columns={'vote':'totalvotes'})
-        
+        totalvotes = totalvotes.rename(columns={'vote': 'totalvotes'})
+
         # add totalvotes column to cham_df
         cham_df = pd.merge(cham_df, totalvotes, how='left', on=['sid', 'ddez'])
-              
+
+        """Make Function"""
         # get winning margins, using same grouped object
         winmargins = grouped.apply(lambda x: 1 if len(x) \
              < 2 else (x.nlargest(2).max() - x.nlargest(2).min()) / x.sum())
         winmargins = winmargins.reset_index()
-        
+
         # rename column for better merge
-        winmargins = winmargins.rename(columns={'vote':'win_margin'})
-        
+        winmargins = winmargins.rename(columns={'vote': 'win_margin'})
+
         # add totalvotes column to cham_df
         cham_df = pd.merge(cham_df, winmargins, how='left', on=['sid', 'ddez'])
-        
+
         # reduce DataFrame to winners
         # IF YOU AIN'T FIRST, YOU'RE LAST
         cham_df = cham_df[cham_df['outcome'] == 'w']
-        
+
         # clean massachusetts
         mass_df = cham_df[cham_df['sfips'] == '25'].copy()
         mass_dict_lower, mass_dict_upper, _, _ = massachusetts_cleaning()
-        
+
         # if upper
         if i == 'u':
             matching_dict = mass_dict_upper
         else:
             matching_dict = mass_dict_lower
-            
+
         # prime dictionary for match
         capital_dict = {}
         for j in matching_dict:
             capital_dict[j.upper()] = matching_dict[j]
-        
+
         # prime DataFrame for match
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: 'DISTRICT ' + \
-               x.upper())
-        
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                                                'DISTRICT ' + x.upper())
+
         # change ordinal numbers to numerals
         # CAN'T DO FIRST, SECOND, ETC. FIRST OR YOU GET AN EVIL BUG LIKE
         # TWENTY1
@@ -651,7 +651,7 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         for k in keys:
             mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
                    x.replace(k, str(ordinals_dict[k])))
-        
+
         # fuzzy match to dict keys
         mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
                 difflib.get_close_matches(x, list(capital_dict))[0])
@@ -659,30 +659,28 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         # change to numerical districts
         mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
                     str(capital_dict[x]).zfill(3))
-        
+
         cham_df = cham_df[cham_df['sfips'] != '25']
         cham_df = pd.concat([cham_df, mass_df], sort=True)
-
-        
         # columns to keep
-        cols_to_keep = ['sfips', 'ddez', 'cand', 'vote', 'totalvotes', 
+        cols_to_keep = ['sfips', 'ddez', 'cand', 'vote', 'totalvotes',
                         'win_margin', 'partyt']
-        
+
         cham_df = cham_df[cols_to_keep]
-        
+
         # change column names to match
-        cham_df.columns = ['state_fips', 'district_num', year + '_winner', 
-                           year + '_winner_vote', year +'_totalvotes',
+        cham_df.columns = ['state_fips', 'district_num', year + '_winner',
+                           year + '_winner_vote', year + '_totalvotes',
                            year + '_win_margin', year + '_win_party']
         output_dfs[i] = cham_df
-        
+
     # merge DataFrames
-    upper = pd.merge(sldu_old, output_dfs['u'], how='left', \
+    upper = pd.merge(sldu_old, output_dfs['u'], how='left',
                      on=['state_fips', 'district_num'])
-    lower = pd.merge(sldl_old, output_dfs['l'], how='left', \
+    lower = pd.merge(sldl_old, output_dfs['l'], how='left',
                      on=['state_fips', 'district_num'])
-    
-    return upper, lower 
+
+    return upper, lower
 
 
 def merge_densities(fips_df, density_path, upper, lower):
@@ -691,104 +689,105 @@ def merge_densities(fips_df, density_path, upper, lower):
     Arguments:
         fips_df: DataFrame with states and two-digit FIPS codes
         density_path: path where all density files are held, in the format
-            density_path + chamber + '/' + state fips code + \
-                                   '_districts.shp'
+            density_path + chamber + '/' + state fips code + '_districts.shp'
         upper, lower: old DataFrames for merge on geoid
     '''
-    
+
     # get all states to test
     all_fips = fips_df['fips'].astype(str).str.zfill(2).unique()
-    
+
     # for each chamber
     for cham in ['upper', 'lower']:
-        
+
         # initialize list of state DataFrames to concatenate at the end
         dfs = []
-        
+
         # for each state
         for st_fips in all_fips:
-            
+
             # nebraska lower does not exist, skip
-            if st_fips == '31' and cham == 'lower': 
+            if st_fips == '31' and cham == 'lower':
                 continue
-            
+
             # read in density DataFrame
-            density_df = gpd.read_file(density_path + cham + '/' + st_fips + \
-                                   '_districts.shp')
-            
+            density_df = gpd.read_file(density_path + cham + '/' + st_fips +
+                                       '_districts.shp')
+
             # create geoid column from GEOID
             density_df['geoid'] = density_df['GEOID']
-            
+
             # remove unnecessary columns
-            density_df = density_df[['geoid', 'rural', 'exurban', \
-                            'suburban', 'urban']]
-            
+            density_df = density_df[['geoid', 'rural', 'exurban',
+                                     'suburban', 'urban']]
+
             # append this to the list of DataFrames to concat
             dfs.append(density_df)
-            
+
         # concatenate all state DataFrames
         to_merge = pd.concat(dfs)
-        
+
         # get proportion of population in each density
         columns = ['rural', 'exurban', 'suburban', 'urban']
         to_merge['pop'] = to_merge[columns].sum(axis=1)
         for col in columns:
             to_merge[col + '_prop'] = to_merge[col] / to_merge['pop']
-        
+
         # merge to appropriate chamber DataFrame
         if cham == 'upper':
             upper = pd.merge(upper, to_merge, how='left', on='geoid')
         else:
             lower = pd.merge(lower, to_merge, how='left', on='geoid')
-    
+
     return upper, lower
+
 
 def merge_incumbents(upper, lower, upper_inc, lower_inc):
     ''' Merges in incumbents from wikipedia scrape
-        
+
     Arguments:
         upper, lower: original DataFrames
         upper_inc, lower_inc: DataFrames with incumbency info
-    '''        
+    '''
+    # clean alaska upper
+    AK_dict = {'1': 'A', '2': 'B', '3': 'C', '4': 'D', '5': 'E', '6': 'F',
+               '7': 'G', '8': 'H', '9': 'I', '10': 'J', '11': 'K', '12': 'L',
+               '13': 'M', '14': 'N', '15': 'O', '16': 'P', '17': 'Q',
+               '18': 'R', '19': 'S', '20': 'T'}
+    upper_inc['district'] = upper_inc.apply(lambda x: AK_dict[x['district']]
+                                            if x['state'] == 'AK'
+                                            else x['district'], axis=1)
 
-     # clean alaska upper
-    AK_dict = {'1':'A', '2':'B', '3':'C', '4':'D', '5':'E', '6':'F', 
-               '7':'G', '8':'H', '9':'I', '10':'J', '11':'K', '12':'L',
-               '13':'M', '14':'N', '15':'O', '16':'P', '17':'Q', '18':'R',
-               '19':'S', '20':'T'}
-    upper_inc['district'] = upper_inc.apply(lambda x: AK_dict[x['district']] \
-                          if x['state'] == 'AK' else x['district'], axis=1)
-    
-    
-    # clean district numbers    
-    upper_inc['district'] = upper_inc['district'].apply(lambda x: \
-                                     str(x).zfill(3))
+    # clean district numbers
+    upper_inc['district'] = upper_inc['district'].apply(lambda x:
+                                                        str(x).zfill(3))
 
-    lower_inc['district'] = lower_inc['district'].apply(lambda x: \
-                                     str(x).zfill(3))
-     
+    lower_inc['district'] = lower_inc['district'].apply(lambda x:
+                                                        str(x).zfill(3))
+
     # rename columns
-    upper_inc.columns = ['state', 'wiki_incumbent', 'inc_party', 'district_num']
-    lower_inc.columns = ['state', 'wiki_incumbent', 'inc_party', 'district_num']
-    
+    rename_cols = ['state', 'wiki_incumbent', 'inc_party', 'district_num']
+    upper_inc.columns = rename_cols
+    lower_inc.columns = rename_cols
+
     # merge DataFrames
-    upper = pd.merge(upper, upper_inc, how='left', on=['state', 'district_num'])
-    lower = pd.merge(lower, lower_inc, how='left', on=['state', 'district_num'])
-    
+    join_cols = ['state', 'district_num']
+    upper = pd.merge(upper, upper_inc, how='left', on=join_cols)
+    lower = pd.merge(lower, lower_inc, how='left', on=join_cols)
+
     # for each DataFrame
     for cham in [upper, lower]:
-        
+
         # for each race
         for i, dist in cham.iterrows():
-            
-            # if no favorite is listed, this is a no-election seat, update to 
+
+            # if no favorite is listed, this is a no-election seat, update to
             # uncontested and make the favored party the incumbent party
             if dist['confidence'] == False:
                 if dist['incumbent'] == False:
                     cham.loc[i, 'incumbent'] = cham.loc[i, 'inc_party']
                 cham.loc[i, 'favored'] = cham.loc[i, 'incumbent']
                 cham.loc[i, 'confidence'] = 'Uncontested'
-                    
+
     return upper, lower
 
 
