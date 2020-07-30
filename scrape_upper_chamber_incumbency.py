@@ -74,9 +74,9 @@ def main():
     # Change vacant seats to no party
     df_inc.loc[df_inc['candidate'] == '', 'candidate'] = 'Vacant'
     df_inc.loc[df_inc['candidate'] == 'Vacant', 'party'] = False
-    
+
     # clean alaska
-    AK_dict = {'1':'A', '2':'B', '3':'C', '4':'D', '5':'E', '6':'F', 
+    AK_dict = {'1':'A', '2':'B', '3':'C', '4':'D', '5':'E', '6':'F',
                '7':'G', '8':'H', '9':'I', '10':'J', '11':'K', '12':'L',
                '13':'M', '14':'N', '15':'O', '16':'P', '17':'Q', '18':'R',
                '19':'S', '20':'T'}
@@ -85,7 +85,7 @@ def main():
 
     # Save to drive
     path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path += 'fundamentals/clean/state_senate_incumbency.csv'
+    path += 'foundation/clean/state_senate_incumbency.csv'
     df_inc.to_csv(path, index=False)
     return
 

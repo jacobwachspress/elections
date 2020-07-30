@@ -9,7 +9,7 @@ import os
 
 def main():
     money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball'
-    money_path += '/fundamentals/'
+    money_path += '/foundation/'
 
     # Get Congressional Shapefile
     print('Creating Congressional Districts')
