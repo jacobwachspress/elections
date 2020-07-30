@@ -1,7 +1,5 @@
-"""Cleaning relevant data for fundmantals estimate."""
-
+"""Clean relevant data for foundations model."""
 import pandas as pd
-import numpy as np
 import os
 from clean_moneyball import massachusetts_cleaning
 import difflib
@@ -31,23 +29,23 @@ def main():
                     index=False)
 
     # Presidential results by st_leg district
-    input_path = money_path + \
-                    'foundation\\raw\\pres_results_by_state_leg_district\\'
+    input_path = money_path + 'foundation/raw/'
+    input_path += 'pres_results_by_state_leg_district/'
     df_st_leg = get_all_st_leg_pres_results(input_path, df_fips)
     df_st_leg.to_csv(path + 'clean/st_leg_pres_results.csv', index=False)
 
     # Get partisan residual of each st leg district
     df_st_leg_pr = get_st_leg_dist_partisan_residual(df_st_leg, df_state)
     df_st_leg_pr.to_csv(path + 'clean/st_leg_partisan_residual.csv',
-                    index=False)
+                        index=False)
 
     # impute residuals where there is no data
     sldu_labels = pd.read_csv(path + 'clean/sldu_labels.csv', dtype=str)
     sldl_labels = pd.read_csv(path + 'clean/sldl_labels.csv', dtype=str)
-    st_leg_res = pd.read_csv(path + 'clean/st_leg_partisan_residual.csv', \
-                                         dtype=str)
-    cong_res = pd.read_csv(path + 'clean/cong_dist_partisan_residual.csv', \
-                                         dtype=str)
+    st_leg_res = pd.read_csv(path + 'clean/st_leg_partisan_residual.csv',
+                             dtype=str)
+    cong_res = pd.read_csv(path + 'clean/cong_dist_partisan_residual.csv',
+                           dtype=str)
     up, low = impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res)
     up.to_csv(path + 'clean/imputed_sldu_residuals.csv', index=False)
     low.to_csv(path + 'clean/imputed_sldl_residuals.csv', index=False)
@@ -156,6 +154,7 @@ def get_cong_dist_presidential_results(df, df_fips):
              'rep_16']]
     return df
 
+
 def clean_st_leg_presidential_results(df, st_fips, chamber):
     """Calculate 2-party voteshare in 2012 and 2016 for pres for all
     state leg districts in a state.
@@ -184,10 +183,10 @@ def clean_st_leg_presidential_results(df, st_fips, chamber):
     df['office'] = chamber
 
     # find columns we have for the 2012/2016 races
-    important_cols = {'Clinton 2016 President D' : 'dem_16',\
-                      'Trump 2016 President R' : 'rep_16',\
-                      'Obama 2012 President D' : 'dem_12',\
-                      'Romney 2012 President R' : 'rep_12'}
+    important_cols = {'Clinton 2016 President D': 'dem_16',
+                      'Trump 2016 President R': 'rep_16',
+                      'Obama 2012 President D': 'dem_12',
+                      'Romney 2012 President R': 'rep_12'}
     cols_we_have = list(df.columns.intersection(important_cols))
 
     # string to int for results columns
@@ -217,10 +216,9 @@ def clean_st_leg_presidential_results(df, st_fips, chamber):
         df['dem_16'] /= df['sum_16']
         df['rep_16'] /= df['sum_16']
 
-
     # Drop unnecessary columns and sort to match format
-    new_cols_we_have = list(df.columns.intersection(['dem_12', 'rep_12', \
-                                                'dem_16', 'rep_16']))
+    new_cols_we_have = list(df.columns.intersection(['dem_12', 'rep_12',
+                                                     'dem_16', 'rep_16']))
     df = df[['state', 'geoid', 'office', 'district_num'] + new_cols_we_have]
 
     return df
@@ -236,8 +234,9 @@ def get_all_st_leg_pres_results(input_path, df_fips):
     '''
 
     # store chambers that use multimember districts, to be ignored
-    multimember_districts = {'upper' : ['VT', 'WV'], 'lower' : ['AZ', 'ID', \
-                         'MD', 'NH', 'NJ', 'ND', 'SD', 'VT', 'WA', 'WV']}
+    upper_states = ['VT', 'WV']
+    lower_states = ['AZ', 'ID', 'MD', 'NH', 'NJ', 'ND', 'SD', 'VT', 'WA', 'WV']
+    multimember_districts = {'upper': upper_states, 'lower': lower_states}
 
     # initialize list of dfs to be concatenated
     dfs = []
@@ -246,7 +245,7 @@ def get_all_st_leg_pres_results(input_path, df_fips):
     for file in os.listdir(input_path):
 
         # read in dataframe
-        state_df = pd.read_csv(input_path+file)
+        state_df = pd.read_csv(input_path + file)
 
         # get state, chamber, fips
         state = file[0:2]
@@ -257,9 +256,9 @@ def get_all_st_leg_pres_results(input_path, df_fips):
         if state in multimember_districts[chamber]:
             continue
 
+        """Clean up this section."""
         # fix massachusetts
         if st_fips == '25':
-
             # prime for fuzzy match
             state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
                             'District ' + ' '.join(x.split(' ')[2:]))
@@ -268,7 +267,6 @@ def get_all_st_leg_pres_results(input_path, df_fips):
             mass_dict_lower, mass_dict_upper, _, _ = massachusetts_cleaning()
 
             if chamber == 'lower':
-
                 # fuzzy match to dict keys
                 state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
                         difflib.get_close_matches(x, list(mass_dict_lower))[0])
@@ -277,7 +275,6 @@ def get_all_st_leg_pres_results(input_path, df_fips):
                 state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
                             str(mass_dict_lower[x]))
             else:
-
                 # fuzzy match to dict keys
                 state_df['DISTRICT'] = state_df['DISTRICT'].apply(lambda x: \
                         difflib.get_close_matches(x, list(mass_dict_upper))[0])
@@ -287,14 +284,15 @@ def get_all_st_leg_pres_results(input_path, df_fips):
                             str(mass_dict_upper[x]))
 
         # clean dataframe and append to list
-        dfs.append(clean_st_leg_presidential_results(state_df, st_fips, chamber))
+        dfs.append(clean_st_leg_presidential_results(state_df, st_fips,
+                                                     chamber))
 
         # merge all dfs
         out_df = pd.concat(dfs)
 
     # order columns appropriately and return
     return out_df[['state', 'office', 'geoid', 'district_num', 'dem_12',
-               'rep_12', 'dem_16', 'rep_16']]
+                   'rep_12', 'dem_16', 'rep_16']]
 
 
 def get_cong_dist_partisan_residual(df, df_state):
@@ -336,6 +334,7 @@ def get_cong_dist_partisan_residual(df, df_state):
     df = df[['state', 'geoid', 'district_num', 'resid']]
     return df
 
+
 def get_st_leg_dist_partisan_residual(df, df_state):
     """Calculate partisan residual for each st_leg district.
 
@@ -376,6 +375,7 @@ def get_st_leg_dist_partisan_residual(df, df_state):
     df = df[['state', 'office', 'geoid', 'district_num', 'resid']]
     return df
 
+
 def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
     ''' Give partisan residual of every state legislative district, making the
     best guess where there is no data.
@@ -414,12 +414,11 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
         match_df = upper_res[upper_res['geoid'] == geoid]
 
         # if there are multiple matches, we have a data problem
-        assert len(match_df) < 2, "duplicate geo_ids in upper residuals dataframe @" \
-                + geoid
+        assert_str = "duplicate geoids in upper residuals dataframe @ "
+        assert len(match_df) < 2, assert_str + geoid
 
         # if we have a match
         if len(match_df) == 1:
-
             # update residual and other relevant fields in sldu_labels
             sldu_labels.loc[i, 'resid'] = list(match_df['resid'])[0]
             sldu_labels.loc[i, 'imputed'] = False
@@ -427,7 +426,6 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
 
         # if no match, impute residual from congressional level
         else:
-
             # get geoid of congressional district to impute from
             cong_geoid = row['cd_geoid']
 
@@ -435,8 +433,8 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
             match_df = cong_res[cong_res['geoid'] == cong_geoid]
 
             # if there are multiple matches, we have a data problem
-            assert len(match_df) < 2, "duplicate geo_ids in cong residuals dataframe @" \
-                + cong_geoid
+            assert_str = "duplicate geoids in cong residualsd dataframe @ "
+            assert len(match_df) < 2, assert_str + cong_geoid
 
             # if we have a match
             if len(match_df) == 1:
@@ -459,12 +457,11 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
         match_df = lower_res[lower_res['geoid'] == geoid]
 
         # if there are multiple matches, we have a data problem
-        assert len(match_df) < 2, "duplicate geo_ids in lower residuals dataframe @" \
-                + geoid
+        assert_str = "duplicate geoids in lower residuals datafrme @ "
+        assert len(match_df) < 2, assert_str + geoid
 
         # if we have a match
         if len(match_df) == 1:
-
             # update residual and other relevant fields in sldu_labels
             sldl_labels.loc[i, 'resid'] = list(match_df['resid'])[0]
             sldl_labels.loc[i, 'imputed'] = False
@@ -472,7 +469,6 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
 
         # if no match, impute residual from congressional level
         else:
-
             # get geoid of sldu district to impute from
             sldu_geoid = row['sldu_geoid']
 
@@ -480,16 +476,16 @@ def impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res):
             match_df = sldu_labels[sldu_labels['geoid'] == sldu_geoid]
 
             # if there are multiple matches, we have a data problem
-            assert len(match_df) < 2, "duplicate geo_ids in upper residuals dataframe"
+            assert_str = "duplicate geoids in upper residual dataframe"
+            assert len(match_df) < 2, assert_str
             # if there is no match, we have a data problem
             assert len(match_df) > 0, "bad sldu_geoid matching @ " + sldu_geoid
-
 
             # update residual and other relevant fields in sldu_labels
             sldl_labels.loc[i, 'resid'] = list(match_df['resid'])[0]
             sldl_labels.loc[i, 'imputed'] = True
-            sldl_labels.loc[i, 'imputed_from'] = \
-                                        list(match_df['imputed_from'])[0]
+            imputed_from = list(match_df['imputed_from'])[0]
+            sldl_labels.loc[i, 'imputed_from'] = imputed_from
 
     return sldu_labels, sldl_labels
 
@@ -504,8 +500,6 @@ def merge_old_election_results(df, ordinals_dict, sldu_old, sldl_old):
             massachusetts
         sldu_old, sldl_old: old dataframes for merge on fips+district
     '''
-
-
     # remove "scattering" votes
     df = df[df['cand'] != 'scattering']
 
@@ -519,13 +513,12 @@ def merge_old_election_results(df, ordinals_dict, sldu_old, sldl_old):
     df['sfips'] = df['sfips'].str.zfill(2)
 
     # keep only the year of the most recent election
-    df =  df[df['year'] == df.groupby(['sid', 'ddez', 'sen'])['year']\
-                                                 .transform(max)]
+    group_cols = ['sid', 'ddez', 'sen']
+    df = df[df['year'] == df.groupby([group_cols])['year'].transform(max)]
 
     # get upper and lower dataframes
     upper_df = df[df['sen'] == '1'].copy()
     lower_df = df[df['sen'] == '0'].copy()
-
 
     # for both chamber dataframes
     input_dfs = {'u': upper_df, 'l': lower_df}
@@ -535,12 +528,12 @@ def merge_old_election_results(df, ordinals_dict, sldu_old, sldl_old):
         cham_df = input_dfs[i]
 
         # get the cleanest form of district designation for match
-        cham_df['ddez'] = cham_df.apply(lambda x: x['ddez'].replace('-', '') \
-                  if x['sfips'] != '50' else x['ddez'], axis=1)
+        cham_df['ddez'] = cham_df.apply(lambda x: x['ddez'].replace('-', '')
+                                        if x['sfips'] != '50'
+                                        else x['ddez'], axis=1)
 
         # make district a three-digit string
         cham_df['ddez'] = cham_df['ddez'].str.zfill(3)
-
 
         # clean massachusetts
         mass_df = cham_df[cham_df['sfips'] == '25']
@@ -558,27 +551,28 @@ def merge_old_election_results(df, ordinals_dict, sldu_old, sldl_old):
             capital_dict[j.upper()] = matching_dict[j]
 
         # prime dataframe for match
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: 'DISTRICT ' + \
-               x.upper())
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: 'DISTRICT ' +
+                                                x.upper())
         for k in ordinals_dict:
-            mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
-                   x.replace(k, str(ordinals_dict[k])))
+            replace_str = str(ordinals_dict[k])
+            mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                                                    x.replace(k, rep_str)
 
         # fuzzy match to dict keys
         mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
                 difflib.get_close_matches(x, list(capital_dict))[0])
 
         # change to numerical districts
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
-                    str(capital_dict[x]).zfill(3))
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                                                str(capital_dict[x]).zfill(3))
 
         # set in orginal df
         cham_df[cham_df['sfips'] == '25'] = mass_df
 
         # add votes for same candidate if multiple rows have their name
         grouped = cham_df.groupby(['sid', 'ddez', 'cand'])
-        cham_df = grouped.agg({'vote' : sum, 'sfips': 'first', \
-                               'outcome' : 'first', 'partyt': 'first', \
+        cham_df = grouped.agg({'vote' : sum, 'sfips': 'first',
+                               'outcome' : 'first', 'partyt': 'first',
                                'sen' : 'first', 'year': 'first'}).reset_index()
 
         # get total_votes in each race
@@ -593,6 +587,7 @@ def merge_old_election_results(df, ordinals_dict, sldu_old, sldl_old):
         cham_df = pd.merge(cham_df, totalvotes, how='left', on=['sid', 'ddez'])
 
         # get winning margins, using same grouped object
+        """Make Function"""
         winmargins = grouped.apply(lambda x: 1 if len(x) \
              < 2 else (x.nlargest(2).max() - x.nlargest(2).min()) / x.sum())
         winmargins = winmargins.reset_index()
@@ -615,14 +610,15 @@ def merge_old_election_results(df, ordinals_dict, sldu_old, sldl_old):
 
         # change column names to match
         cham_df.columns = ['state_fips', 'district_num', 'last_elec_year',
-                           'last_winner', 'last_winner_vote', 'last_totalvotes',
-                           'last_win_margin', 'last_win_party']
+                           'last_winner', 'last_winner_vote',
+                           'last_totalvotes', 'last_win_margin',
+                           'last_win_party']
         output_dfs[i] = cham_df
 
     # merge dataframes
-    upper = pd.merge(sldu_old, output_dfs['u'], how='left', \
+    upper = pd.merge(sldu_old, output_dfs['u'], how='left',
                      on=['state_fips', 'district_num'])
-    lower = pd.merge(sldl_old, output_dfs['l'], how='left', \
+    lower = pd.merge(sldl_old, output_dfs['l'], how='left',
                      on=['state_fips', 'district_num'])
 
     return upper, lower
@@ -638,8 +634,6 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         year: year_to_merge
         sldu_old, sldl_old: old dataframes for merge on fips+district
     '''
-
-
     # remove "scattering" votes
     df = df[df['cand'] != 'scattering']
 
@@ -653,8 +647,8 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
     df['sfips'] = df['sfips'].str.zfill(2)
 
     # keep only the year of the most recent election
-    df =  df[df['year'] == df.groupby(['sid', 'ddez', 'sen'])['year']\
-                                                 .transform(max)]
+    group_cols = ['sid', 'ddez', 'sen']
+    df =  df[df['year'] == df.groupby([group_cols])['year'].transform(max)]
 
     # get upper and lower dataframes
     upper_df = df[df['sen'] == '1'].copy()
@@ -692,11 +686,12 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
             capital_dict[j.upper()] = matching_dict[j]
 
         # prime dataframe for match
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: 'DISTRICT ' + \
-               x.upper())
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: 'DISTRICT ' +
+                                                x.upper())
         for k in ordinals_dict:
-            mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
-                   x.replace(k, str(ordinals_dict[k])))
+            rep_str = ordinals_dict[k]
+            mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                                                    x.replace(k, rep_str)
 
         # fuzzy match to dict keys
         mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
@@ -711,8 +706,8 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
 
         # add votes for same candidate if multiple rows have their name
         grouped = cham_df.groupby(['sid', 'ddez', 'cand'])
-        cham_df = grouped.agg({'vote' : sum, 'sfips': 'first', \
-                               'outcome' : 'first', 'partyt': 'first', \
+        cham_df = grouped.agg({'vote' : sum, 'sfips': 'first',
+                               'outcome' : 'first', 'partyt': 'first',
                                'sen' : 'first', 'year': 'first'}).reset_index()
 
         # get total_votes in each race
@@ -749,14 +744,15 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
 
         # change column names to match
         cham_df.columns = ['state_fips', 'district_num', 'last_elec_year',
-                           'last_winner', 'last_winner_vote', 'last_totalvotes',
-                           'last_win_margin', 'last_win_party']
+                           'last_winner', 'last_winner_vote',
+                           'last_totalvotes', 'last_win_margin',
+                           'last_win_party']
         output_dfs[i] = cham_df
 
     # merge dataframes
-    upper = pd.merge(sldu_old, output_dfs['u'], how='left', \
+    upper = pd.merge(sldu_old, output_dfs['u'], how='left',
                      on=['state_fips', 'district_num'])
-    lower = pd.merge(sldl_old, output_dfs['l'], how='left', \
+    lower = pd.merge(sldl_old, output_dfs['l'], how='left',
                      on=['state_fips', 'district_num'])
 
     return upper, lower
