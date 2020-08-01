@@ -15,22 +15,25 @@ def main():
     foundations_clip = 0.1
 
     # Load state presidential results
-    df_state = pd.read_csv(path + 'state_pres_results.csv')
+    df_state = pd.read_csv('data/output/election/state_pres_results.csv')
 
     # Load chaz's 2018 predictions
-    df_18 = pd.read_csv(money_path + 'chaz/chaz_with_election_results.csv')
+    input_path = 'data/output/CNalysis/foundations_model_input_data.csv'
+    df_18 = pd.read_csv(input_path)
 
     # Load historical results
-    df_hist = pd.read_csv(money_path + 'state/all_input_data.csv')
+    df_hist = pd.read_csv('data/output/CNalysis/all_input_data.csv')
 
     # Load residuals
-    df_resid_lower = pd.read_csv(path + 'imputed_sldl_residuals.csv')
-    df_resid_upper = pd.read_csv(path + 'imputed_sldu_residuals.csv')
+    lower_path = 'data/output/foundation/sldl_district_residuals.csv'
+    upper_path = 'data/output/foundation/sldu_district_residuals.csv'
+    df_resid_lower = pd.read_csv(lower_path)
+    df_resid_upper = pd.read_csv(upper_path)
 
     # Load incumbency
     incumb_str = '_chamber_incumbency_2016_2018.csv'
-    df_inc_lower = pd.read_csv(path + 'lower' + incumb_str)
-    df_inc_upper = pd.read_csv(path + 'upper' + incumb_str)
+    df_inc_lower = pd.read_csv('data/output/foundation/lower' + incumb_str)
+    df_inc_upper = pd.read_csv('data/output/foundation/upper' + incumb_str)
 
     # Compile all dataframes
     df = compile_data(df_18, df_hist, df_state, df_resid_lower, df_resid_upper,
@@ -49,13 +52,14 @@ def main():
 
     # Clip results
     df['dem_share_18'] = np.clip(df['dem_share_18'], 0.3, 0.7)
-    df.to_csv(path + 'foundations_predictions_2018.csv', index=False)
+    df.to_csv('data/output/foundation/foundations_predictions_2018.csv',
+              index=False)
 
     # Calculate blending
     df_blend = blend_predictions(df, foundations_clip)
     df_blend[df_blend['chamber'] == 'both']
-    df_blend.to_csv(path + 'foundations_blending_results.csv', index=False)
-
+    df_blend.to_csv('data/output/foundation/foundations_blending_results.csv',
+                    index=False)
     return
 
 
