@@ -24,42 +24,45 @@ def main():
                  index=False)
 
     # Get partisan residual of each congressional district
+    found_direc = 'data/output/foundation/'
     df_cd_pr = get_cong_dist_partisan_residual(df_cd, df_state)
-    df_cd_pr.to_csv('data/output/foundation/cong_dist_partisan_residual.csv',
+    df_cd_pr.to_csv(found_direc + 'cong_dist_partisan_residual.csv',
                     index=False)
 
     # Presidential results by st_leg district
-    input_path = money_path + 'foundation/raw/'
-    input_path += 'pres_results_by_state_leg_district/'
+    input_path = 'data/input/election/pres_results_by_state_leg_district/'
     df_st_leg = get_all_st_leg_pres_results(input_path, df_fips)
-    df_st_leg.to_csv(path + 'clean/st_leg_pres_results.csv', index=False)
+    df_st_leg.to_csv('data/output/election/st_leg_pres_results_2012_2016.csv',
+                     index=False)
 
     # Get partisan residual of each st leg district
     df_st_leg_pr = get_st_leg_dist_partisan_residual(df_st_leg, df_state)
-    df_st_leg_pr.to_csv(path + 'clean/st_leg_partisan_residual.csv',
-                        index=False)
+    pr_path = found_direc + 'st_leg_district_partisan_residuals.csv'
+    df_st_leg_pr.to_csv(pr_path, index=False)
 
     # impute residuals where there is no data
-    sldu_labels = pd.read_csv(path + 'clean/sldu_labels.csv', dtype=str)
-    sldl_labels = pd.read_csv(path + 'clean/sldl_labels.csv', dtype=str)
-    st_leg_res = pd.read_csv(path + 'clean/st_leg_partisan_residual.csv',
+    sldu_labels = pd.read_csv(found_direc + 'upper_chamber_interpolation.csv',
+                              dtype=str)
+    sldl_labels = pd.read_csv(found_direc + 'lower_chamber_interpolation.csv',
+                              dtype=str)
+    st_leg_res = pd.read_csv(found_direc + 'st_leg_partisan_residuals.csv',
                              dtype=str)
-    cong_res = pd.read_csv(path + 'clean/cong_dist_partisan_residual.csv',
+    cong_res = pd.read_csv(found_direc + 'cong_district_partisan_residual.csv',
                            dtype=str)
     up, low = impute_residuals(sldu_labels, sldl_labels, st_leg_res, cong_res)
-    up.to_csv(path + 'clean/imputed_sldu_residuals.csv', index=False)
-    low.to_csv(path + 'clean/imputed_sldl_residuals.csv', index=False)
+    up.to_csv(found_direc + 'sldu_district_residuals.csv', index=False)
+    low.to_csv(found_direc + 'sldl_district_residuals.csv', index=False)
 
     # merge old eleciton results to residuals
-    ordinals = pd.read_csv(path + 'raw/ordinal_numbers.csv')
+    ordinals = pd.read_csv('data/input/general/ordinal_numbers.csv')
     ordinals['ordinal'] = ordinals['ordinal'].apply(lambda x: x.upper())
     ordinals_dict = dict(zip(ordinals['ordinal'], ordinals['number']))
-    df = pd.read_csv(path + 'raw/historical_state_leg_results.csv', dtype=str)
-    upper = pd.read_csv(path + 'clean/imputed_sldu_residuals.csv', dtype=str)
-    lower = pd.read_csv(path + 'clean/imputed_sldl_residuals.csv', dtype=str)
-    up, low = merge_old_election_results(df, ordinals_dict, upper, lower)
-    up.to_csv(path + 'clean/all_sldu_info.csv', index=False)
-    low.to_csv(path + 'clean/all_sldl_info.csv', index=False)
+    elec_path = 'data/input/election/state_leg_election_results_database.csv'
+    df = pd.read_csv(elec_path, dtype=str)
+    upper, lower = merge_old_election_results(df, ordinals_dict, up, low)
+    upper.to_csv(found_direc + 'sldu_input_data.csv', index=False)
+    lower.to_csv(found_direc + 'sldl_input_data.csv', index=False)
+    return
 
 
 def get_statewide_presidential_results(df):

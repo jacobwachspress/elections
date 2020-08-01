@@ -12,9 +12,6 @@ import os
 import difflib
 from clean_moneyball import merge_densities
 
-# set google drive path for files
-money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-
 
 def fuzzy_merge(file, df):
     """Fuzzy merge chaz and election results."""
