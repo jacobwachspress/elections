@@ -20,27 +20,17 @@ import geo_helper.helper_tools.areal_interpolation as areal
 def main():
     # set parameters
     census_vars = {'H001001': 'housing', 'H010001': 'pop', 'GEO_ID': 'GEOID10'}
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    density_path = money_path + 'density/'
+    density_path = 'data/output/density/'
 
-    # make directories
-    if not os.path.isdir(density_path):
-        os.mkdir(density_path)
-    if not os.path.isdir(density_path + 'raw/'):
-        os.mkdir(density_path + 'raw/')
-    if not os.path.isdir(density_path + 'clean/'):
-        os.mkdir(density_path + 'clean/')
-
-    # set output path for raw data
-    output_path = density_path + 'raw/block_groups/'
+    # set output path for block groups data
+    output_path = density_path + 'block_groups/'
     if not os.path.isdir(output_path):
         os.mkdir(output_path)
     url_start = 'https://www2.census.gov/geo/tiger/TIGER2010/BG/2010/tl_2010_'
     url_end = '_bg10.zip'
 
     # get all fips
-    fips_path = money_path + 'fundamentals/raw/state_fips.csv'
-    fips_df = pd.read_csv(fips_path)
+    fips_df = pd.read_csv('data/input/general/state_fips.csv')
     all_fips = fips_df['fips'].astype(str).str.zfill(2).unique()
 
     # generate shapefiles
@@ -53,15 +43,13 @@ def main():
         # get file name
         file = st_fips + '_block_group.shp'
         # grab geo_df
-        geo_df = gpd.read_file(density_path + 'raw/block_groups/' + file)
+        geo_df = gpd.read_file(density_path + 'block_groups/' + file)
         # fix area column, square meters to square miles
         geo_df['area'] = (geo_df['ALAND10']+geo_df['AWATER10']) / 2589988
         # add density columns
         geo_df = get_densities(geo_df)
         # write shapefile
-        output_path = density_path + 'clean/block_groups/'
-        if not os.path.isdir(output_path):
-            os.mkdir(output_path)
+        output_path = density_path + 'block_groups/'
         fm.save_shapefile(geo_df, output_path + file)
 
     # areal interpolation
@@ -71,7 +59,7 @@ def main():
         file = st_fips + '_block_group.shp'
 
         # get block group geo_df
-        bg_path = density_path + 'clean/block_groups/'
+        bg_path = density_path + 'block_groups/'
         bg_df = gpd.read_file(bg_path + file)
         bg_df['pop'] = bg_df['pop'].astype(int)
 
@@ -79,8 +67,8 @@ def main():
         for cham in ['upper', 'lower']:
 
             # get the target geo_df file
-            dist_file = money_path + 'fundamentals/shp/' + cham + \
-                            '/tl_2019_' + st_fips + '_sld' + cham[0] + '.shp'
+            dist_file = 'data/input/foundation/shp/' + cham + '/tl_2019_'
+            dist_file += st_fips + '_sld' + cham[0] + '.shp'
 
             # if the file exists
             if os.path.exists(dist_file):
@@ -105,8 +93,8 @@ def main():
                 out_dist_df = out_dist_df.rename(columns=dist_cols)
 
                 # prepare output paths to write shapefiles
-                bg_output_path = density_path + 'clean/block_group_eq_files/'
-                dist_output_path = density_path + 'clean/' + cham + '/'
+                bg_output_path = density_path + 'block_group_eq_files/'
+                dist_output_path = density_path + cham + '/'
                 if not os.path.isdir(bg_output_path):
                     os.mkdir(bg_output_path)
                 if not os.path.isdir(dist_output_path):
@@ -223,12 +211,12 @@ def zipped_shapefile_to_geo_df(file_URL):
 
     # set temporary directory to download zip file
     tempfile.TemporaryDirectory()
-    output_path = tempfile.gettempdir() + '\\temp'
+    output_path = tempfile.gettempdir() + '/temp'
     if not os.path.isdir(output_path):
         os.mkdir(output_path)
 
     # read in file
-    file_loc = output_path + '\\temp.zip'
+    file_loc = output_path + '/temp.zip'
     urllib.request.urlretrieve(file_URL, file_loc)
     urllib.request.urlcleanup()
 
@@ -240,7 +228,7 @@ def zipped_shapefile_to_geo_df(file_URL):
     # delete cpg, which can cause an error
     for file in os.listdir(output_path):
         if file[-4:] == '.cpg':
-            os.remove(output_path + '\\' + file)
+            os.remove(output_path + '/' + file)
 
     # get all .shp files in zip folder
     shapefiles = [file for file in os.listdir(output_path) if
@@ -254,7 +242,7 @@ def zipped_shapefile_to_geo_df(file_URL):
 
     # turn the shapefile to a GeoDataFrame
     shp = shapefiles[0]
-    geo_df = gpd.read_file(output_path + '\\' + shp)
+    geo_df = gpd.read_file(output_path + '/' + shp)
 
     # remove temporary folder
     shutil.rmtree(output_path)
