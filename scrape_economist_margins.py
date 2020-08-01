@@ -83,9 +83,9 @@ def main():
     stamp = str(today.month).zfill(2) + '_' + str(today.day).zfill(2)
 
     # Save to drive
-    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path1 = path + 'elections/economist_projected_margins_' + stamp + '.csv'
-    path2 = path + 'elections/economist_projected_margins_most_recent.csv'
+    found_direc = 'data/output/foundation/'
+    path1 = found_direc + 'economist_forecast_' + stamp + '.csv'
+    path2 = found_direc + 'economist_forecast_most_recent.csv'
     df.to_csv(path1, index=False)
     df.to_csv(path2, index=False)
     return
