@@ -8,14 +8,14 @@ import os
 
 
 def main():
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball'
-    money_path += '/foundation/'
+    # Define foundations directory
+    found_direc = 'data/input/foundation/shp/'
 
     # Get Congressional Shapefile
     print('Creating Congressional Districts')
-    path = money_path + 'shp/congressional/tl_2019_us_cd116.shp'
+    path = found_direc + 'congressional/tl_2019_us_cd116.shp'
     df_congress = fm.load_shapefile(path)
-    df_fips = pd.read_csv(money_path + 'raw/state_fips.csv')
+    df_fips = pd.read_csv('data/input/general/state_fips.csv')
     df_fips['fips'] = df_fips['fips'].astype(str).str.zfill(2)
     df_congress = df_congress.merge(df_fips, left_on='STATEFP',
                                     right_on='fips')
@@ -23,7 +23,7 @@ def main():
     # Create nationwide file for upper chamber districts
     print('Creating Upper Chambers')
     # Get all shapefiles in directory
-    upper_files = os.listdir(money_path + 'shp/upper')
+    upper_files = os.listdir(found_direc + 'upper')
     upper_shp = [x for x in upper_files if x[-4:] == '.shp']
 
     # Initialize upper chamber dataframe
@@ -31,7 +31,7 @@ def main():
 
     # Iterate through each shapefile and append to df_upper
     for file in upper_shp:
-        path = money_path + 'shp/upper/' + file
+        path = found_direc + 'upper/' + file
         df_current = fm.load_shapefile(path)
         df_upper = df_upper.append(df_current)
 
@@ -42,13 +42,13 @@ def main():
     df_upper = df_upper.merge(df_fips, left_on='STATEFP', right_on='fips')
 
     # Save into national folder
-    path = money_path + 'shp/national/upper_chambers.shp'
+    path = 'data/output/foundation/shp/upper_chambers.shp'
     fm.save_shapefile(df_upper, path)
 
     # Create nationwide file for lower chamber districts
     print('Creating Lower Chambers')
     # Get all shapefiles in directory
-    lower_files = os.listdir(money_path + 'shp/lower')
+    lower_files = os.listdir(found_direc + 'lower')
     lower_shp = [x for x in lower_files if x[-4:] == '.shp']
 
     # Initialize lower chamber dataframe
@@ -56,7 +56,7 @@ def main():
 
     # Iterate through each shapefile and append to df_lower
     for file in lower_shp:
-        path = money_path + 'shp/lower/' + file
+        path = found_direc + 'lower/' + file
         df_current = fm.load_shapefile(path)
         df_lower = df_lower.append(df_current)
 
@@ -67,14 +67,14 @@ def main():
     df_lower = df_lower.merge(df_fips, left_on='STATEFP', right_on='fips')
 
     # Save into national folder
-    path = money_path + 'shp/national/lower_chambers.shp'
+    path = 'data/output/foundation/shp/lower_chambers.shp'
     fm.save_shapefile(df_lower, path)
 
     # Distribute congressional geoid to upper chamber districts
     print('Distributing Upper Chamber')
     congress_cols = ['GEOID']
     upper_cols = ['cd_geoid']
-    path = money_path + 'shp/national/upper_chambers_labels.shp'
+    path = 'data/output/foundation/shp/upper_chambers_labels.shp'
     df_upper_label = es.distribute_label(df_congress, congress_cols, df_upper,
                                          upper_cols, progress=100,
                                          debug_col='GEOID')
@@ -84,7 +84,7 @@ def main():
     print('Distributing Lower Chamber')
     congress_cols = ['cd_geoid', 'GEOID']
     lower_cols = ['cd_geoid', 'sldu_geoid']
-    path = money_path + 'shp/national/lower_chambers_labels.shp'
+    path = 'data/output/foundation/shp/lower_chambers_labels.shp'
     df_lower_label = es.distribute_label(df_upper_label, congress_cols,
                                          df_lower, lower_cols, progress=100,
                                          debug_col='GEOID')
@@ -105,7 +105,8 @@ def main():
     df_upp = df_upp[keep_cols]
 
     # Save
-    df_upp.to_csv(money_path + 'clean/sldu_labels.csv', index=False)
+    df_upp.to_csv('data/output/foundation/upper_chamber_interpolation.csv',
+                  index=False)
 
     # Turn upper chambers from a geodataframe to a regular dataframe
     df_low = pd.DataFrame(df_lower_label)
@@ -122,7 +123,8 @@ def main():
     df_low = df_low[keep_cols]
 
     # Save
-    df_low.to_csv(money_path + 'clean/sldl_labels.csv', index=False)
+    df_low.to_csv('data/output/foundation/lower_chamber_interpolation.csv',
+                  index=False)
     return
 
 
