@@ -7,19 +7,17 @@ from difflib import SequenceMatcher
 
 def main():
     """Get historical incumbency unavailable in cnalysis rating."""
-    # initialize paths
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'foundation/clean/'
-    state_path = money_path + 'state/'
-    elec_path = money_path + 'elections/'
+    # Get foundation directory
+    found_direc = 'data/output/foundation/'
 
     # Load 2016 election results
-    df_lower = pd.read_csv(state_path + 'lower_input_data.csv')
-    df_upper = pd.read_csv(state_path + 'upper_input_data.csv')
+    df_lower = pd.read_csv('data/output/CNalysis/sldl_model_input_data.csv')
+    df_upper = pd.read_csv('data/output/CNalysis/sldu_model_input_data.csv')
 
     # Load 2018 election results and hand checked incumbency
-    df_18 = pd.read_csv(elec_path + 'election_results_2018.csv')
-    df_hand_18 = pd.read_csv(path + 'incumbency_2016_2018_hand_checked.csv')
+    df_18 = pd.read_csv('data/output/election/state_results_2018.csv')
+    hand_path = found_direc + 'incumbency_2016_2018_hand_checked.csv'
+    df_hand_18 = pd.read_csv(hand_path)
 
     # Add incumbency for whether 2018 candidate won in 2016
     df_lower_18 = get_incumbency_2018(df_lower, df_18, df_hand_18)
@@ -27,15 +25,16 @@ def main():
                                       chamber='upper')
 
     # Add incumbency for whether 2020 candidate won in 2016
-    df_hand_16 = pd.read_csv(path + 'incumbency_2016_2020_hand_checked.csv')
+    hand_path = 'data/output/foundation/incumbency_2016_2020_hand_checked.csv'
+    df_hand_16 = pd.read_csv(hand_path)
     df_lower_16 = get_incumbency_2016(df_lower, df_hand_16)
     df_upper_16 = get_incumbency_2016(df_upper, df_hand_16)
 
     # Save
-    lower_path_18 = path + 'lower_chamber_incumbency_2016_2018.csv'
-    upper_path_18 = path + 'upper_chamber_incumbency_2016_2018.csv'
-    lower_path_16 = path + 'lower_chamber_incumbency_2016_2020.csv'
-    upper_path_16 = path + 'upper_chamber_incumbency_2016_2020.csv'
+    lower_path_18 = found_direc + 'lower_chamber_incumbency_2016_2018.csv'
+    upper_path_18 = found_direc + 'upper_chamber_incumbency_2016_2018.csv'
+    lower_path_16 = found_direc + 'lower_chamber_incumbency_2016_2020.csv'
+    upper_path_16 = found_direc + 'upper_chamber_incumbency_2016_2020.csv'
     df_lower_18.to_csv(lower_path_18, index=False)
     df_upper_18.to_csv(upper_path_18, index=False)
     df_lower_16.to_csv(lower_path_16, index=False)
