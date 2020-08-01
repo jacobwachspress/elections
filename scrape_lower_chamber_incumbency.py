@@ -131,8 +131,7 @@ def main():
     df_inc.loc[df_inc['candidate'].isin(vacant), 'party'] = False
 
     # Save to drive
-    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path += 'foundation/clean/state_lower_chamber_incumbency.csv'
+    path = 'data/output/foundation/state_lower_chamber_incumbency.csv'
     df_inc.to_csv(path, index=False)
     return
 

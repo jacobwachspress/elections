@@ -85,8 +85,7 @@ def main():
                                       else x['district'], axis=1)
 
     # Save to drive
-    path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path += 'foundation/clean/state_senate_incumbency.csv'
+    path = 'data/output/foundation/state_upper_chamber_incumbency.csv'
     df_inc.to_csv(path, index=False)
     return
 
