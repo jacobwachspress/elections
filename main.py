@@ -15,23 +15,19 @@ last_update = date(2020, 7, 18)
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 
-# initialize moneyball path
-money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-path = money_path + 'state/'
-
 # read in input DataFrame
-races_df = pd.read_csv(money_path + 'state/all_input_data.csv')
+races_df = pd.read_csv('data/output/CNalysis/all_input_data.csv')
 
 # read in and merge foundations margin
-founds_df = pd.read_csv(money_path +
-                        'foundation/clean/foundations_predictions_2020.csv')
+pred_path = 'data/output/foundation/foundations_predictions_2020.csv'
+founds_df = pd.read_csv(pred_path)
 founds_df['office'] = founds_df['chamber']
 founds_df = founds_df[['state', 'district_num', 'office', 'found_margin']]
 races_df = pd.merge(races_df, founds_df, how='left',
                     on=['state', 'office', 'district_num'])
 
 # read in states to test
-to_test = pd.read_csv(path + 'states_to_test.csv')
+to_test = pd.read_csv('data/input/parameters/states_and_thresholds.csv')
 
 # merge to get thresholds
 races_df = pd.merge(races_df, to_test, how='left', on=['state', 'office'])
@@ -47,7 +43,7 @@ deg_f_scale = 1 + min(1, 1/4*np.log(1 + days_to_election/20))
 
 # set the correlated error vars
 error_vars = {}
-err_df = pd.read_csv(path + 'correlated_error.csv')
+err_df = pd.read_csv('data/input/parameters/correlated_error_parameters.csv')
 for _, row in err_df.iterrows():
     sigma = row['sigma']
     deg_f = row['deg_f']
@@ -125,18 +121,19 @@ for state in races_df['state'].unique():
 
         # append to results dataframe
         results.append(power_df)
-        power_df.to_csv(money_path + 'output/' + state + '.csv')
+        power_df.to_csv('data/output/voter_power/' + state + '.csv',
+                        index=False)
     except:
         print('failed')
 
 # concatenate statewide dataframes
 output_df = pd.concat(results)
 
-output_df.to_csv(money_path + 'output/' + 'all_results_raw.csv')
+output_df.to_csv('data/output/voter_power/all_results_raw.csv', index=False)
 
 # delete unecessary columns
 output_df = output_df[['state', 'district', 'incumbent', 'favored',
                        'confidence', 'nom_R', 'nom_D', 'nom_I', 'cvap',
                        'VOTER_POWER']]
 
-output_df.to_csv(money_path + 'output/' + 'all_results.csv')
+output_df.to_csv('data/output/voter_power/all_results.csv', index=False)
