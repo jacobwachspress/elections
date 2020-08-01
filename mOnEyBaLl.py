@@ -360,10 +360,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
     return districts_df
 
 
-"""FIX THESE ARGUMENTS"""
-def rating_to_margin(favored, confidence, df=None,
-    money_path='G:/Shared drives/princeton_gerrymandering_project/Moneyball/',\
-    params_csv='state/rating_to_margin.csv'):
+def rating_to_margin(favored, confidence, df=None):
     ''' Gets the expected margin of victory based on information in
     two input parameter files.
 
@@ -380,8 +377,8 @@ def rating_to_margin(favored, confidence, df=None,
     # if not passed a df
     if df is None:
         # read csv into ratings_to_margin DataFrame
-        ratings_to_margin_df = pd.read_csv(money_path + params_csv,
-                                           index_col='RATING')
+        path = 'data/input/parameters/CNalysis_rating_to_margin.csv'
+        ratings_to_margin_df = pd.read_csv(path, index_col='RATING')
 
     # get absolute margin
     margin = ratings_to_margin_df.loc[confidence, 'MARGIN']
