@@ -4,18 +4,17 @@ import numpy as np
 
 
 def main():
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'foundation/'
+    # Get foundations directory
+    found_direc = 'data/output/foundation/'
 
     # Get statewide presidential results and economist forecast
-    df_state = pd.read_csv(path + 'clean/state_pres_results.csv')
-    economist_path = money_path + 'elections/'
-    economist_path += 'economist_projected_margins_most_recent.csv'
+    df_state = pd.read_csv(found_direc + 'state_pres_results.csv')
+    economist_path = found_direc + 'economist_forecast_most_recent.csv'
     df_economist = pd.read_csv(economist_path)
 
     # Get cleaned moneyball data
-    df_lower = pd.read_csv(money_path + 'state/lower_input_data.csv')
-    df_upper = pd.read_csv(money_path + 'state/upper_input_data.csv')
+    df_lower = pd.read_csv('data/output/CNalysis/sldl_model_input_data.csv')
+    df_upper = pd.read_csv('data/output/CNalysis/sldu_model_input_data.csv')
 
     # Format district number and drop unnecessary columns
     df_lower = clean_incumbency(df_lower)
@@ -29,15 +28,15 @@ def main():
     df_upper = df_upper[keep_cols]
 
     # Load election results and incumbency results
-    df_elec = pd.read_csv(money_path + 'elections/election_results_2018.csv')
-    df_inc_lower = pd.read_csv(path +
-                               'clean/lower_chamber_incumbency_2016_2020.csv')
-    df_inc_upper = pd.read_csv(path +
-                               'clean/upper_chamber_incumbency_2016_2020.csv')
+    df_elec = pd.read_csv('data/output/election/state_results_2018.csv')
+    lower_path = found_direc + 'lower_chamber_incumbency_2016_2020.csv'
+    upper_path = found_direc + 'upper_chamber_incumbency_2016_2020.csv'
+    df_inc_lower = pd.read_csv(lower_path)
+    df_inc_upper = pd.read_csv(upper_path)
 
     # Load district based residuals
-    df_lower_resid = pd.read_csv(path + 'clean/imputed_sldl_residuals.csv')
-    df_upper_resid = pd.read_csv(path + 'clean/imputed_sldu_residuals.csv')
+    df_lower_resid = pd.read_csv(found_direc + 'sldl_district_residuals.csv')
+    df_upper_resid = pd.read_csv(found_direc + 'sldu_district_residuals.csv')
 
     # Compile historical results
     df = compile_historical_results(df_elec, df_lower, df_upper, df_inc_lower,
@@ -51,7 +50,7 @@ def main():
 
     # Calculate foundations prediction
     df = foundation_prediction(df, df_economist)
-    df.to_csv(path + 'clean/foundations_predictions_2020.csv', index=False)
+    df.to_csv(found_direc + 'foundations_predictions_2020.csv', index=False)
     return
 
 

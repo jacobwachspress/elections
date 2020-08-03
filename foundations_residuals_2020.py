@@ -15,11 +15,8 @@ from foundations_blending_2018 import chaz_share
 
 
 def main():
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'foundation/clean/'
-
     # Load input data and clean
-    df = pd.read_csv(money_path + 'state/all_input_data.csv')
+    df = pd.read_csv('data/output/CNalysis/all_input_data.csv')
     df['district_num'] = df['district_num'].astype(str).str.zfill(3)
     df['chamber'] = df['office']
 
@@ -36,7 +33,8 @@ def main():
     df = df[keep_cols]
 
     # Load foundations data and clean
-    df_found = pd.read_csv(path + 'foundations_predictions_2020.csv')
+    found_path = 'data/output/foundation/foundations_predictions_2020.csv'
+    df_found = pd.read_csv(found_path)
     df_found['district_num'] = df_found['district_num'].astype(str)
     df_found['district_num'] = df_found['district_num'].str.zfill(3)
     keep_cols = ['state', 'district_num', 'chamber', 'found_share']
@@ -45,7 +43,8 @@ def main():
     # Merge, get residual, and save
     df = df.merge(df_found)
     df['residual'] = df['chaz_share'] - df['found_share']
-    df.to_csv(path + 'foundations_residuals_2020.csv', index=False)
+    resid_path = 'data/output/foundation/foundations_residuals_2020.csv'
+    df.to_csv(resid_path, index=False)
     return
 
 

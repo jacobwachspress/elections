@@ -1,4 +1,5 @@
 *.pyc
 *.ipynb
-*.csv
 *.log
+data/output/*.csv
+data/output/*/*.csv
