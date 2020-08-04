@@ -8,7 +8,7 @@ Created on Fri Jul 24 13:08:40 2020
 import pandas as pd
 import numpy as np
 from datetime import date
-from mOnEyBaLl import state_voter_powers
+from voter_power import state_voter_powers
 
 # set update date and election date
 last_update = date(2020, 7, 18)
@@ -31,7 +31,7 @@ races_df = pd.merge(races_df, founds_df, how='left', on=['state', \
                                             'office', 'district_num'])
 
 # read in states to test
-to_test = pd.read_csv(path + 'states_to_test.csv')
+to_test = pd.read_csv(path + 'states_to_test_NC.csv')
 
 # merge to get thresholds
 races_df = pd.merge(races_df, to_test, how='left', on=['state', 'office'])
@@ -70,12 +70,12 @@ power_col = 'VOTER_POWER'
 bipart_probs = []
 
 # for each state
-for state in ['CT']:
+for state in ['NC']:
     
     # find probablity of bipartisan control of residistricting
     
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state == 'NC':
+    if state != 'NC':
         bipart_prob = state_voter_powers(races_df, state, error_vars, race_sigma, 
                             race_deg_f, margin_col, voters_col,
                             threshold_col, tie_col, chamber_col, power_col,
@@ -90,11 +90,12 @@ for state in ['CT']:
     
     
     bipart_probs.append(bipart_prob)
+    print(bipart_prob)
     
-# write results to DataFrame
-bipartisan_control_df = pd.DataFrame({'state' : ['CT'], \
-                                      'bipartisan_prob': bipart_probs})
-bipartisan_control_df.to_csv(money_path + 'output/bipartisan_control_CT.csv')
+# # write results to DataFrame
+# bipartisan_control_df = pd.DataFrame({'state' : ['CT'], \
+#                                       'bipartisan_prob': bipart_probs})
+# bipartisan_control_df.to_csv(money_path + 'output/bipartisan_control_CT.csv')
 
 print ('win probs done')
     
