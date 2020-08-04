@@ -1,0 +1,154 @@
+correlated error within a state
+- suburban, rural affects
+- nuttycombe states that he considers this, need to model uncertainty around this
+    - backtest to see the effect in 2018
+    
+ties
+- could pick off members from the other party to protect incumbency
+- lobbying could sway a couple representatives from the powerful party
+
+issue- correlated error between upper and lower (same voters!)
+
+172 tilt 
+120 tossup
+
+of tilt, assume tilt are 0.589 of them
+- gives 66.53%
+
+looks like state: (0.037, 12) and race: (0.075, 5) approximates 2018 data well
+- statewide error 0.42 correlated with error
+- isolated race error 0.90 correlated with error 
+- random data more like (0.20, 0.97)
+even when you get rid of small states, very similar
+
+
+The main stories of the 2020 campaign cycle are the presidential election and 
+the fight for control of Congress (mostly, the U.S. Senate). At the same time, 
+several state legislative chambers are up for grabs. While the national media 
+will understandably devote less attention to state-level races, these races 
+nonetheless have substantial implications on policies that will affect millions 
+of Americans. This year, they will decide who has the power to draw the 
+boundaries in the 2021 redistricting for U.S. Congressional and state 
+legislative districts.
+
+
+
+In an effort to help our readers make impactful political contributions to 
+state legislative races, we have designed a model that identifies the 
+highest-leverage seats for chamber control in each state, and to prevent 
+gerrymandering in 2021.
+
+Here we will describe the modelling methodology used to determine the voter power 
+and dollar power indices for state legislature races.  
+
+State legislature elections present some unique modelling challenges. 
+While close races for national office tend to be polled, public polling of 
+individual state legislature races is basically nonexistent. Furthermore, each 
+state has tens or hundreds of small districts, each of which has different 
+candidates and uncertain local dynamics. 
+
+For this reason, we relied heavily on the forecasts of Charles Nuttycombe, the 
+only person who offers comprehensive and regularly updated forecasts for 
+individual state legislature races. Nuttycombe uses the Cook Partisan Voter 
+Index (PVI) of each district based on recent statewide elections, adjusts for 
+the effect of incumbent popularity, researches challengers to assess their 
+quality, and tries to predict demographic trends.
+
+Our task was to take Nuttycombe's seat ratings and determine a "power index" for 
+the individual races where donations would be most efficient toward flipping a 
+chamber. Our strategy looked like this:
+
+1. Develop a probabilistic model that turns Nuttycombe's ratings into a single 
+probability for each party to control a given state chamber.
+2. In each district, add one vote to the expected number of votes received by a
+ candidate, run the model from step 1, and find the change in probability of 
+ chamber control. Call this the "voter power index."
+
+Steps 1 and 3 are the hard parts of this process, involving lots of research and some judgment calls. We will describe the three steps here.
+
+1. The probabilistic model.
+As input, our model of chamber control takes Nuttycombe's individual race ratings, which are all one of "Toss-Up," "Tilt," "Lean," "Likely," "Safe," and "Uncontested." (All categories but "Toss-Up" have an associated party. Fortunately for the sake of simple modeling, there are no competitive independent candidates in the key chambers. CHECK THIS!)
+
+To each category we assign an expected win margin, roughly according to Nuttycombe's stated expectation for each category.
+
+TABLE HERE
+
+
+Of course, the election results will differ from these expected margins. The joint probability distribution of these differences between expected and actual margins determines the probability of chamber control for each party. We incorporated two sources of uncertainty into this distribution:
+- A statewide error S affecting all races equally, a random variable distributed according to t(0.04, df=2) 
+- A race error R_i affecting each race independently, a random variable distributed according to t(0.07, df=2)
+These random error terms are added to the expected win margin to get a probability distribution on the actual candidate win margin. Using this distribution, the candidate win probability may be calculated as approximately
+
+TABLE HERE
+
+To find the chamber control probability, we calculate an integral by finding the probability for any fixed statewide error S (which is made rather simple by the assumption of independence of race errors) and then weighting each probability by the density of S at that point.
+
+(TODO: justify category -> margin with past data or Chaz email)
+(TODO: justify t-dist parameters, go into limitations of this model, do sensitivity analysis)
+
+2. Calculating voter power.
+Suppose you register your neighbor to vote so she can support a certain candidate in a state legislative district. How much does this vote impact the probability that the candidate's party wins the chamber? To calculate this, for each race we adjust the expected win margin for a candidate by the equivalent of one vote, re-run the model from step 1, and find the change in probability, which we call the "voter power." The voter power is sensitive to estimates of voter turnout (basically inversely proportional). For now, we are estimating voter turnout as a fixed fraction (TODO decide this fraction) of citizen voting age population (CVAP), though we may improve these estimates based on old election data, after controlling for depressed turnout in uncontested races. Estimating voter turnout in the era of COVID-19 is a challenging endeavor, so this is a source of some uncertainly in our model output.
+
+3. Calculating dollar power.
+We believe voter power is a good first step for deciding where to direct donations for state legislative races, but the statistic has its limitations. The power of one dollar toward earning a vote is not the same in every district nationwide, or even statewide. Advertising costs vary by media market, and there is evidence that advertising serves mostly to build name-recognition, so funds are more useful for challengers (especially those new to the political scene). We are looking into ways to consider these factors for a "dollar power index," which will give the relative influence of a one-dollar donation to each candidate for determining the balance of power in chamber. (Note: one study suggested money is 7 times more useful to challengers)
+
+TODO (not in methodology post?): mention specifics of gerrymandering problem
+- one-party control
+- supermajority
+- number of seats at stake
+
+One might imagine two (false) paradigms of the uncertainty in the election
+results.
+1) All forecaster errors are uncorrelated. Knowing that 
+
+The voter power is the probability that an individual voter in a district will
+cast the vote that determines whether her state has bipartisan control of
+redistricting. In order to calculate this number, we add the equivalent of 
+one vote to the Democratic candidate's expected win margin, run the model again
+to find the new probability of bipartisan control, and calculate the 
+difference in probability. This requires an estimate of
+the number of votes cast in each race. Rather than use past election results
+to make these estimates (this would be susceptible to error because turnout 
+depends on how strongly the seat was contested), we assume the vote totals
+are proportional to the citizen-voting-age population (CVAP) in the district. 
+This will introduce some error, but CVAP is our best estimate at the moment;
+we haven't taken on the daunting task of modelling voter turnout in 
+the era of coronavirus.
+
+What this model does not consider
+
+A uniform national or regional error. Sometimes one party does systematically 
+better than expected in a geographic region or nationwide. This year, we can 
+expect state legislative races to be affected by the results of the
+presidential election. (Though there is plenty of ticket-splitting
+between national races and state legislative races, there is still some 
+coattail effect.) However, we do not see the need to model this correlated 
+error for our purposes. National elections have an objective function 
+aggregated up from state or local elections to the national level (i.e. 270 electoral
+votes, 51 senators, or 218 representatives). State legislature elections, on the
+other hand, all have their own objective functions. Preventing gerrymandering
+in one state is just as valuable whether or not we have prevented it in another.
+As long as we model the statewide uncertainty properly, the fact that these
+uncertainties are correlated across states has no impact on voter power. The model cannot
+answer question: how likely are we to get bipartisan control of redistricting in 
+every one of TX, KS, and MN? While it might be interesting to know that, it is
+not necessary for calculating voter power. (Also can't answer how likely Chaz 
+is to get 98% or more.)
+
+Elasticity of the districts. Some districts' results are less likely to change
+sharply from election to election than others. (Imagine an Alabama district
+comprised of 60% white, mostly-Republican voters and 40% Black, mostly-Democratic
+voters. Compare that to a New Hampshire district with 50% independents.) 
+Because our model sets expected win margins for each race and then models 
+uncertainty about those margins, it treats any two races with an expected win 
+margin of, say, 10% the same. But this expected win margin should translate 
+to a larger win probability in the inelastic Alabama district than the elastic
+New Hampshire district. Fortunately, according to Nuttycombe, cnalysis reports 
+its race ratings so that each category corresponds to a probability range, not 
+a range of margins. This means that our model sometimes assigns an expected win
+margin too small or large, but when it does this, it also assigns an uncertainty 
+too small or large in the same direction. These factors cause error in opposite
+directions, and we believe the net effect is minor. In future updates, we may
+try to model elasticity.
+
+Lags in cnalysis updates.
