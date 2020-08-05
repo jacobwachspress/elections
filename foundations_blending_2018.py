@@ -7,15 +7,12 @@ from sklearn.metrics import mean_squared_error as mse
 
 
 def main():
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'foundation/clean/'
-
     # Hyperparameters
     uncontested_diff = 0.2
     foundations_clip = 0.1
 
     # Load state presidential results
-    df_state = pd.read_csv('data/output/election/state_pres_results.csv')
+    df_state = pd.read_csv('data/output/foundation/state_pres_results.csv')
 
     # Load chaz's 2018 predictions
     input_path = 'data/output/CNalysis/foundations_model_input_data.csv'
