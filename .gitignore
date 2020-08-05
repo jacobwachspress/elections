@@ -3,8 +3,8 @@
 *.log
 data/output/*.csv
 data/output/*/*.csv
-*.shp
-*.shx
-*.dbf
-*.prj
-*.cpg
+data/output/*/*/*.shp
+data/output/*/*/*.shx
+data/output/*/*/*.dbf
+data/output/*/*/*.prj
+data/output/*/*/*.cpg
