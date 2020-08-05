@@ -1,5 +1,5 @@
 """Clean Errors in MEDSL state legislative results in 2018."""
-from clean_moneyball import massachusetts_cleaning
+from cnalysis_input_components import massachusetts_cleaning
 import pandas as pd
 
 
@@ -17,7 +17,7 @@ def main():
 
     # Load 2018 election results and hand checked incumbency
     df_elec_18 = clean_results_18(df, df_party, df_results)
-    elec_path = 'data/output/elections/state_results_2018.csv'
+    elec_path = 'data/output/election/state_results_2018.csv'
     df_elec_18.to_csv(elec_path, index=False)
     return
 

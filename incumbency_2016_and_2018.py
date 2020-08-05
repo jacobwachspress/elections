@@ -16,7 +16,7 @@ def main():
 
     # Load 2018 election results and hand checked incumbency
     df_18 = pd.read_csv('data/output/election/state_results_2018.csv')
-    hand_path = found_direc + 'incumbency_2016_2018_hand_checked.csv'
+    hand_path = 'data/input/foundation/incumbency_2016_2018_hand_checked.csv'
     df_hand_18 = pd.read_csv(hand_path)
 
     # Add incumbency for whether 2018 candidate won in 2016
@@ -25,7 +25,7 @@ def main():
                                       chamber='upper')
 
     # Add incumbency for whether 2020 candidate won in 2016
-    hand_path = 'data/output/foundation/incumbency_2016_2020_hand_checked.csv'
+    hand_path = 'data/input/foundation/incumbency_2016_2020_hand_checked.csv'
     df_hand_16 = pd.read_csv(hand_path)
     df_lower_16 = get_incumbency_2016(df_lower, df_hand_16)
     df_upper_16 = get_incumbency_2016(df_upper, df_hand_16)
