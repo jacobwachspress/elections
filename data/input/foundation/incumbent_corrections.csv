@@ -1,0 +1,14 @@
+chamber,state,geoid,actual_incumbent
+lower,AR,5041,R
+lower,IA,19072,R
+lower,KY,30058,R
+lower,NV,32011,FALSE
+lower,MT,30063,FALSE
+lower,MT,30058,R
+lower,TN,47071,R
+lower,TX,48054,R
+lower,TX,48054,R
+lower,WI,55025,R
+upper,KS,20021,FALSE
+upper,CA,6028,R
+lower,KS,20085,R

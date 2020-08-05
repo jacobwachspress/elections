@@ -2,41 +2,38 @@
 
 import pandas as pd
 import geopandas as gpd
-import numpy as np
 import difflib
 
 
 def main():
-    money_path = 'G:/Shared drives/princeton_gerrymandering_project/Moneyball/'
-    path = money_path + 'state/'
-    cvap_path = money_path + 'cvap/'
-    found_path = money_path + 'foundation/'
-
+    
     # Initial cleaning
-    lower = pd.read_csv(money_path + 'chaz/chaz_lower_chamber_07_18.csv')
+    lower = pd.read_csv('data/output/CNalysis/ratings_lower_chamber_' + \
+                        'most_recent.csv') 
     lower = clean_initial_rating(lower)
-    upper = pd.read_csv(money_path + 'chaz/chaz_upper_chamber_07_18.csv')
+    upper = pd.read_csv('data/output/CNalysis/ratings_upper_chamber_' + \
+                        'most_recent.csv') 
     upper = clean_initial_rating(upper)
 
     # Fix incumbency errors in ratings
-    incum_path = found_path + 'clean/incumbent_corrections.csv'
+    incum_path = 'data/input/foundation/incumbent_corrections.csv'
     df_incumbent = pd.read_csv(incum_path)
     lower, upper = fix_incumbency(df_incumbent, lower, upper)
 
     # Add cvap by district
-    df_cvap_lower = pd.read_csv(cvap_path + 'SLDLC.csv')
-    df_cvap_upper = pd.read_csv(cvap_path + 'SLDUC.csv')
+    df_cvap_lower = pd.read_csv('data/input/cvap/lower_chamber_cvap.csv')
+    df_cvap_upper = pd.read_csv('data/input/cvap/upper_chamber_cvap.csv')
     lower = add_cvap(lower, df_cvap_lower)
     upper = add_cvap(upper, df_cvap_upper)
 
     # read in ordinals dict for massachusetts district name cleaning
-    ordinals = pd.read_csv(found_path + 'raw/ordinal_numbers.csv')
+    ordinals = pd.read_csv('data/input/general/ordinal_numbers.csv')
     ordinals['ordinal'] = ordinals['ordinal'].apply(lambda x: x.upper())
     ordinals_dict = dict(zip(ordinals['ordinal'], ordinals['number']))
 
     # merge in old election results
-    df = pd.read_csv(found_path + 'raw/historical_state_leg_results.csv',
-                     dtype=str)
+    df = pd.read_csv('data/input/election/st_leg_election_results_database.csv',
+                                 dtype=str)
 
     upper, lower = merge_year_election_results(df, ordinals_dict, '2016',
                                                upper, lower)
@@ -46,18 +43,18 @@ def main():
                                                upper, lower)
 
     # get all fips
-    fips_path = found_path + 'raw/state_fips.csv'
+    fips_path = 'data/input/general/state_fips.csv'
     fips_df = pd.read_csv(fips_path)
-    density_path = money_path + 'density/clean/'
+    density_path = 'data/output/density/'
 
     # merge in densities
     upper, lower = merge_densities(fips_df, density_path, upper, lower)
 
     # merge incumbents
-    lower_path = 'clean/state_lower_chamber_incumbency.csv'
-    upper_path = 'clean/state_sentate_incumbency.csv'
-    lower_inc = pd.read_csv(found_path + lower_path)
-    upper_inc = pd.read_csv(found_path + upper_path)
+    lower_path = 'data/output/foundation/state_lower_chamber_incumbency.csv'
+    upper_path = 'data/output/foundation/state_upper_chamber_incumbency.csv'
+    lower_inc = pd.read_csv(lower_path)
+    upper_inc = pd.read_csv(upper_path)
     lower_inc['district'] = lower_inc['district'].apply(lambda x:
                                                         str(int(x))
                                                         if type(x) == float
@@ -77,9 +74,10 @@ def main():
     lower = lower.sort_values(by=['state', 'geoid'])
 
     # read out the cleaned files
-    lower.to_csv(path + 'lower_input_data.csv', index=False)
-    upper.to_csv(path + 'upper_input_data.csv', index=False)
-    pd.concat([upper, lower]).to_csv(path + 'all_input_data.csv', index=False)
+    lower.to_csv('data/output/CNalysis/sldl_model_input_data.csv', index=False)
+    upper.to_csv('data/output/CNalysis/sldu_model_input_data.csv', index=False)
+    all_data = pd.concat([upper, lower])
+    all_data.to_csv('data/output/CNalysis/all_input_data.csv', index=False)
 
     return
 
@@ -748,15 +746,7 @@ def merge_incumbents(upper, lower, upper_inc, lower_inc):
         upper, lower: original DataFrames
         upper_inc, lower_inc: DataFrames with incumbency info
     '''
-    # clean alaska upper
-    AK_dict = {'1': 'A', '2': 'B', '3': 'C', '4': 'D', '5': 'E', '6': 'F',
-               '7': 'G', '8': 'H', '9': 'I', '10': 'J', '11': 'K', '12': 'L',
-               '13': 'M', '14': 'N', '15': 'O', '16': 'P', '17': 'Q',
-               '18': 'R', '19': 'S', '20': 'T'}
-    upper_inc['district'] = upper_inc.apply(lambda x: AK_dict[x['district']]
-                                            if x['state'] == 'AK'
-                                            else x['district'], axis=1)
-
+    
     # clean district numbers
     upper_inc['district'] = upper_inc['district'].apply(lambda x:
                                                         str(x).zfill(3))

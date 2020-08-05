@@ -69,8 +69,16 @@ def main():
             df_inc.at[r, 'state'] = abbrev
             df_inc.at[r, 'candidate'] = candidate
             df_inc.at[r, 'party'] = party
-            df_inc.at[r, 'district'] = ix + 1
-
+            
+            # fix district formatting before saving
+            district = ix + 1
+            if type(district) == float:
+                district = str(int(district))
+            else:
+                district = str(district)
+            df_inc.at[r, 'district'] = district
+            
+            
     # Change vacant seats to no party
     df_inc.loc[df_inc['candidate'] == '', 'candidate'] = 'Vacant'
     df_inc.loc[df_inc['candidate'] == 'Vacant', 'party'] = False

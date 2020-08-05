@@ -1,4 +1,4 @@
-"""Apply updates from Chaz."""
+"""Apply updates from CNalysis."""
 import pandas as pd
 import titlecase as tc
 
@@ -7,7 +7,7 @@ def main():
     """Load original cnalysis data and apply updates"""
     # Define path
     input_path = 'data/input/CNalysis/'
-    output_path = 'data/output/CNalysis'
+    output_path = 'data/output/CNalysis/'
 
     # Load original data
     lower_old_path = input_path + 'ratings_lower_chamber_original.csv'
@@ -57,8 +57,8 @@ def main():
     upper_path = output_path + 'ratings_upper_chamber_'
     df_lower.to_csv(lower_path + update_date + '.csv', index=False)
     df_upper.to_csv(upper_path + update_date + '.csv', index=False)
-    df_lower.to_csv(lower_path + 'most_recent' + '.csv', index=False)
-    df_upper.to_csv(upper_path + 'most_recent' + '.csv', index=False)
+    df_lower.to_csv(lower_path + 'most_recent.csv', index=False)
+    df_upper.to_csv(upper_path + 'most_recent.csv', index=False)
     return
 
 

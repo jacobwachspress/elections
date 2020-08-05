@@ -80,29 +80,21 @@ def main():
                 t_cols = ['GEOID', 'NAMELSAD']
 
                 # areal interpolation
-                out_bg_df, out_dist_df = areal.aggregate(bg_df, dist_df,
+                _, out_dist_df = areal.aggregate(bg_df, dist_df,
                                                          source_columns=s_cols,
                                                          target_columns=t_cols)
 
                 # rename some columns
-                bg_cols = {'GEOID': 'dist_geoid', 'NAMELSAD': 'dist_name'}
                 dist_cols = {'density_0': 'rural', 'density_1': 'exurban',
                              'density_2': 'suburban', 'density_3': 'urban'}
 
-                out_bg_df = out_bg_df.rename(columns=bg_cols)
                 out_dist_df = out_dist_df.rename(columns=dist_cols)
 
                 # prepare output paths to write shapefiles
-                bg_output_path = density_path + 'block_group_eq_files/'
                 dist_output_path = density_path + cham + '/'
-                if not os.path.isdir(bg_output_path):
-                    os.mkdir(bg_output_path)
                 if not os.path.isdir(dist_output_path):
                     os.mkdir(dist_output_path)
 
-                # write shapefiles
-                fm.save_shapefile(out_bg_df, bg_output_path + st_fips +
-                                  '_block_groups_' + cham + '.shp')
                 fm.save_shapefile(out_dist_df, dist_output_path + st_fips +
                                   '_districts.shp')
 
