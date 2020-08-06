@@ -5,9 +5,7 @@ Created on Thu Jul 16 09:28:26 2020
 @author: Jacob
 """
 
-import numpy as np
 import pandas as pd
-from functools import reduce
 import os
 
 

@@ -23,6 +23,20 @@ Short descriptions of each python file in the repository.
 - wikipedia_lower_chamber_incumbency.py
 - wikipedia_lower_chamber_incumbency.py
 
+## Dependencies
+
+- [Chrome Driver](https://chromedriver.chromium.org/downloads)
+- BeautifulSoup
+- geopandas
+- numpy
+- pandas
+- scipy
+- selenium
+- sklearn
+- titlecase
+- tqdm
+- webdriver
+
 ## Brief Methodology
 
 <b>Step 1: In each state, determine which 2020 electoral outcomes would give neither party the power to enact a partisan gerrymander.</b> This is determined by the redistricting protocol set in the state’s constitution. In many states, the two chambers of the state legislature draw the new districts, the governor may veto the plan, and the state legislature can override a veto with a supermajority. As a result, a state will have bipartisan redistricting as long as (1) one party does not control the governorship and both chambers of the state legislature and (2) one party does not have supermajorities in both chambers of the state legislature. Some states have no governor’s veto (e.g. NC), and we adjust the desired electoral outcomes accordingly. We assume that states with an independent redistricting commission (e.g. AZ) will not enact partisan gerrymanders. We focus on congressional gerrymandering and not state legislative gerrymandering, but it turns out that many of the high-leverage states have similar laws for the two processes.
