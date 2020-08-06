@@ -1,5 +1,7 @@
 # Redistricting Moneyball
 
+Code for the Princeton Gerrymandering Project's model to identify races where voters have the most leverage to prevent partisan gerrymandering in 2021. Our findings can be viewed [here!](https://election.princeton.edu/data/moneyball/). Below is a file dictionary as well as a brief methodology. For a more in-depth methodology, click [here!](https://docs.google.com/document/d/1iNWxfLuYnP_TpYXfqx_yK7wopI6qji6QgCvEZYtiS6g/edit?usp=sharing).
+
 ## File Dictionary
 
 ## Brief Methodology
