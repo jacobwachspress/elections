@@ -10,8 +10,9 @@ import numpy as np
 from datetime import date
 from voter_power import state_voter_powers
 
+
 # set update date and election date
-last_update = date(2020, 7, 18)
+last_update = date(2020, 11, 1)
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 
@@ -59,13 +60,18 @@ for _, row in err_df.iterrows():
 # set the isolated race error
 race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
+
 # set DataFrame columns for voter power analysis
 margin_col = 'margin'
-voters_col = 'cvap'
+voters_col = 'turnout_estimate'
 threshold_col = 'd_threshold'
 tie_col = 'tie_dem'
 chamber_col = 'office'
 power_col = 'VOTER_POWER'
+
+# read csv into ratings_to_margin DataFrame
+path = 'data/input/parameters/CNalysis_rating_to_margin.csv'
+rating_to_margin_df = pd.read_csv(path, index_col='RATING')
 
 # initialize list of bipartisan control probabilities
 bipart_probs = []
@@ -78,22 +84,23 @@ for state in states_to_check:
     # find probablity of bipartisan control of residistricting
 
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state != 'NC':
-        bipart_prob = state_voter_powers(races_df, state, error_vars,
-                                         race_sigma, race_deg_f, margin_col,
-                                         voters_col, threshold_col, tie_col,
-                                         chamber_col, power_col,
+    if state == 'NC':
+        bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
+                                         threshold_col, tie_col, chamber_col,
+                                         power_col, state, error_vars,
+                                         race_sigma, race_deg_f,
+                                         rating_to_margin_df,
+                                         prob_only=True)
+    else:
+        bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
+                                         threshold_col, tie_col, chamber_col,
+                                         power_col, state, error_vars,
+                                         race_sigma, race_deg_f,
+                                         rating_to_margin_df,
                                          found_margin_col='found_margin',
                                          found_clip=0.06,
                                          blend_safe=0.75, blend_else=0.5,
-                                         just_get_prob=True)
-
-    else:
-        bipart_prob = state_voter_powers(races_df, state, error_vars,
-                                         race_sigma, race_deg_f, margin_col,
-                                         voters_col, threshold_col, tie_col,
-                                         chamber_col, power_col,
-                                         just_get_prob=True)
+                                         prob_only=True)
 
     bipart_probs.append(bipart_prob)
     print('a'+2)
@@ -102,11 +109,9 @@ for state in states_to_check:
 bipartisan_control_df = pd.DataFrame({'state': states_to_check,
                                       'bipartisan_prob': bipart_probs})
 
-
 # write these DataFrame to a csv
-bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob_CT' +\
+bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob_CT' +
                              datestring + '.csv', index=False)
-
 print('win probs done')
 
 results = []
@@ -114,39 +119,49 @@ results = []
 # for each state
 for state in states_to_check:
     print('starting ' + state)
-    try:
-        # no blending for NC, all Chaz (maps redrawn in 2018)
-        if state == 'NC':
-            power_df = state_voter_powers(races_df, state, error_vars,
-                                          race_sigma, race_deg_f, margin_col,
-                                          voters_col, threshold_col, tie_col,
-                                          chamber_col, power_col)
 
-        else:
-            # find probablity of pvoter powers for districts in this state
-            power_df = state_voter_powers(races_df, state, error_vars,
-                                          race_sigma, race_deg_f, margin_col,
-                                          voters_col, threshold_col, tie_col,
-                                          chamber_col, power_col,
-                                          found_margin_col='found_margin',
-                                          found_clip=0.06, blend_safe=0.75,
-                                          blend_else=0.5)
+    # no blending for NC, all CNalysis (maps redrawn in 2018)
+    if state == 'NC':
+        power_df = state_voter_powers(races_df, margin_col, voters_col,
+                                      threshold_col, tie_col, chamber_col,
+                                      power_col, state, error_vars,
+                                      race_sigma, race_deg_f,
+                                      rating_to_margin_df)
+    else:
+        power_df = state_voter_powers(races_df, margin_col, voters_col,
+                                      threshold_col, tie_col, chamber_col,
+                                      power_col, state, error_vars,
+                                      race_sigma, race_deg_f,
+                                      rating_to_margin_df,
+                                      found_margin_col='found_margin',
+                                      found_clip=0.06,
+                                      blend_safe=0.75, blend_else=0.5)
 
-        # append to results dataframe
-        results.append(power_df)
-        power_df.to_csv('data/output/voter_power/' + state + '.csv',
-                        index=False)
-    except:
-        print('failed')
+    # append to results dataframe
+    results.append(power_df)
+    power_df.to_csv('data/output/voter_power/' + state +
+                    datestring + '.csv', index=False)
+
 
 # concatenate statewide dataframes
 output_df = pd.concat(results)
 
-output_df.to_csv('data/output/voter_power/all_results_raw.csv', index=False)
+# adjust for number of seats at stake
+seats_df = pd.read_csv('data/input/parameters/cong_dist_proj_2021.csv')
+seats_dict = dict(zip(seats_df['state'], seats_df['cong_proj']))
+redist_col = 'redistricting_voter_power'
+output_df[redist_col] = output_df.apply(lambda x: x['VOTER_POWER'] *
+                                        (seats_dict[x['state']] - 1),
+                                        axis=1)
+
+# save raw output file
+output_df.to_csv('data/output/voter_power/all_results_raw' +
+                 datestring + '.csv', index=False)
 
 # delete unecessary columns
 output_df = output_df[['state', 'district', 'incumbent', 'favored',
                        'confidence', 'nom_R', 'nom_D', 'nom_I', 'cvap',
-                       'VOTER_POWER']]
+                       'VOTER_POWER', 'redistricting_voter_power']]
 
-output_df.to_csv('data/output/voter_power/all_results.csv', index=False)
+output_df.to_csv('data/output/voter_power/all_results' +
+                 datestring + '.csv', index=False)
