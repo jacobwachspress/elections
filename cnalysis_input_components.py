@@ -25,16 +25,6 @@ def main():
     df_cvap_upper = pd.read_csv('data/input/cvap/upper_chamber_cvap.csv')
     lower = add_cvap(lower, df_cvap_lower)
     upper = add_cvap(upper, df_cvap_upper)
-    
-    # adjust for expected state turnout
-    turnout_df = pd.read_csv('data/input/cvap/cvap_2016_turnout_by_state.csv')
-    turnout_dict = dict(zip(turnout_df['state'], turnout_df['CVAP_turnout']))
-    lower['turnout_estimate'] = lower.apply(lambda x:
-                                    x['cvap'] * turnout_dict[x['state']], 
-                                    axis=1)
-    upper['turnout_estimate'] = upper.apply(lambda x:
-                                    x['cvap'] * turnout_dict[x['state']], 
-                                    axis=1)
 
     # read in ordinals dict for massachusetts district name cleaning
     ordinals = pd.read_csv('data/input/general/ordinal_numbers.csv')
