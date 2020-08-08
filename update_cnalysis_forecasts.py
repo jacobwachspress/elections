@@ -20,10 +20,7 @@ def main():
 
     # Define update paths. Add in reverse date order b/c we'll drop duplicates
     update_paths = []
-<<<<<<< HEAD
 #    update_paths.append(input_path + 'ratings_updates_08_08.csv')
-=======
->>>>>>> parent of 4e22f0d... cnalysis update, add preprocessing code
     update_paths.append(input_path + 'ratings_updates_07_18.csv')
     update_paths.append(input_path + 'ratings_updates_07_02.csv')
 
