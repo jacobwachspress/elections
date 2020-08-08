@@ -52,7 +52,7 @@ def main():
                     break
 
         # Extract soup
-        soup = BeautifulSoup(driver.page_source, 'lxml')
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
 
         # Get html for each candidates margin (not in particular order)
         candidate1 = soup.findAll('g', {'class': 'g-text'})[0]

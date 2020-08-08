@@ -12,7 +12,7 @@ from voter_power import state_voter_powers
 
 
 # set update date and election date
-last_update = date(2020, 7, 18)
+last_update = date(2020, 8, 8)
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 

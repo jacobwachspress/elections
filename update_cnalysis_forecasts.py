@@ -16,10 +16,11 @@ def main():
     df_upper_old = pd.read_csv(upper_old_path)
 
     # Define update date
-    update_date = '07_18'
+    update_date = '08_08'
 
     # Define update paths. Add in reverse date order b/c we'll drop duplicates
     update_paths = []
+    update_paths.append(input_path + 'ratings_updates_08_08.csv')
     update_paths.append(input_path + 'ratings_updates_07_18.csv')
     update_paths.append(input_path + 'ratings_updates_07_02.csv')
 
