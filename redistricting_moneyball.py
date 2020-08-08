@@ -12,7 +12,7 @@ from voter_power import state_voter_powers
 
 
 # set update date and election date
-last_update = date(2020, 8, 8)
+last_update = date(2020, 11, 1)
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 
@@ -75,9 +75,11 @@ rating_to_margin_df = pd.read_csv(path, index_col='RATING')
 
 # initialize list of bipartisan control probabilities
 bipart_probs = []
-
+print('finding bipartisan control probs')
 # for each state
-for state in races_df['state'].unique():
+
+states_to_check = ['CT']
+for state in states_to_check:
 
     # find probablity of bipartisan control of residistricting
 
@@ -101,20 +103,21 @@ for state in races_df['state'].unique():
                                          prob_only=True)
 
     bipart_probs.append(bipart_prob)
+    print('a'+2)
 
 # write results to DataFrame
-bipartisan_control_df = pd.DataFrame({'state': races_df['state'].unique(),
+bipartisan_control_df = pd.DataFrame({'state': states_to_check,
                                       'bipartisan_prob': bipart_probs})
 
 # write these DataFrame to a csv
-bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob' +
+bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob_CT' +
                              datestring + '.csv', index=False)
 print('win probs done')
 
 results = []
 
 # for each state
-for state in races_df['state'].unique():
+for state in states_to_check:
     print('starting ' + state)
 
     # no blending for NC, all CNalysis (maps redrawn in 2018)
