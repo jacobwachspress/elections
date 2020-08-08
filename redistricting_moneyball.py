@@ -11,7 +11,11 @@ from datetime import date
 from voter_power import state_voter_powers
 
 # set update date and election date
+<<<<<<< HEAD
 last_update = date(2020, 7, 18)
+=======
+last_update = date(2020, 8, 8)
+>>>>>>> parent of 002690c... some testing, commiting just so I can revert
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 
@@ -70,10 +74,15 @@ power_col = 'VOTER_POWER'
 # initialize list of bipartisan control probabilities
 bipart_probs = []
 
+<<<<<<< HEAD
 states_to_check = ['CT']
 
 # for each state
 for state in states_to_check:
+=======
+# for each state
+for state in races_df['state'].unique():
+>>>>>>> parent of 002690c... some testing, commiting just so I can revert
 
     # find probablity of bipartisan control of residistricting
 
@@ -88,22 +97,30 @@ for state in states_to_check:
                                          blend_safe=0.75, blend_else=0.5,
                                          just_get_prob=True)
 
+<<<<<<< HEAD
     else:
         bipart_prob = state_voter_powers(races_df, state, error_vars,
                                          race_sigma, race_deg_f, margin_col,
                                          voters_col, threshold_col, tie_col,
                                          chamber_col, power_col,
                                          just_get_prob=True)
+=======
+    bipart_probs.append(bipart_prob)
+>>>>>>> parent of 002690c... some testing, commiting just so I can revert
 
     bipart_probs.append(bipart_prob)
 print('a'+2)
 # write results to DataFrame
-bipartisan_control_df = pd.DataFrame({'state': states_to_check,
+bipartisan_control_df = pd.DataFrame({'state': races_df['state'].unique(),
                                       'bipartisan_prob': bipart_probs})
 
 
 # write these DataFrame to a csv
+<<<<<<< HEAD
 bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob_CT' +\
+=======
+bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob' +
+>>>>>>> parent of 002690c... some testing, commiting just so I can revert
                              datestring + '.csv', index=False)
 
 bipartisan_control_df.to_csv('data/output/voter_power/bipartisan_prob' +
