@@ -6,13 +6,12 @@ import difflib
 
 
 def main():
-    
     # Initial cleaning
-    lower = pd.read_csv('data/output/CNalysis/ratings_lower_chamber_' + \
-                        'most_recent.csv') 
+    lower = pd.read_csv('data/output/CNalysis/ratings_lower_chamber_' +
+                        'most_recent.csv')
     lower = clean_initial_rating(lower)
-    upper = pd.read_csv('data/output/CNalysis/ratings_upper_chamber_' + \
-                        'most_recent.csv') 
+    upper = pd.read_csv('data/output/CNalysis/ratings_upper_chamber_' +
+                        'most_recent.csv')
     upper = clean_initial_rating(upper)
 
     # Fix incumbency errors in ratings
@@ -25,16 +24,14 @@ def main():
     df_cvap_upper = pd.read_csv('data/input/cvap/upper_chamber_cvap.csv')
     lower = add_cvap(lower, df_cvap_lower)
     upper = add_cvap(upper, df_cvap_upper)
-    
+
     # adjust for expected state turnout
     turnout_df = pd.read_csv('data/input/cvap/cvap_2016_turnout_by_state.csv')
     turnout_dict = dict(zip(turnout_df['state'], turnout_df['CVAP_turnout']))
-    lower['turnout_estimate'] = lower.apply(lambda x:
-                                    x['cvap'] * turnout_dict[x['state']], 
-                                    axis=1)
-    upper['turnout_estimate'] = upper.apply(lambda x:
-                                    x['cvap'] * turnout_dict[x['state']], 
-                                    axis=1)
+    lower['turnout_estimate'] = lower.apply(lambda x: x['cvap'] *
+                                            turnout_dict[x['state']], axis=1)
+    upper['turnout_estimate'] = upper.apply(lambda x: x['cvap'] *
+                                            turnout_dict[x['state']], axis=1)
 
     # read in ordinals dict for massachusetts district name cleaning
     ordinals = pd.read_csv('data/input/general/ordinal_numbers.csv')
@@ -42,8 +39,8 @@ def main():
     ordinals_dict = dict(zip(ordinals['ordinal'], ordinals['number']))
 
     # merge in old election results
-    df = pd.read_csv('data/input/election/st_leg_election_results_database.csv',
-                                 dtype=str)
+    old_path = 'data/input/election/st_leg_election_results_database.csv'
+    df = pd.read_csv(old_path, dtype=str)
 
     upper, lower = merge_year_election_results(df, ordinals_dict, '2016',
                                                upper, lower)
@@ -616,10 +613,10 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         # add totalvotes column to cham_df
         cham_df = pd.merge(cham_df, totalvotes, how='left', on=['sid', 'ddez'])
 
-        """Make Function"""
         # get winning margins, using same grouped object
-        winmargins = grouped.apply(lambda x: 1 if len(x) \
-             < 2 else (x.nlargest(2).max() - x.nlargest(2).min()) / x.sum())
+        winmargins = grouped.apply(lambda x: 1 if len(x) < 2
+                                   else (x.nlargest(2).max() -
+                                   x.nlargest(2).min()) / x.sum())
         winmargins = winmargins.reset_index()
 
         # rename column for better merge
@@ -657,16 +654,16 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         keys = list(ordinals_dict.keys())
         keys.reverse()
         for k in keys:
-            mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
-                   x.replace(k, str(ordinals_dict[k])))
+            mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                              x.replace(k, str(ordinals_dict[k])))
 
         # fuzzy match to dict keys
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
-                difflib.get_close_matches(x, list(capital_dict))[0])
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                          difflib.get_close_matches(x, list(capital_dict))[0])
 
         # change to numerical districts
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x: \
-                    str(capital_dict[x]).zfill(3))
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+                          str(capital_dict[x]).zfill(3))
 
         cham_df = cham_df[cham_df['sfips'] != '25']
         cham_df = pd.concat([cham_df, mass_df], sort=True)
@@ -756,7 +753,7 @@ def merge_incumbents(upper, lower, upper_inc, lower_inc):
         upper, lower: original DataFrames
         upper_inc, lower_inc: DataFrames with incumbency info
     '''
-    
+
     # clean district numbers
     upper_inc['district'] = upper_inc['district'].apply(lambda x:
                                                         str(x).zfill(3))
@@ -782,8 +779,8 @@ def merge_incumbents(upper, lower, upper_inc, lower_inc):
 
             # if no favorite is listed, this is a no-election seat, update to
             # uncontested and make the favored party the incumbent party
-            if dist['confidence'] == False:
-                if dist['incumbent'] == False:
+            if dist['confidence'] is False:
+                if dist['incumbent'] is False:
                     cham.loc[i, 'incumbent'] = cham.loc[i, 'inc_party']
                 cham.loc[i, 'favored'] = cham.loc[i, 'incumbent']
                 cham.loc[i, 'confidence'] = 'Uncontested'
