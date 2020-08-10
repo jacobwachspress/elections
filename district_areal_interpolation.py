@@ -10,12 +10,11 @@ import os
 def main():
     # Define foundations directory
     found_direc = 'data/input/foundation/shp/'
-    
+
     # Define and make output directory
     output_direc = 'data/output/foundation/shp/'
     if not os.path.isdir(output_direc):
         os.mkdir(output_direc)
-
 
     # Get Congressional Shapefile
     print('Creating Congressional Districts')
