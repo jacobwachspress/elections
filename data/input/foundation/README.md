@@ -1,10 +1,24 @@
 ## File Dictionary
 
 - incumbency_2016_2018_hand_checked.csv
+  - hand checking incumbency in 2018
+  - we used a fuzzy name matching system
+  - for certain candidates it was unclear whether a match was found
+  - occasionally a rep would use a nickname on their registration in which it was a match and other their spouse would run and it would not be a match
 - incumbency_2016_2020_hand_checked.csv
+  - hand checking whether incumbent running in 2020 won in 2016
+  - These candidates were in the "blurry" zone of the fuzzy name match
 - incumbent_corrections.csv
+  - 2020 incumbency corrections to CNalysis reported incumbent list
 - medsl_party_corrections.csv
+  - party based corrections to 2018 MEDSL state legislative data
 - medsl_results_corrections.csv
+  - result based corrections to 2018 MEDSL state legislative data
+- shp/
+  - source: [TIGER/Line Shapfiles](https://www.census.gov/cgi-bin/geo/shapefiles/index.php)
 - shp/congressional/
+  - geographic data for congressional districts
 - shp/lower/
+  - geographic data for state legislative lower chambers
 - shp/upper/
+  - geographic data for state legislative upper chamber

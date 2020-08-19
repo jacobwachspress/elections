@@ -2,6 +2,13 @@
 
 Code for the Princeton Gerrymandering Project's model to identify races where voters have the most leverage to prevent partisan gerrymandering in 2021. Our findings are in this [Redistricting Moneyball Map](https://election.princeton.edu/data/moneyball/). Below is a file dictionary as well as a brief methodology. We also link to [a more in-depth methodlogy](https://docs.google.com/document/d/1iNWxfLuYnP_TpYXfqx_yK7wopI6qji6QgCvEZYtiS6g/edit?usp=sharing).
 
+## Steps to Run Model
+
+1. Download all dependencies listed below
+2. Download or clone this repository
+3. Run preprocess.py
+4. Run redistricting_moneyball.py
+
 ## File Dictionary
 
 Short descriptions of each python file in the repository.
