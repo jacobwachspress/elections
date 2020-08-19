@@ -7,21 +7,43 @@ Code for the Princeton Gerrymandering Project's model to identify races where vo
 Short descriptions of each python file in the repository.
 
 - cnalysis_forecasts_2018.py
+  - Analyze historical accuracy of handicapped estimates
 - cnalysis_input_components.py
+  - Generates handicap forecasting input data
+  - Fixes incumbency errors, adds cvap by district, creates a turnout estimate, and adds old election results
 - density.py
+  - Classify each state legislative district into rural, exurban, suburban, and urban based on population density
 - district_areal_interpolation.py
+  - Assign relevant congressional district to each state upper chamber legislative district
+  - Assign relevant state upper chamber district to each state lower chamber legislative district
+  - Assignments are based on overlapping area
 - economist_forecasts.py
+  - Scrape statewide election forecasts from the economist
 - foundations_blending.py
-- foudnations_Input_components.py
+  - Test how to blend foundations forecast and CNalysis forecasts
+- foudnations_input_components.py
+  - Generate foundations model input data
+  - Puts together historical election results
 - foundations_prediction_2020.py
+  - Predict margin of each relevant state legislative race using foundations model
 - foundations_residuals_2020.py
+  - Evaluate differences between foundations model and CNalysis model
 - historical_presidential_results.py
+  - Extract historical presidential results by state legislative district
 - incumbency_2016_and_2018.py
+  - Identify incumbents in 2016 and 2018
+- preprocess.py
+  - Execute all necessary code from other files before running the model
 - redistricting_moneyball.py
+  - Calculate statewide results for power of a vote
 - update_cnalysis_forecasts.py
+  - Add updates provided by CNalsysis to their ratings
 - voter_power.py
+  - Functions to assist calculating voter power when executing redistricting_moneyball.py
 - wikipedia_lower_chamber_incumbency.py
-- wikipedia_lower_chamber_incumbency.py
+  - Extract current incumbency from wikipedia for lower chambers
+- wikipedia_upper_chamber_incumbency.py
+  - Extract current incumbency from wikipedia for upper chambers
 
 ## Dependencies
 
