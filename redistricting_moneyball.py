@@ -8,6 +8,7 @@ Created on Fri Jul 24 13:08:40 2020
 import pandas as pd
 import numpy as np
 from datetime import date
+import scipy.stats as sts
 from voter_power import state_voter_powers
 
 
@@ -47,6 +48,9 @@ races_df['statewide'] = 1
 # how much should we fatten the tails based on the time to election
 deg_f_scale = 1 + min(1, 1/4*np.log(1 + days_to_election/20))
 
+# for now deprecate this to deal with uncertainty differently
+deg_f_scale=1
+
 # set the correlated error vars
 error_vars = {}
 err_df = pd.read_csv('data/input/parameters/correlated_error_parameters.csv')
@@ -61,6 +65,9 @@ for _, row in err_df.iterrows():
 race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
 
+# precalculate t cumulative distribution function (bottleneck)
+tcdf = sts.t.cdf(np.linspace(-50, 50, 100000000), race_deg_f)
+print ('did t')
 # set DataFrame columns for voter power analysis
 margin_col = 'margin'
 voters_col = 'turnout_estimate'
@@ -73,7 +80,9 @@ power_col = 'VOTER_POWER'
 path = 'data/input/parameters/CNalysis_rating_to_margin.csv'
 rating_to_margin_df = pd.read_csv(path, index_col='RATING')
 
-# initialize list of bipartisan control probabilities
+
+
+## initialize list of bipartisan control probabilities
 bipart_probs = []
 
 # for each state
@@ -84,21 +93,21 @@ for state in races_df['state'].unique():
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
     if state == 'NC':
         bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
-                                         threshold_col, tie_col, chamber_col,
+                                         chamber_col,
                                          power_col, state, error_vars,
                                          race_sigma, race_deg_f,
-                                         rating_to_margin_df,
-                                         prob_only=True)
+                                         rating_to_margin_df, tcdf,
+                                         prob_dist_only=True)
     else:
         bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
-                                         threshold_col, tie_col, chamber_col,
+                                         chamber_col,
                                          power_col, state, error_vars,
                                          race_sigma, race_deg_f,
-                                         rating_to_margin_df,
+                                         rating_to_margin_df, tcdf,
                                          found_margin_col='found_margin',
                                          found_clip=0.06,
                                          blend_safe=0.75, blend_else=0.5,
-                                         prob_only=True)
+                                         prob_dist_only=True)
 
     bipart_probs.append(bipart_prob)
 
@@ -117,22 +126,22 @@ results = []
 for state in races_df['state'].unique():
     print('starting ' + state)
 
-    # no blending for NC, all CNalysis (maps redrawn in 2018)
+    # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
     if state == 'NC':
         power_df = state_voter_powers(races_df, margin_col, voters_col,
-                                      threshold_col, tie_col, chamber_col,
-                                      power_col, state, error_vars,
-                                      race_sigma, race_deg_f,
-                                      rating_to_margin_df)
+                                         chamber_col,
+                                         power_col, state, error_vars,
+                                         race_sigma, race_deg_f,
+                                         rating_to_margin_df, tcdf)
     else:
         power_df = state_voter_powers(races_df, margin_col, voters_col,
-                                      threshold_col, tie_col, chamber_col,
-                                      power_col, state, error_vars,
-                                      race_sigma, race_deg_f,
-                                      rating_to_margin_df,
-                                      found_margin_col='found_margin',
-                                      found_clip=0.06,
-                                      blend_safe=0.75, blend_else=0.5)
+                                         chamber_col,
+                                         power_col, state, error_vars,
+                                         race_sigma, race_deg_f,
+                                         rating_to_margin_df, tcdf,
+                                         found_margin_col='found_margin',
+                                         found_clip=0.06,
+                                         blend_safe=0.75, blend_else=0.5)
 
     # append to results dataframe
     results.append(power_df)
