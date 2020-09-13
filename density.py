@@ -54,7 +54,6 @@ def main():
 
     # areal interpolation
     for st_fips in all_fips:
-
         # get file name
         file = st_fips + '_block_group.shp'
 
@@ -81,8 +80,8 @@ def main():
 
                 # areal interpolation
                 _, out_dist_df = areal.aggregate(bg_df, dist_df,
-                                                         source_columns=s_cols,
-                                                         target_columns=t_cols)
+                                                 source_columns=s_cols,
+                                                 target_columns=t_cols)
 
                 # rename some columns
                 dist_cols = {'density_0': 'rural', 'density_1': 'exurban',

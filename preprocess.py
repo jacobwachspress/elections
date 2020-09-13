@@ -39,7 +39,7 @@ def preprocess(wikipedia_scrape=True, economist_scrape=True,
     if find_density:
         print('calculating urban/suburban/exurban/rural breakdown ' +
               'of the districts using census data')
-        density.main()
+        # density.main()
 
     # merge needed district-specific data to CNalysis ratings
     if district_input_data:
