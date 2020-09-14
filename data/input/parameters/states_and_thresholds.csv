@@ -38,8 +38,7 @@ MT,,,,,,independent commission
 NC,lower,60,0.9,1,1,
 NC,upper,25,0.8,1,1,
 ND,,,,,,no election
-NE,lower,1,0,1,0,artificial for model
-NE,upper,17,1,1,0,
+NE,,,,,,no election
 NH,,,,,,"hard to model, dems would need double supermajority or governor, multi-member in house is tough"
 NJ,,,,,,no election
 NM,upper,21,0.9,0,1,prob not worth it thresh=21 missing data
