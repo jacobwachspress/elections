@@ -66,7 +66,7 @@ race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
 
 # precalculate t cumulative distribution function (bottleneck)
-tcdf = sts.t.cdf(np.linspace(-50, 50, 100000000), race_deg_f)
+tcdf = sts.t.cdf(np.linspace(-50, 50, 10000000), race_deg_f)
 print ('did t')
 # set DataFrame columns for voter power analysis
 margin_col = 'margin'
@@ -91,7 +91,7 @@ for state in races_df['state'].unique():
     # find probablity of bipartisan control of residistricting
 
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state == 'NC':
+    if state in ['NE', 'NC']:
         bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
                                          chamber_col,
                                          power_col, state, error_vars,
@@ -127,7 +127,7 @@ for state in races_df['state'].unique():
     print('starting ' + state)
 
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state == 'NC':
+    if state in ['NE', 'NC']:
         power_df = state_voter_powers(races_df, margin_col, voters_col,
                                          chamber_col,
                                          power_col, state, error_vars,
