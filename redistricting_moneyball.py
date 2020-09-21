@@ -33,9 +33,6 @@ founds_df = founds_df[['state', 'district_num', 'office', 'found_margin']]
 races_df = pd.merge(races_df, founds_df, how='left',
                     on=['state', 'office', 'district_num'])
 
-# HACK
-races_df.loc[(races_df['state'] == 'DE') & (races_df['office'] == 'lower'), 'state'] = 'NE'
-
 # read in states to test
 to_test = pd.read_csv('data/input/parameters/states_and_thresholds.csv')
 
@@ -47,8 +44,6 @@ races_df = races_df[races_df['d_threshold'].notna()]
 
 # add column for statewide error
 races_df['statewide'] = 1
-
-
 
 # how much should we fatten the tails based on the time to election
 deg_f_scale = 1 + min(1, 1/4*np.log(1 + days_to_election/20))
@@ -71,7 +66,7 @@ race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
 
 # precalculate t cumulative distribution function (bottleneck)
-tcdf = sts.t.cdf(np.linspace(-50, 50, 10000000), race_deg_f)
+tcdf = sts.t.cdf(np.linspace(-50, 50, 100000000), race_deg_f)
 print ('did t')
 # set DataFrame columns for voter power analysis
 margin_col = 'margin'
@@ -86,6 +81,7 @@ path = 'data/input/parameters/CNalysis_rating_to_margin.csv'
 rating_to_margin_df = pd.read_csv(path, index_col='RATING')
 
 
+
 ## initialize list of bipartisan control probabilities
 bipart_probs = []
 
@@ -95,7 +91,7 @@ for state in races_df['state'].unique():
     # find probablity of bipartisan control of residistricting
 
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state in ['NE', 'NC']:
+    if state == 'NC':
         bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
                                          chamber_col,
                                          power_col, state, error_vars,
@@ -127,11 +123,11 @@ print('win probs done')
 results = []
 
 # for each state
-for state in ['NE']:
+for state in races_df['state'].unique():
     print('starting ' + state)
 
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state in ['NE', 'NC']:
+    if state == 'NC':
         power_df = state_voter_powers(races_df, margin_col, voters_col,
                                          chamber_col,
                                          power_col, state, error_vars,

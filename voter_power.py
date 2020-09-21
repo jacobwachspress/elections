@@ -212,8 +212,6 @@ def leverage(districts_df, error_vars, race_sigma, race_deg_f, margin_col,
     # find the chamber success probability
     seat_dist = prob_dist(parameter_weights, t_dist_params, chamber_2_ix, 
                           race_sigma, race_deg_f, d_uncont, r_uncont, tcdf)
-    
-    print (np.sum(seat_dist))
 
     # if we just cared about probability distribution
     if prob_dist_only:
