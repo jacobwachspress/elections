@@ -9,10 +9,11 @@ import pandas as pd
 import numpy as np
 from datetime import date
 from voter_power import state_voter_powers
+import scipy.stats as sts
 
 
 # set update date and election date
-last_update = date(2020, 8, 8)
+last_update = date(2020, 9, 20)
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 
@@ -61,6 +62,9 @@ for _, row in err_df.iterrows():
 race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
 
+# get t-distribution cdf (bottleneck if not pre-calculated)
+tcdf = sts.t.cdf(np.linspace(-50, 50, 100000000), race_deg_f)
+
 # set DataFrame columns for voter power analysis
 margin_col = 'margin'
 voters_col = 'turnout_estimate'
@@ -87,14 +91,14 @@ for state in races_df['state'].unique():
                                          threshold_col, tie_col, chamber_col,
                                          power_col, state, error_vars,
                                          race_sigma, race_deg_f,
-                                         rating_to_margin_df,
+                                         rating_to_margin_df, tcdf,
                                          prob_only=True)
     else:
         bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
                                          threshold_col, tie_col, chamber_col,
                                          power_col, state, error_vars,
                                          race_sigma, race_deg_f,
-                                         rating_to_margin_df,
+                                         rating_to_margin_df, tcdf,
                                          found_margin_col='found_margin',
                                          found_clip=0.06,
                                          blend_safe=0.75, blend_else=0.5,
@@ -123,13 +127,13 @@ for state in races_df['state'].unique():
                                       threshold_col, tie_col, chamber_col,
                                       power_col, state, error_vars,
                                       race_sigma, race_deg_f,
-                                      rating_to_margin_df)
+                                      rating_to_margin_df, tcdf)
     else:
         power_df = state_voter_powers(races_df, margin_col, voters_col,
                                       threshold_col, tie_col, chamber_col,
                                       power_col, state, error_vars,
                                       race_sigma, race_deg_f,
-                                      rating_to_margin_df,
+                                      rating_to_margin_df, tcdf,
                                       found_margin_col='found_margin',
                                       found_clip=0.06,
                                       blend_safe=0.75, blend_else=0.5)

@@ -9,7 +9,7 @@ import pandas as pd
 import itertools as it
 
 
-def prob_from_margin(margin, race_sigma, race_deg_f):
+def prob_from_margin(margin, race_sigma, race_deg_f, tcdf):
     ''' Given the expected margin of a race and the parameters determining the
     t-distribution about this margin, returns the probability of victory.
     Arguments:
@@ -20,10 +20,19 @@ def prob_from_margin(margin, race_sigma, race_deg_f):
         race_df: positive integer, degrees of freedom used in t-distribution
     Output: real number between 0 and 1, probability of candidate winning
     '''
-    return sts.t.cdf(margin / race_sigma, race_deg_f)
+    
+    try:
+        x = margin/race_sigma
+        ix = (x+50)/100 * (len(tcdf)-1)
+        floor_ix = int(np.floor(ix))
+        frac_ix = ix - floor_ix
+        return (1 - frac_ix) * tcdf[floor_ix] + frac_ix * tcdf[floor_ix + 1]
+    except:
+        print('here')
+        return sts.t.cdf(margin / race_sigma, race_deg_f)
 
 
-def dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f):
+def dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f, tcdf):
     ''' Given a list of expected win margins and the number of seats needed
     for Dem party to have redistricting power, find the probability
     of the Dem party reaching that threshold. Relies on prob_from_margin
@@ -42,7 +51,7 @@ def dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f):
     '''
 
     # find probability of victory for each race
-    probs = [prob_from_margin(i, race_sigma, race_deg_f) for i in margins]
+    probs = [prob_from_margin(i, race_sigma, race_deg_f, tcdf) for i in margins]
 
     # Find full probability distribution of seats won, assuming independence
 
@@ -62,7 +71,7 @@ def dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f):
 
 
 def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
-                              race_deg_f, both_bad, neither_bad):
+                              race_deg_f, both_bad, neither_bad, tcdf):
     ''' Given two lists of expected win margins and thresholds for Dem party to
     have redistricting power, find the probability of a "good" outcome (no
     single party control). Relies on dem_chamber_power and assumes independence
@@ -95,7 +104,7 @@ def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
         else:
             # find dem chamber power probability and append to win_probs
             p = dem_chamber_power(margins, threshold, tie, race_sigma,
-                                  race_deg_f)
+                                  race_deg_f, tcdf)
             dem_probs.append(p)
 
     # find the probability that we have a good outcome
@@ -110,7 +119,7 @@ def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
 
 def chamber_success_prob(parameter_weights, t_dist_params, threshold_1,
                          threshold_2, tie_1, tie_2, chamber_2_ix,
-                         race_sigma, race_deg_f, both_bad, neither_bad):
+                         race_sigma, race_deg_f, both_bad, neither_bad, tcdf):
     ''' Finds the probability of chamber success (redistricting power) for a
     state, accounting for various sources of correlated error
 
@@ -190,7 +199,8 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1,
 
         # find success_prob
         success = success_prob_independence(params_1, params_2, race_sigma,
-                                            race_deg_f, both_bad, neither_bad)
+                                            race_deg_f, both_bad, neither_bad,
+                                            tcdf)
 
         # add to weighted success probability
         success_weight += all_weights[ix] * success
@@ -200,7 +210,7 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1,
 
 def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
                 neither_bad, margin_col, voters_col, threshold_col, tie_col,
-                chamber_col, power_col, prob_only):
+                chamber_col, power_col, prob_only, tcdf):
     ''' Finds the power of one vote in each district (i.e. the increase in
     probability that the party reaches the necessary number of seats if they
     gain one extra vote)
@@ -293,7 +303,8 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
     # find the chamber success probability
     prob = chamber_success_prob(parameter_weights, t_dist_params, threshold_1,
                                 threshold_2, tie_1, tie_2, chamber_2_ix,
-                                race_sigma, race_deg_f, both_bad, neither_bad)
+                                race_sigma, race_deg_f, both_bad, neither_bad,
+                                tcdf)
 
     # if we just cared about election results
     if prob_only:
@@ -347,7 +358,8 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
             prob_new = chamber_success_prob(param_weights_copy, t_dist_params,
                                             threshold_1, threshold_2, tie_1,
                                             tie_2, chamber_2_ix, race_sigma,
-                                            race_deg_f, both_bad, neither_bad)
+                                            race_deg_f, both_bad, neither_bad, 
+                                            tcdf)
 
             # update dictionary with quantity voter_power * voters_in_district
             voter_power_dict[unique_params] = (prob_new - prob) * num_voters
@@ -387,7 +399,7 @@ def rating_to_margin(favored, confidence, df):
 
 def state_voter_powers(all_races, margin_col, voters_col, threshold_col,
                        tie_col, chamber_col, power_col, state, error_vars,
-                       race_sigma, race_deg_f, rating_to_margin_df,
+                       race_sigma, race_deg_f, rating_to_margin_df, tcdf,
                        found_margin_col=False, found_clip=False,
                        blend_safe=False, blend_else=False, prob_only=False):
     ''' Gets all voter powers in a state.
@@ -499,5 +511,5 @@ def state_voter_powers(all_races, margin_col, voters_col, threshold_col,
     st_races = voter_power(st_races, error_vars, race_sigma, race_deg_f,
                            both_bad, neither_bad, margin_col, voters_col,
                            threshold_col, tie_col, chamber_col, power_col,
-                           prob_only)
+                           prob_only, tcdf)
     return st_races
