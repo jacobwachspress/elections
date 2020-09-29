@@ -28,7 +28,6 @@ def prob_from_margin(margin, race_sigma, race_deg_f, tcdf):
         frac_ix = ix - floor_ix
         return (1 - frac_ix) * tcdf[floor_ix] + frac_ix * tcdf[floor_ix + 1]
     except:
-        print('here')
         return sts.t.cdf(margin / race_sigma, race_deg_f)
 
 

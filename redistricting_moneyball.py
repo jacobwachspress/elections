@@ -33,15 +33,20 @@ founds_df = founds_df[['state', 'district_num', 'office', 'found_margin']]
 races_df = pd.merge(races_df, founds_df, how='left',
                     on=['state', 'office', 'district_num'])
 
+# nebraska unicameral hack
+races_df.loc[(races_df['state'] == 'DE') & \
+             (races_df['office'] == 'lower'), 'state'] = 'NE'
+             
 # read in states to test
 to_test = pd.read_csv('data/input/parameters/states_and_thresholds.csv')
 
 # merge to get thresholds
 races_df = pd.merge(races_df, to_test, how='left', on=['state', 'office'])
-
+             
 # restrict to chambers where there is a threshold in the csv
 races_df = races_df[races_df['d_threshold'].notna()]
 
+             
 # add column for statewide error
 races_df['statewide'] = 1
 
@@ -63,7 +68,7 @@ race_sigma = 0.07
 race_deg_f = 5 / deg_f_scale
 
 # get t-distribution cdf (bottleneck if not pre-calculated)
-tcdf = sts.t.cdf(np.linspace(-50, 50, 100000000), race_deg_f)
+tcdf = sts.t.cdf(np.linspace(-50, 50, 10000000), race_deg_f)
 
 # set DataFrame columns for voter power analysis
 margin_col = 'margin'
@@ -82,11 +87,12 @@ bipart_probs = []
 
 # for each state
 for state in races_df['state'].unique():
+    print(state)
 
     # find probablity of bipartisan control of residistricting
 
     # no blending for NC, all Chaz (redistricting since 2018 messes up founds)
-    if state == 'NC':
+    if state in ['NE', 'NC']:
         bipart_prob = state_voter_powers(races_df, margin_col, voters_col,
                                          threshold_col, tie_col, chamber_col,
                                          power_col, state, error_vars,
@@ -122,7 +128,7 @@ for state in races_df['state'].unique():
     print('starting ' + state)
 
     # no blending for NC, all CNalysis (maps redrawn in 2018)
-    if state == 'NC':
+    if state in ['NE', 'NC']:
         power_df = state_voter_powers(races_df, margin_col, voters_col,
                                       threshold_col, tie_col, chamber_col,
                                       power_col, state, error_vars,

@@ -33,11 +33,15 @@ def main():
     # Drop duplicate updates. Assume updates are in reverse date order
     df = df.drop_duplicates(subset=['DISTRICT'])
 
+    # sometimes he calls HD districts AD districts
+    df['DISTRICT'] = df['DISTRICT'].apply(lambda x: x.replace('AD', 'HD'))
+
     # Convert rating to title case
     df['NEW_RATING'] = df['NEW_RATING'].apply(lambda x: tc.titlecase(x))
 
     # Add hyphen to district
     df['DISTRICT'] = df['DISTRICT'].apply(lambda x: '-'.join(x.split()))
+    
     df_lower = df[df['DISTRICT'].str.contains('HD')]
     df_upper = df[df['DISTRICT'].str.contains('SD')]
 
