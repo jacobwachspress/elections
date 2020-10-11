@@ -43,17 +43,15 @@ def fuzzy_merge(file, df):
     # filter for winners
     results_df = results_df[results_df['Winner'] == True]
 
-    """MAKE FUNCTION"""
     # clean district names (get rid of "District" at the front)
-    results_df['district'] = results_df['district'].apply(lambda x: \
-             ' '.join(x.split(' ')[1:]) if x.split(' ')[0] == 'District' \
+    results_df['district'] = results_df['district'].apply(lambda x:
+             ' '.join(x.split(' ')[1:]) if x.split(' ')[0] == 'District'
                      else x)
 
     # fuzzy guess the name of the district
-    """Make Function"""
-    chaz_df['DIST_NAME'] = chaz_df['NAME'].apply(lambda x: \
-           difflib.get_close_matches(x, results_df['district'])[0] \
-           if len(difflib.get_close_matches(x, results_df['district'])) > 0\
+    chaz_df['DIST_NAME'] = chaz_df['NAME'].apply(lambda x:
+           difflib.get_close_matches(x, results_df['district'])[0]
+           if len(difflib.get_close_matches(x, results_df['district'])) > 0
                   else None)
 
     # merge dataframes

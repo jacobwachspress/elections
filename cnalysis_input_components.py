@@ -544,7 +544,7 @@ def fix_incumbency(df_incumbent, lower, upper):
 
 
 def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
-    ''' Parses Klamer election results and cleans up results from a
+    """ Parses Klamer election results and cleans up results from a
     given year, merges to old DataFrames
 
     Arguments:
@@ -553,7 +553,7 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
             massachusetts
         year: year_to_merge
         sldu_old, sldl_old: old DataFrames for merge on fips+district
-    '''
+    """
     # remove "scattering" votes
     df = df[df['cand'] != 'scattering']
 
@@ -655,15 +655,16 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
         keys.reverse()
         for k in keys:
             mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
-                              x.replace(k, str(ordinals_dict[k])))
+                                                    x.replace(k,
+                                                              str(ordinals_dict[k])))
 
         # fuzzy match to dict keys
-        mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
+        mass_df['ddez'] = mass_df['ddez'].apply(lambda x:\
                           difflib.get_close_matches(x, list(capital_dict))[0])
 
         # change to numerical districts
         mass_df['ddez'] = mass_df['ddez'].apply(lambda x:
-                          str(capital_dict[x]).zfill(3))
+                                                str(capital_dict[x]).zfill(3))
 
         cham_df = cham_df[cham_df['sfips'] != '25']
         cham_df = pd.concat([cham_df, mass_df], sort=True)
@@ -689,14 +690,14 @@ def merge_year_election_results(df, ordinals_dict, year, sldu_old, sldl_old):
 
 
 def merge_densities(fips_df, density_path, upper, lower):
-    ''' Merges in density data to upper and lower DataFrames
+    """ Merges in density data to upper and lower DataFrames
 
     Arguments:
         fips_df: DataFrame with states and two-digit FIPS codes
         density_path: path where all density files are held, in the format
             density_path + chamber + '/' + state fips code + '_districts.shp'
         upper, lower: old DataFrames for merge on geoid
-    '''
+    """
 
     # get all states to test
     all_fips = fips_df['fips'].astype(str).str.zfill(2).unique()
@@ -747,12 +748,12 @@ def merge_densities(fips_df, density_path, upper, lower):
 
 
 def merge_incumbents(upper, lower, upper_inc, lower_inc):
-    ''' Merges in incumbents from wikipedia scrape
+    """ Merges in incumbents from wikipedia scrape
 
     Arguments:
         upper, lower: original DataFrames
         upper_inc, lower_inc: DataFrames with incumbency info
-    '''
+    """
 
     # clean district numbers
     upper_inc['district'] = upper_inc['district'].apply(lambda x:

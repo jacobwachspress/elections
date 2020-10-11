@@ -34,7 +34,7 @@ races_df = pd.merge(races_df, founds_df, how='left',
                     on=['state', 'office', 'district_num'])
 
 # nebraska unicameral hack
-races_df.loc[(races_df['state'] == 'DE') & \
+races_df.loc[(races_df['state'] == 'DE') &
              (races_df['office'] == 'lower'), 'state'] = 'NE'
              
 # read in states to test

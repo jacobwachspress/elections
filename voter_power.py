@@ -5,21 +5,21 @@ Created on Thu Jun 11 14:04:26 2020
 """
 import scipy.stats as sts
 import numpy as np
-import pandas as pd
 import itertools as it
 
 
 def prob_from_margin(margin, race_sigma, race_deg_f, tcdf):
-    ''' Given the expected margin of a race and the parameters determining the
+    """ Given the expected margin of a race and the parameters determining the
     t-distribution about this margin, returns the probability of victory.
     Arguments:
         margin: real number between -1 and 1, expected win margin for candidate
             (negative = loss margin)
         race_sigma: positive real number, estimate of standard deviation of
             actual win margin
-        race_df: positive integer, degrees of freedom used in t-distribution
+        race_deg_f: positive integer, degrees of freedom used in t-distribution
+        tcdf: t cumulative distribution function (precalculated to save time)
     Output: real number between 0 and 1, probability of candidate winning
-    '''
+    """
     
     try:
         x = margin/race_sigma
@@ -45,6 +45,7 @@ def dem_chamber_power(margins, threshold, tie, race_sigma, race_deg_f, tcdf):
             actual win margin in each race
         race_deg_f: positive integer, degrees of freedom used in t-distribution
             in each race
+        tcdf: t cumulative distribution function (precalculated to save time)
     Output: probability that the party reaches the threshold number of seats,
             assuming independence of race outcomes
     '''
@@ -84,7 +85,9 @@ def success_prob_independence(chamber_1_params, chamber_2_params, race_sigma,
         race_deg_f: positive integer, degrees of freedom used in t-distribution
             in each race
         both_bad: Boolean, is it bad if dems win both chambers? (This happens
-            if there is a D governor or governors have no veto power.)'''
+            if there is a D governor or governors have no veto power.)
+        tcdf: t cumulative distribution function (precalculated to save time)
+    '''
 
     # initialize two-element array of dem control prob of each chamber
     dem_probs = []
@@ -150,6 +153,7 @@ def chamber_success_prob(parameter_weights, t_dist_params, threshold_1,
         neither_bad: Boolean, is it bad if Dems reach threshold in no chamber?
             (This happens if there is a R governor or governors have no
             veto power.)
+        tcdf: t cumulative distribution function (precalculated to save time)
     '''
 
     # make sure at least one source of correlated error
@@ -228,7 +232,6 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
             are sources of error, values are (sigma, deg_f) of t-distribution
             of the error and number of nodes for numerical integration accuracy
                 format: (sigma, deg_f), nodes
-        threshold: number of seats needed for redistricting power
         race_sigma: positive real number, estimate of standard deviation of
             actual win margin in each race, after correlated error
         race_deg_f: positive integer, degrees of freedom used in t-distribution
@@ -239,6 +242,7 @@ def voter_power(districts_df, error_vars, race_sigma, race_deg_f, both_bad,
         neither_bad: Boolean, is it bad if Dems reach threshold in no chamber?
             (This happens if there is a R governor or governors have no
             veto power.)
+        tcdf: t cumulative distribution function (precalculated to save time)
     Output: input DataFrame with one column added, power_col, which
             gives the result of the calculation for each district'''
 
@@ -441,6 +445,7 @@ def state_voter_powers(all_races, margin_col, voters_col, threshold_col,
             rating
         prob_only (optional): cuts function off early and just returns the
             probability of bipartisan control
+        tcdf: t cumulative distribution function (precalculated to save time)
 
     Output: DataFrame of races in this state with voter power column added
     '''
@@ -480,7 +485,6 @@ def state_voter_powers(all_races, margin_col, voters_col, threshold_col,
     # adjust margin column based on foundational model
     if found_margin_col:
 
-        """MAKE NAMES SHORTER AND CLEAN UP STYLING"""
         # clip margins if needed
         if found_clip:
             st_races['unclipped_' + found_margin_col] = \
