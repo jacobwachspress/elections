@@ -13,7 +13,7 @@ import scipy.stats as sts
 
 
 # set update date and election date
-last_update = date(2020, 9, 20)
+last_update = date(2020, 10, 10)
 election_day = date(2020, 11, 3)
 days_to_election = (election_day - last_update).days
 

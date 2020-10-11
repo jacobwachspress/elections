@@ -1,319 +1,319 @@
-﻿STATE,GEOID,NAME,DISTRICT,RATING,FLIP,R NOM,D NOM,I NOM
+STATE,GEOID,NAME,DISTRICT,RATING,FLIP,R NOM,D NOM,I NOM
 AK,0200A,A,AK-SD-A,No Election,,N/A,N/A,N/A
-AK,0200B,B,AK-SD-B,Likely R,,Robert Myers,N/A,"Marna Sanford, Evan Eads"
+AK,0200B,B,AK-SD-B,Likely R,,TBA,N/A,"Marna Sanford, Evan Eads"
 AK,0200C,C,AK-SD-C,No Election,,N/A,N/A,N/A
-AK,0200D,D,AK-SD-D,Safe R,,David Wilson [I],N/A,"Dan Mayfield, Thomas Lamb"
+AK,0200D,D,AK-SD-D,Safe R,,TBA,N/A,"Dan Mayfield, Thomas Lamb"
 AK,0200E,E,AK-SD-E,No Election,,N/A,N/A,N/A
-AK,0200F,F,AK-SD-F,Safe R,,Shelley Hughes [I],N/A,"Gavin Christiansen, Jim Cooper"
+AK,0200F,F,AK-SD-F,Safe R,,Shelley Hughes [I],N/A,"Gavin Christiansen, Allan Riordan-Randall, Stephany Jeffers"
 AK,0200G,G,AK-SD-G,No Election,,N/A,N/A,N/A
 AK,0200H,H,AK-SD-H,Safe D,,Madeline Gaiser,Bill Wielechowski [I],N/A
 AK,0200I,I,AK-SD-I,No Election,,N/A,N/A,N/A
 AK,0200J,J,AK-SD-J,Uncontested D,,N/A,Tom Begich [I],N/A
 AK,0200K,K,AK-SD-K,No Election,,N/A,N/A,N/A
-AK,0200L,L,AK-SD-L,Tilt R,,Natasha Von Imhof [I],Roselynn Cacy,N/A
-AK,0200M,M,AK-SD-M,Safe R,,Josh Revak [I],N/A,Andy Holleman
-AK,0200N,N,AK-SD-N,Lean R,,Roger Holland,Carl Johnson,Care Clift
+AK,0200L,L,AK-SD-L,Lean R,,TBA,Roselynn Cacy,Jeff Landfield
+AK,0200M,M,AK-SD-M,Safe R,,TBA,TBA,Andy Holleman
+AK,0200N,N,AK-SD-N,Lean R,,TBA,TBA,Care Clift
 AK,0200O,O,AK-SD-O,No Election,,N/A,N/A,N/A
-AK,0200P,P,AK-SD-P,Safe R,,Gary Stevens [I],N/A,Greg Madden
+AK,0200P,P,AK-SD-P,Safe R,,TBA,N/A,Greg Madden
 AK,0200Q,Q,AK-SD-Q,No Election,,N/A,N/A,N/A
-AK,0200R,R,AK-SD-R,Uncontested R,,Bert Stedman [I],N/A,N/A
+AK,0200R,R,AK-SD-R,Uncontested R,,TBA,N/A,N/A
 AK,0200S,S,AK-SD-S,No Election,,N/A,N/A,N/A
-AK,0200T,T,AK-SD-T,Safe D,,Thomas Baker,Donny Olson [I],N/A
-AZ,4001,1,AZ-SD-1,Safe R,,Karen Fann [I],Gilbert Carillo,N/A
-AZ,4002,2,AZ-SD-2,Safe D,,Mark Workman,Rosanna Gabaldón,N/A
-AZ,4003,3,AZ-SD-3,Uncontested D,,N/A,Sally Ann Gonzales [I],N/A
-AZ,4004,4,AZ-SD-4,Safe D,,Travis Angry,Lisa Otondo [I],N/A
-AZ,4005,5,AZ-SD-5,Uncontested R,,Sonny Borrelli [I],N/A,N/A
-AZ,4006,6,AZ-SD-6,Toss-Up,,Wendy Rogers,Feclia French,N/A
-AZ,4007,7,AZ-SD-7,Uncontested D,,N/A,Jamescita Mae Peshlakai [I],N/A
-AZ,4008,8,AZ-SD-8,Safe R,,T.J. Shope,Barbara McGuire,N/A
-AZ,4009,9,AZ-SD-9,Uncontested D,,N/A,Victoria Steele [I],N/A
-AZ,4010,10,AZ-SD-10,Safe D,,Justine Wadsack,Kirsten Engel,N/A
-AZ,4011,11,AZ-SD-11,Safe R,,Vince Leach [I],JoAnna Mendoza,N/A
-AZ,4012,12,AZ-SD-12,Safe R,,Warren Peterson,Lynsey Robinson,N/A
-AZ,4013,13,AZ-SD-13,Uncontested R,,Sine Kerr [I],N/A,N/A
-AZ,4014,14,AZ-SD-14,Safe R,,David Gowan [I],Bob Karp,N/A
-AZ,4015,15,AZ-SD-15,Uncontested R,,Nancy Barto,N/A,N/A
-AZ,4016,16,AZ-SD-16,Uncontested R,,Kelly Townsend [I],N/A,N/A
-AZ,4017,17,AZ-SD-17,Toss-Up,,J.D. Mesnard [I],Ajlan Kurdoglu,N/A
-AZ,4018,18,AZ-SD-18,Safe D,,Suzanne Sharer,Sean Bowie,N/A
-AZ,4019,19,AZ-SD-19,Uncontested D,,N/A,Lupe Contreras [I],N/A
-AZ,4020,20,AZ-SD-20,Tilt R,,Paul Boyer [I],Douglas Ervin,N/A
-AZ,4021,21,AZ-SD-21,Uncontested R,,Rick Gray [I],N/A,N/A
-AZ,4022,22,AZ-SD-22,Safe R,,David Livingston [I],Sarah Tyree,N/A
-AZ,4023,23,AZ-SD-23,Safe R,,Michelle Ugenti-Rita [I],Seth Blattman,N/A
-AZ,4024,24,AZ-SD-24,Safe D,,Ray Michaels,Lela Alston [I],N/A
-AZ,4025,25,AZ-SD-25,Safe R,,Tyler Pace [I],Paul Weigel,N/A
-AZ,4026,26,AZ-SD-26,Safe D,,Jae Chin,Juan Mendez [I],N/A
-AZ,4027,27,AZ-SD-27,Safe D,,Garland Shreves,Rebecca Rios [I],N/A
-AZ,4028,28,AZ-SD-28,Tilt D,R TO D,Kate Brophy McGee [I],Christine Marsh,N/A
-AZ,4029,29,AZ-SD-29,Safe D,,John Wilson,Martín Quezada [I],N/A
-AZ,4030,30,AZ-SD-30,Uncontested D,,N/A,Tony Navarrete [I],N/A
-AR,5001,1,AR-SD-1,Safe R,,Bart Hester,Ronetta Francis,N/A
-AR,5002,2,AR-SD-2,Safe R,,Jim Hendren [I],Ryan Craig,N/A
-AR,5003,3,AR-SD-3,No Election,,N/A,N/A,N/A
-AR,5004,4,AR-SD-4,No Election,,N/A,N/A,N/A
-AR,5005,5,AR-SD-5,No Election,,N/A,N/A,N/A
-AR,5006,6,AR-SD-6,No Election,,N/A,N/A,N/A
-AR,5007,7,AR-SD-7,Uncontested R,,Lance Eads [I],N/A,N/A
-AR,5008,8,AR-SD-8,No Election,,N/A,N/A,N/A
-AR,5009,9,AR-SD-9,No Election,,N/A,N/A,N/A
-AR,5010,10,AR-SD-10,No Election,,N/A,N/A,N/A
-AR,5011,11,AR-SD-11,Uncontested R,,Jimmy Hickey [I],N/A,N/A
-AR,5012,12,AR-SD-12,Tilt R,D TO R,Charles Beckham,Bruce Maloch [I],N/A
-AR,5013,13,AR-SD-13,Safe R,,Alan Clark [I],Brandon Overly,N/A
-AR,5014,14,AR-SD-14,No Election,,N/A,N/A,N/A
-AR,5015,15,AR-SD-15,No Election,,N/A,N/A,N/A
-AR,5016,16,AR-SD-16,Uncontested R,,Breanne Davis [I],N/A,N/A
-AR,5017,17,AR-SD-17,No Election,,N/A,N/A,N/A
-AR,5018,18,AR-SD-18,No Election,,N/A,N/A,N/A
-AR,5019,19,AR-SD-19,No Election,,N/A,N/A,N/A
-AR,5020,20,AR-SD-20,No Election,,N/A,N/A,N/A
-AR,5021,21,AR-SD-21,Uncontested R,,Dan Sullivan,N/A,N/A
-AR,5022,22,AR-SD-22,Uncontested R,,Dave Wallace [I],N/A,N/A
-AR,5023,23,AR-SD-23,Uncontested R,,Ronald Caldwell [I],N/A,N/A
-AR,5024,24,AR-SD-24,No Election,,N/A,N/A,N/A
-AR,5025,25,AR-SD-25,Uncontested D,,N/A,Stephanie Flowers [I],N/A
-AR,5026,26,AR-SD-26,Safe R,D TO R,Ben Gilmore,Eddie Cheatham [I],N/A
-AR,5027,27,AR-SD-27,Safe R,,Trent Garner [I],Keidra Burrell,N/A
-AR,5028,28,AR-SD-28,Uncontested R,,Jonathan Dismang [I],N/A,N/A
-AR,5029,29,AR-SD-29,Uncontested R,,Ricky Hill [I],N/A,N/A
-AR,5030,30,AR-SD-30,No Election,,N/A,N/A,N/A
-AR,5031,31,AR-SD-31,No Election,,N/A,N/A,N/A
-AR,5032,32,AR-SD-32,Safe D,,Bob Thomas,Clarke Tucker,N/A
-AR,5033,33,AR-SD-33,No Election,,N/A,N/A,N/A
-AR,5034,34,AR-SD-34,Likely R,,Jane English [I],Alisa Blaize Dixon,N/A
-AR,5035,35,AR-SD-35,No Election,,N/A,N/A,N/A
-CA,6001,1,CA-SD-1,Safe R,,Brian Dahle [I],Pamela Swartz,N/A
-CA,6002,2,CA-SD-2,No Election,,N/A,N/A,N/A
-CA,6003,3,CA-SD-3,Safe D,,Carlos Santamaria,Bill Dodd [I],N/A
-CA,6004,4,CA-SD-4,No Election,,N/A,N/A,N/A
-CA,6005,5,CA-SD-5,Safe D,,Jim Ridenour,Susan Talamantes Eggman,N/A
-CA,6006,6,CA-SD-6,No Election,,N/A,N/A,N/A
-CA,6007,7,CA-SD-7,Safe D,,Julie Mobley,Steve Glazer [I],N/A
-CA,6008,8,CA-SD-8,No Election,,N/A,N/A,N/A
-CA,6009,9,CA-SD-9,Uncontested D,,N/A,Nancy Skinner [I],N/A
-CA,6010,10,CA-SD-10,No Election,,N/A,N/A,N/A
-CA,6011,11,CA-SD-11,Uncontested D,,N/A,"Scott Wiener [I], Jackie Fielder",N/A
-CA,6012,12,CA-SD-12,No Election,,N/A,N/A,N/A
-CA,6013,13,CA-SD-13,Safe D,,Alexander Glew,Josh Becker,N/A
-CA,6014,14,CA-SD-14,No Election,,N/A,N/A,N/A
-CA,6015,15,CA-SD-15,Uncontested D,,N/A,"Dave Cortese, Ann Ravel",N/A
-CA,6016,16,CA-SD-16,No Election,,N/A,N/A,N/A
-CA,6017,17,CA-SD-17,Safe D,,Vicki Nohrden,John Laird,N/A
-CA,6018,18,CA-SD-18,No Election,,N/A,N/A,N/A
-CA,6019,19,CA-SD-19,Safe D,,Gary J. Michaels,Monique Limón,N/A
-CA,6020,20,CA-SD-20,No Election,,N/A,N/A,N/A
-CA,6021,21,CA-SD-21,Lean R,,Scott Wilk [I],Kipp Mueller,N/A
-CA,6022,22,CA-SD-22,No Election,,N/A,N/A,N/A
-CA,6023,23,CA-SD-23,Lean R,,Rosilicie Ochoa Bogh,Abigail Medina,N/A
-CA,6024,24,CA-SD-24,No Election,,N/A,N/A,N/A
-CA,6025,25,CA-SD-25,Safe D,,Kathleen Hazelton,Anthony Portantino Jr. [I],N/A
-CA,6026,26,CA-SD-26,No Election,,N/A,N/A,N/A
-CA,6027,27,CA-SD-27,Safe D,,Houmen Salem,Henry Stern [I],N/A
-CA,6028,28,CA-SD-28,No Election,,N/A,N/A,N/A
-CA,6029,29,CA-SD-29,Lean D,R TO D,Ling Ling Chang [I],Josh Newman,N/A
-CA,6030,30,CA-SD-30,No Election,,N/A,N/A,N/A
-CA,6031,31,CA-SD-31,Safe D,,Rod Taylor,Richard Roth [I],N/A
-CA,6032,32,CA-SD-32,No Election,,N/A,N/A,N/A
-CA,6033,33,CA-SD-33,Uncontested D,,N/A,"Lena Gonzalez [I], Elizabeth Castillo",N/A
-CA,6034,34,CA-SD-34,No Election,,N/A,N/A,N/A
-CA,6035,35,CA-SD-35,Safe D,,N/A,Steven Bradford,Anthony Perry
-CA,6036,36,CA-SD-36,No Election,,N/A,N/A,N/A
-CA,6037,37,CA-SD-37,Tilt R,,John Moorlach [I],Dave Min,N/A
-CA,6038,38,CA-SD-38,No Election,,N/A,N/A,N/A
-CA,6039,39,CA-SD-39,Safe D,,Linda Blankenship,Toni Atkins [I],N/A
-CA,6040,40,CA-SD-40,No Election,,N/A,N/A,N/A
-CO,8001,1,CO-SD-1,No Election,,N/A,N/A,N/A
-CO,8002,2,CO-SD-2,No Election,,N/A,N/A,N/A
-CO,8003,3,CO-SD-3,No Election,,N/A,N/A,N/A
-CO,8004,4,CO-SD-4,Safe R,,James Callaway Smallwood [I],Elissa Joy Flaumenhaft,Wayne Harlos
-CO,8005,5,CO-SD-5,No Election,,N/A,N/A,N/A
-CO,8006,6,CO-SD-6,No Election,,N/A,N/A,N/A
-CO,8007,7,CO-SD-7,No Election,,N/A,N/A,N/A
-CO,8008,8,CO-SD-8,Lean R,,Bob Rankin [I],Karl Hanlon,N/A
-CO,8009,9,CO-SD-9,No Election,,N/A,N/A,N/A
-CO,8010,10,CO-SD-10,Safe R,,Larry Liston,Randi McCallian,Heather Johnson
-CO,8011,11,CO-SD-11,No Election,,N/A,N/A,N/A
-CO,8012,12,CO-SD-12,Safe R,,Bob Gardner [I],Electra Johnson,Zechariah Harris
-CO,8013,13,CO-SD-13,No Election,,N/A,N/A,N/A
-CO,8014,14,CO-SD-14,Safe D,,Hans Hochheimer,Joann Ginal [I],N/A
-CO,8015,15,CO-SD-15,No Election,,N/A,N/A,N/A
-CO,8016,16,CO-SD-16,No Election,,N/A,N/A,N/A
-CO,8017,17,CO-SD-17,Safe D,,Matthew D. Menza,Sonya Jaquez Lewis,N/A
-CO,8018,18,CO-SD-18,Safe D,,Peg Cage,Stephen Fenberg [I],N/A
-CO,8019,19,CO-SD-19,Safe D,,Lynn Gerber,Rachel Zenzinger [I],N/A
-CO,8020,20,CO-SD-20,No Election,,N/A,N/A,N/A
-CO,8021,21,CO-SD-21,Safe D,,Roger Lehman,Dominick Anselmo Moreno [I],N/A
-CO,8022,22,CO-SD-22,No Election,,N/A,N/A,N/A
-CO,8023,23,CO-SD-23,Safe R,,Barbara Kirkmeyer,Sally Boccella,N/A
-CO,8024,24,CO-SD-24,No Election,,N/A,N/A,N/A
-CO,8025,25,CO-SD-25,Tilt D,R TO D,Kevin Priola [I],Paula Dickerson,N/A
-CO,8026,26,CO-SD-26,Safe D,,Bob Roth,Jeff Bridges [I],N/A
-CO,8027,27,CO-SD-27,Lean D,R TO D,Suzanne Staiert,Chris Kolker,N/A
-CO,8028,28,CO-SD-28,Safe D,,Karl Stecher,Janet Buckner,N/A
-CO,8029,29,CO-SD-29,Safe D,,N/A,Rhonda Fields [I],Michele Poague
-CO,8030,30,CO-SD-30,No Election,,N/A,N/A,N/A
-CO,8031,31,CO-SD-31,Safe D,,Doug Townsend,Chris Hansen [I],N/A
-CO,8032,32,CO-SD-32,No Election,,N/A,N/A,N/A
-CO,8033,33,CO-SD-33,Safe D,,N/A,James Rashad Coleman,Jerry Burton
-CO,8034,34,CO-SD-34,No Election,,N/A,N/A,N/A
-CO,8035,35,CO-SD-35,Safe R,,Cleave Alan Simpson,Carlos Rey Lopez,N/A
-CT,9001,1,CT-SD-1,Safe D,,Barbara Ruhe,John Fonfara [I],Mary Sanders
-CT,9002,2,CT-SD-2,Uncontested D,,N/A,Douglas McCrory [I],N/A
-CT,9003,3,CT-SD-3,Uncontested D,,N/A,Saud Anwar [I],N/A
-CT,9004,4,CT-SD-4,Likely D,,Matthew Corey,Steve Cassano [I],"Harold Harris, Kelly Green"
-CT,9005,5,CT-SD-5,Safe D,,Phillip Chabot,Derek Slap [I],Joelle Nawrocki
-CT,9006,6,CT-SD-6,Lean D,R TO D,Gennaro Bizzarro [I],Rick Lopes,N/A
-CT,9007,7,CT-SD-7,Likely R,,John Kissel [I],Frederich Moffa,N/A
-CT,9008,8,CT-SD-8,Likely R,,Kevin Witkos [I],Melissa Osborne,Keith McConnell
-CT,9009,9,CT-SD-9,Safe D,,Richard Ruglio,Matthew Lesser [I],N/A
-CT,9010,10,CT-SD-10,Safe D,,Carlos Alvarado,Gary Winfield [I],Jason Bartlett
-CT,9011,11,CT-SD-11,Safe D,,Jameson White,Martin Looney [I],Alex Taubes
-CT,9012,12,CT-SD-12,Lean D,,Joe LaPorta,Christine Cohen [I],N/A
-CT,9013,13,CT-SD-13,Lean D,,Len Suzio,Mary Daugherty Abrams [I],N/A
-CT,9014,14,CT-SD-14,Lean D,,Michael Southworth,James Maroney [I],N/A
-CT,9015,15,CT-SD-15,Uncontested D,,N/A,Joan Hartley [I],N/A
-CT,9016,16,CT-SD-16,Safe R,,Robert Sampson [I],Jack Perry,N/A
-CT,9017,17,CT-SD-17,Toss-Up,,George Logan [I],Jorge Cabrera,N/A
-CT,9018,18,CT-SD-18,Likely R,,Heather Somers [I],"Robert ""Bob"" Statchen",N/A
-CT,9019,19,CT-SD-19,Safe D,,Steve Weir,Catherine Osten [I],William Russell
-CT,9020,20,CT-SD-20,Toss-Up,,Paul Formica [I],Martha Marx,Joseph Taraya
-CT,9021,21,CT-SD-21,Uncontested R,,Kevin Kelly [I],N/A,N/A
-CT,9022,22,CT-SD-22,Safe D,,Steven Choi,Marilyn Moore [I],Steven Dincher
-CT,9023,23,CT-SD-23,Safe D,,Josiah Israel,Dennis Bradley [I],N/A
-CT,9024,24,CT-SD-24,Likely D,,Susan Chapman,Julie Kushner [I],N/A
-CT,9025,25,CT-SD-25,Safe D,,Ellie Kousidis,Bob Duff [I],N/A
-CT,9026,26,CT-SD-26,Lean D,,Kim Healy,William Haskell [I],N/A
-CT,9027,27,CT-SD-27,Safe D,,Eva Maldonado,Carlo Leone [I],N/A
-CT,9028,28,CT-SD-28,Likely R,,Tony Hwang [I],Michelle McCabe,N/A
-CT,9029,29,CT-SD-29,Likely D,,Jessica Alba,Mae Flexer [I],N/A
-CT,9030,30,CT-SD-30,Lean R,,Craig Miner [I],David Gronbach,N/A
-CT,9031,31,CT-SD-31,Safe R,,Henri Martin [I],Mary Fortier,N/A
-CT,9032,32,CT-SD-32,Safe R,,Eric Berthel [I],Jeffrey Desmarais,N/A
-CT,9033,33,CT-SD-33,Lean D,,Brendan Saunders,Norman Needleman [I],N/A
-CT,9034,34,CT-SD-34,Safe R,,Paul Cicarella,April Capone,N/A
-CT,9035,35,CT-SD-35,Lean R,,Daniel Champagne [I],Lisa Thomas,N/A
-CT,9036,36,CT-SD-36,Tilt D,,Alex Kasser [I],Ryan Fazio,N/A
-DE,10001,1,DE-SD-1,Safe D,,Steven Washington,Sarah McBride,
+AK,0200T,T,AK-SD-T,Safe D,,TBA,Donny Olson [I],N/A
+AZ,04001,1,AZ-SD-1,Uncontested R,,Karen Fann [I],N/A,N/A
+AZ,04002,2,AZ-SD-2,Safe D,,Mark Workman,Rosanna Gabaldón,N/A
+AZ,04003,3,AZ-SD-3,Uncontested D,,N/A,Sally Ann Gonzales [I],N/A
+AZ,04004,4,AZ-SD-4,Safe D,,Travis Angry,Lisa Otondo [I],N/A
+AZ,04005,5,AZ-SD-5,Uncontested R,,Sonny Borrelli [I],N/A,N/A
+AZ,04006,6,AZ-SD-6,Lean R,,TBA,Feclia French,N/A
+AZ,04007,7,AZ-SD-7,Uncontested D,,N/A,Jamescita Mae Peshlakai [I],N/A
+AZ,04008,8,AZ-SD-8,Safe R,,T.J. Shope,Barbara McGuire,N/A
+AZ,04009,9,AZ-SD-9,Uncontested D,,N/A,Victoria Steele [I],N/A
+AZ,04010,10,AZ-SD-10,Likely D,,Justine Wadsack,Kirsten Engel,N/A
+AZ,04011,11,AZ-SD-11,Safe R,,Vince Leach [I],TBA,N/A
+AZ,04012,12,AZ-SD-12,Safe R,,Warren Peterson,Lynsey Robinson,N/A
+AZ,04013,13,AZ-SD-13,Uncontested R,,Sine Kerr [I],N/A,N/A
+AZ,04014,14,AZ-SD-14,Safe R,,David Gowan [I],Bob Karp,N/A
+AZ,04015,15,AZ-SD-15,Uncontested R,,TBA,N/A,N/A
+AZ,04016,16,AZ-SD-16,Uncontested R,,Kelly Townsend [I],N/A,N/A
+AZ,04017,17,AZ-SD-17,Tilt R,,J.D. Mesnard [I],A.J. Kurdoglu,N/A
+AZ,04018,18,AZ-SD-18,Likely D,,Suzanne Sharer,Sean Bowie,N/A
+AZ,04019,19,AZ-SD-19,Uncontested D,,N/A,Lupe Chavira Contreras [I],N/A
+AZ,04020,20,AZ-SD-20,Tilt R,,Paul Boyer [I],Douglas Ervin,N/A
+AZ,04021,21,AZ-SD-21,Lean R,,Rick Gray,Brian Whitman,N/A
+AZ,04022,22,AZ-SD-22,Safe R,,TBA,Sarah Tyree,N/A
+AZ,04023,23,AZ-SD-23,Safe R,,TBA,Seth Blattman,N/A
+AZ,04024,24,AZ-SD-24,Uncontested D,,N/A,TBA,N/A
+AZ,04025,25,AZ-SD-25,Safe R,,Tyler Pace [I],Paul Weigel,N/A
+AZ,04026,26,AZ-SD-26,Safe D,,Jae Chin,TBA,N/A
+AZ,04027,27,AZ-SD-27,Safe D,,Garland Shreves,Rebecca Rios [I],N/A
+AZ,04028,28,AZ-SD-28,Toss-Up,,Kate Brophy McGee [I],Christine Marsh,N/A
+AZ,04029,29,AZ-SD-29,Safe D,,John Wilson,Martín Quezada [I],N/A
+AZ,04030,30,AZ-SD-30,Uncontested D,,N/A,Tony Navarrete [I],N/A
+AR,05001,1,AR-SD-1,Safe R,,Bart Hester,Ronetta Francis,N/A
+AR,05002,2,AR-SD-2,Safe R,,Jim Hendren [I],Ryan Craig,N/A
+AR,05003,3,AR-SD-3,No Election,,N/A,N/A,N/A
+AR,05004,4,AR-SD-4,No Election,,N/A,N/A,N/A
+AR,05005,5,AR-SD-5,No Election,,N/A,N/A,N/A
+AR,05006,6,AR-SD-6,No Election,,N/A,N/A,N/A
+AR,05007,7,AR-SD-7,Uncontested R,,Lance Eads [I],N/A,N/A
+AR,05008,8,AR-SD-8,No Election,,N/A,N/A,N/A
+AR,05009,9,AR-SD-9,No Election,,N/A,N/A,N/A
+AR,05010,10,AR-SD-10,No Election,,N/A,N/A,N/A
+AR,05011,11,AR-SD-11,Uncontested R,,Jimmy Hickey [I],N/A,N/A
+AR,05012,12,AR-SD-12,Toss-Up,,Charles Beckham,Bruce Maloch [I],N/A
+AR,05013,13,AR-SD-13,Safe R,,TBA,Brandon Overly,N/A
+AR,05014,14,AR-SD-14,No Election,,N/A,N/A,N/A
+AR,05015,15,AR-SD-15,No Election,,N/A,N/A,N/A
+AR,05016,16,AR-SD-16,Uncontested R,,Breanne Davis [I],N/A,N/A
+AR,05017,17,AR-SD-17,No Election,,N/A,N/A,N/A
+AR,05018,18,AR-SD-18,No Election,,N/A,N/A,N/A
+AR,05019,19,AR-SD-19,No Election,,N/A,N/A,N/A
+AR,05020,20,AR-SD-20,No Election,,N/A,N/A,N/A
+AR,05021,21,AR-SD-21,Uncontested R,,Alan Clark [I],N/A,N/A
+AR,05022,22,AR-SD-22,Uncontested R,,Dave Wallace [I],N/A,N/A
+AR,05023,23,AR-SD-23,Uncontested R,,Ronald Caldwell [I],N/A,N/A
+AR,05024,24,AR-SD-24,No Election,,N/A,N/A,N/A
+AR,05025,25,AR-SD-25,Uncontested D,,N/A,Stephanie Flowers [I],N/A
+AR,05026,26,AR-SD-26,Likely R,D TO R,Ben Gilmore,Eddie Cheatham [I],N/A
+AR,05027,27,AR-SD-27,Safe R,,Trent Garner [I],TBA,N/A
+AR,05028,28,AR-SD-28,Uncontested R,,Jonathan Dismang [I],N/A,N/A
+AR,05029,29,AR-SD-29,Uncontested R,,Ricky Hill [I],N/A,N/A
+AR,05030,30,AR-SD-30,No Election,,N/A,N/A,N/A
+AR,05031,31,AR-SD-31,No Election,,N/A,N/A,N/A
+AR,05032,32,AR-SD-32,Safe D,,Bob Thomas,Clarke Tucker,N/A
+AR,05033,33,AR-SD-33,No Election,,N/A,N/A,N/A
+AR,05034,34,AR-SD-34,Lean R,,Jane English [I],Alisa Blaize Dixon,N/A
+AR,05035,35,AR-SD-35,No Election,,N/A,N/A,N/A
+CA,06001,1,CA-SD-1,Safe R,,Brian Dahle [I],Pamela Swartz,N/A
+CA,06002,2,CA-SD-2,No Election,,N/A,N/A,N/A
+CA,06003,3,CA-SD-3,Uncontested D,,N/A,Bill Dodd [I],N/A
+CA,06004,4,CA-SD-4,No Election,,N/A,N/A,N/A
+CA,06005,5,CA-SD-5,Safe D,,Jim Ridenour,Susan Talamantes Eggman,N/A
+CA,06006,6,CA-SD-6,No Election,,N/A,N/A,N/A
+CA,06007,7,CA-SD-7,Safe D,,Julie Mobley,Steve Glazer [I],N/A
+CA,06008,8,CA-SD-8,No Election,,N/A,N/A,N/A
+CA,06009,9,CA-SD-9,Uncontested D,,N/A,Nancy Skinner [I],N/A
+CA,06010,10,CA-SD-10,No Election,,N/A,N/A,N/A
+CA,06011,11,CA-SD-11,Uncontested D,,N/A,"Scott Wiener [I], Jackie Fielder",N/A
+CA,06012,12,CA-SD-12,No Election,,N/A,N/A,N/A
+CA,06013,13,CA-SD-13,Safe D,,Alexander Glew,Josh Becker,N/A
+CA,06014,14,CA-SD-14,No Election,,N/A,N/A,N/A
+CA,06015,15,CA-SD-15,Uncontested D,,N/A,"Dave Cortese, Ann Ravel",N/A
+CA,06016,16,CA-SD-16,No Election,,N/A,N/A,N/A
+CA,06017,17,CA-SD-17,Safe D,,Vicki Nohrden,John Laird,N/A
+CA,06018,18,CA-SD-18,No Election,,N/A,N/A,N/A
+CA,06019,19,CA-SD-19,Safe D,,Gary J. Michaels,Monique Limón,N/A
+CA,06020,20,CA-SD-20,No Election,,N/A,N/A,N/A
+CA,06021,21,CA-SD-21,Tilt R,,Scott Wilk [I],Kipp Mueller,N/A
+CA,06022,22,CA-SD-22,No Election,,N/A,N/A,N/A
+CA,06023,23,CA-SD-23,Lean R,,Rosilicie Ochoa Bogh,Abigail Medina,N/A
+CA,06024,24,CA-SD-24,No Election,,N/A,N/A,N/A
+CA,06025,25,CA-SD-25,Uncontested D,,N/A,Ben Allen [I],N/A
+CA,06026,26,CA-SD-26,No Election,,N/A,N/A,N/A
+CA,06027,27,CA-SD-27,Safe D,,Houmen Salem,Henry Stern [I],N/A
+CA,06028,28,CA-SD-28,No Election,,N/A,N/A,N/A
+CA,06029,29,CA-SD-29,Tilt D,R TO D,Ling Ling Chang [I],Josh Newman,N/A
+CA,06030,30,CA-SD-30,No Election,,N/A,N/A,N/A
+CA,06031,31,CA-SD-31,Uncontested D,,N/A,Richard Roth [I],N/A
+CA,06032,32,CA-SD-32,No Election,,N/A,N/A,N/A
+CA,06033,33,CA-SD-33,Uncontested D,,N/A,Lena Gonzalez [I],N/A
+CA,06034,34,CA-SD-34,No Election,,N/A,N/A,N/A
+CA,06035,35,CA-SD-35,Safe D,,N/A,Steven Bradford,Anthony Perry
+CA,06036,36,CA-SD-36,No Election,,N/A,N/A,N/A
+CA,06037,37,CA-SD-37,Tilt R,,John Moorlach [I],Dave Min,N/A
+CA,06038,38,CA-SD-38,No Election,,N/A,N/A,N/A
+CA,06039,39,CA-SD-39,Uncontested D,,N/A,Toni Atkins [I],N/A
+CA,06040,40,CA-SD-40,No Election,,N/A,N/A,N/A
+CO,08001,1,CO-SD-1,No Election,,N/A,N/A,N/A
+CO,08002,2,CO-SD-2,No Election,,N/A,N/A,N/A
+CO,08003,3,CO-SD-3,No Election,,N/A,N/A,N/A
+CO,08004,4,CO-SD-4,Safe R,,James Callaway Smallwood [I],Elissa Joy Flaumenhaft,N/A
+CO,08005,5,CO-SD-5,No Election,,N/A,N/A,N/A
+CO,08006,6,CO-SD-6,No Election,,N/A,N/A,N/A
+CO,08007,7,CO-SD-7,No Election,,N/A,N/A,N/A
+CO,08008,8,CO-SD-8,Safe R,,TBA,TBA,N/A
+CO,08009,9,CO-SD-9,No Election,,N/A,N/A,N/A
+CO,08010,10,CO-SD-10,Safe R,,Larry Liston,TBA,N/A
+CO,08011,11,CO-SD-11,No Election,,N/A,N/A,N/A
+CO,08012,12,CO-SD-12,Uncontested R,,Bob Gardner [I],N/A,N/A
+CO,08013,13,CO-SD-13,No Election,,N/A,N/A,N/A
+CO,08014,14,CO-SD-14,Safe D,,Hans Hochheimer,Joann Ginal [I],N/A
+CO,08015,15,CO-SD-15,No Election,,N/A,N/A,N/A
+CO,08016,16,CO-SD-16,No Election,,N/A,N/A,N/A
+CO,08017,17,CO-SD-17,Uncontested D,,N/A,TBA,N/A
+CO,08018,18,CO-SD-18,Uncontested D,,N/A,Stephen Fenberg [I],N/A
+CO,08019,19,CO-SD-19,Likely D,,TBA,Rachel Zenzinger [I],N/A
+CO,08020,20,CO-SD-20,No Election,,N/A,N/A,N/A
+CO,08021,21,CO-SD-21,Safe D,,Roger Lehman,Dominick Anselmo Moreno [I],N/A
+CO,08022,22,CO-SD-22,No Election,,N/A,N/A,N/A
+CO,08023,23,CO-SD-23,Safe R,,TBA,TBA,N/A
+CO,08024,24,CO-SD-24,No Election,,N/A,N/A,N/A
+CO,08025,25,CO-SD-25,Toss-Up,,Kevin Priola [I],TBA,N/A
+CO,08026,26,CO-SD-26,Likely D,,TBA,Jeff Bridges [I],N/A
+CO,08027,27,CO-SD-27,Tilt D,R TO D,TBA,Chris Kolker,N/A
+CO,08028,28,CO-SD-28,Uncontested D,,N/A,Janet Buckner,N/A
+CO,08029,29,CO-SD-29,Uncontested D,,N/A,Rhonda Fields [I],N/A
+CO,08030,30,CO-SD-30,No Election,,N/A,N/A,N/A
+CO,08031,31,CO-SD-31,Safe D,,Doug Townsend,TBA,N/A
+CO,08032,32,CO-SD-32,No Election,,N/A,N/A,N/A
+CO,08033,33,CO-SD-33,Uncontested D,,N/A,TBA,N/A
+CO,08034,34,CO-SD-34,No Election,,N/A,N/A,N/A
+CO,08035,35,CO-SD-35,Safe R,,Cleave Alan Simpson,Carlos Rey Lopez,N/A
+CT,09001,1,CT-SD-1,Safe D,,,,
+CT,09002,2,CT-SD-2,Safe D,,,,
+CT,09003,3,CT-SD-3,Safe D,,,,
+CT,09004,4,CT-SD-4,Likely D,,,,
+CT,09005,5,CT-SD-5,Safe D,,,,
+CT,09006,6,CT-SD-6,Lean D,R TO D,,,
+CT,09007,7,CT-SD-7,Likely R,,,,
+CT,09008,8,CT-SD-8,Likely R,,,,
+CT,09009,9,CT-SD-9,Safe D,,,,
+CT,09010,10,CT-SD-10,Safe D,,,,
+CT,09011,11,CT-SD-11,Safe D,,,,
+CT,09012,12,CT-SD-12,Lean D,,,,
+CT,09013,13,CT-SD-13,Lean D,,,,
+CT,09014,14,CT-SD-14,Tilt D,,,,
+CT,09015,15,CT-SD-15,Safe D,,,,
+CT,09016,16,CT-SD-16,Safe R,,,,
+CT,09017,17,CT-SD-17,Toss-Up,,,,
+CT,09018,18,CT-SD-18,Likely R,,,,
+CT,09019,19,CT-SD-19,Safe D,,,,
+CT,09020,20,CT-SD-20,Toss-Up,,,,
+CT,09021,21,CT-SD-21,Safe R,,,,
+CT,09022,22,CT-SD-22,Safe D,,,,
+CT,09023,23,CT-SD-23,Safe D,,,,
+CT,09024,24,CT-SD-24,Lean D,,,,
+CT,09025,25,CT-SD-25,Safe D,,,,
+CT,09026,26,CT-SD-26,Lean D,,,,
+CT,09027,27,CT-SD-27,Safe D,,,,
+CT,09028,28,CT-SD-28,Likely R,,,,
+CT,09029,29,CT-SD-29,Likely D,,,,
+CT,09030,30,CT-SD-30,Lean R,,,,
+CT,09031,31,CT-SD-31,Safe R,,,,
+CT,09032,32,CT-SD-32,Safe R,,,,
+CT,09033,33,CT-SD-33,Tilt D,,,,
+CT,09034,34,CT-SD-34,Safe R,,,,
+CT,09035,35,CT-SD-35,Lean R,,,,
+CT,09036,36,CT-SD-36,Tilt D,,,,
+DE,10001,1,DE-SD-1,Safe D,,,,
 DE,10002,2,DE-SD-2,No Election,,N/A,N/A,N/A
 DE,10003,3,DE-SD-3,No Election,,N/A,N/A,N/A
 DE,10004,4,DE-SD-4,No Election,,N/A,N/A,N/A
-DE,10005,5,DE-SD-5,Lean D,R TO D,Catherina Cloutier [I],Kyle Evans Gay,N/A
+DE,10005,5,DE-SD-5,Lean R,,,,
 DE,10006,6,DE-SD-6,No Election,,N/A,N/A,N/A
-DE,10007,7,DE-SD-7,Lean D,R TO D,Anthony DelCollo [I],Spiros Mantzavinos,N/A
-DE,10008,8,DE-SD-8,Uncontested D,,N/A,David P. Sokola [I],N/A
-DE,10009,9,DE-SD-9,Safe D,,Todd Ruckle,John Walsh [I],N/A
+DE,10007,7,DE-SD-7,Tilt D,R TO D,,,
+DE,10008,8,DE-SD-8,Likely D,,,,
+DE,10009,9,DE-SD-9,Safe D,,,,
 DE,10010,10,DE-SD-10,No Election,,N/A,N/A,N/A
 DE,10011,11,DE-SD-11,No Election,,N/A,N/A,N/A
-DE,10012,12,DE-SD-12,Uncontested D,,N/A,Nicole Poore [I],N/A
-DE,10013,13,DE-SD-13,Safe D,,Alexander Homich,Marie Pickeny,N/A
-DE,10014,14,DE-SD-14,Safe D,,Craig Pugh,Bruce Ennis [I],N/A
-DE,10015,15,DE-SD-15,Safe R,,David Lawson [I],Jacqueline Hugg,N/A
+DE,10012,12,DE-SD-12,Safe D,,,,
+DE,10013,13,DE-SD-13,Safe D,,,,
+DE,10014,14,DE-SD-14,Safe D,,,,
+DE,10015,15,DE-SD-15,Safe R,,,,
 DE,10016,16,DE-SD-16,No Election,,N/A,N/A,N/A
 DE,10017,17,DE-SD-17,No Election,,N/A,N/A,N/A
 DE,10018,18,DE-SD-18,No Election,,N/A,N/A,N/A
-DE,10019,19,DE-SD-19,Uncontested R,,Brian Pettyjohn [I],N/A,N/A
-DE,10020,20,DE-SD-20,Uncontested R,,Gerald Hocker [I],N/A,N/A
+DE,10019,19,DE-SD-19,Safe R,,,,
+DE,10020,20,DE-SD-20,Safe R,,,,
 DE,10021,21,DE-SD-21,No Election,,N/A,N/A,N/A
-FL,12001,1,FL-SD-1,Safe R,,Douglas Broxon [I],Karen Butler,N/A
+FL,12001,1,FL-SD-1,Safe R,,,,
 FL,12002,2,FL-SD-2,No Election,,N/A,N/A,N/A
-FL,12003,3,FL-SD-3,Safe D,,Marva Harris Preston,Loranne Ausley,N/A
+FL,12003,3,FL-SD-3,Safe D,,,,
 FL,12004,4,FL-SD-4,No Election,,N/A,N/A,N/A
-FL,12005,5,FL-SD-5,Safe R,,Jennifer Bradley,Melina Barratt,N/A
+FL,12005,5,FL-SD-5,Safe R,,,,
 FL,12006,6,FL-SD-6,No Election,,N/A,N/A,N/A
-FL,12007,7,FL-SD-7,Safe R,,Travis Hutson [I],Heather Hunter,N/A
+FL,12007,7,FL-SD-7,Safe R,,,,
 FL,12008,8,FL-SD-8,No Election,,N/A,N/A,N/A
-FL,12009,9,FL-SD-9,Tilt R,,Jason Brodeur,Patricia Sigman,Jestine Iannotti
+FL,12009,9,FL-SD-9,Lean R,,,,
 FL,12010,10,FL-SD-10,No Election,,N/A,N/A,N/A
-FL,12011,11,FL-SD-11,Safe D,,Joshua Adams,Randolph Bracy [I],N/A
+FL,12011,11,FL-SD-11,Safe D,,,,
 FL,12012,12,FL-SD-12,No Election,,N/A,N/A,N/A
-FL,12013,13,FL-SD-13,Safe D,,Josh Anderson,Linda Stewart [I],N/A
+FL,12013,13,FL-SD-13,Safe D,,,,
 FL,12014,14,FL-SD-14,No Election,,N/A,N/A,N/A
-FL,12015,15,FL-SD-15,Safe D,,Louis Minnis Jr,Victor Torres Jr [I],Mike James
+FL,12015,15,FL-SD-15,Safe D,,,,
 FL,12016,16,FL-SD-16,No Election,,N/A,N/A,N/A
-FL,12017,17,FL-SD-17,Safe R,,Debbie Mayfield [I],Scot Fretwell,Phillip Snyder
+FL,12017,17,FL-SD-17,Safe R,,,,
 FL,12018,18,FL-SD-18,No Election,,N/A,N/A,N/A
-FL,12019,19,FL-SD-19,Safe D,,N/A,Darryl Rouson [I],Christina Paylan
-FL,12020,20,FL-SD-20,Likely R,,Daniel Burgess,Kathy Lewis,N/A
-FL,12021,21,FL-SD-21,Safe R,,Jim Boyd,Anthony Eldon,N/A
+FL,12019,19,FL-SD-19,Safe D,,,,
+FL,12020,20,FL-SD-20,No Election,,N/A,N/A,N/A
+FL,12021,21,FL-SD-21,Safe R,,,,
 FL,12022,22,FL-SD-22,No Election,,N/A,N/A,N/A
-FL,12023,23,FL-SD-23,Safe R,,Joe Gruters [I],Katherine Norman,Robert Kaplan
+FL,12023,23,FL-SD-23,Safe R,,,,
 FL,12024,24,FL-SD-24,No Election,,N/A,N/A,N/A
-FL,12025,25,FL-SD-25,Safe R,,Gayle Harrell,Corinna Robinson,N/A
+FL,12025,25,FL-SD-25,Likely R,,,,
 FL,12026,26,FL-SD-26,No Election,,N/A,N/A,N/A
-FL,12027,27,FL-SD-27,Safe R,,Ray Rodrigues,Rachel Brown,N/A
+FL,12027,27,FL-SD-27,Safe R,,,,
 FL,12028,28,FL-SD-28,No Election,,N/A,N/A,N/A
-FL,12029,29,FL-SD-29,Safe D,,Brian Norton,Tina Polsky,N/A
+FL,12029,29,FL-SD-29,Safe D,,,,
 FL,12030,30,FL-SD-30,No Election,,N/A,N/A,N/A
-FL,12031,31,FL-SD-31,Safe D,,Tami Donnally,Lori Berman [I],N/A
+FL,12031,31,FL-SD-31,Safe D,,,,
 FL,12032,32,FL-SD-32,No Election,,N/A,N/A,N/A
-FL,12033,33,FL-SD-33,Uncontested D,,N/A,Perry Thurston,N/A
+FL,12033,33,FL-SD-33,Safe D,,,,
 FL,12034,34,FL-SD-34,No Election,,N/A,N/A,N/A
-FL,12035,35,FL-SD-35,Uncontested D,,N/A,Shevrin Jones,N/A
+FL,12035,35,FL-SD-35,Safe D,,,,
 FL,12036,36,FL-SD-36,No Election,,N/A,N/A,N/A
-FL,12037,37,FL-SD-37,Safe D,,Illeana Garcia,Jose Rodriguez [I],Alex Rodriguez
+FL,12037,37,FL-SD-37,Likely D,,,,
 FL,12038,38,FL-SD-38,No Election,,N/A,N/A,N/A
-FL,12039,39,FL-SD-39,Toss-Up,,Ana Rodriguez,Javier Fernandez,Celso Alfonso
+FL,12039,39,FL-SD-39,Toss-Up,,,,
 FL,12040,40,FL-SD-40,No Election,,N/A,N/A,N/A
 GA,13001,1,GA-SD-1,Safe R,,Ben Watson [I],Kerri Wilkins McGinty,N/A
 GA,13002,2,GA-SD-2,Uncontested D,,N/A,Lester Jackson [I],N/A
-GA,13003,3,GA-SD-3,Uncontested R,,Sheila McNeill,N/A,N/A
-GA,13004,4,GA-SD-4,Uncontested R,,Billy Hickman,N/A,N/A
+GA,13003,3,GA-SD-3,Safe R,,TBA,David Sharpe,Cedric King
+GA,13004,4,GA-SD-4,Uncontested R,,Jack Hill [I],N/A,N/A
 GA,13005,5,GA-SD-5,Uncontested D,,N/A,Sheikh Rahman [I],N/A
 GA,13006,6,GA-SD-6,Safe D,,Harrison Lance,Jen Jordan [I],N/A
 GA,13007,7,GA-SD-7,Uncontested R,,Tyler Harper [I],N/A,N/A
 GA,13008,8,GA-SD-8,Safe R,,Russ Goodman,Treva Gear,N/A
-GA,13009,9,GA-SD-9,Tilt R,,P. K. Martin [I],Nikki Merritt,N/A
-GA,13010,10,GA-SD-10,Uncontested D,,N/A,Emanuel Jones [I],N/A
+GA,13009,9,GA-SD-9,Lean R,,P. K. Martin [I],TBA,N/A
+GA,13010,10,GA-SD-10,Uncontested D,,N/A,TBA,N/A
 GA,13011,11,GA-SD-11,Uncontested R,,Dean Burke [I],N/A,N/A
-GA,13012,12,GA-SD-12,Safe D,,Tracy Taylor,Freddie Sims [I],N/A
-GA,13013,13,GA-SD-13,Safe R,,Carden Summers [I],Mary Egler,N/A
-GA,13014,14,GA-SD-14,Safe R,,Bruce Thompson [I],Travis Johnson,N/A
-GA,13015,15,GA-SD-15,Uncontested D,,N/A,Ed Harbison [I],N/A
+GA,13012,12,GA-SD-12,Safe D,,TBA,TBA,N/A
+GA,13013,13,GA-SD-13,Safe R,,Carden Summers [I],TBA,N/A
+GA,13014,14,GA-SD-14,Safe R,,Bruce Thompson [I],TBA,N/A
+GA,13015,15,GA-SD-15,Uncontested D,,N/A,TBA,N/A
 GA,13016,16,GA-SD-16,Safe R,,Marty Harbin [I],Clinquez Jester,N/A
 GA,13017,17,GA-SD-17,Likely R,,Brian Strickland [I],Kelly Rose,N/A
 GA,13018,18,GA-SD-18,Uncontested R,,John F. Kennedy [I],N/A,N/A
 GA,13019,19,GA-SD-19,Uncontested R,,Blake Tillery [I],N/A,N/A
-GA,13020,20,GA-SD-20,Safe R,,Larry Walker [I],Julius Johnson,N/A
-GA,13021,21,GA-SD-21,Uncontested R,,Brandon Beach [I],N/A,N/A
+GA,13020,20,GA-SD-20,Safe R,,TBA,Julius Johnson,N/A
+GA,13021,21,GA-SD-21,Uncontested R,,TBA,N/A,N/A
 GA,13022,22,GA-SD-22,Uncontested D,,N/A,Harold Jones [I],N/A
-GA,13023,23,GA-SD-23,Safe R,,Max Burns,Ceretta Smith,N/A
+GA,13023,23,GA-SD-23,Safe R,,TBA,Ceretta Smith,N/A
 GA,13024,24,GA-SD-24,Uncontested R,,Lee Anderson [I],N/A,N/A
 GA,13025,25,GA-SD-25,Safe R,,Burt Jones [I],Veronica Brison,N/A
-GA,13026,26,GA-SD-26,Uncontested D,,N/A,David Lucas [I],N/A
+GA,13026,26,GA-SD-26,Uncontested D,,N/A,TBA,N/A
 GA,13027,27,GA-SD-27,Safe R,,Greg Dolezal [I],Brooke Griffiths,N/A
 GA,13028,28,GA-SD-28,Uncontested R,,Matt Brass [I],N/A,N/A
 GA,13029,29,GA-SD-29,Uncontested R,,Randy Robertson [I],N/A,N/A
-GA,13030,30,GA-SD-30,Safe R,,Michael Dugan [I],Montenia Edwards,N/A
-GA,13031,31,GA-SD-31,Safe R,,Jason Anavitarte,Tianna Smith,N/A
+GA,13030,30,GA-SD-30,Safe R,,Michael Dugan [I],TBA,N/A
+GA,13031,31,GA-SD-31,Safe R,,TBA,Tianna Smith,N/A
 GA,13032,32,GA-SD-32,Safe R,,Kay Kirkpatrick [I],Christine Triebsch,N/A
 GA,13033,33,GA-SD-33,Uncontested D,,N/A,Michael Rhett [I],N/A
 GA,13034,34,GA-SD-34,Uncontested D,,N/A,Valencia Seay [I],N/A
-GA,13035,35,GA-SD-35,Uncontested D,,N/A,Donzella James [I],N/A
+GA,13035,35,GA-SD-35,Uncontested D,,N/A,TBA,N/A
 GA,13036,36,GA-SD-36,Uncontested D,,N/A,Nan Orrock [I],N/A
-GA,13037,37,GA-SD-37,Safe R,,Lindsey Tippins [I],Vanessa Parker,N/A
-GA,13038,38,GA-SD-38,Uncontested D,,N/A,Horacena Tate [I],N/A
-GA,13039,39,GA-SD-39,Uncontested D,,N/A,Nikema Williams [I],N/A
-GA,13040,40,GA-SD-40,Safe D,,Garry Guan,Sally Harrell [I],N/A
-GA,13041,41,GA-SD-41,Safe D,,William Park Freeman,Kim Jackson,N/A
+GA,13037,37,GA-SD-37,Safe R,,Lindsey Tippins [I],TBA,N/A
+GA,13038,38,GA-SD-38,Uncontested D,,N/A,TBA,N/A
+GA,13039,39,GA-SD-39,Uncontested D,,N/A,TBA,N/A
+GA,13040,40,GA-SD-40,Lean D,,Garry Guan,Sally Harrell [I],N/A
+GA,13041,41,GA-SD-41,Safe D,,William Park Freeman,TBA,N/A
 GA,13042,42,GA-SD-42,Uncontested D,,N/A,Elena Parent [I],N/A
 GA,13043,43,GA-SD-43,Safe D,,Melanie Williams,Tonya Anderson [I],N/A
-GA,13044,44,GA-SD-44,Safe D,,Benjamin Brooks,Gail Davenport [I],N/A
-GA,13045,45,GA-SD-45,Safe R,,Clint Dixon,Matielyn Jones,N/A
+GA,13044,44,GA-SD-44,Safe D,,Benjamin Brooks,TBA,N/A
+GA,13045,45,GA-SD-45,Safe R,,TBA,TBA,N/A
 GA,13046,46,GA-SD-46,Safe R,,Bill Cowsert [I],Zachary Perry,N/A
 GA,13047,47,GA-SD-47,Safe R,,Frank Ginn [I],Dawn Johnson,N/A
-GA,13048,48,GA-SD-48,Tilt D,,Matt Reeves,Michelle Au,N/A
-GA,13049,49,GA-SD-49,Uncontested R,,Butch Miller [I],N/A,N/A
-GA,13050,50,GA-SD-50,Safe R,,Bo Hatchett,Dee Daley,N/A
+GA,13048,48,GA-SD-48,Tilt D,,Matt Reeves,TBA,N/A
+GA,13049,49,GA-SD-49,Uncontested R,,Butch Miller [I] ,N/A,N/A
+GA,13050,50,GA-SD-50,Safe R,,TBA,Dee Daley,N/A
 GA,13051,51,GA-SD-51,Safe R,,Steve Gooch [I],June Krise,N/A
 GA,13052,52,GA-SD-52,Safe R,,Chuck Hufstetler [I],Charles DeYoung,N/A
-GA,13053,53,GA-SD-53,Uncontested R,,Jeff Mullis [I],N/A,N/A
-GA,13054,54,GA-SD-54,Uncontested R,,Chuck Payne [I],N/A,N/A
+GA,13053,53,GA-SD-53,Uncontested R,,TBA,N/A,N/A
+GA,13054,54,GA-SD-54,Uncontested R,,TBA,N/A,N/A
 GA,13055,55,GA-SD-55,Uncontested D,,N/A,Gloria Butler [I],N/A
 GA,13056,56,GA-SD-56,Lean R,,John Albers [I],Sarah Beeson,N/A
 HI,15001,1,HI-SD-1,No Election,,N/A,N/A,N/A
-HI,15002,2,HI-SD-2,Uncontested D,,N/A,Joy San Buenaventura,Ron Ka-Ipo
+HI,15002,2,HI-SD-2,Uncontested D,,N/A,TBA,Ron Ka-Ipo
 HI,15003,3,HI-SD-3,No Election,,N/A,N/A,N/A
 HI,15004,4,HI-SD-4,No Election,,N/A,N/A,N/A
 HI,15005,5,HI-SD-5,Safe D,,Christy Kajiwara-Gusman,Gil Keith-Agaran [I],Rynette Ipo Keen
@@ -321,19 +321,19 @@ HI,15006,6,HI-SD-6,No Election,,N/A,N/A,N/A
 HI,15007,7,HI-SD-7,No Election,,N/A,N/A,N/A
 HI,15008,8,HI-SD-8,Safe D,,N/A,Ronald Kouchi [I],N/A
 HI,15009,9,HI-SD-9,Likely D,,Sam Slom,Stanley Chang [I],N/A
-HI,15010,10,HI-SD-10,Safe D,,N/A,Les Ihara [I],Paul Shiraishi
+HI,15010,10,HI-SD-10,Safe D,,N/A,TBA,Paul Shiraishi
 HI,15011,11,HI-SD-11,Uncontested D,,N/A,Brian Taniguchi [I],N/A
 HI,15012,12,HI-SD-12,No Election,,N/A,N/A,N/A
-HI,15013,13,HI-SD-13,Uncontested D,,N/A,Karl Rhoads [I],N/A
+HI,15013,13,HI-SD-13,Uncontested D,,N/A,TBA,N/A
 HI,15014,14,HI-SD-14,Uncontested D,,N/A,Donna Mercado Kim [I],N/A
 HI,15015,15,HI-SD-15,Uncontested D,,N/A,Glenn Wakai [I],N/A
-HI,15016,16,HI-SD-16,Safe D,,Kelly Kitashima,Bennette Misalucha [I],N/A
+HI,15016,16,HI-SD-16,No Election,,N/A,N/A,N/A
 HI,15017,17,HI-SD-17,No Election,,N/A,N/A,N/A
 HI,15018,18,HI-SD-18,No Election,,N/A,N/A,N/A
-HI,15019,19,HI-SD-19,Tilt D,R TO D,Kurt Fevella [I],Rida Cabanilla,N/A
+HI,15019,19,HI-SD-19,No Election,,N/A,N/A,N/A
 HI,15020,20,HI-SD-20,Safe D,,N/A,Mike Gabbard [I],Feena Bonoan
 HI,15021,21,HI-SD-21,No Election,,N/A,N/A,N/A
-HI,15022,22,HI-SD-22,Safe D,,John Miller,Donovan M. Dela Cruz [I],Banner Fanene
+HI,15022,22,HI-SD-22,Safe D,,John Miller,TBA,Banner Fanene
 HI,15023,23,HI-SD-23,No Election,,N/A,N/A,N/A
 HI,15024,24,HI-SD-24,No Election,,N/A,N/A,N/A
 HI,15025,25,HI-SD-25,Safe D,,Kristina Kim-Marshall,Chris Lee,N/A
@@ -341,7 +341,7 @@ ID,16001,1,ID-SD-1,Safe R,,Jim Woodward [I],Vera Gadman,N/A
 ID,16002,2,ID-SD-2,Uncontested R,,Steve Vick [I],N/A,N/A
 ID,16003,3,ID-SD-3,Uncontested R,,Peter Riggs,N/A,N/A
 ID,16004,4,ID-SD-4,Safe R,,Mary Souza [I],Shem Michael Hanks,N/A
-ID,16005,5,ID-SD-5,Likely D,,Dan Foreman,David Nelson [I],N/A
+ID,16005,5,ID-SD-5,Lean D,,Dan Foreman,David Nelson[I],N/A
 ID,16006,6,ID-SD-6,Uncontested R,,Dan Johnson [I],N/A,N/A
 ID,16007,7,ID-SD-7,Uncontested R,,Carl G. Crabtree [I],N/A,N/A
 ID,16008,8,ID-SD-8,Safe R,,Steve Thayn [I],N/A,Kirsten Faith Richardson
@@ -351,7 +351,7 @@ ID,16011,11,ID-SD-11,Uncontested R,,Patti Anne Lodge [I],N/A,N/A
 ID,16012,12,ID-SD-12,Safe R,,Todd Lakey [I],Chelle Gluch,N/A
 ID,16013,13,ID-SD-13,Safe R,,Jeff C. Agenbroad [I],Melissa Sue Robinson,N/A
 ID,16014,14,ID-SD-14,Safe R,,Scott Grow [I],N/A,Ellen B. Spencer
-ID,16015,15,ID-SD-15,Tilt R,,Fred Martin [I],Shelley Brock,N/A
+ID,16015,15,ID-SD-15,Toss-Up,,Fred Martin [I],Shelley Brock,N/A
 ID,16016,16,ID-SD-16,Safe D,,LeeJoe Lay,Grant Burgoyne [I],N/A
 ID,16017,17,ID-SD-17,Safe D,,Gary L. Smith,Ali Rabe,N/A
 ID,16018,18,ID-SD-18,Safe D,,Mark A. Bost,Janie Ward-Engelking [I],N/A
@@ -377,12 +377,12 @@ IL,17002,2,IL-SD-2,No Election,,N/A,N/A,N/A
 IL,17003,3,IL-SD-3,No Election,,N/A,N/A,N/A
 IL,17004,4,IL-SD-4,Uncontested D,,N/A,Kimberly Lightford [I],N/A
 IL,17005,5,IL-SD-5,No Election,,N/A,N/A,N/A
-IL,17006,6,IL-SD-6,Uncontested D,,N/A,Sara Feigenholtz [I],N/A
+IL,17006,6,IL-SD-6,No Election,,N/A,N/A,N/A
 IL,17007,7,IL-SD-7,Uncontested D,,N/A,Heather Steans [I],N/A
 IL,17008,8,IL-SD-8,No Election,,N/A,N/A,N/A
 IL,17009,9,IL-SD-9,No Election,,N/A,N/A,N/A
 IL,17010,10,IL-SD-10,Safe D,,Anthony Beckman,Robert Martwick [I],N/A
-IL,17011,11,IL-SD-11,Safe D,,N/A,Celina Villanueva [I],Mary Ellen Brown
+IL,17011,11,IL-SD-11,No Election,,N/A,N/A,N/A
 IL,17012,12,IL-SD-12,No Election,,N/A,N/A,N/A
 IL,17013,13,IL-SD-13,Uncontested D,,N/A,Robert Peters [I],N/A
 IL,17014,14,IL-SD-14,No Election,,N/A,N/A,N/A
@@ -396,7 +396,7 @@ IL,17021,21,IL-SD-21,No Election,,N/A,N/A,N/A
 IL,17022,22,IL-SD-22,Uncontested D,,N/A,Cristina Castro [I],N/A
 IL,17023,23,IL-SD-23,No Election,,N/A,N/A,N/A
 IL,17024,24,IL-SD-24,No Election,,N/A,N/A,N/A
-IL,17025,25,IL-SD-25,Lean D,R TO D,Jeanette Ward,Karina Villa,N/A
+IL,17025,25,IL-SD-25,Tilt D,R TO D,Jeanette Ward,Karina Villa,N/A
 IL,17026,26,IL-SD-26,No Election,,N/A,N/A,N/A
 IL,17027,27,IL-SD-27,No Election,,N/A,N/A,N/A
 IL,17028,28,IL-SD-28,Uncontested D,,N/A,Laura Murphy [I],N/A
@@ -405,7 +405,7 @@ IL,17030,30,IL-SD-30,No Election,,N/A,N/A,N/A
 IL,17031,31,IL-SD-31,Safe D,,Christopher Kasperski,Melinda Bush [I],N/A
 IL,17032,32,IL-SD-32,No Election,,N/A,N/A,N/A
 IL,17033,33,IL-SD-33,No Election,,N/A,N/A,N/A
-IL,17034,34,IL-SD-34,Safe D,,Paul Hoffman,Steve Stadelman [I],N/A
+IL,17034,34,IL-SD-34,Uncontested D,,N/A,Steve Stadelman [I],N/A
 IL,17035,35,IL-SD-35,No Election,,N/A,N/A,N/A
 IL,17036,36,IL-SD-36,No Election,,N/A,N/A,N/A
 IL,17037,37,IL-SD-37,Safe R,,Win Stoller,N/A,Marcus Throneburg
@@ -417,16 +417,16 @@ IL,17042,42,IL-SD-42,No Election,,N/A,N/A,N/A
 IL,17043,43,IL-SD-43,Safe D,,Ben Bierly,John Connor,N/A
 IL,17044,44,IL-SD-44,No Election,,N/A,N/A,N/A
 IL,17045,45,IL-SD-45,No Election,,N/A,N/A,N/A
-IL,17046,46,IL-SD-46,Safe D,,Mary Burress,Dave Koehler [I],N/A
+IL,17046,46,IL-SD-46,Likely D,,Mary Burress,Dave Koehler [I],N/A
 IL,17047,47,IL-SD-47,No Election,,N/A,N/A,N/A
 IL,17048,48,IL-SD-48,No Election,,N/A,N/A,N/A
 IL,17049,49,IL-SD-49,Lean D,,Thomas McCullagh,Meg Loughran Cappel,N/A
 IL,17050,50,IL-SD-50,No Election,,N/A,N/A,N/A
 IL,17051,51,IL-SD-51,No Election,,N/A,N/A,N/A
-IL,17052,52,IL-SD-52,Safe D,,Alexander Ruggieri,Scott Bennett [I],N/A
+IL,17052,52,IL-SD-52,Uncontested D,,N/A,Scott Bennett [I],N/A
 IL,17053,53,IL-SD-53,No Election,,N/A,N/A,N/A
 IL,17054,54,IL-SD-54,No Election,,N/A,N/A,N/A
-IL,17055,55,IL-SD-55,Safe R,,Darren Bailey,Cynthia Given,N/A
+IL,17055,55,IL-SD-55,Uncontested R,,Darren Bailey,N/A,N/A
 IL,17056,56,IL-SD-56,No Election,,N/A,N/A,N/A
 IL,17057,57,IL-SD-57,No Election,,N/A,N/A,N/A
 IL,17058,58,IL-SD-58,Uncontested R,,Terri Bryant,N/A,N/A
@@ -438,7 +438,7 @@ IN,18004,4,IN-SD-4,No Election,,N/A,N/A,N/A
 IN,18005,5,IN-SD-5,Safe R,,Ed Charbonneau [I],Luke Bohm,N/A
 IN,18006,6,IN-SD-6,No Election,,N/A,N/A,N/A
 IN,18007,7,IN-SD-7,Safe R,,Brian Buchanan [I],Tabitha Bartley,N/A
-IN,18008,8,IN-SD-8,Safe R,,Mike Bohacek [I],Gary Davis,N/A
+IN,18008,8,IN-SD-8,Uncontested R,,Mike Bohacek [I],N/A,N/A
 IN,18009,9,IN-SD-9,Safe R,,Ryan Mishler [I],Brandon Cavanaugh,N/A
 IN,18010,10,IN-SD-10,Uncontested D,,N/A,David Niezgodski [I],N/A
 IN,18011,11,IN-SD-11,No Election,,N/A,N/A,N/A
@@ -460,21 +460,21 @@ IN,18026,26,IN-SD-26,No Election,,N/A,N/A,N/A
 IN,18027,27,IN-SD-27,No Election,,N/A,N/A,N/A
 IN,18028,28,IN-SD-28,Safe R,,Mike Crider [I],Theresa Bruno,N/A
 IN,18029,29,IN-SD-29,No Election,,N/A,N/A,N/A
-IN,18030,30,IN-SD-30,Lean D,R TO D,John Ruckelshaus [I],Fady Qaddoura,N/A
+IN,18030,30,IN-SD-30,Toss-Up,,TBA,Fady Qaddoura,N/A
 IN,18031,31,IN-SD-31,No Election,,N/A,N/A,N/A
 IN,18032,32,IN-SD-32,Safe R,,Aaron Freeman [I],Belinda Drake,N/A
 IN,18033,33,IN-SD-33,Uncontested D,,N/A,Greg Taylor [I],N/A
 IN,18034,34,IN-SD-34,Uncontested D,,N/A,Jean Breaux [I],N/A
 IN,18035,35,IN-SD-35,Safe R,,R. Michael Young [I],Pete Cowden,N/A
-IN,18036,36,IN-SD-36,Lean R,,Jack Sandlin [I],Ashley Eason,N/A
+IN,18036,36,IN-SD-36,Lean R,,Jack Sandlin [I],Jason Fletcher,N/A
 IN,18037,37,IN-SD-37,Safe R,,Rodrick Bray [I],Tom Wallace,N/A
 IN,18038,38,IN-SD-38,No Election,,N/A,N/A,N/A
 IN,18039,39,IN-SD-39,No Election,,N/A,N/A,N/A
-IN,18040,40,IN-SD-40,Uncontested D,,N/A,Shelli Yoder,N/A
+IN,18040,40,IN-SD-40,Uncontested D,,N/A,TBA,N/A
 IN,18041,41,IN-SD-41,No Election,,N/A,N/A,N/A
 IN,18042,42,IN-SD-42,Uncontested R,,Jean Leising [I],N/A,N/A
 IN,18043,43,IN-SD-43,No Election,,N/A,N/A,N/A
-IN,18044,44,IN-SD-44,Safe R,,Eric Koch [I],Cynthia Wirth,N/A
+IN,18044,44,IN-SD-44,Uncontested R,,Eric Koch [I],N/A,N/A
 IN,18045,45,IN-SD-45,No Election,,N/A,N/A,N/A
 IN,18046,46,IN-SD-46,No Election,,N/A,N/A,N/A
 IN,18047,47,IN-SD-47,No Election,,N/A,N/A,N/A
@@ -500,9 +500,9 @@ IA,19016,16,IA-SD-16,Safe D,,N/A,Nate Boulton [I],Toya Johnson
 IA,19017,17,IA-SD-17,No Election,,N/A,N/A,N/A
 IA,19018,18,IA-SD-18,Uncontested D,,N/A,Janet Petersen [I],N/A
 IA,19019,19,IA-SD-19,No Election,,N/A,N/A,N/A
-IA,19020,20,IA-SD-20,Tilt D,R TO D,Brad Zaun [I],Rhonda Martin,N/A
+IA,19020,20,IA-SD-20,Toss-Up,,Brad Zaun [I],Rhonda Martin,N/A
 IA,19021,21,IA-SD-21,No Election,,N/A,N/A,N/A
-IA,19022,22,IA-SD-22,Lean D,R TO D,Scott Cirksena,Sarah Trone Garriott,N/A
+IA,19022,22,IA-SD-22,Tilt D,R TO D,Scott Cirksena,Sarah Trone Garriott,N/A
 IA,19023,23,IA-SD-23,No Election,,N/A,N/A,N/A
 IA,19024,24,IA-SD-24,Safe R,,Jesse Green,Cynthia Oppedal Paschen,N/A
 IA,19025,25,IA-SD-25,No Election,,N/A,N/A,N/A
@@ -522,13 +522,13 @@ IA,19038,38,IA-SD-38,Safe R,,Dawn Driscoll,Ivy Schuster,N/A
 IA,19039,39,IA-SD-39,No Election,,N/A,N/A,N/A
 IA,19040,40,IA-SD-40,Safe R,,Ken Rozenboom [I],Lance Roorda,N/A
 IA,19041,41,IA-SD-41,No Election,,N/A,N/A,N/A
-IA,19042,42,IA-SD-42,Tilt R,D TO R,Jeff Reichman,Rich Taylor [I],N/A
+IA,19042,42,IA-SD-42,Toss-Up,,Jeff Reichman,Rich Taylor [I],N/A
 IA,19043,43,IA-SD-43,No Election,,N/A,N/A,N/A
-IA,19044,44,IA-SD-44,Tilt D,R TO D,Tim Goodwin,Tom Courtney,N/A
+IA,19044,44,IA-SD-44,Toss-Up,,Tim Goodwin,Tom Courtney,N/A
 IA,19045,45,IA-SD-45,No Election,,N/A,N/A,N/A
 IA,19046,46,IA-SD-46,Likely R,,Mark S. Lofgren [I],Chris Brase,N/A
 IA,19047,47,IA-SD-47,No Election,,N/A,N/A,N/A
-IA,19048,48,IA-SD-48,Safe R,,Dan Zumbach [I],Eric Green,N/A
+IA,19048,48,IA-SD-48,Uncontested R,,Dan Zumbach [I],N/A,N/A
 IA,19049,49,IA-SD-49,No Election,,N/A,N/A,N/A
 IA,19050,50,IA-SD-50,Safe D,,Jennifer Smith,Pam Jochum [I],N/A
 KS,20001,1,KS-SD-1,Safe R,,Dennis Pyle [I],Kirk Miller,N/A
@@ -537,47 +537,47 @@ KS,20003,3,KS-SD-3,Lean D,,Willie Dove,Tom Holland [I],N/A
 KS,20004,4,KS-SD-4,Safe D,,Sam Stillwell,David Haley [I],N/A
 KS,20005,5,KS-SD-5,Toss-Up,,Kevin Braun [I],Jeffrey Pittman,N/A
 KS,20006,6,KS-SD-6,Safe D,,Dianna Whittington,Pat Pettey [I],N/A
-KS,20007,7,KS-SD-7,Safe D,,Laura McConwell,Ethan Corson,N/A
+KS,20007,7,KS-SD-7,Likely D,,Laura McConwell,Ethan Corson,N/A
 KS,20008,8,KS-SD-8,Lean D,R TO D,James Todd,Cindy Holscher,N/A
 KS,20009,9,KS-SD-9,Likely R,,Julia Lynn [I],Stacey Knoell,N/A
-KS,20010,10,KS-SD-10,Tilt D,R TO D,Mike Thompson [I],Lindsey Constance,N/A
-KS,20011,11,KS-SD-11,Toss-Up,,Kellie Warren,Joy Koesten,N/A
+KS,20010,10,KS-SD-10,Toss-Up,,TBA,Lindsey Constance,N/A
+KS,20011,11,KS-SD-11,Safe R,,TBA,Joy Koesten,N/A
 KS,20012,12,KS-SD-12,Safe R,,Caryn Tyson [I],Mike Bruner,N/A
 KS,20013,13,KS-SD-13,Safe R,,Richard Hilderbrand [I],Nancy Ingle,N/A
-KS,20014,14,KS-SD-14,Uncontested R,,Michael Fagg,N/A,N/A
-KS,20015,15,KS-SD-15,Uncontested R,,Virgil Peck,N/A,N/A
+KS,20014,14,KS-SD-14,Uncontested R,,TBA,N/A,N/A
+KS,20015,15,KS-SD-15,Uncontested R,,TBA,N/A,N/A
 KS,20016,16,KS-SD-16,Safe R,,Ty Masterson [I],Timothy Don Fry II,N/A
 KS,20017,17,KS-SD-17,Safe R,,Jeff Longbine [I],Stephen Vecchione,N/A
-KS,20018,18,KS-SD-18,Tilt R,D TO R,Kristen O'Shea,Tobias Schlingensiepen,N/A
-KS,20019,19,KS-SD-19,Safe D,,Rick Kloos,Anthony Hensley [I],N/A
-KS,20020,20,KS-SD-20,Likely R,,Brenda Dietrich,Rachel Willis,N/A
+KS,20018,18,KS-SD-18,Toss-Up,,Kristen O'Shea,TBA,N/A
+KS,20019,19,KS-SD-19,Likely D,,Rick Kloos,Anthony Hensley [I],N/A
+KS,20020,20,KS-SD-20,Likely R,,TBA,Rachel Willis,N/A
 KS,20021,21,KS-SD-21,Lean D,,Tom Bickimer,Dinah Sykes [I],N/A
-KS,20022,22,KS-SD-22,Lean D,,Craig Bowser,Tom Hawk [I],N/A
-KS,20023,23,KS-SD-23,Likely R,,Robert Olson [I],Wendy Budetti,N/A
-KS,20024,24,KS-SD-24,Uncontested R,,J.R. Claeys [I],N/A,N/A
-KS,20025,25,KS-SD-25,Safe D,,Vail Fruechting,Mary Ware [I],N/A
+KS,20022,22,KS-SD-22,Lean D,,TBA,Tom Hawk [I],N/A
+KS,20023,23,KS-SD-23,Likely R,,TBA,Wendy Budetti,N/A
+KS,20024,24,KS-SD-24,Uncontested R,,TBA,N/A,N/A
+KS,20025,25,KS-SD-25,Likely D,,Vail Fruechting,Mary Ware [I],N/A
 KS,20026,26,KS-SD-26,Uncontested R,,Dan Kerschen [I],N/A,N/A
 KS,20027,27,KS-SD-27,Safe R,,Gene Suellentrop [I],Mike McCorkle,N/A
-KS,20028,28,KS-SD-28,Tilt D,R TO D,Mike Petersen [I],Jim Ward,N/A
+KS,20028,28,KS-SD-28,Toss-Up,,Mike Petersen [I],Jim Ward,N/A
 KS,20029,29,KS-SD-29,Safe D,,Myron Ackerman,Oletha Faust-Goudeau [I],N/A
-KS,20030,30,KS-SD-30,Lean R,,Renee Erickson,Melissa Gregory,N/A
+KS,20030,30,KS-SD-30,Likely R,,Renee Erickson,TBA,N/A
 KS,20031,31,KS-SD-31,Uncontested R,,Carolyn McGinn [I],N/A,N/A
 KS,20032,32,KS-SD-32,Uncontested R,,Larry Alley [I],N/A,N/A
-KS,20033,33,KS-SD-33,Uncontested R,,Alicia Straub,N/A,N/A
-KS,20034,34,KS-SD-34,Safe R,,Mark Steffen,Shanna Henry,N/A
+KS,20033,33,KS-SD-33,Uncontested R,,TBA,N/A,N/A
+KS,20034,34,KS-SD-34,Safe R,,TBA,Shanna Henry,N/A
 KS,20035,35,KS-SD-35,Uncontested R,,Richard Wilborn [I],N/A,N/A
 KS,20036,36,KS-SD-36,Uncontested R,,Elaine Bowers [I],N/A,N/A
 KS,20037,37,KS-SD-37,Safe R,,Molly Baumgardner [I],Becca Peck,N/A
 KS,20038,38,KS-SD-38,Safe R,,Bud Estes [I],Edgar Pando,N/A
-KS,20039,39,KS-SD-39,Uncontested R,,John Doll [I],N/A,N/A
+KS,20039,39,KS-SD-39,Uncontested R,,TBA,N/A,N/A
 KS,20040,40,KS-SD-40,Safe R,,Rick Billinger [I],Larry Dreiling,N/A
 KY,21001,1,KY-SD-1,Uncontested R,,Jason Howell,N/A,N/A
 KY,21002,2,KY-SD-2,No Election,,N/A,N/A,N/A
-KY,21003,3,KY-SD-3,Safe R,,Whitney Chesterfield [I],N/A,Amanda Billings
+KY,21003,3,KY-SD-3,Uncontested R,,Whitney Chesterfield [I],N/A,N/A
 KY,21004,4,KY-SD-4,No Election,,N/A,N/A,N/A
-KY,21005,5,KY-SD-5,Safe R,,Stephen Meredith [I],N/A,"Mike Miller, John Whippie"
+KY,21005,5,KY-SD-5,Uncontested R,,Stephen Meredith [I],N/A,N/A
 KY,21006,6,KY-SD-6,No Election,,N/A,N/A,N/A
-KY,21007,7,KY-SD-7,Lean D,,Adrienne Southworth,Joe Graviss,N/A
+KY,21007,7,KY-SD-7,Toss-Up,,TBA,Joe Graviss,N/A
 KY,21008,8,KY-SD-8,No Election,,N/A,N/A,N/A
 KY,21009,9,KY-SD-9,Safe R,,David Givens [I],Brian Pedigo,N/A
 KY,21010,10,KY-SD-10,No Election,,N/A,N/A,N/A
@@ -585,130 +585,130 @@ KY,21011,11,KY-SD-11,Safe R,,John Schickel [I],James Fiorelli,N/A
 KY,21012,12,KY-SD-12,No Election,,N/A,N/A,N/A
 KY,21013,13,KY-SD-13,Uncontested D,,N/A,Reginald Thomas [I],N/A
 KY,21014,14,KY-SD-14,No Election,,N/A,N/A,N/A
-KY,21015,15,KY-SD-15,Uncontested R,,Rick Girdler [I],N/A,N/A
+KY,21015,15,KY-SD-15,Uncontested R,,TBA,N/A,N/A
 KY,21016,16,KY-SD-16,No Election,,N/A,N/A,N/A
 KY,21017,17,KY-SD-17,Safe R,,Damon Thayer [I],Jason Stroude,N/A
 KY,21018,18,KY-SD-18,No Election,,N/A,N/A,N/A
 KY,21019,19,KY-SD-19,Uncontested D,,N/A,Morgan McGarvey [I],N/A
 KY,21020,20,KY-SD-20,No Election,,N/A,N/A,N/A
-KY,21021,21,KY-SD-21,Safe R,,Brandon Jackson Storm,Walter Trebolo,N/A
+KY,21021,21,KY-SD-21,Safe R,,TBA,Walter Trebolo,N/A
 KY,21022,22,KY-SD-22,No Election,,N/A,N/A,N/A
 KY,21023,23,KY-SD-23,Likely R,,Chris McDaniel [I],Ryan Olexia,N/A
 KY,21024,24,KY-SD-24,No Election,,N/A,N/A,N/A
 KY,21025,25,KY-SD-25,Uncontested R,,Robert Stivers [I],N/A,N/A
 KY,21026,26,KY-SD-26,No Election,,N/A,N/A,N/A
-KY,21027,27,KY-SD-27,Safe R,,Steve West [I],N/A,Bryan Short
+KY,21027,27,KY-SD-27,Uncontested R,,Steve West [I],N/A,N/A
 KY,21028,28,KY-SD-28,No Election,,N/A,N/A,N/A
-KY,21029,29,KY-SD-29,Tilt D,,Johnnie L. Turner,Johnny Ray Turner [I],N/A
+KY,21029,29,KY-SD-29,Toss-Up,,TBA,Johnny Ray Turner [I],N/A
 KY,21030,30,KY-SD-30,No Election,,N/A,N/A,N/A
-KY,21031,31,KY-SD-31,Likely R,,Phillip Wheeler [I],Glenn Martin Hammond,N/A
+KY,21031,31,KY-SD-31,Likely R,,Phillip Wheeler [I],TBA,N/A
 KY,21032,32,KY-SD-32,No Election,,N/A,N/A,N/A
 KY,21033,33,KY-SD-33,Uncontested D,,N/A,Gerald Neal [I],N/A
 KY,21034,34,KY-SD-34,No Election,,N/A,N/A,N/A
 KY,21035,35,KY-SD-35,Uncontested D,,N/A,Denise Harper Angel [I],N/A
 KY,21036,36,KY-SD-36,No Election,,N/A,N/A,N/A
-KY,21037,37,KY-SD-37,Uncontested D,,N/A,David Yates,N/A
+KY,21037,37,KY-SD-37,Uncontested D,,N/A,TBA,N/A
 KY,21038,38,KY-SD-38,No Election,,N/A,N/A,N/A
-ME,23001,1,ME-SD-1,Likely D,,Brian Schaefer,Troy Jackson [I],N/A
-ME,23002,2,ME-SD-2,Tilt R,D TO R,Harold Stewart,Michael Carpenter [I],N/A
-ME,23003,3,ME-SD-3,Safe R,,Bradlee Farrin [I],Daniel Swain,N/A
-ME,23004,4,ME-SD-4,Safe R,,Paul Davis [I],David Ziemer,N/A
+ME,23001,1,ME-SD-1,Lean D,,Brian Schaefer,Troy Jackson [I],N/A
+ME,23002,2,ME-SD-2,Toss-Up,,Harold Stewart,Michael Carpenter [I],N/A
+ME,23003,3,ME-SD-3,Safe R,,Bradlee Farrin [I],Katherine Wilder,N/A
+ME,23004,4,ME-SD-4,Safe R,,TBA,David Ziemer,N/A
 ME,23005,5,ME-SD-5,Safe D,,Christian Ireland,James Dill [I],N/A
 ME,23006,6,ME-SD-6,Safe R,,Marianne Moore [I],Jeffrey Lovit,N/A
-ME,23007,7,ME-SD-7,Safe D,,Brian Langley,Louis Luchini [I],N/A
-ME,23008,8,ME-SD-8,Safe R,,Kimberley Rosen [I],Beverly Uhlenhake,N/A
-ME,23009,9,ME-SD-9,Safe D,,Sean Hinkley,Joe Baldacci,N/A
+ME,23007,7,ME-SD-7,Safe D,,TBA,Louis Luchini [I],N/A
+ME,23008,8,ME-SD-8,Safe R,,TBA,TBA,N/A
+ME,23009,9,ME-SD-9,Safe D,,John Hiatt,TBA,N/A
 ME,23010,10,ME-SD-10,Safe R,,Stacey Guerin [I],Frederick Austin,N/A
-ME,23011,11,ME-SD-11,Lean D,,Duncan Milne,Glenn Curry,N/A
+ME,23011,11,ME-SD-11,Lean D,,Duncan Milne,TBA,N/A
 ME,23012,12,ME-SD-12,Safe D,,Gordon Page,David Miramant [I],N/A
-ME,23013,13,ME-SD-13,Tilt D,R TO D,Dana Dow [I],Chloe Maxmin,N/A
-ME,23014,14,ME-SD-14,Safe D,,Mark Walker,Shenna Bellows [I],N/A
-ME,23015,15,ME-SD-15,Safe R,,Matthew Pouliot [I],Kalie Hess,N/A
+ME,23013,13,ME-SD-13,Toss-Up,,Dana Dow [I],Chloe Maxmin,N/A
+ME,23014,14,ME-SD-14,Likely D,,Mark Walker,TBA,N/A
+ME,23015,15,ME-SD-15,Likely R,,Matthew Pouliot [I],Kalie Hess,N/A
 ME,23016,16,ME-SD-16,Tilt R,,Scott Cyrway [I],Hilary Koch,N/A
-ME,23017,17,ME-SD-17,Lean R,,Russell Black [I],Jan Collins,N/A
+ME,23017,17,ME-SD-17,Likely R,,Russell Black [I],Jan Collins,N/A
 ME,23018,18,ME-SD-18,Safe R,,Lisa Keim [I],Gabriel Perkins,N/A
 ME,23019,19,ME-SD-19,Safe R,,Richard Bennett,Katherine Branch,N/A
-ME,23020,20,ME-SD-20,Lean D,,Matthew Leonard,Ned Claxton [I],N/A
-ME,23021,21,ME-SD-21,Safe D,,Timothy Gallant,Nathan Libby [I],N/A
+ME,23020,20,ME-SD-20,Tilt D,,Matthew Leonard,Ned Claxton [I],N/A
+ME,23021,21,ME-SD-21,Lean D,,Timothy Gallant,Nathan Libby [I],N/A
 ME,23022,22,ME-SD-22,Safe R,,Jeffrey Timberlake [I],Martha Poliquin,N/A
 ME,23023,23,ME-SD-23,Safe D,,Holly Kopp,Eloise Vitelli [I],N/A
-ME,23024,24,ME-SD-24,Safe D,,Bradford Pattershall,Matthea Daughtry,N/A
+ME,23024,24,ME-SD-24,Safe D,,Bradford Pattershall,TBA,N/A
 ME,23025,25,ME-SD-25,Safe D,,Jennifer White,Catherine Breen [I],N/A
 ME,23026,26,ME-SD-26,Safe D,,Karen Lockwood,Bill Diamond [I],N/A
 ME,23027,27,ME-SD-27,Uncontested D,,N/A,Benjamin Chipman [I],N/A
 ME,23028,28,ME-SD-28,Uncontested D,,N/A,Heather Sanborn [I],N/A
-ME,23029,29,ME-SD-29,Safe D,,Stephanie Anderson,Anne Carney,N/A
+ME,23029,29,ME-SD-29,Safe D,,Stephanie Anderson,TBA,N/A
 ME,23030,30,ME-SD-30,Lean D,,Sara Rivard,Stacy Brenner,N/A
-ME,23031,31,ME-SD-31,Safe D,,William Gombar,Donna Bailey,N/A
+ME,23031,31,ME-SD-31,Safe D,,William Gombar,Justin Chenette [I],N/A
 ME,23032,32,ME-SD-32,Safe D,,Robert Daigle,Susan Deschambault [I],N/A
 ME,23033,33,ME-SD-33,Safe R,,David Woodsome [I],Michael McKinney,N/A
-ME,23034,34,ME-SD-34,Tilt D,R TO D,Michael Pardue,Joseph Rafferty,N/A
+ME,23034,34,ME-SD-34,Toss-Up,,Michael Pardue,Joseph Rafferty,N/A
 ME,23035,35,ME-SD-35,Safe D,,Bradley Moulton,Mark Lawrence [I],N/A
-MA,25004,"Berkshire, Hampshire, Franklin & Hampden","MA-SD-Berkshire, Hampshire, Franklin & Hampden",Uncontested D,,N/A,Adam G. Hinds [I],N/A
-MA,25031,Bristol & Norfolk,MA-SD-Bristol & Norfolk,Uncontested D,,N/A,Paul Feeney [I],N/A
-MA,25040,Cape & Islands,MA-SD-Cape & Islands,Uncontested D,,N/A,Julian Andre Cyr [I],N/A
-MA,25023,Fifth Middlesex,MA-SD-Fifth Middlesex,Uncontested D,,N/A,Jason M. Lewis [I],N/A
-MA,25037,First Bristol & Plymouth,MA-SD-First Bristol & Plymouth,Uncontested D,,N/A,Michael J. Rodrigues [I],N/A
-MA,25019,First Essex,MA-SD-First Essex,Uncontested D,,N/A,Diana DiZoglio [I],N/A
-MA,25020,First Essex & Middlesex,MA-SD-First Essex & Middlesex,Uncontested R,,Bruce E. Tarr [I],N/A,N/A
-MA,25007,First Hampden & Hampshire,MA-SD-First Hampden & Hampshire,Uncontested D,,N/A,Eric Lesser [I],N/A
-MA,25013,First Middlesex,MA-SD-First Middlesex,Uncontested D,,N/A,"Edward J. Kennedy, Jr. [I]",N/A
-MA,25029,First Middlesex & Norfolk,MA-SD-First Middlesex & Norfolk,Uncontested D,,N/A,Cynthia Stone Creem [I],N/A
-MA,25036,First Plymouth & Bristol,MA-SD-First Plymouth & Bristol,Uncontested D,,N/A,Marc R. Pacheco [I],N/A
-MA,25001,First Suffolk,MA-SD-First Suffolk,Uncontested D,,N/A,Nicholas Collins [I],N/A
-MA,25027,First Suffolk & Middlesex,MA-SD-First Suffolk & Middlesex,Uncontested D,,N/A,Joseph A. Boncore [I],N/A
-MA,25010,First Worcester,MA-SD-First Worcester,Uncontested D,,N/A,Harriette L. Chandler [I],N/A
-MA,25024,Fourth Middlesex,MA-SD-Fourth Middlesex,Uncontested D,,N/A,Cindy F. Friedman [I],N/A
-MA,25003,Hampden,MA-SD-Hampden,Uncontested D,,N/A,Adam Gomez,N/A
-MA,25006,"Hampshire, Franklin & Worcester","MA-SD-Hampshire, Franklin & Worcester",Uncontested D,,N/A,Joanne M. Comerford [I],N/A
-MA,25026,Middlesex & Suffolk,MA-SD-Middlesex & Suffolk,Uncontested D,,N/A,Sal N. DiDomenico [I],N/A
-MA,25014,Middlesex & Worcester,MA-SD-Middlesex & Worcester,Uncontested D,,N/A,Jamie Eldridge [I],N/A
-MA,25033,Norfolk & Plymouth,MA-SD-Norfolk & Plymouth,Safe D,,N/A,John F. Keenan [I],Alexander Mendez
-MA,25030,Norfolk & Suffolk,MA-SD-Norfolk & Suffolk,Uncontested D,,N/A,Michael F. Rush [I],N/A
-MA,25017,"Norfolk, Bristol & Middlesex","MA-SD-Norfolk, Bristol & Middlesex",Likely D,,Matthew T. Kelly,Rebecca L. Rausch [I],N/A
-MA,25032,"Norfolk, Bristol & Plymouth","MA-SD-Norfolk, Bristol & Plymouth",Uncontested D,,N/A,"Walter F. Timilty, Jr. [I]",N/A
-MA,25039,Plymouth & Barnstable,MA-SD-Plymouth & Barnstable,Lean D,,James R. McMahon,Susan Lynn Moran [I],N/A
-MA,25034,Plymouth & Norfolk,MA-SD-Plymouth & Norfolk,Lean R,,Patrick M. O'Connor [I],Meg Wheeler,N/A
-MA,25038,Second Bristol & Plymouth,MA-SD-Second Bristol & Plymouth,Uncontested D,,N/A,Mark C. Montigny [I],N/A
-MA,25021,Second Essex,MA-SD-Second Essex,Uncontested D,,N/A,Joan B. Lovely [I],N/A
-MA,25018,Second Essex & Middlesex,MA-SD-Second Essex & Middlesex,Uncontested D,,N/A,Barry Finegold [I],N/A
-MA,25005,Second Hampden & Hampshire,MA-SD-Second Hampden & Hampshire,Likely D,,John Francis Cain,John C. Velis [I],N/A
-MA,25025,Second Middlesex,MA-SD-Second Middlesex,Uncontested D,,N/A,Patricia Jehlen [I],N/A
-MA,25015,Second Middlesex & Norfolk,MA-SD-Second Middlesex & Norfolk,Uncontested D,,N/A,Karen E. Spilka [I],N/A
-MA,25035,Second Plymouth & Bristol,MA-SD-Second Plymouth & Bristol,Uncontested D,,N/A,Michael Brady [I],N/A
-MA,25002,Second Suffolk,MA-SD-Second Suffolk,Uncontested D,,N/A,Sonia Rosa Chang-Diaz [I],N/A
-MA,25028,Second Suffolk & Middlesex,MA-SD-Second Suffolk & Middlesex,Uncontested D,,N/A,William Brownsberger,N/A
-MA,25011,Second Worcester,MA-SD-Second Worcester,Uncontested D,,N/A,Michael O. Moore [I],N/A
-MA,25022,Third Essex,MA-SD-Third Essex,Uncontested D,,N/A,Brendan P. Crighton [I],N/A
-MA,25016,Third Middlesex,MA-SD-Third Middlesex,Uncontested D,,N/A,Michael J. Barrett [I],N/A
-MA,25009,Worcester & Middlesex,MA-SD-Worcester & Middlesex,Tilt R,,Dean Tran [I],John C. Cronin,N/A
-MA,25012,Worcester & Norfolk,MA-SD-Worcester & Norfolk,Safe R,,Ryan C. Fattman [I],Christine Crean,N/A
-MA,25008,"Worcester, Hampden, Hampshire & Middlesex","MA-SD-Worcester, Hampden, Hampshire & Middlesex",Safe D,,Steven R. Hall,Anne M. Gobi [I],N/A
-MN,27001,1,MN-SD-01,Safe R,,Mark Johnson [I],Reed Perkins,N/A
-MN,27002,2,MN-SD-02,Safe R,,Paul Utke [I],Leonard Alan Roy,N/A
-MN,27003,3,MN-SD-03,Safe D,,Christopher Hogan,Thomas (Tom) Bakk [I],N/A
-MN,27004,4,MN-SD-04,Likely D,,Mark Larson,Kent Eken [I],N/A
-MN,27005,5,MN-SD-05,Tilt R,,Justin Eichorn [I],Rita Albrecht,"Robyn Smith, Dennis Barsness"
-MN,27006,6,MN-SD-06,Safe D,,John J. Moren,David Tomassoni [I],N/A
-MN,27007,7,MN-SD-07,Safe D,,Donna Bergstrom,Jen McEwen,N/A
-MN,27008,8,MN-SD-08,Safe R,,Bill Ingebrigtsen [I],Michele Anderson,N/A
-MN,27009,9,MN-SD-09,Safe R,,Paul Gazelka [I],A. John Peters,N/A
-MN,27010,10,MN-SD-10,Safe R,,Carrie Ruud [I],Steve Samuelson,N/A
+MA,25004,"Berkshire, Hampshire, Franklin & Hampden","MA-SD-Berkshire, Hampshire, Franklin & Hampden",Safe D,,,,
+MA,25031,Bristol & Norfolk,MA-SD-Bristol & Norfolk,Safe D,,,,
+MA,25040,Cape & Islands,MA-SD-Cape & Islands,Safe D,,,,
+MA,25023,Fifth Middlesex,MA-SD-Fifth Middlesex,Safe D,,,,
+MA,25037,First Bristol & Plymouth,MA-SD-First Bristol & Plymouth,Safe D,,,,
+MA,25019,First Essex,MA-SD-First Essex,Safe D,,,,
+MA,25020,First Essex & Middlesex,MA-SD-First Essex & Middlesex,Safe R,,,,
+MA,25007,First Hampden & Hampshire,MA-SD-First Hampden & Hampshire,Safe D,,,,
+MA,25013,First Middlesex,MA-SD-First Middlesex,Safe D,,,,
+MA,25029,First Middlesex & Norfolk,MA-SD-First Middlesex & Norfolk,Safe D,,,,
+MA,25036,First Plymouth & Bristol,MA-SD-First Plymouth & Bristol,Safe D,,,,
+MA,25001,First Suffolk,MA-SD-First Suffolk,Safe D,,,,
+MA,25027,First Suffolk & Middlesex,MA-SD-First Suffolk & Middlesex,Safe D,,,,
+MA,25010,First Worcester,MA-SD-First Worcester,Safe D,,,,
+MA,25024,Fourth Middlesex,MA-SD-Fourth Middlesex,Safe D,,,,
+MA,25003,Hampden,MA-SD-Hampden,Safe D,,,,
+MA,25006,"Hampshire, Franklin & Worcester","MA-SD-Hampshire, Franklin & Worcester",Safe D,,,,
+MA,25026,Middlesex & Suffolk,MA-SD-Middlesex & Suffolk,Safe D,,,,
+MA,25014,Middlesex & Worcester,MA-SD-Middlesex & Worcester,Safe D,,,,
+MA,25033,Norfolk & Plymouth,MA-SD-Norfolk & Plymouth,Safe D,,,,
+MA,25030,Norfolk & Suffolk,MA-SD-Norfolk & Suffolk,Safe D,,,,
+MA,25017,"Norfolk, Bristol & Middlesex","MA-SD-Norfolk, Bristol & Middlesex",Tilt D,,,,
+MA,25032,"Norfolk, Bristol & Plymouth","MA-SD-Norfolk, Bristol & Plymouth",Safe D,,,,
+MA,25039,Plymouth & Barnstable,MA-SD-Plymouth & Barnstable,Tilt D,,,,
+MA,25034,Plymouth & Norfolk,MA-SD-Plymouth & Norfolk,Lean R,,,,
+MA,25038,Second Bristol & Plymouth,MA-SD-Second Bristol & Plymouth,Safe D,,,,
+MA,25021,Second Essex,MA-SD-Second Essex,Safe D,,,,
+MA,25018,Second Essex & Middlesex,MA-SD-Second Essex & Middlesex,Safe D,,,,
+MA,25005,Second Hampden & Hampshire,MA-SD-Second Hampden & Hampshire,Lean D,,,,
+MA,25025,Second Middlesex,MA-SD-Second Middlesex,Safe D,,,,
+MA,25015,Second Middlesex & Norfolk,MA-SD-Second Middlesex & Norfolk,Safe D,,,,
+MA,25035,Second Plymouth & Bristol,MA-SD-Second Plymouth & Bristol,Safe D,,,,
+MA,25002,Second Suffolk,MA-SD-Second Suffolk,Safe D,,,,
+MA,25028,Second Suffolk & Middlesex,MA-SD-Second Suffolk & Middlesex,Safe D,,,,
+MA,25011,Second Worcester,MA-SD-Second Worcester,Safe D,,,,
+MA,25022,Third Essex,MA-SD-Third Essex,Safe D,,,,
+MA,25016,Third Middlesex,MA-SD-Third Middlesex,Safe D,,,,
+MA,25009,Worcester & Middlesex,MA-SD-Worcester & Middlesex,Lean R,,,,
+MA,25012,Worcester & Norfolk,MA-SD-Worcester & Norfolk,Safe R,,,,
+MA,25008,"Worcester, Hampden, Hampshire & Middlesex","MA-SD-Worcester, Hampden, Hampshire & Middlesex",Likely D,,,,
+MN,27001,01,MN-SD-01,Safe R,,Mark Johnson [I],Reed Perkins,N/A
+MN,27002,02,MN-SD-02,Safe R,,Paul Utke [I],Leonard Alan Roy,N/A
+MN,27003,03,MN-SD-03,Safe D,,Christopher Hogan,Thomas (Tom) Bakk [I],N/A
+MN,27004,04,MN-SD-04,Likely D,,Mark Larson,Kent Eken [I],N/A
+MN,27005,05,MN-SD-05,Lean R,,Justin Eichorn [I],Rita Albrecht,"Robyn Smith, Dennis Barsness"
+MN,27006,06,MN-SD-06,Safe D,,John J. Moren,TBA,N/A
+MN,27007,07,MN-SD-07,Safe D,,Donna Bergstrom,TBA,N/A
+MN,27008,08,MN-SD-08,Safe R,,Bill Ingebrigtsen [I],Michele Anderson,N/A
+MN,27009,09,MN-SD-09,Safe R,,TBA,A. John Peters,N/A
+MN,27010,10,MN-SD-10,Safe R,,TBA,Steve Samuelson,N/A
 MN,27011,11,MN-SD-11,Likely R,,Jason Rarick [I],Michelle Lee,N/A
 MN,27012,12,MN-SD-12,Safe R,,Torrey Westrom [I],Jill Abahsain,N/A
 MN,27013,13,MN-SD-13,Safe R,,Jeff Howe [I],Michael Willemsen,N/A
 MN,27014,14,MN-SD-14,Toss-Up,,Jerry Relph [I],Aric Putnam,Jaden Partlow
 MN,27015,15,MN-SD-15,Safe R,,Andrew Matthews [I],Brent Krist,N/A
-MN,27016,16,MN-SD-16,Safe R,,Gary Dahms [I],N/A,"Steve ""Stoney"" Preslicka"
+MN,27016,16,MN-SD-16,Safe R,,Gary Dahms [I],,"Steve ""Stoney"" Preslicka"
 MN,27017,17,MN-SD-17,Safe R,,Andrew Lang [I],Fernando Alvarado,N/A
 MN,27018,18,MN-SD-18,Safe R,,Scott Newman [I],Chad R. Tschimperle,N/A
 MN,27019,19,MN-SD-19,Safe D,,Elizabeth Bangert,Nick Frentz [I],N/A
 MN,27020,20,MN-SD-20,Lean R,,Rich Draheim [I],Jon Olson,Jason Hoschette
 MN,27021,21,MN-SD-21,Likely R,,Michael P. Goggin [I],Ralph Kaehler,N/A
-MN,27022,22,MN-SD-22,Safe R,,Bill Weber [I],Shawna Marshall,Brian Abrahamson
+MN,27022,22,MN-SD-22,Safe R,,Bill Weber [I],TBA,Brian Abrahamson
 MN,27023,23,MN-SD-23,Safe R,,Julie A. Rosen [I],N/A,David Pulkrabek
 MN,27024,24,MN-SD-24,Safe R,,John R. Jasinski [I],Roger Steinkamp,N/A
-MN,27025,25,MN-SD-25,Tilt R,,David Senjem [I],Sara Flick,N/A
+MN,27025,25,MN-SD-25,Likely R,,David Senjem [I],Sara Flick,N/A
 MN,27026,26,MN-SD-26,Lean R,,Carla Nelson [I],Aleta Borrund,N/A
 MN,27027,27,MN-SD-27,Lean D,,Gene Dornink,Dan Sparks [I],Tyler Becvar
 MN,27028,28,MN-SD-28,Safe R,,Jeremy Miller [I],Sarah Kruger,Eric Leitzen
@@ -717,73 +717,73 @@ MN,27030,30,MN-SD-30,Safe R,,Mary Kiffmeyer [I],Diane Nguyen,N/A
 MN,27031,31,MN-SD-31,Safe R,,Michelle R. Benson [I],Kate Luthner,N/A
 MN,27032,32,MN-SD-32,Safe R,,Mark Koran [I],Joshua Fike,N/A
 MN,27033,33,MN-SD-33,Likely R,,David Osmek [I],Gretchen Piper,N/A
-MN,27034,34,MN-SD-34,Tilt R,,Warren Limmer [I],Bonnie Westlin,N/A
+MN,27034,34,MN-SD-34,Safe R,,Warren Limmer [I],Bonnie Westlin,N/A
 MN,27035,35,MN-SD-35,Safe R,,Jim Abeler [I],David L. Nelson,N/A
-MN,27036,36,MN-SD-36,Safe D,,Karen Attia,John Hoffman [I],N/A
-MN,27037,37,MN-SD-37,Likely D,,Brad Sanford,Jerry Newton [I],N/A
+MN,27036,36,MN-SD-36,Likely D,,Karen Attia,John Hoffman [I],N/A
+MN,27037,37,MN-SD-37,Lean D,,Brad Sanford,Jerry Newton [I],N/A
 MN,27038,38,MN-SD-38,Lean R,,Roger Chamberlain [I],Justin Stofferahn,N/A
-MN,27039,39,MN-SD-39,Likely R,,Karin Housley [I],Josiah Hill,N/A
-MN,27040,40,MN-SD-40,Safe D,,Robert Marvin,Chris Eaton [I],N/A
+MN,27039,39,MN-SD-39,Likely R,,Karin Housley [I],TBA,N/A
+MN,27040,40,MN-SD-40,Safe D,,Robert Marvin ,Chris Eaton [I],N/A
 MN,27041,41,MN-SD-41,Safe D,,Lucia Marina Vogel,Mary Kunesh-Podein,N/A
 MN,27042,42,MN-SD-42,Safe D,,Ben Schwanke,"Jason ""Ike"" Isaacson [I]",N/A
 MN,27043,43,MN-SD-43,Safe D,,Bob Zick,"Charles ""Chuck"" Wiger [I]",Doug Daubenspeck
 MN,27044,44,MN-SD-44,Likely D,R TO D,Greg Pulles,Ann Johnson Stewart,N/A
 MN,27045,45,MN-SD-45,Safe D,,Roxana Bruins,Ann H. Rest [I],Andy Schuler
 MN,27046,46,MN-SD-46,Safe D,,Bryan P. Björnson,Ron Latz [I],N/A
-MN,27047,47,MN-SD-47,Safe R,,Julia Coleman,Addie Miller,N/A
-MN,27048,48,MN-SD-48,Likely D,,Jeff Jiang,Steve Cwodzinski [I],N/A
-MN,27049,49,MN-SD-49,Safe D,,Julie Dupre,Melisa Lopez Franzen [I],N/A
+MN,27047,47,MN-SD-47,Safe R,,TBA,TBA,N/A
+MN,27048,48,MN-SD-48,Lean D,,Jeff Jiang,Steve Cwodzinski [I],N/A
+MN,27049,49,MN-SD-49,Safe D,,TBA,Melisa Lopez Franzen [I],N/A
 MN,27050,50,MN-SD-50,Safe D,,Dean Wm Mumbleau,Melissa Halvorson Wiklund [I],N/A
 MN,27051,51,MN-SD-51,Safe D,,Douglas D. Willetts,Jim Carlson [I],N/A
 MN,27052,52,MN-SD-52,Safe D,,Tomas Settell,Matt Klein [I],N/A
-MN,27053,53,MN-SD-53,Likely D,,Mary Giuliani Stephens,Susan Kent [I],N/A
+MN,27053,53,MN-SD-53,Likely D,,Mary Giuliani Stephens,TBA,N/A
 MN,27054,54,MN-SD-54,Lean D,,Leilani Holmstadt,Karla Bigham [I],N/A
-MN,27055,55,MN-SD-55,Likely R,,Eric Pratt [I],Sahra Odowa,N/A
-MN,27056,56,MN-SD-56,Toss-Up,,Dan Hall [I],Lindsey Port,N/A
+MN,27055,55,MN-SD-55,Safe R,,Eric Pratt [I],Sahra Odowa,N/A
+MN,27056,56,MN-SD-56,Toss-Up,,Dan Hall [I],TBA,N/A
 MN,27057,57,MN-SD-57,Likely D,,Jose W. Jimenez,Greg Clausen [I],N/A
 MN,27058,58,MN-SD-58,Toss-Up,,Zach Duckworth,Matt Little [I],N/A
-MN,27059,59,MN-SD-59,Safe D,,Paul Anderson,Bobby Joe Champion [I],N/A
+MN,27059,59,MN-SD-59,Safe D,,Paul Anderson,TBA,N/A
 MN,27060,60,MN-SD-60,Uncontested D,,N/A,Kari Dziedzic [I],N/A
 MN,27061,61,MN-SD-61,Safe D,,Jennifer Zielinski,Scott Dibble [I],N/A
-MN,27062,62,MN-SD-62,Safe D,,Bruce Lundeen,Omar Fateh,N/A
+MN,27062,62,MN-SD-62,Safe D,,Bruce Lundeen,TBA,N/A
 MN,27063,63,MN-SD-63,Safe D,,Diane Napper,Patricia Torres Ray [I],Chris Wright
 MN,27064,64,MN-SD-64,Safe D,,Sharon Anderson,Erin Murphy,Patricia Jirovec McArdell
 MN,27065,65,MN-SD-65,Safe D,,Paul Holmgren,Sandy Pappas [I],N/A
 MN,27066,66,MN-SD-66,Safe D,,Greg Copeland,John Marty [I],N/A
 MN,27067,67,MN-SD-67,Uncontested D,,N/A,Foung Hawj [I],N/A
-MO,29001,1,MO-SD-1,Lean D,,David Lenihan,Doug Beck,N/A
+MO,29001,1,MO-SD-1,Lean D,,TBA,Doug Beck,N/A
 MO,29002,2,MO-SD-2,No Election,,N/A,N/A,N/A
-MO,29003,3,MO-SD-3,Uncontested R,,Elaine Freeman Gannon,N/A,N/A
+MO,29003,3,MO-SD-3,Uncontested R,,TBA,N/A,N/A
 MO,29004,4,MO-SD-4,No Election,,N/A,N/A,N/A
-MO,29005,5,MO-SD-5,Safe D,,Michael Hebron,Steve Roberts,N/A
+MO,29005,5,MO-SD-5,Safe D,,Michael Hebron,TBA,N/A
 MO,29006,6,MO-SD-6,No Election,,N/A,N/A,N/A
-MO,29007,7,MO-SD-7,Safe D,,N/A,Greg Razer,Nathan Kline
+MO,29007,7,MO-SD-7,Safe D,,N/A,TBA,Nathan Kline
 MO,29008,8,MO-SD-8,No Election,,N/A,N/A,N/A
-MO,29009,9,MO-SD-9,Safe D,,David Martin,Barbara Washington,N/A
+MO,29009,9,MO-SD-9,Safe D,,David Martin,TBA,N/A
 MO,29010,10,MO-SD-10,No Election,,N/A,N/A,N/A
 MO,29011,11,MO-SD-11,Uncontested D,,N/A,John Joseph Rizzo [I],N/A
 MO,29012,12,MO-SD-12,No Election,,N/A,N/A,N/A
-MO,29013,13,MO-SD-13,Uncontested D,,N/A,Angela Walton Mosley,Jeff Coleman
+MO,29013,13,MO-SD-13,Uncontested D,,N/A,TBA,Jeff Coleman
 MO,29014,14,MO-SD-14,No Election,,N/A,N/A,N/A
-MO,29015,15,MO-SD-15,Tilt R,,Andrew Koenig [I],Deb Lavender,N/A
+MO,29015,15,MO-SD-15,Lean R,,Andrew Koenig [I],Deb Lavender,N/A
 MO,29016,16,MO-SD-16,No Election,,N/A,N/A,N/A
-MO,29017,17,MO-SD-17,Likely D,,Mickey Younghanz,Lauren Arthur [I],N/A
+MO,29017,17,MO-SD-17,Lean D,,Mickey Younghanz,Lauren Arthur [I],N/A
 MO,29018,18,MO-SD-18,No Election,,N/A,N/A,N/A
-MO,29019,19,MO-SD-19,Tilt D,R TO D,Caleb Rowden [I],Judy Baker,N/A
+MO,29019,19,MO-SD-19,Toss-Up,,Caleb Rowden [I],Judy Baker,N/A
 MO,29020,20,MO-SD-20,No Election,,N/A,N/A,N/A
 MO,29021,21,MO-SD-21,Safe R,,Denny Hoskins [I],N/A,Mark Bliss
 MO,29022,22,MO-SD-22,No Election,,N/A,N/A,N/A
-MO,29023,23,MO-SD-23,Safe R,,Bill Eigel [I],Richard Orr,N/A
+MO,29023,23,MO-SD-23,Safe R,,TBA,Richard Orr,N/A
 MO,29024,24,MO-SD-24,No Election,,N/A,N/A,N/A
-MO,29025,25,MO-SD-25,Uncontested R,,Jason Bean,N/A,N/A
+MO,29025,25,MO-SD-25,Uncontested R,,TBA,N/A,N/A
 MO,29026,26,MO-SD-26,No Election,,N/A,N/A,N/A
-MO,29027,27,MO-SD-27,Safe R,,Holly Rehder,Donnie Owens,N/A
+MO,29027,27,MO-SD-27,Safe R,,TBA,Donnie Owens,N/A
 MO,29028,28,MO-SD-28,No Election,,N/A,N/A,N/A
-MO,29029,29,MO-SD-29,Uncontested R,,Mike Moon,N/A,N/A
+MO,29029,29,MO-SD-29,Uncontested R,,TBA,N/A,N/A
 MO,29030,30,MO-SD-30,No Election,,N/A,N/A,N/A
-MO,29031,31,MO-SD-31,Safe R,,Rick Brattin,Raymond Kinney,N/A
+MO,29031,31,MO-SD-31,Safe R,,TBA,Raymond Kinney,N/A
 MO,29032,32,MO-SD-32,No Election,,N/A,N/A,N/A
-MO,29033,33,MO-SD-33,Safe R,,Karla Eslinger,Tammy Harty,N/A
+MO,29033,33,MO-SD-33,Safe R,,TBA,Tammy Harty,N/A
 MO,29034,34,MO-SD-34,No Election,,N/A,N/A,N/A
 MT,30001,1,MT-SD-1,No Election,,N/A,N/A,N/A
 MT,30002,2,MT-SD-2,Safe R,,Carl Glimm,Kyle Waterman,N/A
@@ -810,7 +810,7 @@ MT,30022,22,MT-SD-22,No Election,,N/A,N/A,N/A
 MT,30023,23,MT-SD-23,Uncontested R,,Tom McGillvray,N/A,N/A
 MT,30024,24,MT-SD-24,No Election,,N/A,N/A,N/A
 MT,30025,25,MT-SD-25,Lean D,,Scott Price,Jen Gross [I],N/A
-MT,30026,26,MT-SD-26,Lean D,,Chris Friedel,Margie MacDonald [I],N/A
+MT,30026,26,MT-SD-26,Tilt D,,Chris Friedel,Margie MacDonald,N/A
 MT,30027,27,MT-SD-27,No Election,,N/A,N/A,N/A
 MT,30028,28,MT-SD-28,Uncontested R,,Brad Molnar,N/A,N/A
 MT,30029,29,MT-SD-29,No Election,,N/A,N/A,N/A
@@ -835,15 +835,15 @@ MT,30047,47,MT-SD-47,Lean R,,Dan Salomon [I],Chase Porter Gay,"Devin Braaten, Ga
 MT,30048,48,MT-SD-48,No Election,,N/A,N/A,N/A
 MT,30049,49,MT-SD-49,No Election,,N/A,N/A,N/A
 MT,30050,50,MT-SD-50,No Election,,N/A,N/A,N/A
-NC,37001,1,NC-SD-1,Toss-Up,,Bob Steinburg [I],Tess Judge,N/A
+NC,37001,1,NC-SD-1,Tilt R,,Bob Steinburg [I],Tess Judge,N/A
 NC,37002,2,NC-SD-2,Safe R,,Norman W. Sanderson [I],Libbie Griffin,Tim Harris
 NC,37003,3,NC-SD-3,Likely D,,Thomas S. Hester,Ernestine Bazemore,N/A
 NC,37004,4,NC-SD-4,Safe D,,Sammy Davis Webb,Milton F. Fitch [I],N/A
 NC,37005,5,NC-SD-5,Safe D,,Karen Kozel,Don Davis [I],N/A
 NC,37006,6,NC-SD-6,Safe R,,Michael Lazzara,Ike Johnson,N/A
-NC,37007,7,NC-SD-7,Lean R,,Jim Perry [I],Donna Lake,N/A
+NC,37007,7,NC-SD-7,Tilt R,,Jim Perry [I],Donna Lake,N/A
 NC,37008,8,NC-SD-8,Safe R,,Bill Rabon [I],David Sink,"Anthony Mascolo, Ethan Bickley"
-NC,37009,9,NC-SD-9,Tilt D,,Michael Lee,Harper Peterson [I],N/A
+NC,37009,9,NC-SD-9,Toss-Up,,Michael Lee,Harper Peterson [I],N/A
 NC,37010,10,NC-SD-10,Safe R,,Brent Jackson [I],Vernon R. Moore,N/A
 NC,37011,11,NC-SD-11,Lean R,,Lisa Barnes,Allen Wellons,N/A
 NC,37012,12,NC-SD-12,Safe R,,Jim Burgin [I],John Kirkman,N/A
@@ -852,8 +852,8 @@ NC,37014,14,NC-SD-14,Safe D,,Alan David Michael,Dan Blue [I],Justin Walczak
 NC,37015,15,NC-SD-15,Safe D,,Mario J. Lomuscio,Jay J. Chaudhuri [I],Kat McDonald
 NC,37016,16,NC-SD-16,Safe D,,Will Marsh,Wiley Nickel [I],N/A
 NC,37017,17,NC-SD-17,Lean D,,Mark Cavaliero,Sam Searcy [I],Travis Groo
-NC,37018,18,NC-SD-18,Lean D,R TO D,Larry Norman,Sarah Crawford,Jason Loeback
-NC,37019,19,NC-SD-19,Tilt D,,Wesley Meredith,Kirk DeViere [I],N/A
+NC,37018,18,NC-SD-18,Tilt D,R TO D,Larry Norman,Sarah Crawford,Jason Loeback
+NC,37019,19,NC-SD-19,Toss-Up,,Wesley Meredith,Kirk DeViere [I],N/A
 NC,37020,20,NC-SD-20,Safe D,,John Tarantino,Natalie Murdock,N/A
 NC,37021,21,NC-SD-21,Safe D,,Sev Palacios,Ben Clark [I],N/A
 NC,37022,22,NC-SD-22,Safe D,,Rick Padgett,Mike Woodard [I],Ray Ubinger
@@ -865,7 +865,7 @@ NC,37027,27,NC-SD-27,Lean D,,Sebastian King,Michael Garrett [I],N/A
 NC,37028,28,NC-SD-28,Safe D,,D.R. King,Gladys A. Robinson [I],N/A
 NC,37029,29,NC-SD-29,Safe R,,Steven Jarvis,Duskin Lassiter,N/A
 NC,37030,30,NC-SD-30,Safe R,,Phil E. Berger [I],Wally White,N/A
-NC,37031,31,NC-SD-31,Lean R,,Joyce Krawiec [I],Terri Elizabeth LeGrand,N/A
+NC,37031,31,NC-SD-31,Likely R,,Joyce Krawiec [I],Terri Elizabeth LeGrand,N/A
 NC,37032,32,NC-SD-32,Safe D,,Ven Challa,Paul Lowe [I],N/A
 NC,37033,33,NC-SD-33,Safe R,,Carl Ford [I],Tarsha Ellis,N/A
 NC,37034,34,NC-SD-34,Safe R,,Vickie Sawyer [I],Barry Templeton,N/A
@@ -896,21 +896,21 @@ ND,38008,8,ND-SD-8,Uncontested R,,Howard Anderson [I],N/A,N/A
 ND,38009,9,ND-SD-9,No Election,,N/A,N/A,N/A
 ND,38010,10,ND-SD-10,Safe R,,Janne Myrdal [I],Charlie Hart,N/A
 ND,38011,11,ND-SD-11,No Election,,N/A,N/A,N/A
-ND,38012,12,ND-SD-12,Tilt D,,Cole Conley,John Grabinger [I],N/A
+ND,38012,12,ND-SD-12,Likely D,,TBA,John Grabinger [I],N/A
 ND,38013,13,ND-SD-13,No Election,,N/A,N/A,N/A
 ND,38014,14,ND-SD-14,Safe R,,Jerry Klein,Jenna Vanhorne,N/A
 ND,38015,15,ND-SD-15,No Election,,N/A,N/A,N/A
-ND,38016,16,ND-SD-16,Tilt R,,David Clemens [I],Kari Breker,N/A
+ND,38016,16,ND-SD-16,Likely R,,David Clemens [I],Kari Breker,N/A
 ND,38017,17,ND-SD-17,No Election,,N/A,N/A,N/A
-ND,38018,18,ND-SD-18,Tilt R,,Scott Meyer [I],Kyle Thorson,N/A
+ND,38018,18,ND-SD-18,Lean R,,Scott Meyer [I],Kyle Thorson,N/A
 ND,38019,19,ND-SD-19,No Election,,N/A,N/A,N/A
-ND,38020,20,ND-SD-20,Safe R,,Randy Lemm [I],Paul Hanson,N/A
+ND,38020,20,ND-SD-20,Likely R,,Randy Lemm [I],Paul Hanson,N/A
 ND,38021,21,ND-SD-21,No Election,,N/A,N/A,N/A
 ND,38022,22,ND-SD-22,Safe R,,Mark Weber,Laetitia Hellerud,N/A
 ND,38023,23,ND-SD-23,No Election,,N/A,N/A,N/A
-ND,38024,24,ND-SD-24,Tilt R,D TO R,Mike Wobbema,Larry Robinson [I],N/A
+ND,38024,24,ND-SD-24,Toss-Up,,Mike Wobbema,Larry Robinson [I],N/A
 ND,38025,25,ND-SD-25,No Election,,N/A,N/A,N/A
-ND,38026,26,ND-SD-26,Tilt D,,Jason Heitkamp,Jim Dotzenrod [I],N/A
+ND,38026,26,ND-SD-26,Toss-Up,,Jason Heitkamp,Jim Dotzenrod [I],N/A
 ND,38027,27,ND-SD-27,No Election,,N/A,N/A,N/A
 ND,38028,28,ND-SD-28,Uncontested R,,Bob Erbele [I],N/A,N/A
 ND,38029,29,ND-SD-29,No Election,,N/A,N/A,N/A
@@ -918,19 +918,19 @@ ND,38030,30,ND-SD-30,Uncontested R,,Diane Larson [I],N/A,N/A
 ND,38031,31,ND-SD-31,No Election,,N/A,N/A,N/A
 ND,38032,32,ND-SD-32,Safe R,,Dick Dever [I],Amelia Doll,Jody Vetter
 ND,38033,33,ND-SD-33,No Election,,N/A,N/A,N/A
-ND,38034,34,ND-SD-34,Safe R,,Doug Larsen,Adam Michal,N/A
+ND,38034,34,ND-SD-34,Safe R,,TBA,Adam Michal,N/A
 ND,38035,35,ND-SD-35,No Election,,N/A,N/A,N/A
-ND,38036,36,ND-SD-36,Uncontested R,,Jay Elkin [I],N/A,N/A
+ND,38036,36,ND-SD-36,Uncontested R,,TBA,N/A,N/A
 ND,38037,37,ND-SD-37,No Election,,N/A,N/A,N/A
 ND,38038,38,ND-SD-38,Uncontested R,,David Hogue [I],N/A,N/A
 ND,38039,39,ND-SD-39,No Election,,N/A,N/A,N/A
 ND,38040,40,ND-SD-40,Uncontested R,,Karen Krebsbach [I],N/A,N/A
 ND,38041,41,ND-SD-41,No Election,,N/A,N/A,N/A
-ND,38042,42,ND-SD-42,Tilt D,R TO D,Curt Kreun [I],Melissa Gjellstad,N/A
+ND,38042,42,ND-SD-42,Lean R,,Curt Kreun [I],Melissa Gjellstad,
 ND,38043,43,ND-SD-43,No Election,,N/A,N/A,N/A
-ND,38044,44,ND-SD-44,Tilt D,,Tim Flakoll,Merrill Piepkorn [I],N/A
+ND,38044,44,ND-SD-44,Lean D,,Tim Flakoll,Merrill Piepkorn [I],
 ND,38045,45,ND-SD-45,No Election,,N/A,N/A,N/A
-ND,38046,46,ND-SD-46,Tilt D,R TO D,Jim Roers [I],Terri Hedman,N/A
+ND,38046,46,ND-SD-46,Toss-Up,,Jim Roers [I],Terri Hedman,
 ND,38047,47,ND-SD-47,No Election,,N/A,N/A,N/A
 NE,31001,1,NE-SD-1,Uncontested R,,"Julie Slama [I], Janet Palmtag",N/A,N/A
 NE,31002,2,NE-SD-2,No Election,,N/A,N/A,N/A
@@ -946,13 +946,13 @@ NE,31011,11,NE-SD-11,Uncontested D,I TO D,N/A,"Fred Conley, Terrell McKinney",N/
 NE,31012,12,NE-SD-12,No Election,,N/A,N/A,N/A
 NE,31013,13,NE-SD-13,Uncontested D,,N/A,Justin Wayne [I],N/A
 NE,31014,14,NE-SD-14,No Election,,N/A,N/A,N/A
-NE,31015,15,NE-SD-15,Tilt D,,David Rogers,Lynne Walz [I],N/A
+NE,31015,15,NE-SD-15,Lean D,,David Rogers,Lynne Walz [I],N/A
 NE,31016,16,NE-SD-16,No Election,,N/A,N/A,N/A
 NE,31017,17,NE-SD-17,Safe R,,Joni Albrecht [I],Sheryl Lindau,N/A
 NE,31018,18,NE-SD-18,No Election,,N/A,N/A,N/A
 NE,31019,19,NE-SD-19,Uncontested R,,Mike Flood,N/A,N/A
 NE,31020,20,NE-SD-20,No Election,,N/A,N/A,N/A
-NE,31021,21,NE-SD-21,Lean R,,Mike Hilgers [I],Brodey Weber,N/A
+NE,31021,21,NE-SD-21,Likely R,,Mike Hilgers [I},Brodey Weber,N/A
 NE,31022,22,NE-SD-22,No Election,,N/A,N/A,N/A
 NE,31023,23,NE-SD-23,Safe R,,Bruce Bostelman [I],N/A,Helen Raikes
 NE,31024,24,NE-SD-24,No Election,,N/A,N/A,N/A
@@ -960,9 +960,9 @@ NE,31025,25,NE-SD-25,Likely R,,Suzanne Geist [I],Stephany Pleasant,N/A
 NE,31026,26,NE-SD-26,No Election,,N/A,N/A,N/A
 NE,31027,27,NE-SD-27,Safe D,,Brenda Bickford,Anna Wishart [I],N/A
 NE,31028,28,NE-SD-28,No Election,,N/A,N/A,N/A
-NE,31029,29,NE-SD-29,Safe D,,Jacob Campbell,Eliot Bostar,N/A
+NE,31029,29,NE-SD-29,Likely D,,Jacob Campbell,Eliot Bostar,N/A
 NE,31030,30,NE-SD-30,No Election,,N/A,N/A,N/A
-NE,31031,31,NE-SD-31,Toss-Up,,Rich Pauls,Tim Royers,N/A
+NE,31031,31,NE-SD-31,Lean D,,Rich Pauls,Tim Royers,N/A
 NE,31032,32,NE-SD-32,No Election,,N/A,N/A,N/A
 NE,31033,33,NE-SD-33,Uncontested R,,Steve Halloran [I],N/A,N/A
 NE,31034,34,NE-SD-34,No Election,,N/A,N/A,N/A
@@ -976,7 +976,7 @@ NE,31041,41,NE-SD-41,Uncontested R,,Tom Briese [I],N/A,N/A
 NE,31042,42,NE-SD-42,No Election,,N/A,N/A,N/A
 NE,31043,43,NE-SD-43,Uncontested R,,"Tom Brewer [I], Tonya Storer",N/A,N/A
 NE,31044,44,NE-SD-44,No Election,,N/A,N/A,N/A
-NE,31045,45,NE-SD-45,Toss-Up,,Rita Sanders,Susan Hester,N/A
+NE,31045,45,NE-SD-45,Lean D,,Rita Sanders,Susan Hester,N/A
 NE,31046,46,NE-SD-46,No Election,,N/A,N/A,N/A
 NE,31047,47,NE-SD-47,Uncontested R,,Steve Erdman [I],N/A,N/A
 NE,31048,48,NE-SD-48,No Election,,N/A,N/A,N/A
@@ -985,9 +985,9 @@ NV,32001,1,NV-SD-1,Uncontested D,,N/A,Pat Spearman [I],N/A
 NV,32002,2,NV-SD-2,No Election,,N/A,N/A,N/A
 NV,32003,3,NV-SD-3,Uncontested D,,N/A,Chris Brooks [I],N/A
 NV,32004,4,NV-SD-4,Safe D,,Esper M. Hickman,Dina Neal,N/A
-NV,32005,5,NV-SD-5,Tilt D,,Carrie Buck,Kristee Watson,Tim Hagan
+NV,32005,5,NV-SD-5,Tilt D,,TBA,Kristee Watson,Tim Hagan
 NV,32006,6,NV-SD-6,Lean D,,April Becker,Nicole Cannizzaro [I],N/A
-NV,32007,7,NV-SD-7,Uncontested D,,N/A,Roberta Lange,N/A
+NV,32007,7,NV-SD-7,Uncontested D,,N/A,TBA,N/A
 NV,32008,8,NV-SD-8,No Election,,N/A,N/A,N/A
 NV,32009,9,NV-SD-9,No Election,,N/A,N/A,N/A
 NV,32010,10,NV-SD-10,No Election,,N/A,N/A,N/A
@@ -998,34 +998,34 @@ NV,32014,14,NV-SD-14,No Election,,N/A,N/A,N/A
 NV,32015,15,NV-SD-15,Lean R,,Heidi S. Gansert [I],Wendy Jauregui-Jackins,Catana Barnes
 NV,32016,16,NV-SD-16,No Election,,N/A,N/A,N/A
 NV,32017,17,NV-SD-17,No Election,,N/A,N/A,N/A
-NV,32018,18,NV-SD-18,Likely R,,Scott Hammond [I],Elizabeth Becker,N/A
+NV,32018,18,NV-SD-18,Likely R,,Scott Hammond [I],TBA,N/A
 NV,32019,19,NV-SD-19,Safe R,,Pete Goicoechea,N/A,Tiffany Seeback
 NV,32020,20,NV-SD-20,No Election,,N/A,N/A,N/A
 NV,32021,21,NV-SD-21,No Election,,N/A,N/A,N/A
-NH,33001,1,NH-SD-1,Tilt R,,Erin Hennessey,Susan Ford,N/A
-NH,33002,2,NH-SD-2,Tilt R,,Bob Guida [I],Bill Bolton,N/A
-NH,33003,3,NH-SD-3,Safe R,,Jed Bradley [I],Theresa Swanick,N/A
-NH,33004,4,NH-SD-4,Safe D,,Frank Bertone,David Watters [I],N/A
-NH,33005,5,NH-SD-5,Safe D,,Timothy O'Hearne,Suzanne Prentiss,N/A
-NH,33006,6,NH-SD-6,Safe R,,James Gray [I],Christopher Rice,N/A
-NH,33007,7,NH-SD-7,Lean R,,Harold French [I],Philip Spagnuolo,N/A
-NH,33008,8,NH-SD-8,Toss-Up,,Ruth Ward [I],Jenn Alford-Teaster,N/A
-NH,33009,9,NH-SD-9,Lean D,,Denise Ricciardi,Jeanne Dietsch [I],N/A
-NH,33010,10,NH-SD-10,Safe D,,Daniel LeClair,Jay Kahn [I],N/A
-NH,33011,11,NH-SD-11,Lean D,,Gary Daniels,Shannon Chandley [I],N/A
-NH,33012,12,NH-SD-12,Tilt D,,Kevin Avard,Melanie Levesque [I],N/A
-NH,33013,13,NH-SD-13,Safe D,,Mariellen MacKay,Cindy Rosenwald [I],N/A
-NH,33014,14,NH-SD-14,Safe R,,Sharon Carson [I],Nancy Hendricks,N/A
-NH,33015,15,NH-SD-15,Safe D,,Linda Rae Banfill,Becky Whitley,N/A
-NH,33016,16,NH-SD-16,Likely D,,Jason Syversen,Kevin Cavanaugh [I],N/A
-NH,33017,17,NH-SD-17,Safe R,,John Reagan [I],Nancy Fraher,N/A
-NH,33018,18,NH-SD-18,Safe D,,George Lambert,Donna Soucy [I],N/A
-NH,33019,19,NH-SD-19,Safe R,,Regina Birdsell [I],Joshua Bourdon,N/A
-NH,33020,20,NH-SD-20,Safe D,,Carla Gericke,Lou D'Allesandro [I],N/A
-NH,33021,21,NH-SD-21,Safe D,,Sue Polidura,Rebecca Kwoka,N/A
-NH,33022,22,NH-SD-22,Safe R,,Chuck Morse [I],Thomas Haynes,N/A
-NH,33023,23,NH-SD-23,Tilt D,,Bill Gannon,Jon Morgan [I],N/A
-NH,33024,24,NH-SD-24,Lean D,,Lou Garglio,Tom Sherman [I],N/A
+NH,33001,1,NH-SD-1,Tilt R,,,,
+NH,33002,2,NH-SD-2,Lean R,,,,
+NH,33003,3,NH-SD-3,Safe R,,,,
+NH,33004,4,NH-SD-4,Safe D,,,,
+NH,33005,5,NH-SD-5,Safe D,,,,
+NH,33006,6,NH-SD-6,Safe R,,,,
+NH,33007,7,NH-SD-7,Lean R,,,,
+NH,33008,8,NH-SD-8,Lean R,,,,
+NH,33009,9,NH-SD-9,Lean D,,,,
+NH,33010,10,NH-SD-10,Safe D,,,,
+NH,33011,11,NH-SD-11,Tilt D,,,,
+NH,33012,12,NH-SD-12,Tilt D,,,,
+NH,33013,13,NH-SD-13,Safe D,,,,
+NH,33014,14,NH-SD-14,Safe R,,,,
+NH,33015,15,NH-SD-15,Safe D,,,,
+NH,33016,16,NH-SD-16,Likely D,,,,
+NH,33017,17,NH-SD-17,Safe R,,,,
+NH,33018,18,NH-SD-18,Safe D,,,,
+NH,33019,19,NH-SD-19,Safe R,,,,
+NH,33020,20,NH-SD-20,Safe D,,,,
+NH,33021,21,NH-SD-21,Safe D,,,,
+NH,33022,22,NH-SD-22,Safe R,,,,
+NH,33023,23,NH-SD-23,Toss-Up,,,,
+NH,33024,24,NH-SD-24,Lean D,,,,
 NM,35001,1,NM-SD-1,Uncontested R,,William E. Sharer [I],N/A,N/A
 NM,35002,2,NM-SD-2,Uncontested R,,Steven P. Neville [I],N/A,N/A
 NM,35003,3,NM-SD-3,Safe D,,Arthur Allison,Shannon Pinto [I],N/A
@@ -1045,7 +1045,7 @@ NM,35016,16,NM-SD-16,Safe D,,Chelsea Flanders,Antoinette Sedillo-Lopez,N/A
 NM,35017,17,NM-SD-17,Safe D,,Rodney Deskin,Mimi Stewart [I],N/A
 NM,35018,18,NM-SD-18,Lean D,,Ryan Chavez,Bill Tallman [I],Michael Cordova
 NM,35019,19,NM-SD-19,Safe R,,Gregg Schmedes,Claudia Risner,John McDivitt
-NM,35020,20,NM-SD-20,Toss-Up,,John Morton,Martin Hickey,N/A
+NM,35020,20,NM-SD-20,Tilt R,,John Morton,TBA,N/A
 NM,35021,21,NM-SD-21,Likely R,,Mark Moores [I],Athena Christodoulou,N/A
 NM,35022,22,NM-SD-22,Safe D,,Susan Aguayo,Benny Shendo [I],N/A
 NM,35023,23,NM-SD-23,Toss-Up,,Sander Rue [I],Harold Pope,N/A
@@ -1055,82 +1055,82 @@ NM,35026,26,NM-SD-26,Safe D,,Manuel Lardizabal,Jacob Candelaria [I],N/A
 NM,35027,27,NM-SD-27,Uncontested R,,Stuart Ingle [I],N/A,N/A
 NM,35028,28,NM-SD-28,Safe D,,James Williams,Siah Correa Hemphill,N/A
 NM,35029,29,NM-SD-29,Lean R,,Gregory Baca [I],Paul Baca,N/A
-NM,35030,30,NM-SD-30,Lean D,,Joshua Sanchez,Pamela Cordova,N/A
+NM,35030,30,NM-SD-30,Tilt D,,Joshua Sanchez,Pamela Cordova,N/A
 NM,35031,31,NM-SD-31,Safe D,,John Roberts,Joseph Cervantes [I],N/A
 NM,35032,32,NM-SD-32,Uncontested R,,Cliff Pirtle [I],N/A,N/A
 NM,35033,33,NM-SD-33,Safe R,,Bill Burt [I],Denise Lang-Browne,N/A
 NM,35034,34,NM-SD-34,Safe R,,Ron Griggs [I],Darren Kugler,N/A
-NM,35035,35,NM-SD-35,Tilt R,D TO R,Crystal Diamond,Neomi Martinez-Parra,N/A
+NM,35035,35,NM-SD-35,Tilt D,,Crystal Diamond,Neomi Martinez-Parra,N/A
 NM,35036,36,NM-SD-36,Safe D,,Kimberly Skaggs,Jeff Steinborn [I],N/A
 NM,35037,37,NM-SD-37,Safe D,,David Gallus,William Soules [I],N/A
 NM,35038,38,NM-SD-38,Safe D,,Charles Wendler,Carrie Hamblen,N/A
-NM,35039,39,NM-SD-39,Lean D,,Joseph Tiano,Elizabeth Stefanics [I],N/A
+NM,35039,39,NM-SD-39,Lean D,,TBA,Elizabeth Stefanics [I],N/A
 NM,35040,40,NM-SD-40,Uncontested R,,Craig Brandt [I],N/A,N/A
 NM,35041,41,NM-SD-41,Uncontested R,,David Gallegos,N/A,N/A
 NM,35042,42,NM-SD-42,Safe R,,Gay Kernan [I],N/A,Mayna Myers
-NY,36001,1,NY-SD-1,Tilt R,,Anthony Palumbo,Laura Ahearn,Valerie Cartwright
-NY,36002,2,NY-SD-2,Likely R,,Mario Mattera,Michael Siderakis,N/A
+NY,36001,1,NY-SD-1,Lean R,,Anthony Palumbo,TBA,N/A
+NY,36002,2,NY-SD-2,Lean R,,Mario Mattera,Michael Siderakis,N/A
 NY,36003,3,NY-SD-3,Lean D,,Alexis Weik,Monica Martinez [I],N/A
 NY,36004,4,NY-SD-4,Lean R,,Philip Boyle [I],Christine Pellegrino,N/A
 NY,36005,5,NY-SD-5,Likely D,,Edmund Smyth,James Gaughran [I],Barbara Wagner
-NY,36006,6,NY-SD-6,Likely D,,"Dennis Dunne, Sr.",Kevin M. Thomas [I],Jonathan Gunther
-NY,36007,7,NY-SD-7,Safe D,,David C. Franklin,Anna M. Kaplan [I],N/A
-NY,36008,8,NY-SD-8,Uncontested D,,N/A,John E. Brooks [I],N/A
+NY,36006,6,NY-SD-6,Lean D,,"Dennis Dunne, Sr.",Kevin M. Thomas [I],Jonathan Gunther
+NY,36007,7,NY-SD-7,Likely D,,David C. Franklin,Anna M. Kaplan [I],N/A
+NY,36008,8,NY-SD-8,Lean D,,Nicholas LaLota,John E. Brooks [I],N/A
 NY,36009,9,NY-SD-9,Safe D,,Victoria M. Johnson,Todd D. Kaminsky [I],N/A
-NY,36010,10,NY-SD-10,Uncontested D,,N/A,James Sanders [I],N/A
+NY,36010,10,NY-SD-10,Uncontested D,,N/A,TBA,N/A
 NY,36011,11,NY-SD-11,Safe D,,Elisa Nahoum,John Liu [I],N/A
-NY,36012,12,NY-SD-12,Uncontested D,,N/A,Michael Gianaris [I],N/A
-NY,36013,13,NY-SD-13,Safe D,,Jesus Gonzalez,Jessica Ramos [I],N/A
+NY,36012,12,NY-SD-12,Uncontested D,,N/A,TBA,N/A
+NY,36013,13,NY-SD-13,Safe D,,Jesus Gonzalez,TBA,N/A
 NY,36014,14,NY-SD-14,Uncontested D,,N/A,Leroy Comrie [I],N/A
 NY,36015,15,NY-SD-15,Safe D,,Thomas Sullivan,Joseph Addabbo [I],N/A
 NY,36016,16,NY-SD-16,Uncontested D,,N/A,Toby Ann Stavisky [I],N/A
 NY,36017,17,NY-SD-17,Uncontested D,,N/A,Simcha Felder [I],N/A
-NY,36018,18,NY-SD-18,Uncontested D,,N/A,Julia Salazar [I],N/A
-NY,36019,19,NY-SD-19,Uncontested D,,N/A,Roxanne Persaud [I],N/A
+NY,36018,18,NY-SD-18,Uncontested D,,N/A,TBA,N/A
+NY,36019,19,NY-SD-19,Uncontested D,,N/A,TBA,N/A
 NY,36020,20,NY-SD-20,Safe D,,N/A,Zellnor Myrie [I],Tucker Coburn
-NY,36021,21,NY-SD-21,Uncontested D,,N/A,Kevin Parker [I],N/A
-NY,36022,22,NY-SD-22,Lean D,,Vito Bruno,Andrew Gounardes [I],N/A
-NY,36023,23,NY-SD-23,Safe D,,N/A,Diane Savino [I],"Justin DeFillippo, John Jairo Rodriguez"
-NY,36024,24,NY-SD-24,Uncontested R,,Andrew Lanza [I],N/A,N/A
-NY,36025,25,NY-SD-25,Uncontested D,,N/A,Jabari Brisport,N/A
+NY,36021,21,NY-SD-21,Uncontested D,,N/A,TBA,N/A
+NY,36022,22,NY-SD-22,Tilt D,,Vito Bruno,Andrew Gounardes [I],N/A
+NY,36023,23,NY-SD-23,Safe D,,N/A,TBA,"Justin DeFillippo, John Jairo Rodriguez"
+NY,36024,24,NY-SD-24,Safe R,,Andrew Lanza [I],N/A,N/A
+NY,36025,25,NY-SD-25,Uncontested D,,N/A,TBA,N/A
 NY,36026,26,NY-SD-26,Safe D,,Lester Chang,Brian Kavanaugh [I],N/A
-NY,36027,27,NY-SD-27,Uncontested D,,N/A,Brad Hoylman [I],N/A
+NY,36027,27,NY-SD-27,Uncontested D,,N/A,TBA,N/A
 NY,36028,28,NY-SD-28,Safe D,,Mike Zumbluskas,Liz Krueger [I],N/A
 NY,36029,29,NY-SD-29,Safe D,,Jose A. Colon,Jose M. Serrano [I],N/A
 NY,36030,30,NY-SD-30,Safe D,,Oz Sultan,Brian Benjamin [I],N/A
-NY,36031,31,NY-SD-31,Safe D,,Melinda Crump,Robert Jackson [I],N/A
-NY,36032,32,NY-SD-32,Safe D,,N/A,Luis Sepulveda [I],Jonathan Weiner
+NY,36031,31,NY-SD-31,Safe D,,Melinda Crump,TBA,N/A
+NY,36032,32,NY-SD-32,Safe D,,N/A,TBA,Jonathan Weiner
 NY,36033,33,NY-SD-33,Safe D,,Dustin Martinez,J. Gustavo Rivera [I],Steven Stern
-NY,36034,34,NY-SD-34,Safe D,,James Gisondi,Alessandra Biaggi [I],Antonio Vitiello
-NY,36035,35,NY-SD-35,Uncontested D,,N/A,Andrea Stewart-Cousins [I],N/A
+NY,36034,34,NY-SD-34,Safe D,,James Gisondi,TBA,Antonio Vitiello
+NY,36035,35,NY-SD-35,Safe D,,,,
 NY,36036,36,NY-SD-36,Safe D,,N/A,Jamaal Bailey [I],Robert Diamond
-NY,36037,37,NY-SD-37,Safe D,,Liviu Saimovici,Shelley Mayer [I],N/A
-NY,36038,38,NY-SD-38,Safe D,,William Weber Jr.,Elijah Reichlin-Melnick,Justin Sweet
-NY,36039,39,NY-SD-39,Likely D,,Steve Brescia,James Skoufis [I],N/A
-NY,36040,40,NY-SD-40,Tilt D,,Rob Astorino,Peter Harckham [I],N/A
-NY,36041,41,NY-SD-41,Tilt D,R TO D,Susan Serino [I],Karen Smythe,N/A
-NY,36042,42,NY-SD-42,Lean D,,Mike Martucci,Jen Metzger [I],N/A
+NY,36037,37,NY-SD-37,Safe D,,,,
+NY,36038,38,NY-SD-38,Safe D,,TBA,TBA,N/A
+NY,36039,39,NY-SD-39,Lean D,,Steve Brescia,James Skoufis [I],N/A
+NY,36040,40,NY-SD-40,Lean D,,Rob Astorino,Peter Harckham [I],N/A
+NY,36041,41,NY-SD-41,Toss-Up,,Susan Serino [I],Karen Smythe,N/A
+NY,36042,42,NY-SD-42,Tilt D,,Mike Martucci,Jen Metzger [I],N/A
 NY,36043,43,NY-SD-43,Likely R,,Daphne Jordan [I],Patrick Nelson,N/A
 NY,36044,44,NY-SD-44,Safe D,,David Yule,Neil Breslin [I],N/A
-NY,36045,45,NY-SD-45,Likely R,,Dan Stec,Kimberly Davis,N/A
-NY,36046,46,NY-SD-46,Tilt R,,Richard Amedure,Michelle Hinchey,N/A
+NY,36045,45,NY-SD-45,Likely R,,TBA,Kimberly Davis,N/A
+NY,36046,46,NY-SD-46,Lean R,,Richard Amedure,TBA,N/A
 NY,36047,47,NY-SD-47,Uncontested R,,Joseph Griffo [I],N/A,N/A
 NY,36048,48,NY-SD-48,Uncontested R,,Patricia Ritchie [I],N/A,N/A
-NY,36049,49,NY-SD-49,Safe R,,James Tedisco [I],Thearse McCalmon,N/A
-NY,36050,50,NY-SD-50,Tilt D,R TO D,Angi Renna,John Mannion,N/A
-NY,36051,51,NY-SD-51,Safe R,,Peter Oberacker,James Barber,N/A
+NY,36049,49,NY-SD-49,Safe R,,James Tedisco [I],TBA,N/A
+NY,36050,50,NY-SD-50,Toss-Up,,Angi Renna,John Mannion,N/A
+NY,36051,51,NY-SD-51,Safe R,,Peter Oberacker,Jim Barber,Timothy O'Connor
 NY,36052,52,NY-SD-52,Safe R,,Frederick Akshar [I],N/A,Thomas Daniel Quiter
-NY,36053,53,NY-SD-53,Safe D,,Sam Rodgers,Rachel May [I],Russell Penner
+NY,36053,53,NY-SD-53,Safe D,,Sam Rodgers,Rachel May [I],TBA
 NY,36054,54,NY-SD-54,Safe R,,Pamela Helming [I],Shauna O'Toole,N/A
-NY,36055,55,NY-SD-55,Lean D,R TO D,Christopher Missick,Samra Brouk,N/A
-NY,36056,56,NY-SD-56,Likely D,R TO D,Michael Barry Jr.,Jeremy Cooney,N/A
+NY,36055,55,NY-SD-55,Lean D,R TO D,Christopher Missick,Samra Brouk [I],N/A
+NY,36056,56,NY-SD-56,Tilt D,R TO D,Michael Barry Jr.,TBA,N/A
 NY,36057,57,NY-SD-57,Safe R,,George Borrello [I],Frank Puglisi,N/A
 NY,36058,58,NY-SD-58,Safe R,,Thomas O'Mara [I],Leslie Danks Burke,N/A
 NY,36059,59,NY-SD-59,Safe R,,Patrick Gallivan [I],Jason Klimek,N/A
-NY,36060,60,NY-SD-60,Tilt D,R TO D,Joshua Mertzlufft,Sean Ryan,N/A
-NY,36061,61,NY-SD-61,Likely R,,Edward Rath III,Jacqualine Berger,N/A
+NY,36060,60,NY-SD-60,Likely R,,Joshua Mertzlufft,Sean Ryan,N/A
+NY,36061,61,NY-SD-61,Lean R,,Edward Rath,TBA,"Brian Curran, Adam Massaro, TBA"
 NY,36062,62,NY-SD-62,Uncontested R,,Robert Ortt [I],N/A,N/A
-NY,36063,63,NY-SD-63,Uncontested D,,Timothy Kennedy,N/A,N/A
+NY,36063,63,NY-SD-63,Safe D,,Timothy Kennedy,N/A,N/A
 OH,39001,1,OH-SD-1,No Election,,N/A,N/A,N/A
 OH,39002,2,OH-SD-2,Safe R,,Theresa Gavarone,Joel O'Dorisio,N/A
 OH,39003,3,OH-SD-3,No Election,,N/A,N/A,N/A
@@ -1146,7 +1146,7 @@ OH,39012,12,OH-SD-12,Safe R,,Matt Huffman [I],Kenny Poling,N/A
 OH,39013,13,OH-SD-13,No Election,,N/A,N/A,N/A
 OH,39014,14,OH-SD-14,Safe R,,Terry Johnson [I],Ryan Ottney,N/A
 OH,39015,15,OH-SD-15,No Election,,N/A,N/A,N/A
-OH,39016,16,OH-SD-16,Tilt D,R TO D,Stephanie Kunze [I],Krystal Lett,N/A
+OH,39016,16,OH-SD-16,Toss-Up,,Stephanie Kunze [I],Krystal Lett,N/A
 OH,39017,17,OH-SD-17,No Election,,N/A,N/A,N/A
 OH,39018,18,OH-SD-18,Safe R,,Jerry Cirino,Betsy Rader,N/A
 OH,39019,19,OH-SD-19,No Election,,N/A,N/A,N/A
@@ -1158,31 +1158,31 @@ OH,39024,24,OH-SD-24,Lean R,,Matt Dolan [I],Tom Jackson,N/A
 OH,39025,25,OH-SD-25,No Election,,N/A,N/A,N/A
 OH,39026,26,OH-SD-26,Safe R,,Bill Reineke,Craig Swartz,N/A
 OH,39027,27,OH-SD-27,No Election,,N/A,N/A,N/A
-OH,39028,28,OH-SD-28,Safe D,,Michael Downey,Vernon Sykes [I],N/A
+OH,39028,28,OH-SD-28,Uncontested D,,N/A,Vernon Sykes [I],N/A
 OH,39029,29,OH-SD-29,No Election,,N/A,N/A,N/A
 OH,39030,30,OH-SD-30,Safe R,,Frank Hoagland [I],Michael Fletcher,N/A
 OH,39031,31,OH-SD-31,No Election,,N/A,N/A,N/A
-OH,39032,32,OH-SD-32,Likely D,,Sandra O'Brien,Sean O'Brien [I],N/A
+OH,39032,32,OH-SD-32,Lean D,,Sandra O'Brien,Sean O'Brien [I],N/A
 OH,39033,33,OH-SD-33,No Election,,N/A,N/A,N/A
-OK,40001,1,OK-SD-1,Uncontested R,,Micheal Bergstrom [I],N/A,N/A
+OK,40001,1,OK-SD-1,Uncontested R,,TBA,N/A,N/A
 OK,40002,2,OK-SD-2,No Election,,N/A,N/A,N/A
-OK,40003,3,OK-SD-3,Safe R,,Blake Cowboy Stephens,Dyllon Fite,N/A
+OK,40003,3,OK-SD-3,Safe R,,TBA,Dyllon Fite,N/A
 OK,40004,4,OK-SD-4,No Election,,N/A,N/A,N/A
-OK,40005,5,OK-SD-5,Safe R,,George Burns,Randy Coleman,N/A
+OK,40005,5,OK-SD-5,Safe R,,TBA,TBA,N/A
 OK,40006,6,OK-SD-6,No Election,,N/A,N/A,N/A
-OK,40007,7,OK-SD-7,Safe R,,Warren Hamilton,Jerry L. Donathan,N/A
+OK,40007,7,OK-SD-7,Safe R,,TBA,TBA,N/A
 OK,40008,8,OK-SD-8,No Election,,N/A,N/A,N/A
 OK,40009,9,OK-SD-9,Likely R,,DeWayne Pemberton [I],Jack Reavis,N/A
 OK,40010,10,OK-SD-10,No Election,,N/A,N/A,N/A
 OK,40011,11,OK-SD-11,Uncontested D,,N/A,Kevin Matthews [I],N/A
 OK,40012,12,OK-SD-12,No Election,,N/A,N/A,N/A
-OK,40013,13,OK-SD-13,Uncontested R,,Greg McCortney [I],N/A,N/A
+OK,40013,13,OK-SD-13,Uncontested R,,TBA,N/A,N/A
 OK,40014,14,OK-SD-14,No Election,,N/A,N/A,N/A
-OK,40015,15,OK-SD-15,Likely R,,Rob Standridge [I],Alex Scott,N/A
+OK,40015,15,OK-SD-15,Likely R,,Rob Standridge [I],TBA,N/A
 OK,40016,16,OK-SD-16,No Election,,N/A,N/A,N/A
-OK,40017,17,OK-SD-17,Safe R,,Shane Jett,N/A,Greg Sadler
+OK,40017,17,OK-SD-17,Safe R,,TBA,N/A,Greg Sadler
 OK,40018,18,OK-SD-18,No Election,,N/A,N/A,N/A
-OK,40019,19,OK-SD-19,Uncontested R,,Roland Pederson [I],N/A,N/A
+OK,40019,19,OK-SD-19,Uncontested R,,TBA,N/A,N/A
 OK,40020,20,OK-SD-20,No Election,,N/A,N/A,N/A
 OK,40021,21,OK-SD-21,Safe R,,Tom J. Dugger [I],Rick Dunham,N/A
 OK,40022,22,OK-SD-22,No Election,,N/A,N/A,N/A
@@ -1191,24 +1191,24 @@ OK,40024,24,OK-SD-24,No Election,,N/A,N/A,N/A
 OK,40025,25,OK-SD-25,Uncontested R,,Joe Newhouse [I],N/A,N/A
 OK,40026,26,OK-SD-26,No Election,,N/A,N/A,N/A
 OK,40027,27,OK-SD-27,Uncontested R,,Casey Murdock [I],N/A,N/A
-OK,40028,28,OK-SD-28,Uncontested R,,Zack Taylor,N/A,
+OK,40028,28,OK-SD-28,Uncontested R,,TBA,N/A,
 OK,40029,29,OK-SD-29,Uncontested R,,Julie Daniels [I],N/A,N/A
 OK,40030,30,OK-SD-30,No Election,,N/A,N/A,N/A
 OK,40031,31,OK-SD-31,Uncontested R,,Chris Kidd [I],N/A,N/A
 OK,40032,32,OK-SD-32,No Election,,N/A,N/A,N/A
 OK,40033,33,OK-SD-33,Uncontested R,,Nathan Dahm [I],N/A,N/A
 OK,40034,34,OK-SD-34,No Election,,N/A,N/A,N/A
-OK,40035,35,OK-SD-35,Toss-Up,,Cheryl Baber,Jo Anna Dossett,N/A
+OK,40035,35,OK-SD-35,Toss-Up,,TBA,TBA,N/A
 OK,40036,36,OK-SD-36,No Election,,N/A,N/A,N/A
-OK,40037,37,OK-SD-37,Lean R,D TO R,Cody Rogers,Allison Ikley-Freeman [I],N/A
+OK,40037,37,OK-SD-37,Lean R,D TO R,TBA,Allison Ikley-Freeman [I],N/A
 OK,40038,38,OK-SD-38,No Election,,N/A,N/A,N/A
 OK,40039,39,OK-SD-39,Tilt R,,Dave Rader [I],Shawna Mott-Wright,N/A
 OK,40040,40,OK-SD-40,No Election,,N/A,N/A,N/A
 OK,40041,41,OK-SD-41,Uncontested R,,Adam Pugh [I],N/A,N/A
 OK,40042,42,OK-SD-42,No Election,,N/A,N/A,N/A
-OK,40043,43,OK-SD-43,Safe R,,Jessica Garvin,Terri Reimer,N/A
+OK,40043,43,OK-SD-43,Safe R,,TBA,Terri Reimer,N/A
 OK,40044,44,OK-SD-44,No Election,,N/A,N/A,N/A
-OK,40045,45,OK-SD-45,Safe R,,Paul Rosino [I],Jennifer Wilkinson,N/A
+OK,40045,45,OK-SD-45,Safe R,,TBA,Jennifer Wilkinson,N/A
 OK,40046,46,OK-SD-46,No Election,,N/A,N/A,N/A
 OK,40047,47,OK-SD-47,Likely R,,Greg Treat [I],Andrea Stone,N/A
 OK,40048,48,OK-SD-48,No Election,,N/A,N/A,N/A
@@ -1216,12 +1216,12 @@ OR,41001,1,OR-SD-1,Safe R,,Dallas Heard [I],Kat Stone,N/A
 OR,41002,2,OR-SD-2,Safe R,,Art Robinson,Jerry Allen,N/A
 OR,41003,3,OR-SD-3,No Election,,N/A,N/A,N/A
 OR,41004,4,OR-SD-4,No Election,,N/A,N/A,N/A
-OR,41005,5,OR-SD-5,Tilt R,D TO R,Dick Anderson,Melissa Cribbins,N/A
+OR,41005,5,OR-SD-5,Toss-Up,,Dick Anderson,Melissa Cribbins,N/A
 OR,41006,6,OR-SD-6,No Election,,N/A,N/A,N/A
 OR,41007,7,OR-SD-7,No Election,,N/A,N/A,N/A
 OR,41008,8,OR-SD-8,No Election,,N/A,N/A,N/A
 OR,41009,9,OR-SD-9,Safe R,,Fred Girod [I],Jim Hinsvark,N/A
-OR,41010,10,OR-SD-10,Toss-Up,,Denyc Boles [I],Deb Patterson,N/A
+OR,41010,10,OR-SD-10,Toss-Up,,Denyc Boles,Deb Patterson,N/A
 OR,41011,11,OR-SD-11,No Election,,N/A,N/A,N/A
 OR,41012,12,OR-SD-12,Safe R,,Brian J. Boquist [I],Bernadette Hansen,N/A
 OR,41013,13,OR-SD-13,No Election,,N/A,N/A,N/A
@@ -1248,15 +1248,15 @@ PA,42003,3,PA-SD-3,Uncontested D,,N/A,Sharif Street [I],N/A
 PA,42004,4,PA-SD-4,No Election,,N/A,N/A,N/A
 PA,42005,5,PA-SD-5,Uncontested D,,N/A,John Sabatina [I],N/A
 PA,42006,6,PA-SD-6,No Election,,N/A,N/A,N/A
-PA,42007,7,PA-SD-7,Uncontested D,,N/A,Vincent Hughes [I],N/A
+PA,42007,7,PA-SD-7,Uncontested D,,N/A,TBA,N/A
 PA,42008,8,PA-SD-8,No Election,,N/A,N/A,N/A
 PA,42009,9,PA-SD-9,Tilt D,R TO D,Tom Killion [I],John Kane,N/A
 PA,42010,10,PA-SD-10,No Election,,N/A,N/A,N/A
 PA,42011,11,PA-SD-11,Safe D,,Annette Baker,Judith Schwank [I],N/A
 PA,42012,12,PA-SD-12,No Election,,N/A,N/A,N/A
-PA,42013,13,PA-SD-13,Lean R,,Scott Martin [I],Janet Diaz,N/A
+PA,42013,13,PA-SD-13,Likely R,,Scott Martin [I],Janet Diaz,N/A
 PA,42014,14,PA-SD-14,No Election,,N/A,N/A,N/A
-PA,42015,15,PA-SD-15,Tilt R,,John DiSanto [I],George Scott,N/A
+PA,42015,15,PA-SD-15,Toss-Up,,John DiSanto [I],George Scott,N/A
 PA,42016,16,PA-SD-16,No Election,,N/A,N/A,N/A
 PA,42017,17,PA-SD-17,Safe D,,Ellen Fisher,Amanda Cappelletti,N/A
 PA,42018,18,PA-SD-18,No Election,,N/A,N/A,N/A
@@ -1290,95 +1290,95 @@ PA,42045,45,PA-SD-45,Likely D,,Nicole Ziccarelli,Jim Brewster [I],N/A
 PA,42046,46,PA-SD-46,No Election,,N/A,N/A,N/A
 PA,42047,47,PA-SD-47,Safe R,,Elder Vogel [I],Stephen John Krizan,N/A
 PA,42048,48,PA-SD-48,No Election,,N/A,N/A,N/A
-PA,42049,49,PA-SD-49,Tilt D,R TO D,Daniel Laughlin [I],Julie Slomski,N/A
+PA,42049,49,PA-SD-49,Toss-Up,,Daniel Laughlin [I],Julie Slomski,N/A
 PA,42050,50,PA-SD-50,No Election,,N/A,N/A,N/A
-RI,44001,1,RI-SD-1,Uncontested D,,N/A,Mayrellen Goodwin [I],
-RI,44002,2,RI-SD-2,Uncontested D,,N/A,Ana Quezeda [I],
-RI,44003,3,RI-SD-3,Uncontested D,,N/A,Gayle Goldin [I],
-RI,44004,4,RI-SD-4,Uncontested D,,N/A,Dominick Ruggerio [I],
-RI,44005,5,RI-SD-5,Uncontested D,,N/A,Samuel Bell [I],
-RI,44006,6,RI-SD-6,Uncontested D,,N/A,Tiara Mack,
-RI,44007,7,RI-SD-7,Uncontested D,,N/A,Frank Ciccone [I],
-RI,44008,8,RI-SD-8,Safe D,,Richard Karsulavitch,Sandra Cano [I],
-RI,44009,9,RI-SD-9,Safe D,,Jeffery Kozlin,John Burke,
-RI,44010,10,RI-SD-10,Safe D,,Mark Smiley,Walter Felag [I],
-RI,44011,11,RI-SD-11,Uncontested D,,N/A,James Seveney,
-RI,44012,12,RI-SD-12,Uncontested D,,N/A,Louis DePalma [I],
-RI,44013,13,RI-SD-13,Uncontested D,,N/A,Dawn Euer [I],
-RI,44014,14,RI-SD-14,Uncontested D,,N/A,Valarie Lawson [I],
-RI,44015,15,RI-SD-15,Uncontested D,,N/A,Meghan Kallman,
-RI,44016,16,RI-SD-16,Uncontested D,,N/A,Jonathon Acosta,
-RI,44017,17,RI-SD-17,Tilt R,,Thomas Paolino [I],John Barr,
-RI,44018,18,RI-SD-18,Uncontested D,,N/A,Cynthia Mendes,
-RI,44019,19,RI-SD-19,Uncontested D,,N/A,Ryan Pearson [I],
-RI,44020,20,RI-SD-20,Uncontested D,,N/A,Roger Picard [I],
-RI,44021,21,RI-SD-21,Uncontested R,,Gordon Rodgers [I],N/A,
-RI,44022,22,RI-SD-22,Safe D,,Paul Santucci,Stephen Archambault,
-RI,44023,23,RI-SD-23,Safe R,,Jessica De La Cruz [I],Paul Roselli,
-RI,44024,24,RI-SD-24,Uncontested D,,N/A,Melissa Murray [I],
-RI,44025,25,RI-SD-25,Uncontested D,,N/A,Frank Lombardo [I],
-RI,44026,26,RI-SD-26,Safe D,,Anthony Fagundes,Frank Lombardi[I],
-RI,44027,27,RI-SD-27,Safe D,,Pat Cortellessa,Hanna Gallo [I],
-RI,44028,28,RI-SD-28,Uncontested D,,N/A,Joshua Miller [I],
-RI,44029,29,RI-SD-29,Safe D,,Jean Trafford,Michael McCaffrey [I],
-RI,44030,30,RI-SD-30,Uncontested D,,N/A,Jeanine Calkin,
-RI,44031,31,RI-SD-31,Safe D,,Scott Zambarano,Kendra Anderson,
-RI,44032,32,RI-SD-32,Uncontested D,,N/A,Cynthia Coyne [I],
-RI,44033,33,RI-SD-33,Uncontested D,,N/A,Leonidas Raptakis [I],
-RI,44034,34,RI-SD-34,Safe R,,Elaine Morgan [I],Jennifer Douglas,
-RI,44035,35,RI-SD-35,Likely D,,Charles Callanan,Bridget Valverde [I],
-RI,44036,36,RI-SD-36,Safe D,,Doreen Costa,Alana DiMario,
-RI,44037,37,RI-SD-37,Safe D,,David Tacey,Virginia Sosnowski,
-RI,44038,38,RI-SD-38,Uncontested R,,Dennis Algiere [I],N/A,
+RI,44001,1,RI-SD-1,Safe D,,,,
+RI,44002,2,RI-SD-2,Safe D,,,,
+RI,44003,3,RI-SD-3,Safe D,,,,
+RI,44004,4,RI-SD-4,Safe D,,,,
+RI,44005,5,RI-SD-5,Safe D,,,,
+RI,44006,6,RI-SD-6,Safe D,,,,
+RI,44007,7,RI-SD-7,Safe D,,,,
+RI,44008,8,RI-SD-8,Safe D,,,,
+RI,44009,9,RI-SD-9,Safe D,,,,
+RI,44010,10,RI-SD-10,Safe D,,,,
+RI,44011,11,RI-SD-11,Likely D,,,,
+RI,44012,12,RI-SD-12,Safe D,,,,
+RI,44013,13,RI-SD-13,Safe D,,,,
+RI,44014,14,RI-SD-14,Safe D,,,,
+RI,44015,15,RI-SD-15,Safe D,,,,
+RI,44016,16,RI-SD-16,Safe D,,,,
+RI,44017,17,RI-SD-17,Toss-Up,,,,
+RI,44018,18,RI-SD-18,Safe D,,,,
+RI,44019,19,RI-SD-19,Safe D,,,,
+RI,44020,20,RI-SD-20,Safe D,,,,
+RI,44021,21,RI-SD-21,Safe R,,,,
+RI,44022,22,RI-SD-22,Safe D,,,,
+RI,44023,23,RI-SD-23,Safe R,,,,
+RI,44024,24,RI-SD-24,Safe D,,,,
+RI,44025,25,RI-SD-25,Safe D,,,,
+RI,44026,26,RI-SD-26,Safe D,,,,
+RI,44027,27,RI-SD-27,Safe D,,,,
+RI,44028,28,RI-SD-28,Safe D,,,,
+RI,44029,29,RI-SD-29,Safe D,,,,
+RI,44030,30,RI-SD-30,Safe D,,,,
+RI,44031,31,RI-SD-31,Safe D,,,,
+RI,44032,32,RI-SD-32,Safe D,,,,
+RI,44033,33,RI-SD-33,Lean D,,,,
+RI,44034,34,RI-SD-34,Safe R,,,,
+RI,44035,35,RI-SD-35,Lean D,,,,
+RI,44036,36,RI-SD-36,Safe D,,,,
+RI,44037,37,RI-SD-37,Safe D,,,,
+RI,44038,38,RI-SD-38,Likely R,,,,
 SC,45001,1,SC-SD-1,Uncontested R,,Thomas Alexander [I],N/A,N/A
 SC,45002,2,SC-SD-2,Uncontested R,,Rex Rice [I],N/A,N/A
-SC,45003,3,SC-SD-3,Safe R,,Richard Cash [I],Judith Polson,N/A
+SC,45003,3,SC-SD-3,Uncontested R,,TBA,N/A,N/A
 SC,45004,4,SC-SD-4,Safe R,,Mike Gambrell [I],Jose Villa,N/A
-SC,45005,5,SC-SD-5,Safe R,,Tom Corbin [I],Michael McCord,N/A
+SC,45005,5,SC-SD-5,Safe R,,TBA,Michael McCord,N/A
 SC,45006,6,SC-SD-6,Safe R,,Dwight Loftis [I],Hao Wu,N/A
-SC,45007,7,SC-SD-7,Safe D,,Jack Logan,Karl Allen [I],N/A
-SC,45008,8,SC-SD-8,Uncontested R,,Ross Turner [I],N/A,N/A
+SC,45007,7,SC-SD-7,Safe D,,Jack Logan,TBA,N/A
+SC,45008,8,SC-SD-8,Uncontested R,,TBA,N/A,N/A
 SC,45009,9,SC-SD-9,Uncontested R,,Danny Verdin [I],N/A,N/A
-SC,45010,10,SC-SD-10,Lean D,,Billy Garrett,Floyd Nicholson [I],N/A
+SC,45010,10,SC-SD-10,Lean D,,TBA,Floyd Nicholson [I],N/A
 SC,45011,11,SC-SD-11,Likely D,,Josh Kimbrell,Glenn Reese [I],N/A
-SC,45012,12,SC-SD-12,Safe R,,Scott Talley [I],Dawn Bingham,N/A
+SC,45012,12,SC-SD-12,Safe R,,TBA,Dawn Bingham,N/A
 SC,45013,13,SC-SD-13,Uncontested R,,Shane Martin [I],N/A,N/A
 SC,45014,14,SC-SD-14,Safe R,,Harvey Peeler [I],N/A,Sarah Work
 SC,45015,15,SC-SD-15,Safe R,,Wes Climer [I],Vickie Holt,N/A
-SC,45016,16,SC-SD-16,Safe R,,Michael Johnson,Ram Mammadov,N/A
-SC,45017,17,SC-SD-17,Likely D,,Erin Mosley,Mike Fanning [I],N/A
-SC,45018,18,SC-SD-18,Safe R,,Ronnie Cromer [I],Christopher Thibault,N/A
+SC,45016,16,SC-SD-16,Safe R,,TBA,Ram Mammadov,N/A
+SC,45017,17,SC-SD-17,Likely D,,Erin Mosley,TBA,N/A
+SC,45018,18,SC-SD-18,Safe R,,TBA,Christopher Thibault,N/A
 SC,45019,19,SC-SD-19,Uncontested D,,N/A,John Scott [I],N/A
-SC,45020,20,SC-SD-20,Likely D,,Benjamin Dunn,Dick Harpootlian [I],N/A
+SC,45020,20,SC-SD-20,Lean D,,TBA,Dick Harpootlian [I],N/A
 SC,45021,21,SC-SD-21,Uncontested D,,N/A,Darrell Jackson [I],N/A
-SC,45022,22,SC-SD-22,Safe D,,Lee Blatt,Mia McLeod [I],N/A
+SC,45022,22,SC-SD-22,Safe D,,TBA,Mia McLeod [I],N/A
 SC,45023,23,SC-SD-23,Safe R,,Katrina Shealy [I],Bill Brown,N/A
-SC,45024,24,SC-SD-24,Safe R,,Tom Young [I],Lisa Williams,N/A
-SC,45025,25,SC-SD-25,Safe R,,Shane Massey [I],Shirley Green Frayson,N/A
-SC,45026,26,SC-SD-26,Safe D,,Chris Smith,Nikki Setzler [I],N/A
+SC,45024,24,SC-SD-24,Uncontested R,,Tom Young [I],N/A,N/A
+SC,45025,25,SC-SD-25,Safe R,,TBA,Shirley Green Frayson,N/A
+SC,45026,26,SC-SD-26,Safe D,,TBA,Nikki Setzler [I],N/A
 SC,45027,27,SC-SD-27,Likely D,,Penry Gustafson,Vincent Sheheen [I],N/A
 SC,45028,28,SC-SD-28,Uncontested R,,Greg Hembree [I],N/A,N/A
 SC,45029,29,SC-SD-29,Safe D,,J.D. Chaplin,Gerald Malloy [I],N/A
-SC,45030,30,SC-SD-30,Uncontested D,,N/A,Kent Williams [I],N/A
+SC,45030,30,SC-SD-30,Uncontested D,,N/A,TBA,N/A
 SC,45031,31,SC-SD-31,Uncontested R,,Hugh Leatherman [I],N/A,N/A
-SC,45032,32,SC-SD-32,Safe D,,David Ellison,Ronnie Sabb [I],N/A
-SC,45033,33,SC-SD-33,Uncontested R,,Luke Rankin [I],N/A,N/A
+SC,45032,32,SC-SD-32,Safe D,,David Ellison,TBA,N/A
+SC,45033,33,SC-SD-33,Uncontested R,,TBA,N/A,N/A
 SC,45034,34,SC-SD-34,Safe R,,Stephen Goldfinch [I],Emily Cegledy,N/A
 SC,45035,35,SC-SD-35,Uncontested D,,N/A,Thomas McElveen [I],N/A
-SC,45036,36,SC-SD-36,Safe D,,Leon Winn,Kevin Johnson [I],N/A
+SC,45036,36,SC-SD-36,Safe D,,Leon Winn,TBA,N/A
 SC,45037,37,SC-SD-37,Safe R,,Larry Grooms [I],Kathryn Whitaker,Steve French
 SC,45038,38,SC-SD-38,Safe R,,Sean Bennett [I],John Lowe,N/A
-SC,45039,39,SC-SD-39,Safe D,,Tom Connor,Vernon Stephens,N/A
-SC,45040,40,SC-SD-40,Uncontested D,,N/A,Brad Hutto [I],N/A
-SC,45041,41,SC-SD-41,Tilt R,,Sandy Senn [I],Sam Skardon,N/A
+SC,45039,39,SC-SD-39,Safe D,,Tom Connor,TBA,N/A
+SC,45040,40,SC-SD-40,Uncontested D,,N/A,TBA,N/A
+SC,45041,41,SC-SD-41,Lean R,,Sandy Senn [I],TBA,N/A
 SC,45042,42,SC-SD-42,Uncontested D,,N/A,Marlon Kimpson [I],N/A
 SC,45043,43,SC-SD-43,Lean R,,Chip Campsen [I],Richard Hricik,N/A
-SC,45044,44,SC-SD-44,Likely R,,Brian Adams,Debbie Bryant,N/A
+SC,45044,44,SC-SD-44,Likely R,,TBA,TBA,N/A
 SC,45045,45,SC-SD-45,Safe D,,Rodney Buncum,Margie Bright Matthews [I],N/A
 SC,45046,46,SC-SD-46,Safe R,,Tom Davis [I],Nathan Campbell,N/A
 SD,46001,1,SD-SD-1,Tilt D,,Michael Rohl,Susan Wismer [I],N/A
 SD,46002,2,SD-SD-2,Uncontested R,,Brock L. Greenfield [I],N/A,N/A
-SD,46003,3,SD-SD-3,Uncontested R,,Al R. Novstrup [I],N/A,N/A
+SD,46003,3,SD-SD-3,Safe R,,Al R. Novstrup [I],Josh Halsey,N/A
 SD,46004,4,SD-SD-4,Uncontested R,,John Wiik [I],N/A,N/A
 SD,46005,5,SD-SD-5,Uncontested R,,Lee Schoenbeck [I],N/A,N/A
 SD,46006,6,SD-SD-6,Safe R,,Herman Otten,Nancy Kirstein,N/A
@@ -1389,14 +1389,14 @@ SD,46010,10,SD-SD-10,Safe R,,Maggie Sutton [I],Nichole Cauwels,N/A
 SD,46011,11,SD-SD-11,Safe R,,Jim Stalzer [I],Tom Cool,N/A
 SD,46012,12,SD-SD-12,Toss-Up,,R. Blake Curd [I],Jessica Meyers,N/A
 SD,46013,13,SD-SD-13,Uncontested R,,Jack Kolbeck [I],N/A,N/A
-SD,46014,14,SD-SD-14,Safe R,,Larry P. Zikmund,Timothy Reed,N/A
+SD,46014,14,SD-SD-14,Safe R,,TBA,Timothy Reed,N/A
 SD,46015,15,SD-SD-15,Safe D,,Thor Bardon,Reynold F. Nesiba [I],N/A
 SD,46016,16,SD-SD-16,Uncontested R,,Jim Bolin [I],N/A,N/A
-SD,46017,17,SD-SD-17,Safe R,,Arthur Rusch [I],Codylee Riedmann,N/A
+SD,46017,17,SD-SD-17,Safe R,,TBA,Codylee Riedmann,N/A
 SD,46018,18,SD-SD-18,Tilt R,D TO R,Jean Hunhoff,Jay Williams,N/A
 SD,46019,19,SD-SD-19,Uncontested R,,Kyle Schoenfish [I],N/A,N/A
 SD,46020,20,SD-SD-20,Safe R,,Joshua Klumb,N/A,Alexander Martin
-SD,46021,21,SD-SD-21,Likely R,,Erin Tobin,Dan Kerner Andersson,N/A
+SD,46021,21,SD-SD-21,Safe R,,Erin Tobin,Dan Kerner Andersson,N/A
 SD,46022,22,SD-SD-22,Uncontested R,,David Wheeler,N/A,N/A
 SD,46023,23,SD-SD-23,Uncontested R,,Bryan Breitling,N/A,N/A
 SD,46024,24,SD-SD-24,Uncontested R,,Mary Duvall,N/A,N/A
@@ -1405,7 +1405,7 @@ SD,46026,26,SD-SD-26,Tilt D,,Joel Koskan,Troy Heinert [I],N/A
 SD,46027,27,SD-SD-27,Safe D,,Judd W Schomp,Red Dawn Foster [I],N/A
 SD,46028,28,SD-SD-28,Uncontested R,,Ryan M. Maher [I],N/A,N/A
 SD,46029,29,SD-SD-29,Uncontested R,,Gary Cammack [I],N/A,N/A
-SD,46030,30,SD-SD-30,Uncontested R,,Julie Frye-Mueller,N/A,N/A
+SD,46030,30,SD-SD-30,Uncontested R,,TBA,N/A,N/A
 SD,46031,31,SD-SD-31,Uncontested R,,Timothy Johns,N/A,N/A
 SD,46032,32,SD-SD-32,Safe R,,Helene Duhamel [I],Michael Calabrese,N/A
 SD,46033,33,SD-SD-33,Safe R,,David Johnson,Ryan A. Ryder,N/A
@@ -1416,11 +1416,11 @@ TN,47002,2,TN-SD-2,Uncontested R,,Art Swann [I],N/A,N/A
 TN,47003,3,TN-SD-3,No Election,,N/A,N/A,N/A
 TN,47004,4,TN-SD-4,Safe R,,Jon Lundberg [I],Amber Riddle,N/A
 TN,47005,5,TN-SD-5,No Election,,N/A,N/A,N/A
-TN,47006,6,TN-SD-6,Safe R,,Becky Duncan Massey [I],Jane George,N/A
+TN,47006,6,TN-SD-6,Safe R,,Becky Duncan Massey [I],TBA,N/A
 TN,47007,7,TN-SD-7,No Election,,N/A,N/A,N/A
 TN,47008,8,TN-SD-8,Uncontested R,,Frank S. Niceley [I],N/A,N/A
 TN,47009,9,TN-SD-9,No Election,,N/A,N/A,N/A
-TN,47010,10,TN-SD-10,Lean R,,Todd Gardenhire [I],Glenn Scruggs,N/A
+TN,47010,10,TN-SD-10,Likely R,,Todd Gardenhire [I],Glenn Scruggs,N/A
 TN,47011,11,TN-SD-11,No Election,,N/A,N/A,N/A
 TN,47012,12,TN-SD-12,Uncontested R,,Ken Yager [I],N/A,N/A
 TN,47013,13,TN-SD-13,No Election,,N/A,N/A,N/A
@@ -1430,19 +1430,19 @@ TN,47016,16,TN-SD-16,Safe R,,Janice Bowling [I],Sheila Younglove,N/A
 TN,47017,17,TN-SD-17,No Election,,N/A,N/A,N/A
 TN,47018,18,TN-SD-18,Safe R,,Ferrell Haile [I],N/A,John A. Gentry
 TN,47019,19,TN-SD-19,No Election,,N/A,N/A,N/A
-TN,47020,20,TN-SD-20,Tilt D,R TO D,Steven Reid Dickerson [I],Heidi Campbell,N/A
+TN,47020,20,TN-SD-20,Toss-Up,,Steven Reid Dickerson [I],TBA,N/A
 TN,47021,21,TN-SD-21,No Election,,N/A,N/A,N/A
-TN,47022,22,TN-SD-22,Safe R,,Bill Powers [I],Ronnie L. Glynn,N/A
+TN,47022,22,TN-SD-22,Safe R,,TBA,Ronnie L. Glynn,N/A
 TN,47023,23,TN-SD-23,No Election,,N/A,N/A,N/A
-TN,47024,24,TN-SD-24,Safe R,,John Stevens [I],N/A,Yahweh Yahweh
+TN,47024,24,TN-SD-24,Safe R,,TBA,N/A,Yahweh Yahweh
 TN,47025,25,TN-SD-25,No Election,,N/A,N/A,N/A
-TN,47026,26,TN-SD-26,Safe R,,Page Walley,Civil Miller-Watkins,N/A
+TN,47026,26,TN-SD-26,Safe R,,TBA,Civil Miller-Watkins,N/A
 TN,47027,27,TN-SD-27,No Election,,N/A,N/A,N/A
 TN,47028,28,TN-SD-28,Safe R,,Joey Hensley [I],N/A,James Gray
 TN,47029,29,TN-SD-29,No Election,,N/A,N/A,N/A
-TN,47030,30,TN-SD-30,Uncontested D,,N/A,Sara P. Kyle [I],N/A
+TN,47030,30,TN-SD-30,Uncontested D,,N/A,TBA,N/A
 TN,47031,31,TN-SD-31,No Election,,N/A,N/A,N/A
-TN,47032,32,TN-SD-32,Safe R,,Paul Rose [I],Julie Byrd Ashworth,N/A
+TN,47032,32,TN-SD-32,Safe R,,TBA,Julie Byrd Ashworth,N/A
 TN,47033,33,TN-SD-33,No Election,,N/A,N/A,N/A
 TX,48001,1,TX-SD-1,Safe R,,Bryan Hughes [I],Audrey Spanko,N/A
 TX,48002,2,TX-SD-2,No Election,,N/A,N/A,N/A
@@ -1462,7 +1462,7 @@ TX,48015,15,TX-SD-15,No Election,,N/A,N/A,N/A
 TX,48016,16,TX-SD-16,No Election,,N/A,N/A,N/A
 TX,48017,17,TX-SD-17,No Election,,N/A,N/A,N/A
 TX,48018,18,TX-SD-18,Safe R,,Lois Kolkhorst [I],Michael Antalan,N/A
-TX,48019,19,TX-SD-19,Lean D,R TO D,Pete Flores [I],Roland Gutierrez,N/A
+TX,48019,19,TX-SD-19,Lean D,R TO D,Pete Flores [I],TBA,N/A
 TX,48020,20,TX-SD-20,Safe D,,Judy Cutright,Juan Hinojosa [I],N/A
 TX,48021,21,TX-SD-21,Safe D,,Frank Pomeroy,Judith Zaffirini [I],N/A
 TX,48022,22,TX-SD-22,Safe R,,Brian Birdwell [I],Robert Vick,N/A
@@ -1480,68 +1480,68 @@ UT,49002,2,UT-SD-2,No Election,,N/A,N/A,N/A
 UT,49003,3,UT-SD-3,No Election,,N/A,N/A,N/A
 UT,49004,4,UT-SD-4,No Election,,N/A,N/A,N/A
 UT,49005,5,UT-SD-5,No Election,,N/A,N/A,N/A
-UT,49006,6,UT-SD-6,Safe R,,Wayne Harper [I],Erika Larsen,N/A
-UT,49007,7,UT-SD-7,Safe R,,Mike McKell,N/A,Emily Bergeson
-UT,49008,8,UT-SD-8,Safe D,,Brian Zehnder,Kathleen Riebe [I],N/A
+UT,49006,6,UT-SD-6,Safe R,,TBA,TBA,N/A
+UT,49007,7,UT-SD-7,Safe R,,TBA,N/A,Emily Bergeson
+UT,49008,8,UT-SD-8,Likely D,,Brian Zehnder,Kathleen Riebe [I],N/A
 UT,49009,9,UT-SD-9,No Election,,N/A,N/A,N/A
-UT,49010,10,UT-SD-10,Safe R,,Lincoln Fillmore [I],Dan McClellan,N/A
+UT,49010,10,UT-SD-10,Safe R,,TBA,Dan McClellan,N/A
 UT,49011,11,UT-SD-11,No Election,,N/A,N/A,N/A
 UT,49012,12,UT-SD-12,No Election,,N/A,N/A,N/A
 UT,49013,13,UT-SD-13,Safe R,,Jake Anderegg [I],Lyndsey Jarman,N/A
 UT,49014,14,UT-SD-14,Uncontested R,,Dan Hemmert [I],N/A,N/A
 UT,49015,15,UT-SD-15,No Election,,N/A,N/A,N/A
-UT,49016,16,UT-SD-16,Uncontested R,,Curt Bramble [I],N/A,N/A
+UT,49016,16,UT-SD-16,Uncontested R,,TBA,N/A,N/A
 UT,49017,17,UT-SD-17,No Election,,N/A,N/A,N/A
 UT,49018,18,UT-SD-18,No Election,,N/A,N/A,N/A
-UT,49019,19,UT-SD-19,Safe R,,John Johnson,Katy Owens,N/A
+UT,49019,19,UT-SD-19,Safe R,,TBA,Katy Owens,N/A
 UT,49020,20,UT-SD-20,Uncontested R,,Gregg Buxton [I],N/A,N/A
 UT,49021,21,UT-SD-21,No Election,,N/A,N/A,N/A
 UT,49022,22,UT-SD-22,No Election,,N/A,N/A,N/A
-UT,49023,23,UT-SD-23,Uncontested R,,Todd Weiler,N/A,N/A
-UT,49024,24,UT-SD-24,Safe R,,Derrin Owens,N/A,Warren Rogers
-UT,49025,25,UT-SD-25,Safe R,,Chris Wilson,Nancy Huntly,N/A
+UT,49023,23,UT-SD-23,Uncontested R,,TBA,N/A,N/A
+UT,49024,24,UT-SD-24,Safe R,,TBA,N/A,Warren Rogers
+UT,49025,25,UT-SD-25,Safe R,,TBA,Nancy Huntly,N/A
 UT,49026,26,UT-SD-26,No Election,,N/A,N/A,N/A
 UT,49027,27,UT-SD-27,Uncontested R,,David Hinkins [I],N/A,N/A
 UT,49028,28,UT-SD-28,No Election,,N/A,N/A,N/A
-UT,49029,29,UT-SD-29,Safe R,,Don Ipson [I],Chuck Goode,N/A
+UT,49029,29,UT-SD-29,Safe R,,TBA,Chuck Goode,N/A
 VT,50BEN,Bennington,VT-SD-Bennington,MMD,,N/A,N/A,N/A
 VT,50E-O,Essex-Orleans,VT-SD-Essex-Orleans,MMD,,N/A,N/A,N/A
 VT,50FRA,Franklin,VT-SD-Franklin,MMD,,N/A,N/A,N/A
 VT,50WAS,Washington,VT-SD-Washington,MMD,,N/A,N/A,N/A
-VT,50ORA,Orange,VT-SD-Orange,Likely D,,Bill Huff,Mark MacDonald [I],N/A
+VT,50ORA,Orange,VT-SD-Orange,Likely D,,Bill Huff,Mark MacDonald [I],TBA
 VT,50CAL,Caledonia,VT-SD-Caledonia,MMD,,N/A,N/A,N/A
-VT,50CGI,Grand-Isle,VT-SD-Grand-Isle,Safe D,,N/A,Richard Mazza [I],Jon Lynch
+VT,50CGI,Grand-Isle,VT-SD-Grand-Isle,Safe D,,N/A,Richard Mazza [I],TBA
 VT,50CHI,Chittenden,VT-SD-Chittenden,MMD,,N/A,N/A,N/A
 VT,50WDM,Windham,VT-SD-Windham,MMD,,N/A,N/A,N/A
 VT,50RUT,Rutland,VT-SD-Rutland,MMD,,N/A,N/A,N/A
 VT,50ADD,Addison,VT-SD-Addison,MMD,,N/A,N/A,N/A
 VT,50WSR,Windsor,VT-SD-Windsor,MMD,,N/A,N/A,N/A
-VT,50LAM,Lamoille,VT-SD-Lamoille,Uncontested R,,Richard Westman [I],N/A,N/A
+VT,50LAM,Lamoille,VT-SD-Lamoille,Lean R,,Richard Westman [I],N/A,TBA
 WA,53001,1,WA-SD-1,Safe D,,Art Coday,Derek Stanford [I],N/A
-WA,53002,2,WA-SD-2,Safe R,,Jim McCune,Rick Payne,N/A
-WA,53003,3,WA-SD-3,Safe D,,Dave Lucas,Andy Billig [I],N/A
-WA,53004,4,WA-SD-4,Safe R,,Mike Padden [I],John Roskelley,N/A
-WA,53005,5,WA-SD-5,Uncontested D,,N/A,"Mark Mullet [I], Ingrid Anderson",N/A
+WA,53002,2,WA-SD-2,Safe R,,TBA,Rick Payne,N/A
+WA,53003,3,WA-SD-3,Safe D,,,,N/A
+WA,53004,4,WA-SD-4,Safe R,,Mike Padden [I],John Roskelley,Ann Marie Danimus
+WA,53005,5,WA-SD-5,Lean D,,Todd Smelcer,TBA,N/A
 WA,53006,6,WA-SD-6,No Election,,N/A,N/A,N/A
 WA,53007,7,WA-SD-7,No Election,,N/A,N/A,N/A
 WA,53008,8,WA-SD-8,No Election,,N/A,N/A,N/A
 WA,53009,9,WA-SD-9,Safe R,,Mark Schoesler [I],Jenn Goulet,N/A
-WA,53010,10,WA-SD-10,Tilt R,,Ron Muzzall [I],Helen Price Johnson,N/A
+WA,53010,10,WA-SD-10,Lean R,,Ron Muzzall [I],Helen Price Johnson,N/A
 WA,53011,11,WA-SD-11,Uncontested D,,N/A,Bob Hasegawa [I],N/A
 WA,53012,12,WA-SD-12,Uncontested R,,Brad Hawkins [I],N/A,N/A
 WA,53013,13,WA-SD-13,No Election,,N/A,N/A,N/A
 WA,53014,14,WA-SD-14,Uncontested R,,Curtis King [I],N/A,N/A
 WA,53015,15,WA-SD-15,No Election,,N/A,N/A,N/A
-WA,53016,16,WA-SD-16,Safe R,,Perry Dozier,Danielle Garbe Reser,N/A
+WA,53016,16,WA-SD-16,Safe R,,TBA,Danielle Garbe Reser,N/A
 WA,53017,17,WA-SD-17,Lean R,,Lynda Wilson [I],Daniel Smith,N/A
-WA,53018,18,WA-SD-18,Safe R,,Ann Rivers [I],Rick Bell,N/A
-WA,53019,19,WA-SD-19,Tilt R,D TO R,Jeff Wilson,Dean Takko [I],N/A
+WA,53018,18,WA-SD-18,Likely R,,TBA,Rick Bell,N/A
+WA,53019,19,WA-SD-19,Lean D,,TBA,Dean Takko [I],N/A
 WA,53020,20,WA-SD-20,Uncontested R,,John Braun [I],N/A,N/A
 WA,53021,21,WA-SD-21,No Election,,N/A,N/A,N/A
-WA,53022,22,WA-SD-22,Safe D,,Garry Holland,Sam Hunt [I],N/A
+WA,53022,22,WA-SD-22,Safe D,,Garry Holland,TBA,N/A
 WA,53023,23,WA-SD-23,Safe D,,Pam Madden-Boyer,Christine Rolfes [I],N/A
-WA,53024,24,WA-SD-24,Lean D,,Connie Beauvais,Kevin Van De Wege [I],N/A
-WA,53025,25,WA-SD-25,Lean R,,Chris Gildon,Julie Door,N/A
+WA,53024,24,WA-SD-24,Likely D,,Connie Beauvais,Kevin Van De Wege [I],N/A
+WA,53025,25,WA-SD-25,Lean R,,TBA,Julie Door,N/A
 WA,53026,26,WA-SD-26,No Election,,N/A,N/A,N/A
 WA,53027,27,WA-SD-27,Safe D,,Kyle Paskewitz,Jeannie Darneille [I],N/A
 WA,53028,28,WA-SD-28,Toss-Up,,Steve O'Ban [I],Twina Nobles,N/A
@@ -1554,7 +1554,7 @@ WA,53034,34,WA-SD-34,No Election,,N/A,N/A,N/A
 WA,53035,35,WA-SD-35,No Election,,N/A,N/A,N/A
 WA,53036,36,WA-SD-36,No Election,,N/A,N/A,N/A
 WA,53037,37,WA-SD-37,No Election,,N/A,N/A,N/A
-WA,53038,38,WA-SD-38,Safe D,,Bernard Moody,June Robinson [I],N/A
+WA,53038,38,WA-SD-38,Safe D,,Bernard Moody,TBA,N/A
 WA,53039,39,WA-SD-39,Safe R,,Keith L. Wagoner [I],N/A,Kathryn A. Lewandowsky
 WA,53040,40,WA-SD-40,Safe D,,Charles Carrell,Liz Lovelett [I],N/A
 WA,53041,41,WA-SD-41,Safe D,,Mike Nykreim,Lisa Wellman [I],N/A
@@ -1566,83 +1566,83 @@ WA,53046,46,WA-SD-46,No Election,,N/A,N/A,N/A
 WA,53047,47,WA-SD-47,No Election,,N/A,N/A,N/A
 WA,53048,48,WA-SD-48,No Election,,N/A,N/A,N/A
 WA,53049,49,WA-SD-49,Safe D,,N/A,Annette Cleveland [I],Rey Reynolds
-WV,54001,1,WV-SD-1,Toss-Up,,Ryan Weld [I],Randy Swartzmiller,N/A
-WV,54002,2,WV-SD-2,Lean R,,Mike Maroney [I],Josh Gary,N/A
-WV,54003,3,WV-SD-3,Safe R,,Donna Boley [I],Robin Wilson,N/A
-WV,54004,4,WV-SD-4,Likely R,,Amy Nichole Grady,Bruce Ashworth,N/A
-WV,54005,5,WV-SD-5,Safe D,,Charles Shaffer,Bob Plymale [I],N/A
-WV,54006,6,WV-SD-6,Uncontested R,,Chandler Swope [I],N/A,N/A
-WV,54007,7,WV-SD-7,Lean D,,Rupie Phillips,Ralph Rodighiero,N/A
-WV,54008,8,WV-SD-8,Safe D,,Katie Hess Crouse,Glenn Jeffries [I],N/A
-WV,54009,9,WV-SD-9,Uncontested R,,David Stover,N/A,N/A
-WV,54010,10,WV-SD-10,Tilt D,R TO D,Jack Woodrum,William Laird,N/A
-WV,54011,11,WV-SD-11,Tilt R,,Robert Karnes,Denise Campbell,N/A
-WV,54012,12,WV-SD-12,Tilt D,,Patrick Martin,Doug Facemire [I],N/A
-WV,54013,13,WV-SD-13,Likely D,,Rebecca Polis,Mike Caputo,N/A
-WV,54014,14,WV-SD-14,Safe R,,Randy Smith [I],David Childers,N/A
-WV,54015,15,WV-SD-15,Safe R,,Craig Blair,N/A,Donald Kinnie
-WV,54016,16,WV-SD-16,Lean R,,Patricia Rucker [I],Pete Dougherty,N/A
-WV,54017,17,WV-SD-17,Tilt R,D TO R,Eric Nelson,Andrew Robinson,N/A
+WV,54001,1,WV-SD-1,Toss-Up,,TBA,Randy Swartzmiller,
+WV,54002,2,WV-SD-2,Lean R,,TBA,TBA,
+WV,54003,3,WV-SD-3,Safe R,,Donna Boley [I],Robin Wilson,
+WV,54004,4,WV-SD-4,Likely R,,TBA,Bruce Ashworth,
+WV,54005,5,WV-SD-5,Safe D,,TBA,Bob Plymale [I],
+WV,54006,6,WV-SD-6,Safe R,,Chandler Swope [I],Wesley Blankenship,
+WV,54007,7,WV-SD-7,Lean D,,Rupie Phillips,Ralph Rodighiero,
+WV,54008,8,WV-SD-8,Likely D,,Katie Hess Crouse,Glenn Jeffries [I],
+WV,54009,9,WV-SD-9,Safe R,,Sue Cline [I],David Bugs Stover,
+WV,54010,10,WV-SD-10,Toss-Up,,TBA,William Laird,
+WV,54011,11,WV-SD-11,Lean R,,TBA,Denise Campbell,
+WV,54012,12,WV-SD-12,Tilt D,,TBA,Doug Facemire [I],
+WV,54013,13,WV-SD-13,Lean D,,TBA,Mike Caputo,
+WV,54014,14,WV-SD-14,Safe R,,Randy Smith [I],David Childers,
+WV,54015,15,WV-SD-15,Uncontested R,,TBA,N/A,
+WV,54016,16,WV-SD-16,Tilt R,,Patricia Rucker [I],Pete Dougherty,
+WV,54017,17,WV-SD-17,Toss-Up,,Eric Nelson,TBA,
 WI,55001,1,WI-SD-1,No Election,,N/A,N/A,N/A
-WI,55002,2,WI-SD-2,Safe R,,Robert Cowles [I],Tony Lee,N/A
+WI,55002,2,WI-SD-2,Uncontested R,,TBA,N/A,N/A
 WI,55003,3,WI-SD-3,No Election,,N/A,N/A,N/A
-WI,55004,4,WI-SD-4,Safe D,,N/A,Lena Taylor [I],N/A
+WI,55004,4,WI-SD-4,Safe D,,N/A,TBA,Lance Allen
 WI,55005,5,WI-SD-5,No Election,,N/A,N/A,N/A
-WI,55006,6,WI-SD-6,Safe D,,Alciro Deacon,La Toyna Johnson [I],N/A
+WI,55006,6,WI-SD-6,Safe D,,Alciro Deacon,TBA,N/A
 WI,55007,7,WI-SD-7,No Election,,N/A,N/A,N/A
-WI,55008,8,WI-SD-8,Likely R,,Alberta Darling,Neal Plotkin,N/A
+WI,55008,8,WI-SD-8,Likely R,,TBA,TBA,N/A
 WI,55009,9,WI-SD-9,No Election,,N/A,N/A,N/A
-WI,55010,10,WI-SD-10,Lean R,D TO R,Rob Stafsholt,Patty Schachtner [I],N/A
+WI,55010,10,WI-SD-10,Likely R,D TO R,TBA,Patty Schachtner [I],N/A
 WI,55011,11,WI-SD-11,No Election,,N/A,N/A,N/A
-WI,55012,12,WI-SD-12,Safe R,,Mary Czaja-Felzkowski,Ed Vocke,N/A
+WI,55012,12,WI-SD-12,Safe R,,Mary Czaja-Felzkowski,TBA,N/A
 WI,55013,13,WI-SD-13,No Election,,N/A,N/A,N/A
-WI,55014,14,WI-SD-14,Safe R,,Joan Ballweg,Joni Anderson,N/A
+WI,55014,14,WI-SD-14,Safe R,,TBA,TBA,N/A
 WI,55015,15,WI-SD-15,No Election,,N/A,N/A,N/A
-WI,55016,16,WI-SD-16,Safe D,,Scott Barker,Melissa Agard Sargent,N/A
+WI,55016,16,WI-SD-16,Safe D,,Scott Barker,TBA,N/A
 WI,55017,17,WI-SD-17,No Election,,N/A,N/A,N/A
-WI,55018,18,WI-SD-18,Likely R,,Dan Feyen [I],Aaron Wojciechowski,N/A
+WI,55018,18,WI-SD-18,Likely R,,Dan Feyen [I],Aaron Wojciechowski,Thomas Benjamin Hodge
 WI,55019,19,WI-SD-19,No Election,,N/A,N/A,N/A
 WI,55020,20,WI-SD-20,Uncontested R,,Duey Stroebel [I],N/A,N/A
 WI,55021,21,WI-SD-21,No Election,,N/A,N/A,N/A
 WI,55022,22,WI-SD-22,Uncontested D,,N/A,Robert Wirch [I],N/A
 WI,55023,23,WI-SD-23,No Election,,N/A,N/A,N/A
-WI,55024,24,WI-SD-24,Lean R,,Patrick Testin [I],Paul Piotrowski,N/A
+WI,55024,24,WI-SD-24,Lean R,,Patrick Testin [I],Paul Piotrowski,Roberta Reamer
 WI,55025,25,WI-SD-25,No Election,,N/A,N/A,N/A
-WI,55026,26,WI-SD-26,Uncontested D,,N/A,Kelda Roys,N/A
+WI,55026,26,WI-SD-26,Uncontested D,,N/A,TBA,N/A
 WI,55027,27,WI-SD-27,No Election,,N/A,N/A,N/A
-WI,55028,28,WI-SD-28,Safe R,,Julian Bradley,Adam Murphy,N/A
+WI,55028,28,WI-SD-28,Safe R,,TBA,Adam Murphy,N/A
 WI,55029,29,WI-SD-29,No Election,,N/A,N/A,N/A
-WI,55030,30,WI-SD-30,Tilt R,D TO R,Eric Wimberger,Johnathon Hanson,N/A
+WI,55030,30,WI-SD-30,Lean R,D TO R,TBA,TBA,N/A
 WI,55031,31,WI-SD-31,No Election,,N/A,N/A,N/A
-WI,55032,32,WI-SD-32,Lean D,,Dan Kapanke,Brad Pfaff,N/A
+WI,55032,32,WI-SD-32,Toss-Up,,Dan Kapanke,TBA,N/A
 WI,55033,33,WI-SD-33,No Election,,N/A,N/A,N/A
 WY,56001,1,WY-SD-1,No Election,,N/A,N/A,N/A
 WY,56002,2,WY-SD-2,Uncontested R,,Brian Bonner [I],N/A,N/A
 WY,56003,3,WY-SD-3,No Election,,N/A,N/A,N/A
 WY,56004,4,WY-SD-4,Uncontested R,,Tara Nethercott [I],N/A,N/A
 WY,56005,5,WY-SD-5,No Election,,N/A,N/A,N/A
-WY,56006,6,WY-SD-6,Safe R,,Anthony Bouchard [I],Britney Wallesch,N/A
+WY,56006,6,WY-SD-6,Safe R,,TBA,Britney Wallesch,N/A
 WY,56007,7,WY-SD-7,No Election,,N/A,N/A,N/A
-WY,56008,8,WY-SD-8,Safe R,,Affie Ellis [I],James Byrd,N/A
+WY,56008,8,WY-SD-8,Safe R,,TBA,TBA,N/A
 WY,56009,9,WY-SD-9,No Election,,N/A,N/A,N/A
-WY,56010,10,WY-SD-10,Safe R,,Dan Furphy,Jackie Grimes,N/A
+WY,56010,10,WY-SD-10,Safe R,,TBA,Jackie Grimes,N/A
 WY,56011,11,WY-SD-11,No Election,,N/A,N/A,N/A
-WY,56012,12,WY-SD-12,Tilt R,D TO R,John Kolb,Liisa Anselmi-Dalton [I],N/A
+WY,56012,12,WY-SD-12,Lean D,,John Kolb,Liisa Anselmi-Dalton [I],N/A
 WY,56013,13,WY-SD-13,No Election,,N/A,N/A,N/A
-WY,56014,14,WY-SD-14,Uncontested R,,Fred Baldwin [I],N/A,N/A
+WY,56014,14,WY-SD-14,Uncontested R,,TBA,N/A,N/A
 WY,56015,15,WY-SD-15,No Election,,N/A,N/A,N/A
 WY,56016,16,WY-SD-16,Uncontested R,,Dan Dockstader [I],N/A,N/A
 WY,56017,17,WY-SD-17,No Election,,N/A,N/A,N/A
-WY,56018,18,WY-SD-18,Uncontested R,,Tim French,N/A,N/A
+WY,56018,18,WY-SD-18,Uncontested R,,TBA,N/A,N/A
 WY,56019,19,WY-SD-19,No Election,,N/A,N/A,N/A
-WY,56020,20,WY-SD-20,Safe R,,Edward Cooper [I],Theresa Livingston,N/A
+WY,56020,20,WY-SD-20,Safe R,,TBA,Theresa Livingston,N/A
 WY,56021,21,WY-SD-21,No Election,,N/A,N/A,N/A
 WY,56022,22,WY-SD-22,Uncontested R,,Dave Kinsey [I],N/A,N/A
 WY,56023,23,WY-SD-23,No Election,,N/A,N/A,N/A
-WY,56024,24,WY-SD-24,Uncontested R,,Troy McKeown,N/A,N/A
+WY,56024,24,WY-SD-24,Uncontested R,,TBA,N/A,N/A
 WY,56025,25,WY-SD-25,No Election,,N/A,N/A,N/A
-WY,56026,26,WY-SD-26,Uncontested R,,Tim Salazar,N/A,N/A
+WY,56026,26,WY-SD-26,Uncontested R,,TBA,N/A,N/A
 WY,56027,27,WY-SD-27,No Election,,N/A,N/A,N/A
-WY,56028,28,WY-SD-28,Uncontested R,,James Anderson,N/A,N/A
+WY,56028,28,WY-SD-28,Uncontested R,,TBA,N/A,N/A
 WY,56029,29,WY-SD-29,No Election,,N/A,N/A,N/A
-WY,56030,30,WY-SD-30,Safe R,,Charles Scott [I],N/A,Wendy Degroot
+WY,56030,30,WY-SD-30,Uncontested R,,TBA,N/A,N/A

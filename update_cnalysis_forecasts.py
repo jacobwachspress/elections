@@ -12,22 +12,21 @@ def main():
     # Load original data
     lower_old_path = input_path + 'ratings_lower_chamber_original.csv'
     upper_old_path = input_path + 'ratings_upper_chamber_original.csv'
-    df_lower_old = pd.read_csv(lower_old_path)
-    df_upper_old = pd.read_csv(upper_old_path)
+    df_lower_old = pd.read_csv(lower_old_path).dropna(subset=['RATING'])
+    df_upper_old = pd.read_csv(upper_old_path).dropna(subset=['RATING'])
 
     # Define update date
-    update_date = '08_08'
+    update_date = '10_06'
 
     # Define update paths. Add in reverse date order b/c we'll drop duplicates
+    
     update_paths = []
-    update_paths.append(input_path + 'ratings_updates_08_08.csv')
-    update_paths.append(input_path + 'ratings_updates_07_18.csv')
-    update_paths.append(input_path + 'ratings_updates_07_02.csv')
+    update_paths.append(input_path + 'nebraska_updates.csv')
 
     # Load updates
     df = pd.DataFrame()
     for update_path in update_paths:
-        df_update = pd.read_csv(update_path)
+        df_update = pd.read_csv(update_path).dropna()
         df = df.append(df_update)
 
     # Drop duplicate updates. Assume updates are in reverse date order
